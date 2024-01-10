@@ -1,0 +1,29 @@
+{
+	"name": "@shakebugs/browser",
+	"version": "0.1.0",
+	"description": "Browser SDK for Shake",
+	"main": "./dist/browser.js",
+	"style": "./dist/main.css",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/shakebugs/browser.git"
+	},
+	"keywords": [
+		"bug",
+		"reporting",
+		"web",
+		"bug",
+		"feedback",
+		"shake",
+		"bugs"
+	],
+	"author": "Shake",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/shakebugs/browser/issues"
+	},
+	"homepage": "https://github.com/shakebugs/browser#readme"
+}
