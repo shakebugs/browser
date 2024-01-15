@@ -2,7 +2,8 @@
 	"name": "@shakebugs/browser",
 	"version": "0.1.0",
 	"description": "Browser SDK for Shake",
-	"main": "./dist/browser.js",
+	"module": "./dist/browser.min.js",
+	"browser":"./dist/browser.min.umd.cjs",
 	"style": "./dist/main.css",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
