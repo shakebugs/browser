@@ -1,10 +1,10 @@
 {
 	"name": "@shakebugs/browser",
-	"version": "0.2.5",
+	"version": "0.3.0",
 	"description": "Browser SDK for Shake",
 	"module": "./dist/browser.js",
 	"main": "./dist/browser.js",
-	"browser":"./dist/browser.umd.js",
+	"browser": "./dist/browser.umd.js",
 	"style": "./dist/main.css",
 	"types": "./dist/browser.d.ts",
 	"scripts": {
