@@ -13,4 +13,4 @@ export {
   g as SecondComponent,
   l as Shake
 };
-//# sourceMappingURL=browser.min.js.map
+//# sourceMappingURL=browser.js.map
