@@ -3810,7 +3810,7 @@ const go = async () => {
         y = await F.getFirstByType(I);
         const v = C.attachments.find((D) => D.type === cA.VIDEO);
         p = await F.getFirstByType(v);
-        const H = await F.convertAttachmentsToFiles(C.attachments.filter((D) => D.data !== (I == null ? void 0 : I.data) && D.data !== (v == null ? void 0 : v.data))) ?? [];
+        const H = await F.convertAttachmentsToFiles(C.attachments.filter((D) => D.data !== (I == null ? void 0 : I.data) && D.data !== (v == null ? void 0 : v.data)).slice(0, 9)) ?? [];
         U = await F.sendFiles(H) ?? [];
       }
       await F.sendUserFeedback(d, h, y, p, U), xe();
@@ -3862,12 +3862,14 @@ const go = async () => {
   const A = IA("data:image/svg+xml,%3csvg%20width='21'%20height='21'%20viewBox='0%200%2021%2021'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_14931_603)'%3e%3cpath%20d='M8.19434%2012.6212C10.9278%2015.3547%2014.6693%2016.0477%2016.5462%2014.1682C18.1282%2012.5862%2017.8823%209.68817%2016.1367%207.18042'%20stroke='%23B77DFF'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M13.8599%204.82319C10.5725%202.29444%206.46177%201.97857%204.1719%204.26844C1.60902%206.83132%202.30202%2011.6788%205.7189%2015.0957C7.21501%2016.6164%209.06436%2017.7431%2011.1019%2018.3752'%20stroke='%23B77DFF'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M10.8666%2010.8501L12.5002%2010.5228C12.7364%2010.4764%2012.9537%2010.3613%2013.1249%2010.1921L17.8954%205.42507C18.535%204.78514%2018.535%203.74801%2017.8954%203.10807C17.2555%202.46853%2016.2184%202.46853%2015.5784%203.10807L10.8079%207.87507C10.6374%208.04585%2010.5211%208.2632%2010.4737%208.49982L10.1499%2010.1334C10.0864%2010.4657%2010.3043%2010.7865%2010.6365%2010.8501C10.7125%2010.8646%2010.7906%2010.8646%2010.8666%2010.8501Z'%20stroke='%23880FFF'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_14931_603'%3e%3crect%20width='21'%20height='21'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
   A.alt = "Send feedback icon", A.classList.add("shake-sdk-main-button-icon");
   const t = ps(X().shake_sdk_main_button_title);
-  return t.classList.add("shake-sdk-main-button-text"), e.appendChild(A), e.appendChild(t), e.addEventListener("click", () => (async () => {
-    const r = V.data;
-    Re.shakeAuthService.authenticate(Ct.clientId, Ct.clientSecret), dc(), r.getShakeState() || r.setShakeState(new Ut()), await go();
-    const n = Uo(r.getShakeState() ?? new Ut());
-    document.body.appendChild(n), r.setShakeOpened(!0);
-  })()), e;
+  return t.classList.add("shake-sdk-main-button-text"), e.appendChild(A), e.appendChild(t), e.addEventListener("click", (r) => {
+    r.preventDefault(), (async () => {
+      const n = V.data;
+      Re.shakeAuthService.authenticate(Ct.clientId, Ct.clientSecret), dc(), n.getShakeState() || n.setShakeState(new Ut()), await go();
+      const s = Uo(n.getShakeState() ?? new Ut());
+      document.body.appendChild(s), n.setShakeOpened(!0);
+    })();
+  }), e;
 }, wc = () => {
   const e = document.getElementById(Zr);
   e && (e.style.display = "flex");
