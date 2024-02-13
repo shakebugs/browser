@@ -3863,7 +3863,7 @@ const go = async () => {
   A.alt = "Send feedback icon", A.classList.add("shake-sdk-main-button-icon");
   const t = ps(X().shake_sdk_main_button_title);
   return t.classList.add("shake-sdk-main-button-text"), e.appendChild(A), e.appendChild(t), e.addEventListener("click", (r) => {
-    r.preventDefault(), (async () => {
+    r.stopPropagation(), (async () => {
       const n = V.data;
       Re.shakeAuthService.authenticate(Ct.clientId, Ct.clientSecret), dc(), n.getShakeState() || n.setShakeState(new Ut()), await go();
       const s = Uo(n.getShakeState() ?? new Ut());
