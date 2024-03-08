@@ -24,9 +24,11 @@ If using npm, execute the npm install command in your terminal:
 npm install @shakebugs/browser
 ```
 
-### Script tag
+### CDN
 
-Alternatively, you can include this library directly into your HTML file using a script tag:
+Alternatively, library can be added to your project through CDN. Bundle is delivered through JSDelivr CDN.
+
+Add the following script to your code:
 
 ```html
 <script type="module">
@@ -43,24 +45,28 @@ Call `Shake.start()` at the top level of your app
 
 #### Example usage in Javascript
 
+Call `Shake.start()` in your _index.js_ file.
+
 ```javascript
 // Import the library if using ES6 modules
 import Shake from '@shakebugs/browser';
 
-Shake.start('client-id', 'client-secret');
+Shake.start('client-id', 'client-secret', 'bundle-id');
 ```
 
 #### Example usage in HTML
 
+Call `Shake.start()` in your main file.
+
 ```html
 <body>
 	<script>
-		window.Shake.start('client-id', 'client-secret');
+		window.Shake.start('client-id', 'client-secret', 'bundle-id');
 	</script>
 </body>
 ```
 
-Replace `client-id` and `client-secret` with the actual values you have in [your workspace settings](https://app.shakebugs.com/settings/workspace#general).
+Replace `client-id`, `client-secret` and `bundle-id` with the actual values you have in [your workspace settings](https://app.shakebugs.com/settings/workspace#general).
 
 ## Resources
 
