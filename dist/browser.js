@@ -5107,8 +5107,8 @@ class ke {
 }
 F(ke, "metadata", {});
 async function qo() {
-  const e = new Ql.UAParser(navigator.userAgent), A = await fl().then((t) => t);
-  return { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, issue_reported_time: jr((/* @__PURE__ */ new Date()).toString()), os: Tt.WEB, device: pl(), browser_name: e.getBrowser().name, browser_version: e.getBrowser().version, current_view: window.location.pathname, screen_height: Ls().height, screen_width: Ls().width, metadata_: ke.metadata, sdk_version: Bn, platform: Tt.WEB, report_type: Ys.MANUAL, screen_density: window.devicePixelRatio || 1, locale: window.navigator.language || null, os_version: e.getOS().version, os_name: e.getOS().name, device_orientation: Cl(), battery_level: A.level, battery_status: A.charging ? 1 : 0, font_scale: Ul(), network_type: Fl(), permissions: await bl().then((t) => t), browser_height: Ss().height, browser_width: Ss().width, cookies_enabled: ml(), is_mobile: yl(), cpu_arch: e.getCPU().architecture, app_version: "1.0", tags: [] };
+  const e = new Ql.UAParser(navigator.userAgent), A = await fl().then((t) => (console.log("a"), t));
+  return console.log(A), { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, issue_reported_time: jr((/* @__PURE__ */ new Date()).toString()), os: Tt.WEB, device: pl(), browser_name: e.getBrowser().name, browser_version: e.getBrowser().version, current_view: window.location.pathname, screen_height: Ls().height, screen_width: Ls().width, metadata_: ke.metadata, sdk_version: Bn, platform: Tt.WEB, report_type: Ys.MANUAL, screen_density: window.devicePixelRatio || 1, locale: window.navigator.language || null, os_version: e.getOS().version, os_name: e.getOS().name, device_orientation: Cl(), battery_level: A == null ? void 0 : A.level, battery_status: A != null && A.charging ? 1 : 0, font_scale: Ul(), network_type: Fl(), permissions: await bl().then((t) => t), browser_height: Ss().height, browser_width: Ss().width, cookies_enabled: ml(), is_mobile: yl(), cpu_arch: e.getCPU().architecture, app_version: "1.0", tags: [] };
 }
 function pl() {
   const e = navigator.userAgent;
