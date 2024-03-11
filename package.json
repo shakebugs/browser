@@ -1,6 +1,6 @@
 {
 	"name": "@shakebugs/browser",
-	"version": "0.5.0",
+	"version": "0.5.1",
 	"description": "Browser SDK for Shake",
 	"main": "./dist/browser.js",
 	"style": "./dist/main.css",

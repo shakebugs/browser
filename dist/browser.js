@@ -202,10 +202,10 @@ function K(e, A, t, r, n) {
 h.inherits(K, Error, { toJSON: function() {
   return { message: this.message, name: this.name, description: this.description, number: this.number, fileName: this.fileName, lineNumber: this.lineNumber, columnNumber: this.columnNumber, stack: this.stack, config: h.toJSONObject(this.config), code: this.code, status: this.response && this.response.status ? this.response.status : null };
 } });
-const Hn = K.prototype, vn = {};
+const Hn = K.prototype, kn = {};
 ["ERR_BAD_OPTION_VALUE", "ERR_BAD_OPTION", "ECONNABORTED", "ETIMEDOUT", "ERR_NETWORK", "ERR_FR_TOO_MANY_REDIRECTS", "ERR_DEPRECATED", "ERR_BAD_RESPONSE", "ERR_BAD_REQUEST", "ERR_CANCELED", "ERR_NOT_SUPPORT", "ERR_INVALID_URL"].forEach((e) => {
-  vn[e] = { value: e };
-}), Object.defineProperties(K, vn), Object.defineProperty(Hn, "isAxiosError", { value: !0 }), K.from = (e, A, t, r, n, s) => {
+  kn[e] = { value: e };
+}), Object.defineProperties(K, kn), Object.defineProperty(Hn, "isAxiosError", { value: !0 }), K.from = (e, A, t, r, n, s) => {
   const o = Object.create(Hn);
   return h.toFlatObject(e, o, function(i) {
     return i !== Error.prototype;
@@ -217,7 +217,7 @@ function ur(e) {
 function Ms(e) {
   return h.endsWith(e, "[]") ? e.slice(0, -2) : e;
 }
-function kn(e, A, t) {
+function vn(e, A, t) {
   return e ? e.concat(A).map(function(r, n) {
     return r = Ms(r), !t && n ? "[" + r + "]" : r;
   }).join(t ? "." : "") : A;
@@ -252,10 +252,10 @@ function Dt(e, A, t) {
         return h.isArray(Q) && !Q.some(ur);
       }(d) || (h.isFileList(d) || h.endsWith(g, "[]")) && (w = h.toArray(d)))
         return g = Ms(g), w.forEach(function(Q, p) {
-          !h.isUndefined(Q) && Q !== null && A.append(o === !0 ? kn([g], p, s) : o === null ? g : g + "[]", c(Q));
+          !h.isUndefined(Q) && Q !== null && A.append(o === !0 ? vn([g], p, s) : o === null ? g : g + "[]", c(Q));
         }), !1;
     }
-    return !!ur(d) || (A.append(kn(u, g, s), c(d)), !1);
+    return !!ur(d) || (A.append(vn(u, g, s), c(d)), !1);
   }
   const a = [], l = Object.assign(hi, { defaultVisitor: B, convertValue: c, isVisitable: ur });
   if (!h.isObject(e))
@@ -761,7 +761,7 @@ on.transitional = function(e, A, t) {
     return A && !Rn[s] && (Rn[s] = !0, console.warn(r(s, " has been deprecated since v" + A + " and will be removed in the near future"))), !e || e(n, s, o);
   };
 };
-const vr = { assertOptions: function(e, A, t) {
+const kr = { assertOptions: function(e, A, t) {
   if (typeof e != "object")
     throw new K("options must be an object", K.ERR_BAD_OPTION_VALUE);
   const r = Object.keys(e);
@@ -775,8 +775,8 @@ const vr = { assertOptions: function(e, A, t) {
     } else if (t !== !0)
       throw new K("Unknown option " + s, K.ERR_BAD_OPTION);
   }
-}, validators: on }, ne = vr.validators;
-class vt {
+}, validators: on }, ne = kr.validators;
+class kt {
   constructor(A) {
     this.defaults = A, this.interceptors = { request: new Kn(), response: new Kn() };
   }
@@ -792,7 +792,7 @@ class vt {
   _request(A, t) {
     typeof A == "string" ? (t = t || {}).url = A : t = A || {}, t = Ke(this.defaults, t);
     const { transitional: r, paramsSerializer: n, headers: s } = t;
-    r !== void 0 && vr.assertOptions(r, { silentJSONParsing: ne.transitional(ne.boolean), forcedJSONParsing: ne.transitional(ne.boolean), clarifyTimeoutError: ne.transitional(ne.boolean) }, !1), n != null && (h.isFunction(n) ? t.paramsSerializer = { serialize: n } : vr.assertOptions(n, { encode: ne.function, serialize: ne.function }, !0)), t.method = (t.method || this.defaults.method || "get").toLowerCase();
+    r !== void 0 && kr.assertOptions(r, { silentJSONParsing: ne.transitional(ne.boolean), forcedJSONParsing: ne.transitional(ne.boolean), clarifyTimeoutError: ne.transitional(ne.boolean) }, !1), n != null && (h.isFunction(n) ? t.paramsSerializer = { serialize: n } : kr.assertOptions(n, { encode: ne.function, serialize: ne.function }, !0)), t.method = (t.method || this.defaults.method || "get").toLowerCase();
     let o = s && h.merge(s.common, s[t.method]);
     s && h.forEach(["delete", "get", "head", "post", "put", "patch", "common"], (u) => {
       delete s[u];
@@ -839,7 +839,7 @@ class vt {
   }
 }
 h.forEach(["delete", "get", "head", "options"], function(e) {
-  vt.prototype[e] = function(A, t) {
+  kt.prototype[e] = function(A, t) {
     return this.request(Ke(t || {}, { method: e, url: A, data: (t || {}).data }));
   };
 }), h.forEach(["post", "put", "patch"], function(e) {
@@ -848,9 +848,9 @@ h.forEach(["delete", "get", "head", "options"], function(e) {
       return this.request(Ke(s || {}, { method: e, headers: t ? { "Content-Type": "multipart/form-data" } : {}, url: r, data: n }));
     };
   }
-  vt.prototype[e] = A(), vt.prototype[e + "Form"] = A(!0);
+  kt.prototype[e] = A(), kt.prototype[e + "Form"] = A(!0);
 });
-const kt = vt;
+const vt = kt;
 class an {
   constructor(A) {
     if (typeof A != "function")
@@ -899,30 +899,30 @@ class an {
     }), cancel: A };
   }
 }
-const bi = an, kr = { Continue: 100, SwitchingProtocols: 101, Processing: 102, EarlyHints: 103, Ok: 200, Created: 201, Accepted: 202, NonAuthoritativeInformation: 203, NoContent: 204, ResetContent: 205, PartialContent: 206, MultiStatus: 207, AlreadyReported: 208, ImUsed: 226, MultipleChoices: 300, MovedPermanently: 301, Found: 302, SeeOther: 303, NotModified: 304, UseProxy: 305, Unused: 306, TemporaryRedirect: 307, PermanentRedirect: 308, BadRequest: 400, Unauthorized: 401, PaymentRequired: 402, Forbidden: 403, NotFound: 404, MethodNotAllowed: 405, NotAcceptable: 406, ProxyAuthenticationRequired: 407, RequestTimeout: 408, Conflict: 409, Gone: 410, LengthRequired: 411, PreconditionFailed: 412, PayloadTooLarge: 413, UriTooLong: 414, UnsupportedMediaType: 415, RangeNotSatisfiable: 416, ExpectationFailed: 417, ImATeapot: 418, MisdirectedRequest: 421, UnprocessableEntity: 422, Locked: 423, FailedDependency: 424, TooEarly: 425, UpgradeRequired: 426, PreconditionRequired: 428, TooManyRequests: 429, RequestHeaderFieldsTooLarge: 431, UnavailableForLegalReasons: 451, InternalServerError: 500, NotImplemented: 501, BadGateway: 502, ServiceUnavailable: 503, GatewayTimeout: 504, HttpVersionNotSupported: 505, VariantAlsoNegotiates: 506, InsufficientStorage: 507, LoopDetected: 508, NotExtended: 510, NetworkAuthenticationRequired: 511 };
-Object.entries(kr).forEach(([e, A]) => {
-  kr[A] = e;
+const bi = an, vr = { Continue: 100, SwitchingProtocols: 101, Processing: 102, EarlyHints: 103, Ok: 200, Created: 201, Accepted: 202, NonAuthoritativeInformation: 203, NoContent: 204, ResetContent: 205, PartialContent: 206, MultiStatus: 207, AlreadyReported: 208, ImUsed: 226, MultipleChoices: 300, MovedPermanently: 301, Found: 302, SeeOther: 303, NotModified: 304, UseProxy: 305, Unused: 306, TemporaryRedirect: 307, PermanentRedirect: 308, BadRequest: 400, Unauthorized: 401, PaymentRequired: 402, Forbidden: 403, NotFound: 404, MethodNotAllowed: 405, NotAcceptable: 406, ProxyAuthenticationRequired: 407, RequestTimeout: 408, Conflict: 409, Gone: 410, LengthRequired: 411, PreconditionFailed: 412, PayloadTooLarge: 413, UriTooLong: 414, UnsupportedMediaType: 415, RangeNotSatisfiable: 416, ExpectationFailed: 417, ImATeapot: 418, MisdirectedRequest: 421, UnprocessableEntity: 422, Locked: 423, FailedDependency: 424, TooEarly: 425, UpgradeRequired: 426, PreconditionRequired: 428, TooManyRequests: 429, RequestHeaderFieldsTooLarge: 431, UnavailableForLegalReasons: 451, InternalServerError: 500, NotImplemented: 501, BadGateway: 502, ServiceUnavailable: 503, GatewayTimeout: 504, HttpVersionNotSupported: 505, VariantAlsoNegotiates: 506, InsufficientStorage: 507, LoopDetected: 508, NotExtended: 510, NetworkAuthenticationRequired: 511 };
+Object.entries(vr).forEach(([e, A]) => {
+  vr[A] = e;
 });
-const Hi = kr, Y = function e(A) {
-  const t = new kt(A), r = Ts(kt.prototype.request, t);
-  return h.extend(r, kt.prototype, t, { allOwnKeys: !0 }), h.extend(r, t, null, { allOwnKeys: !0 }), r.create = function(n) {
+const Hi = vr, Z = function e(A) {
+  const t = new vt(A), r = Ts(vt.prototype.request, t);
+  return h.extend(r, vt.prototype, t, { allOwnKeys: !0 }), h.extend(r, t, null, { allOwnKeys: !0 }), r.create = function(n) {
     return e(Ke(A, n));
   }, r;
 }(sn);
-Y.Axios = kt, Y.CanceledError = rt, Y.CancelToken = bi, Y.isCancel = Ns, Y.VERSION = Ei, Y.toFormData = Dt, Y.AxiosError = K, Y.Cancel = Y.CanceledError, Y.all = function(e) {
+Z.Axios = vt, Z.CanceledError = rt, Z.CancelToken = bi, Z.isCancel = Ns, Z.VERSION = Ei, Z.toFormData = Dt, Z.AxiosError = K, Z.Cancel = Z.CanceledError, Z.all = function(e) {
   return Promise.all(e);
-}, Y.spread = function(e) {
+}, Z.spread = function(e) {
   return function(A) {
     return e.apply(null, A);
   };
-}, Y.isAxiosError = function(e) {
+}, Z.isAxiosError = function(e) {
   return h.isObject(e) && e.isAxiosError === !0;
-}, Y.mergeConfig = Ke, Y.AxiosHeaders = ee, Y.formToJSON = (e) => Ps(h.isHTMLForm(e) ? new FormData(e) : e), Y.getAdapter = Xs, Y.HttpStatusCode = Hi, Y.default = Y;
-var vi = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
-function ki(e) {
+}, Z.mergeConfig = Ke, Z.AxiosHeaders = ee, Z.formToJSON = (e) => Ps(h.isHTMLForm(e) ? new FormData(e) : e), Z.getAdapter = Xs, Z.HttpStatusCode = Hi, Z.default = Z;
+var ki = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
+function vi(e) {
   return e && e.__esModule && Object.prototype.hasOwnProperty.call(e, "default") ? e.default : e;
 }
-const Ii = ki(typeof self == "object" ? self.FormData : window.FormData), JA = "shake.sdk.appToken", Gn = "shake.sdk.isAppRegistered", Vn = "shake.sdk.isAppActive", Pn = "shake.sdk.isShakeOpened", Nn = "shake.sdk.shakeState", _n = "shake.sdk.shakeDeviceId", we = class we {
+const Ii = vi(typeof self == "object" ? self.FormData : window.FormData), JA = "shake.sdk.appToken", Gn = "shake.sdk.isAppRegistered", Vn = "shake.sdk.isAppActive", Pn = "shake.sdk.isShakeOpened", Nn = "shake.sdk.shakeState", _n = "shake.sdk.shakeDeviceId", ge = class ge {
   constructor(A, t, r, n) {
     F(this, "instance");
     F(this, "instanceAuth");
@@ -931,10 +931,10 @@ const Ii = ki(typeof self == "object" ? self.FormData : window.FormData), JA = "
     F(this, "deviceId");
     F(this, "storageProvider");
     F(this, "handlers", {});
-    Y.defaults.withCredentials = !1, this.storageProvider = A, this.bundleId = r, this.deviceId = n, this.version = t, this.instance = Y.create({ baseURL: cr.apiHost }), this.instanceAuth = Y.create({ baseURL: cr.oAuthHost }), this.setRequestInterceptors(), this.setResponseInterceptors();
+    Z.defaults.withCredentials = !1, this.storageProvider = A, this.bundleId = r, this.deviceId = n, this.version = t, this.instance = Z.create({ baseURL: cr.apiHost }), this.instanceAuth = Z.create({ baseURL: cr.oAuthHost }), this.setRequestInterceptors(), this.setResponseInterceptors();
   }
   static getInstance(A, t, r, n) {
-    return we.serviceInstance || (we.serviceInstance = new we(A, t, r, n)), we.serviceInstance;
+    return ge.serviceInstance || (ge.serviceInstance = new ge(A, t, r, n)), ge.serviceInstance;
   }
   addTokenToRequest(A) {
     var r;
@@ -1002,8 +1002,8 @@ const Ii = ki(typeof self == "object" ? self.FormData : window.FormData), JA = "
     return Object.keys(A).map((t) => ({ op: "replace", path: "/" + t, value: A[t] }));
   }
 };
-F(we, "serviceInstance");
-let ze = we;
+F(ge, "serviceInstance");
+let ze = ge;
 var Ws = ((e) => (e.WEB = "Web", e))(Ws || {}), Tt = ((e) => (e.WEB = "Web", e))(Tt || {}), Xe = ((e) => (e.SUGGESTION = "improvement", e.BUG = "bug", e.QUESTION = "question", e))(Xe || {}), Ys = ((e) => (e.MANUAL = "manual", e.AUTOMATIC = "automatic", e))(Ys || {}), Ot = ((e) => (e.TITLE = "title", e.TEXT_INPUT = "text_input", e.EMAIL = "email", e.PICKER = "picker", e))(Ot || {});
 const xi = ["geolocation", "camera", "microphone", "notifications", "persistent-storage", "screen-wake-lock"];
 class Ki {
@@ -1073,7 +1073,7 @@ const Ie = class Ie {
 };
 F(Ie, "storageProvider", new Di()), F(Ie, "localStorage", new Li(Ie.storageProvider)), F(Ie, "attachmentsManager", new Si());
 let j = Ie;
-const cn = "shakeSdk: ", Z = (e) => {
+const cn = "shakeSdk: ", X = (e) => {
   console.debug(`${cn} ${e}`);
 }, Jn = (e) => {
   console.info(`${cn} ${e}`);
@@ -1096,7 +1096,7 @@ class Ti {
       const { data: n } = await this.authApi.getToken(A, t);
       return this.storage.setObject(JA, n), n ?? null;
     } catch (n) {
-      return Z("Error getting token: " + (n == null ? void 0 : n.message)), null;
+      return X("Error getting token: " + (n == null ? void 0 : n.message)), null;
     }
   }
   async registerApp(A) {
@@ -1105,7 +1105,7 @@ class Ti {
     try {
       return await this.authApi.registerApp(DA.bundleId, Tt.WEB, !1, Ws.WEB), !0;
     } catch (t) {
-      return Z("Error registering the app: " + (t == null ? void 0 : t.message)), !1;
+      return X("Error registering the app: " + (t == null ? void 0 : t.message)), !1;
     }
   }
   async authenticate(A, t) {
@@ -1117,7 +1117,7 @@ class Ti {
       const s = await this.registerApp(n);
       this.data.setAppRegistered(s), this.data.setAppActive(!0);
     } catch (n) {
-      Z("Error initializing the app: " + (n == null ? void 0 : n.message)), ((r = n.response) == null ? void 0 : r.status) === 404 && (Z("App archived"), this.data.setAppRegistered(!1), this.data.setAppActive(!1));
+      X("Error initializing the app: " + (n == null ? void 0 : n.message)), ((r = n.response) == null ? void 0 : r.status) === 404 && (X("App archived"), this.data.setAppRegistered(!1), this.data.setAppActive(!1));
     }
   }
 }
@@ -1153,9 +1153,9 @@ class Ri {
     let r, n, s = [];
     t.length && (r = await this.uploadScreenshot(t), n = await this.uploadVideo(t), s = await this.uploadAttachments(t)), A.screenshot_url = r, A.video_url = n, A.files = s;
     try {
-      await this.feedbackApi.sendFeedback(DA.bundleId, A), Z("Ticket sent successfully.");
+      await this.feedbackApi.sendFeedback(DA.bundleId, A), X("Ticket sent successfully.");
     } catch (o) {
-      return Z("Error sending user feedback: " + (o == null ? void 0 : o.message)), null;
+      return X("Error sending user feedback: " + (o == null ? void 0 : o.message)), null;
     }
   }
   async uploadScreenshot(A) {
@@ -1183,12 +1183,12 @@ class Ri {
       const { data: t } = await this.filesApi.uploadFile(A);
       return t.url;
     } catch (t) {
-      return void Z("Error uploading file: " + (t == null ? void 0 : t.message));
+      return void X("Error uploading file: " + (t == null ? void 0 : t.message));
     }
   }
   async blobToFile(A) {
     try {
-      return Y.get(A.data, { responseType: "arraybuffer" }).then((t) => new File([t.data], A.name, { type: t.data.type }));
+      return Z.get(A.data, { responseType: "arraybuffer" }).then((t) => new File([t.data], A.name, { type: t.data.type }));
     } catch {
       return null;
     }
@@ -1228,9 +1228,9 @@ const Zs = () => {
 }, qs = (e) => {
   const A = document.createElement("p");
   return A.classList.add("shake-sdk-text-button"), A.innerText = e, A;
-}, O = async (e) => new CSSStyleSheet().replace(e);
-let de;
-(async () => [await O(".shake-sdk-bubble{padding:0;border-radius:100px;border-width:0;cursor:pointer;display:flex;align-items:center;justify-content:center;position:fixed;background-color:#fff;width:50px;height:50px;box-shadow:0 2px 2px #e1e1e1;z-index:2147483647;transition:none}"), await O(".shake-sdk-button{border-radius:var(--shake-sdk-button-border-radius);border:1px solid var(--shake-sdk-grey30);background:var(--shake-sdk-pureWhite);padding:4px 10px 3px 7px;display:flex;justify-content:center;align-items:center;cursor:pointer}.shake-sdk-button:disabled{cursor:not-allowed;opacity:.3}"), await O(".shake-sdk-card{flex:1;background-color:var(--shake-sdk-bg-color-primary);border-radius:var(--shake-sdk-border-radius)}"), await O(".shake-sdk-circle-button{padding:0;border-radius:100px;border-width:0;cursor:pointer;display:flex;align-items:center;justify-content:center}"), await O(""), await O(""), await O(".shake-sdk-context-menu{position:fixed;display:none;width:260px;z-index:2147483647;transform:translate(20%,-25%);border-radius:10px;border-width:1px;border-color:var(--shake-sdk-bg-color-outline);padding:8px 0;background-color:var(--shake-sdk-bg-color-primary-inversed-highlight);box-shadow:0 2px 10px #1c1c1e}"), await O(".shake-sdk-context-menu-header{background-color:transparent;border:0;display:flex;width:100%;padding:8px 20px;cursor:pointer}.shake-sdk-context-menu-header-text{color:var(--shake-sdk-text-color-secondary);font-size:12px}"), await O(".shake-sdk-context-menu-item{background-color:transparent;border:0;display:flex;width:100%;padding:8px 20px;cursor:pointer}.shake-sdk-context-menu-item:hover{background-color:var(--shake-sdk-bg-color-outline)}.shake-sdk-context-menu-item img{width:20px;height:20px;margin-right:10px}.shake-sdk-context-menu-item p{color:var(--shake-sdk-text-color-popup-menu-item)}"), await O(".shake-sdk-select-dropdown{border-radius:var(--shake-sdk-border-radius-light);border:1px solid var(--shake-sdk-bg-color-primary-highlight);background:var(--shake-sdk-bg-color-secondary);padding:9px 18px 12px 12px;display:flex;flex-direction:column;cursor:pointer;position:relative;-webkit-user-select:none;user-select:none}.shake-sdk-select-dropdown.active{border:1px solid var(--shake-sdk-color-accent)}.shake-sdk-dropdown-icon{position:absolute;right:16px;top:16px;cursor:pointer}.shake-sdk-select-dropdown-label{font-size:12px;color:var(--shake-sdk-text-color-secondary);font-family:Roobert,serif;-webkit-font-smoothing:antialiased;cursor:pointer;-webkit-user-select:none;user-select:none}.shake-sdk-select-dropdown-chosen{color:var(--shake-sdk-text-color-primary)}.shake-sdk-select-options{padding:8px 0;margin-top:2px;background:var(--shake-sdk-bg-color-secondary);border-radius:var(--shake-sdk-border-radius-light);border:1px solid var(--shake-sdk-bg-color-primary-highlight);list-style-type:none;display:none;position:absolute;width:333px;z-index:1}.shake-sdk-select-option{list-style-type:none;font-family:Roobert,serif;padding:10px 20px 12px 12px;cursor:pointer;color:var(--shake-sdk-text-color-primary);font-size:14px;font-weight:500}.shake-sdk-select-option:hover{background-color:var(--shake-sdk-bg-color-primary-highlight)}"), await O(".shake-sdk-sheet-background{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2147483647;display:flex;flex-direction:column-reverse;background-color:#000000b3;box-sizing:border-box}.shake-sdk-sheet{padding:40px;display:flex;flex-direction:column;background-color:var(--shake-sdk-bg-color-primary);border-radius:var(--shake-sdk-border-radius) var(--shake-sdk-border-radius) 0 0}.shake-sdk-sheet>p{text-align:center;margin-bottom:25px}.shake-sdk-sheet-item{cursor:pointer;display:flex;flex-direction:row;background-color:transparent;border:0;padding:12px;margin:0}.shake-sdk-sheet-item:hover{background-color:var(--shake-sdk-bg-color-primary-highlight)}.shake-sdk-sheet-item img{text-align:center;margin-right:12px;width:27px;height:27px}"), await O(".shake-sdk-text-p1{font-size:16px;font-weight:500;line-height:20px;letter-spacing:0;color:var(--shake-sdk-text-color-primary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-p2{font-size:14px;font-weight:500;line-height:18px;letter-spacing:0;color:var(--shake-sdk-text-color-secondary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-p3{color:var(--shake-sdk-text-color-secondary);font-size:12px;font-weight:500;line-height:16px;letter-spacing:0;-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-h2{font-size:24px;font-weight:700;line-height:32px;letter-spacing:0;color:var(--shake-sdk-text-color-primary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-button{font-size:14px;font-weight:700;line-height:20px;letter-spacing:0;color:var(--shake-sdk-text-color-accent-button);-webkit-font-smoothing:antialiased;margin:0}"), await O(".shake-sdk-textarea-container{width:100%;display:flex;position:relative;z-index:0}.shake-sdk-textarea{flex:1;background-color:transparent;border:1px solid var(--shake-sdk-bg-color-primary-highlight);border-radius:var(--shake-sdk-border-radius-light);font-family:Roobert,serif;padding:28px 12px 12px;resize:none;width:100%;color:var(--shake-sdk-text-color-primary);font-size:16px}.shake-sdk-textarea:focus-visible{outline:none;border:1px solid var(--shake-sdk-color-accent)}.shake-sdk-textarea::placeholder{color:var(--shake-sdk-text-color-secondary)}.shake-sdk-textarea-label{position:absolute;font-family:Roobert,serif;top:28px;left:2px;font-size:12px;color:var(--shake-sdk-text-color-secondary);pointer-events:none;transform-origin:top left;transform:translateY(-50%) translate(10px)}"), await O(".toast-notification{width:300px;max-height:min-content;bottom:0;margin-bottom:20px;opacity:.8;margin-left:0;top:20px;right:20px;position:fixed;z-index:2147483647;display:flex;flex-direction:row;cursor:default;border:1px solid var(--shake-sdk-bg-color-outline);border-radius:var(--shake-sdk-border-radius-light);background:var(--shake-sdk-bg-color-primary-inversed-highlight);color:var(--shake-sdk-text-color-popup-menu-item);box-shadow:0 2px 10px var(--shake-sdk-bg-color-primary-inversed)}.message-container{width:88%;padding-bottom:14px;padding-left:20px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:14px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight)}.title-container{width:88%;padding-left:20px;padding-bottom:4px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:16px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight)}.content-container{width:88%;padding-top:14px;padding-left:20px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:14px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight);display:flex;flex-direction:column}.close-notification{width:12%;height:32px}.close-notification>img{padding-top:8px;padding-left:5px;font-weight:900;color:var(--shake-sdk-text-color-popup-menu-item);cursor:pointer}"), await O(".shake-sdk-toolbar{width:100%;height:32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-toolbar-button{display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;width:32px;height:32px;background-color:transparent;margin-left:-10px}.shake-sdk-toolbar-button:hover{opacity:.7}@media only screen and (min-width: 1025px){.shake-sdk-toolbar{display:none}}"), await O(".shake-sdk-video{width:100%}"), await O(".shake-sdk-main-button{position:fixed;top:50%;right:-32px;height:28px;min-width:138px;z-index:2147483647;transform:rotate(-90deg);margin-top:-14px}.shake-sdk-main-button-icon{margin-right:4px;width:21px;height:21px;border-radius:4px}.shake-sdk-main-button-text{color:var(--shake-sdk-text-color-primary);letter-spacing:-.04em}"), await O(".shake-sdk-content{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;background-color:#000000b3;z-index:2147483647;overflow:hidden}.shake-sdk-content-wrap{flex:1;display:flex;flex-direction:row;padding:40px}.shake-sdk-content-left{display:flex;flex:1;margin-right:20px;position:relative}.shake-sdk-content-right{display:flex}.shake-sdk-close-button{position:absolute;top:-15px;left:-15px;width:40px;height:40px}@media only screen and (max-width: 1024px){.shake-sdk-content-wrap{background-color:var(--shake-sdk-bg-color-primary);padding:0}.shake-sdk-content-left{display:none}.shake-sdk-content-right{flex:1}.shake-sdk-close-button{display:none}}.shake-sdk-content p,h1,h2,h3,ul,li,label,div{font-family:Roobert,serif;margin:0}.shake-sdk-sheet p,h1,h2,h3,ul,li,label,div{font-family:Roobert,serif}.shake-sdk-content *{scrollbar-width:thin;scrollbar-color:#2C2C2E transparent}.shake-sdk-content *::-webkit-scrollbar{width:10px}.shake-sdk-content *::-webkit-scrollbar-track{background:none}.shake-sdk-content *::-webkit-scrollbar-thumb{background-color:#2c2c2e;border-radius:10px}.shake-sdk-content ::-webkit-scrollbar-corner{background-color:transparent}"), await O(".shake-sdk-new-ticket{padding:32px 20px;display:flex;flex-direction:column;background-color:var(--shake-sdk-bg-color-primary);justify-content:space-between;width:336px}.shake-sdk-new-ticket-form{display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}.shake-sdk-new-ticket-title{padding-bottom:32px}.shake-sdk-styled-textarea{padding-top:12px;margin-bottom:12px}.shake-sdk-submit-button{background-color:var(--shake-sdk-color-accent);padding:9px 20px 11px;border-radius:var(--shake-sdk-border-radius-light)}.shake-sdk-new-ticket *{scrollbar-color:#e8e8e8 transparent!important}.shake-sdk-new-ticket *::-webkit-scrollbar-thumb{background-color:#e8e8e8!important}"), await O(".shake-sdk-attachments-items-small{display:flex;flex-direction:row;min-height:210px;width:100%;overflow-x:auto;overflow-y:hidden}@media only screen and (min-width: 1025px){.shake-sdk-attachments-items-small{display:none}}"), await O(".shake-sdk-attachment-item-small{display:flex;min-width:100px;max-width:100px;height:200px;margin-right:10px;cursor:pointer;overflow:hidden;position:relative}.shake-sdk-attachment-item-remove-small{position:absolute;top:15px;right:15px;width:30px;height:30px;background-color:var(--shake-sdk-bg-color-primary-inversed);opacity:.7}.shake-sdk-attachment-item-thumbnail-small{background-color:#000;height:100%;width:100%;object-fit:cover;border-radius:10px}"), await O(".shake-sdk-attachments-add-item-small{display:flex;min-width:100px;max-width:100px;height:200px;margin-right:10px;align-items:center;justify-content:center;overflow:hidden;position:relative}.shake-sdk-attachment-add-button-small{width:29px;height:29px;cursor:pointer;background-color:var(--shake-sdk-bg-color-secondary)}"), await O(".shake-sdk-attachments-card{padding:20px;display:flex;flex-direction:row;background-color:var(--shake-sdk-bg-color-primary-inversed)}.shake-sdk-attachments-list-wrap{display:flex;flex-direction:row;flex:0;margin-right:12px}.shake-sdk-attachments-preview-wrap{display:flex;flex-direction:row;flex:1}@media only screen and (max-width: 1024px){.shake-sdk-attachments-card{display:none}}"), await O(".shake-sdk-attachments-items{display:flex;flex-direction:column;overflow:auto;overflow-x:hidden}"), await O(".shake-sdk-attachment-item{width:140px;display:flex;flex-direction:column;margin-bottom:20px;cursor:pointer}.shake-sdk-attachment-item-card{position:relative;padding:8px;background-color:transparent}.shake-sdk-attachment-item-selected .shake-sdk-attachment-item-card{background-color:var(--shake-sdk-bg-color-primary-inversed-highlight)}.shake-sdk-attachment-remove{position:absolute;top:15px;right:15px;width:30px;height:30px;background-color:var(--shake-sdk-bg-color-primary-inversed);opacity:.7}.shake-sdk-attachment-item-thumbnail{background-color:#fff;width:100%;height:61px;object-fit:cover;border-radius:10px}.shake-sdk-attachment-item-title{display:flex;justify-content:center}.shake-sdk-attachment-title-box{display:flex;width:78px;height:20px;margin:2px;text-align:center;align-items:center;justify-content:center;border-radius:4px;background-color:transparent}.shake-sdk-attachment-item-selected .shake-sdk-attachment-title-box{background-color:var(--shake-sdk-color-accent-dark)}.shake-sdk-attachment-title-box p{color:var(--shake-sdk-text-color-accent-button)}"), await O(".shake-sdk-attachments-add-item{width:140px;display:flex;align-items:center;justify-content:center}.shake-sdk-attachment-add-button{width:29px;height:29px;background-color:var(--shake-sdk-bg-color-primary-inversed-highlight)}"), await O(".shake-sdk-attachments-preview{margin-top:36px;flex:1;overflow:hidden}"), await O(".shake-sdk-image-preview{height:100%}.shake-sdk-image-preview img{border-radius:10px;display:block;max-width:100%;max-height:100%;height:auto;width:auto}"), await O(".shake-sdk-video-preview{height:100%}.shake-sdk-video-preview video{border-radius:10px;display:block;max-width:100%;max-height:100%;height:auto;width:auto}"), await O(".shake-sdk-image-preview-root-fs{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;background-color:#000;z-index:2147483647}.shake-sdk-image-preview-toolbar-fs{width:100%;flex:0 0 32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-image-preview-content-fs{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:32px}.shake-sdk-image-preview-fs{display:block;max-width:100%;max-height:100%;height:auto;width:auto;border-radius:10px}"), await O(".shake-sdk-video-preview-root-fs{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;background-color:#000;z-index:2147483647}.shake-sdk-video-preview-toolbar-fs{width:100%;height:32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-video-preview-fs{width:100%;height:100%}")])().then((e) => de = e);
+}, O = async (e) => new CSSStyleSheet().replace(e), he = (e) => {
+  (async () => await Promise.all([O(".shake-sdk-bubble{padding:0;border-radius:100px;border-width:0;cursor:pointer;display:flex;align-items:center;justify-content:center;position:fixed;background-color:#fff;width:50px;height:50px;box-shadow:0 2px 2px #e1e1e1;z-index:2147483647;transition:none}"), O(".shake-sdk-button{border-radius:var(--shake-sdk-button-border-radius);border:1px solid var(--shake-sdk-grey30);background:var(--shake-sdk-pureWhite);padding:4px 10px 3px 7px;display:flex;justify-content:center;align-items:center;cursor:pointer}.shake-sdk-button:disabled{cursor:not-allowed;opacity:.3}"), O(".shake-sdk-card{flex:1;background-color:var(--shake-sdk-bg-color-primary);border-radius:var(--shake-sdk-border-radius)}"), O(".shake-sdk-circle-button{padding:0;border-radius:100px;border-width:0;cursor:pointer;display:flex;align-items:center;justify-content:center}"), O(""), O(""), O(".shake-sdk-context-menu{position:fixed;display:none;width:260px;z-index:2147483647;transform:translate(20%,-25%);border-radius:10px;border-width:1px;border-color:var(--shake-sdk-bg-color-outline);padding:8px 0;background-color:var(--shake-sdk-bg-color-primary-inversed-highlight);box-shadow:0 2px 10px #1c1c1e}"), O(".shake-sdk-context-menu-header{background-color:transparent;border:0;display:flex;width:100%;padding:8px 20px;cursor:pointer}.shake-sdk-context-menu-header-text{color:var(--shake-sdk-text-color-secondary);font-size:12px}"), O(".shake-sdk-context-menu-item{background-color:transparent;border:0;display:flex;width:100%;padding:8px 20px;cursor:pointer}.shake-sdk-context-menu-item:hover{background-color:var(--shake-sdk-bg-color-outline)}.shake-sdk-context-menu-item img{width:20px;height:20px;margin-right:10px}.shake-sdk-context-menu-item p{color:var(--shake-sdk-text-color-popup-menu-item)}"), O(".shake-sdk-select-dropdown{border-radius:var(--shake-sdk-border-radius-light);border:1px solid var(--shake-sdk-bg-color-primary-highlight);background:var(--shake-sdk-bg-color-secondary);padding:9px 18px 12px 12px;display:flex;flex-direction:column;cursor:pointer;position:relative;-webkit-user-select:none;user-select:none}.shake-sdk-select-dropdown.active{border:1px solid var(--shake-sdk-color-accent)}.shake-sdk-dropdown-icon{position:absolute;right:16px;top:16px;cursor:pointer}.shake-sdk-select-dropdown-label{font-size:12px;color:var(--shake-sdk-text-color-secondary);font-family:Roobert,serif;-webkit-font-smoothing:antialiased;cursor:pointer;-webkit-user-select:none;user-select:none}.shake-sdk-select-dropdown-chosen{color:var(--shake-sdk-text-color-primary)}.shake-sdk-select-options{padding:8px 0;margin-top:2px;background:var(--shake-sdk-bg-color-secondary);border-radius:var(--shake-sdk-border-radius-light);border:1px solid var(--shake-sdk-bg-color-primary-highlight);list-style-type:none;display:none;position:absolute;width:333px;z-index:1}.shake-sdk-select-option{list-style-type:none;font-family:Roobert,serif;padding:10px 20px 12px 12px;cursor:pointer;color:var(--shake-sdk-text-color-primary);font-size:14px;font-weight:500}.shake-sdk-select-option:hover{background-color:var(--shake-sdk-bg-color-primary-highlight)}"), O(".shake-sdk-sheet-background{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2147483647;display:flex;flex-direction:column-reverse;background-color:#000000b3;box-sizing:border-box}.shake-sdk-sheet{padding:40px;display:flex;flex-direction:column;background-color:var(--shake-sdk-bg-color-primary);border-radius:var(--shake-sdk-border-radius) var(--shake-sdk-border-radius) 0 0}.shake-sdk-sheet>p{text-align:center;margin-bottom:25px}.shake-sdk-sheet-item{cursor:pointer;display:flex;flex-direction:row;background-color:transparent;border:0;padding:12px;margin:0}.shake-sdk-sheet-item:hover{background-color:var(--shake-sdk-bg-color-primary-highlight)}.shake-sdk-sheet-item img{text-align:center;margin-right:12px;width:27px;height:27px}"), O(".shake-sdk-text-p1{font-size:16px;font-weight:500;line-height:20px;letter-spacing:0;color:var(--shake-sdk-text-color-primary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-p2{font-size:14px;font-weight:500;line-height:18px;letter-spacing:0;color:var(--shake-sdk-text-color-secondary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-p3{color:var(--shake-sdk-text-color-secondary);font-size:12px;font-weight:500;line-height:16px;letter-spacing:0;-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-h2{font-size:24px;font-weight:700;line-height:32px;letter-spacing:0;color:var(--shake-sdk-text-color-primary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-button{font-size:14px;font-weight:700;line-height:20px;letter-spacing:0;color:var(--shake-sdk-text-color-accent-button);-webkit-font-smoothing:antialiased;margin:0}"), O(".shake-sdk-textarea-container{width:100%;display:flex;position:relative;z-index:0}.shake-sdk-textarea{flex:1;background-color:transparent;border:1px solid var(--shake-sdk-bg-color-primary-highlight);border-radius:var(--shake-sdk-border-radius-light);font-family:Roobert,serif;padding:28px 12px 12px;resize:none;width:100%;color:var(--shake-sdk-text-color-primary);font-size:16px}.shake-sdk-textarea:focus-visible{outline:none;border:1px solid var(--shake-sdk-color-accent)}.shake-sdk-textarea::placeholder{color:var(--shake-sdk-text-color-secondary)}.shake-sdk-textarea-label{position:absolute;font-family:Roobert,serif;top:28px;left:2px;font-size:12px;color:var(--shake-sdk-text-color-secondary);pointer-events:none;transform-origin:top left;transform:translateY(-50%) translate(10px)}"), O(".toast-notification{width:300px;max-height:min-content;bottom:0;margin-bottom:20px;opacity:.8;margin-left:0;top:20px;right:20px;position:fixed;z-index:2147483647;display:flex;flex-direction:row;cursor:default;border:1px solid var(--shake-sdk-bg-color-outline);border-radius:var(--shake-sdk-border-radius-light);background:var(--shake-sdk-bg-color-primary-inversed-highlight);color:var(--shake-sdk-text-color-popup-menu-item);box-shadow:0 2px 10px var(--shake-sdk-bg-color-primary-inversed)}.message-container{width:88%;padding-bottom:14px;padding-left:20px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:14px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight)}.title-container{width:88%;padding-left:20px;padding-bottom:4px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:16px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight)}.content-container{width:88%;padding-top:14px;padding-left:20px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:14px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight);display:flex;flex-direction:column}.close-notification{width:12%;height:32px}.close-notification>img{padding-top:8px;padding-left:5px;font-weight:900;color:var(--shake-sdk-text-color-popup-menu-item);cursor:pointer}"), O(".shake-sdk-toolbar{width:100%;height:32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-toolbar-button{display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;width:32px;height:32px;background-color:transparent;margin-left:-10px}.shake-sdk-toolbar-button:hover{opacity:.7}@media only screen and (min-width: 1025px){.shake-sdk-toolbar{display:none}}"), O(".shake-sdk-video{width:100%}"), O(".shake-sdk-main-button{position:fixed;top:50%;right:-32px;height:28px;min-width:138px;z-index:2147483647;transform:rotate(-90deg);margin-top:-14px}.shake-sdk-main-button-icon{margin-right:4px;width:21px;height:21px;border-radius:4px}.shake-sdk-main-button-text{color:var(--shake-sdk-text-color-primary);letter-spacing:-.04em}"), O(".shake-sdk-content{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;background-color:#000000b3;z-index:2147483647;overflow:hidden}.shake-sdk-content-wrap{flex:1;display:flex;flex-direction:row;padding:40px}.shake-sdk-content-left{display:flex;flex:1;margin-right:20px;position:relative}.shake-sdk-content-right{display:flex}.shake-sdk-close-button{position:absolute;top:-15px;left:-15px;width:40px;height:40px}@media only screen and (max-width: 1024px){.shake-sdk-content-wrap{background-color:var(--shake-sdk-bg-color-primary);padding:0}.shake-sdk-content-left{display:none}.shake-sdk-content-right{flex:1}.shake-sdk-close-button{display:none}}.shake-sdk-content p,h1,h2,h3,ul,li,label,div{font-family:Roobert,serif;margin:0}.shake-sdk-sheet p,h1,h2,h3,ul,li,label,div{font-family:Roobert,serif}.shake-sdk-content *{scrollbar-width:thin;scrollbar-color:#2C2C2E transparent}.shake-sdk-content *::-webkit-scrollbar{width:10px}.shake-sdk-content *::-webkit-scrollbar-track{background:none}.shake-sdk-content *::-webkit-scrollbar-thumb{background-color:#2c2c2e;border-radius:10px}.shake-sdk-content ::-webkit-scrollbar-corner{background-color:transparent}"), O(".shake-sdk-new-ticket{padding:32px 20px;display:flex;flex-direction:column;background-color:var(--shake-sdk-bg-color-primary);justify-content:space-between;width:336px}.shake-sdk-new-ticket-form{display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}.shake-sdk-new-ticket-title{padding-bottom:32px}.shake-sdk-styled-textarea{padding-top:12px;margin-bottom:12px}.shake-sdk-submit-button{background-color:var(--shake-sdk-color-accent);padding:9px 20px 11px;border-radius:var(--shake-sdk-border-radius-light)}.shake-sdk-new-ticket *{scrollbar-color:#e8e8e8 transparent!important}.shake-sdk-new-ticket *::-webkit-scrollbar-thumb{background-color:#e8e8e8!important}"), O(".shake-sdk-attachments-items-small{display:flex;flex-direction:row;min-height:210px;width:100%;overflow-x:auto;overflow-y:hidden}@media only screen and (min-width: 1025px){.shake-sdk-attachments-items-small{display:none}}"), O(".shake-sdk-attachment-item-small{display:flex;min-width:100px;max-width:100px;height:200px;margin-right:10px;cursor:pointer;overflow:hidden;position:relative}.shake-sdk-attachment-item-remove-small{position:absolute;top:15px;right:15px;width:30px;height:30px;background-color:var(--shake-sdk-bg-color-primary-inversed);opacity:.7}.shake-sdk-attachment-item-thumbnail-small{background-color:#000;height:100%;width:100%;object-fit:cover;border-radius:10px}"), O(".shake-sdk-attachments-add-item-small{display:flex;min-width:100px;max-width:100px;height:200px;margin-right:10px;align-items:center;justify-content:center;overflow:hidden;position:relative}.shake-sdk-attachment-add-button-small{width:29px;height:29px;cursor:pointer;background-color:var(--shake-sdk-bg-color-secondary)}"), O(".shake-sdk-attachments-card{padding:20px;display:flex;flex-direction:row;background-color:var(--shake-sdk-bg-color-primary-inversed)}.shake-sdk-attachments-list-wrap{display:flex;flex-direction:row;flex:0;margin-right:12px}.shake-sdk-attachments-preview-wrap{display:flex;flex-direction:row;flex:1}@media only screen and (max-width: 1024px){.shake-sdk-attachments-card{display:none}}"), O(".shake-sdk-attachments-items{display:flex;flex-direction:column;overflow:auto;overflow-x:hidden}"), O(".shake-sdk-attachment-item{width:140px;display:flex;flex-direction:column;margin-bottom:20px;cursor:pointer}.shake-sdk-attachment-item-card{position:relative;padding:8px;background-color:transparent}.shake-sdk-attachment-item-selected .shake-sdk-attachment-item-card{background-color:var(--shake-sdk-bg-color-primary-inversed-highlight)}.shake-sdk-attachment-remove{position:absolute;top:15px;right:15px;width:30px;height:30px;background-color:var(--shake-sdk-bg-color-primary-inversed);opacity:.7}.shake-sdk-attachment-item-thumbnail{background-color:#fff;width:100%;height:61px;object-fit:cover;border-radius:10px}.shake-sdk-attachment-item-title{display:flex;justify-content:center}.shake-sdk-attachment-title-box{display:flex;width:78px;height:20px;margin:2px;text-align:center;align-items:center;justify-content:center;border-radius:4px;background-color:transparent}.shake-sdk-attachment-item-selected .shake-sdk-attachment-title-box{background-color:var(--shake-sdk-color-accent-dark)}.shake-sdk-attachment-title-box p{color:var(--shake-sdk-text-color-accent-button)}"), O(".shake-sdk-attachments-add-item{width:140px;display:flex;align-items:center;justify-content:center}.shake-sdk-attachment-add-button{width:29px;height:29px;background-color:var(--shake-sdk-bg-color-primary-inversed-highlight)}"), O(".shake-sdk-attachments-preview{margin-top:36px;flex:1;overflow:hidden}"), O(".shake-sdk-image-preview{height:100%}.shake-sdk-image-preview img{border-radius:10px;display:block;max-width:100%;max-height:100%;height:auto;width:auto}"), O(".shake-sdk-video-preview{height:100%}.shake-sdk-video-preview video{border-radius:10px;display:block;max-width:100%;max-height:100%;height:auto;width:auto}"), O(".shake-sdk-image-preview-root-fs{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;background-color:#000;z-index:2147483647}.shake-sdk-image-preview-toolbar-fs{width:100%;flex:0 0 32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-image-preview-content-fs{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:32px}.shake-sdk-image-preview-fs{display:block;max-width:100%;max-height:100%;height:auto;width:auto;border-radius:10px}"), O(".shake-sdk-video-preview-root-fs{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;background-color:#000;z-index:2147483647}.shake-sdk-video-preview-toolbar-fs{width:100%;height:32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-video-preview-fs{width:100%;height:100%}")]))().then((A) => e.adoptedStyleSheets = A);
+};
 /*!
  * html2canvas 1.4.1 <https://html2canvas.hertzen.com>
  * Copyright (c) 2022 Niklas von Hertzen <https://hertzen.com>
@@ -1567,7 +1567,7 @@ var oe = 10, Kr = 13, Ve = 15, lt = 17, Te = 18, Xi = 19, Wn = 20, Lr = 21, Oe =
   return e.prototype.slice = function() {
     return z.apply(void 0, this.codePoints.slice(this.start, this.end));
   }, e;
-}(), mA = 45, he = 43, _A = -1, UA = function(e) {
+}(), mA = 45, we = 43, _A = -1, UA = function(e) {
   return e >= 48 && e <= 57;
 }, fe = function(e) {
   return UA(e) || e >= 65 && e <= 70 || e >= 97 && e <= 102;
@@ -1592,10 +1592,10 @@ var oe = 10, Kr = 13, Ve = 15, lt = 17, Te = 18, Xi = 19, Wn = 20, Lr = 21, Oe =
 }, ht = function(e, A, t) {
   return e === mA ? Gt(A) || se(A, t) : !!Gt(e) || !(e !== 92 || !se(e, A));
 }, pr = function(e, A, t) {
-  return e === he || e === mA ? !!UA(A) || A === 46 && UA(t) : UA(e === 46 ? A : e);
+  return e === we || e === mA ? !!UA(A) || A === 46 && UA(t) : UA(e === 46 ? A : e);
 }, Aa = function(e) {
   var A = 0, t = 1;
-  e[A] !== he && e[A] !== mA || (e[A] === mA && (t = -1), A++);
+  e[A] !== we && e[A] !== mA || (e[A] === mA && (t = -1), A++);
   for (var r = []; UA(e[A]); )
     r.push(e[A++]);
   var n = r.length ? parseInt(z.apply(void 0, r), 10) : 0;
@@ -1605,7 +1605,7 @@ var oe = 10, Kr = 13, Ve = 15, lt = 17, Te = 18, Xi = 19, Wn = 20, Lr = 21, Oe =
   var o = s.length, i = o ? parseInt(z.apply(void 0, s), 10) : 0;
   e[A] !== 69 && e[A] !== 101 || A++;
   var c = 1;
-  e[A] !== he && e[A] !== mA || (e[A] === mA && (c = -1), A++);
+  e[A] !== we && e[A] !== mA || (e[A] === mA && (c = -1), A++);
   for (var B = []; UA(e[A]); )
     B.push(e[A++]);
   var a = B.length ? parseInt(z.apply(void 0, B), 10) : 0;
@@ -1646,7 +1646,7 @@ var oe = 10, Kr = 13, Ve = 15, lt = 17, Te = 18, Xi = 19, Wn = 20, Lr = 21, Oe =
         if (this.peekCodePoint(0) === 61)
           return this.consumeCodePoint(), la;
         break;
-      case he:
+      case we:
         if (pr(A, this.peekCodePoint(0), this.peekCodePoint(1)))
           return this.reconsumeCodePoint(A), this.consumeNumericToken();
         break;
@@ -1707,7 +1707,7 @@ var oe = 10, Kr = 13, Ve = 15, lt = 17, Te = 18, Xi = 19, Wn = 20, Lr = 21, Oe =
       case 117:
       case 85:
         var g = this.peekCodePoint(0), u = this.peekCodePoint(1);
-        return g !== he || !fe(u) && u !== 63 || (this.consumeCodePoint(), this.consumeUnicodeRangeToken()), this.reconsumeCodePoint(A), this.consumeIdentLikeToken();
+        return g !== we || !fe(u) && u !== 63 || (this.consumeCodePoint(), this.consumeUnicodeRangeToken()), this.reconsumeCodePoint(A), this.consumeIdentLikeToken();
       case 124:
         if (this.peekCodePoint(0) === 61)
           return this.consumeCodePoint(), ia;
@@ -1806,7 +1806,7 @@ var oe = 10, Kr = 13, Ve = 15, lt = 17, Te = 18, Xi = 19, Wn = 20, Lr = 21, Oe =
     }
   }, e.prototype.consumeNumber = function() {
     var A = [], t = 4, r = this.peekCodePoint(0);
-    for (r !== he && r !== mA || A.push(this.consumeCodePoint()); UA(this.peekCodePoint(0)); )
+    for (r !== we && r !== mA || A.push(this.consumeCodePoint()); UA(this.peekCodePoint(0)); )
       A.push(this.consumeCodePoint());
     r = this.peekCodePoint(0);
     var n = this.peekCodePoint(1);
@@ -1815,7 +1815,7 @@ var oe = 10, Kr = 13, Ve = 15, lt = 17, Te = 18, Xi = 19, Wn = 20, Lr = 21, Oe =
         A.push(this.consumeCodePoint());
     r = this.peekCodePoint(0), n = this.peekCodePoint(1);
     var s = this.peekCodePoint(2);
-    if ((r === 69 || r === 101) && ((n === he || n === mA) && UA(s) || UA(n)))
+    if ((r === 69 || r === 101) && ((n === we || n === mA) && UA(s) || UA(n)))
       for (A.push(this.consumeCodePoint(), this.consumeCodePoint()), t = 8; UA(this.peekCodePoint(0)); )
         A.push(this.consumeCodePoint());
     return [Aa(A), t];
@@ -2308,11 +2308,11 @@ var ts = function(e, A) {
       }
     return 0;
   });
-} }, va = { name: "background-position", initialValue: "0% 0%", type: 1, prefix: !1, parse: function(e, A) {
+} }, ka = { name: "background-position", initialValue: "0% 0%", type: 1, prefix: !1, parse: function(e, A) {
   return WA(A).map(function(t) {
     return t.filter(AA);
   }).map(eo);
-} }, ka = { name: "background-repeat", initialValue: "repeat", prefix: !1, type: 1, parse: function(e, A) {
+} }, va = { name: "background-repeat", initialValue: "repeat", prefix: !1, type: 1, parse: function(e, A) {
   return WA(A).map(function(t) {
     return t.filter(P).map(function(r) {
       return r.value;
@@ -2703,7 +2703,7 @@ for (var yc = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
   throw new Error("Unsupported time type");
 }, bc = { name: "opacity", initialValue: "1", type: 0, prefix: !1, parse: function(e, A) {
   return be(A) ? A.number : 1;
-} }, Hc = { name: "text-decoration-color", initialValue: "transparent", prefix: !1, type: 3, format: "color" }, vc = { name: "text-decoration-line", initialValue: "none", prefix: !1, type: 1, parse: function(e, A) {
+} }, Hc = { name: "text-decoration-color", initialValue: "transparent", prefix: !1, type: 3, format: "color" }, kc = { name: "text-decoration-line", initialValue: "none", prefix: !1, type: 1, parse: function(e, A) {
   return A.filter(P).map(function(t) {
     switch (t.value) {
       case "underline":
@@ -2719,7 +2719,7 @@ for (var yc = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
   }).filter(function(t) {
     return t !== 0;
   });
-} }, kc = { name: "font-family", initialValue: "", prefix: !1, type: 1, parse: function(e, A) {
+} }, vc = { name: "font-family", initialValue: "", prefix: !1, type: 1, parse: function(e, A) {
   var t = [], r = [];
   return A.forEach(function(n) {
     switch (n.type) {
@@ -2835,9 +2835,9 @@ for (var yc = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
 } }, Nc = function() {
   function e(A, t) {
     var r, n;
-    this.animationDuration = y(A, Oc, t.animationDuration), this.backgroundClip = y(A, ma, t.backgroundClip), this.backgroundColor = y(A, ya, t.backgroundColor), this.backgroundImage = y(A, ba, t.backgroundImage), this.backgroundOrigin = y(A, Ha, t.backgroundOrigin), this.backgroundPosition = y(A, va, t.backgroundPosition), this.backgroundRepeat = y(A, ka, t.backgroundRepeat), this.backgroundSize = y(A, xa, t.backgroundSize), this.borderTopColor = y(A, La, t.borderTopColor), this.borderRightColor = y(A, Sa, t.borderRightColor), this.borderBottomColor = y(A, Da, t.borderBottomColor), this.borderLeftColor = y(A, Ta, t.borderLeftColor), this.borderTopLeftRadius = y(A, Oa, t.borderTopLeftRadius), this.borderTopRightRadius = y(A, Ma, t.borderTopRightRadius), this.borderBottomRightRadius = y(A, Ra, t.borderBottomRightRadius), this.borderBottomLeftRadius = y(A, Ga, t.borderBottomLeftRadius), this.borderTopStyle = y(A, Va, t.borderTopStyle), this.borderRightStyle = y(A, Pa, t.borderRightStyle), this.borderBottomStyle = y(A, Na, t.borderBottomStyle), this.borderLeftStyle = y(A, _a, t.borderLeftStyle), this.borderTopWidth = y(A, Ja, t.borderTopWidth), this.borderRightWidth = y(A, Xa, t.borderRightWidth), this.borderBottomWidth = y(A, Wa, t.borderBottomWidth), this.borderLeftWidth = y(A, Ya, t.borderLeftWidth), this.boxShadow = y(A, Rc, t.boxShadow), this.color = y(A, Za, t.color), this.direction = y(A, ja, t.direction), this.display = y(A, qa, t.display), this.float = y(A, $a, t.cssFloat), this.fontFamily = y(A, kc, t.fontFamily), this.fontSize = y(A, Ic, t.fontSize), this.fontStyle = y(A, Lc, t.fontStyle), this.fontVariant = y(A, Kc, t.fontVariant), this.fontWeight = y(A, xc, t.fontWeight), this.letterSpacing = y(A, Ac, t.letterSpacing), this.lineBreak = y(A, ec, t.lineBreak), this.lineHeight = y(A, tc, t.lineHeight), this.listStyleImage = y(A, rc, t.listStyleImage), this.listStylePosition = y(A, nc, t.listStylePosition), this.listStyleType = y(A, Vr, t.listStyleType), this.marginTop = y(A, sc, t.marginTop), this.marginRight = y(A, oc, t.marginRight), this.marginBottom = y(A, ic, t.marginBottom), this.marginLeft = y(A, ac, t.marginLeft), this.opacity = y(A, bc, t.opacity);
+    this.animationDuration = y(A, Oc, t.animationDuration), this.backgroundClip = y(A, ma, t.backgroundClip), this.backgroundColor = y(A, ya, t.backgroundColor), this.backgroundImage = y(A, ba, t.backgroundImage), this.backgroundOrigin = y(A, Ha, t.backgroundOrigin), this.backgroundPosition = y(A, ka, t.backgroundPosition), this.backgroundRepeat = y(A, va, t.backgroundRepeat), this.backgroundSize = y(A, xa, t.backgroundSize), this.borderTopColor = y(A, La, t.borderTopColor), this.borderRightColor = y(A, Sa, t.borderRightColor), this.borderBottomColor = y(A, Da, t.borderBottomColor), this.borderLeftColor = y(A, Ta, t.borderLeftColor), this.borderTopLeftRadius = y(A, Oa, t.borderTopLeftRadius), this.borderTopRightRadius = y(A, Ma, t.borderTopRightRadius), this.borderBottomRightRadius = y(A, Ra, t.borderBottomRightRadius), this.borderBottomLeftRadius = y(A, Ga, t.borderBottomLeftRadius), this.borderTopStyle = y(A, Va, t.borderTopStyle), this.borderRightStyle = y(A, Pa, t.borderRightStyle), this.borderBottomStyle = y(A, Na, t.borderBottomStyle), this.borderLeftStyle = y(A, _a, t.borderLeftStyle), this.borderTopWidth = y(A, Ja, t.borderTopWidth), this.borderRightWidth = y(A, Xa, t.borderRightWidth), this.borderBottomWidth = y(A, Wa, t.borderBottomWidth), this.borderLeftWidth = y(A, Ya, t.borderLeftWidth), this.boxShadow = y(A, Rc, t.boxShadow), this.color = y(A, Za, t.color), this.direction = y(A, ja, t.direction), this.display = y(A, qa, t.display), this.float = y(A, $a, t.cssFloat), this.fontFamily = y(A, vc, t.fontFamily), this.fontSize = y(A, Ic, t.fontSize), this.fontStyle = y(A, Lc, t.fontStyle), this.fontVariant = y(A, Kc, t.fontVariant), this.fontWeight = y(A, xc, t.fontWeight), this.letterSpacing = y(A, Ac, t.letterSpacing), this.lineBreak = y(A, ec, t.lineBreak), this.lineHeight = y(A, tc, t.lineHeight), this.listStyleImage = y(A, rc, t.listStyleImage), this.listStylePosition = y(A, nc, t.listStylePosition), this.listStyleType = y(A, Vr, t.listStyleType), this.marginTop = y(A, sc, t.marginTop), this.marginRight = y(A, oc, t.marginRight), this.marginBottom = y(A, ic, t.marginBottom), this.marginLeft = y(A, ac, t.marginLeft), this.opacity = y(A, bc, t.opacity);
     var s = y(A, cc, t.overflow);
-    this.overflowX = s[0], this.overflowY = s[s.length > 1 ? 1 : 0], this.overflowWrap = y(A, Bc, t.overflowWrap), this.paddingTop = y(A, lc, t.paddingTop), this.paddingRight = y(A, dc, t.paddingRight), this.paddingBottom = y(A, uc, t.paddingBottom), this.paddingLeft = y(A, gc, t.paddingLeft), this.paintOrder = y(A, Gc, t.paintOrder), this.position = y(A, hc, t.position), this.textAlign = y(A, wc, t.textAlign), this.textDecorationColor = y(A, Hc, (r = t.textDecorationColor) !== null && r !== void 0 ? r : t.color), this.textDecorationLine = y(A, vc, (n = t.textDecorationLine) !== null && n !== void 0 ? n : t.textDecoration), this.textShadow = y(A, Qc, t.textShadow), this.textTransform = y(A, pc, t.textTransform), this.transform = y(A, Cc, t.transform), this.transformOrigin = y(A, Fc, t.transformOrigin), this.visibility = y(A, mc, t.visibility), this.webkitTextStrokeColor = y(A, Vc, t.webkitTextStrokeColor), this.webkitTextStrokeWidth = y(A, Pc, t.webkitTextStrokeWidth), this.wordBreak = y(A, yc, t.wordBreak), this.zIndex = y(A, Ec, t.zIndex);
+    this.overflowX = s[0], this.overflowY = s[s.length > 1 ? 1 : 0], this.overflowWrap = y(A, Bc, t.overflowWrap), this.paddingTop = y(A, lc, t.paddingTop), this.paddingRight = y(A, dc, t.paddingRight), this.paddingBottom = y(A, uc, t.paddingBottom), this.paddingLeft = y(A, gc, t.paddingLeft), this.paintOrder = y(A, Gc, t.paintOrder), this.position = y(A, hc, t.position), this.textAlign = y(A, wc, t.textAlign), this.textDecorationColor = y(A, Hc, (r = t.textDecorationColor) !== null && r !== void 0 ? r : t.color), this.textDecorationLine = y(A, kc, (n = t.textDecorationLine) !== null && n !== void 0 ? n : t.textDecoration), this.textShadow = y(A, Qc, t.textShadow), this.textTransform = y(A, pc, t.textTransform), this.transform = y(A, Cc, t.transform), this.transformOrigin = y(A, Fc, t.transformOrigin), this.visibility = y(A, mc, t.visibility), this.webkitTextStrokeColor = y(A, Vc, t.webkitTextStrokeColor), this.webkitTextStrokeWidth = y(A, Pc, t.webkitTextStrokeWidth), this.wordBreak = y(A, yc, t.wordBreak), this.zIndex = y(A, Ec, t.zIndex);
   }
   return e.prototype.isVisible = function() {
     return this.display > 0 && this.opacity > 0 && this.visibility === 0;
@@ -3283,8 +3283,8 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
   for (var n = A.firstChild, s = void 0; n; n = s)
     if (s = n.nextSibling, Eo(n) && n.data.trim().length > 0)
       t.textNodes.push(new nB(e, n, t.styles));
-    else if (ve(n))
-      if (ko(n) && n.assignedNodes)
+    else if (ke(n))
+      if (vo(n) && n.assignedNodes)
         n.assignedNodes().forEach(function(i) {
           return Kt(e, i, t, r);
         });
@@ -3293,7 +3293,7 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
         o.styles.isVisible() && (dB(n, o, r) ? o.flags |= 4 : uB(o.styles) && (o.flags |= 2), lB.indexOf(n.tagName) !== -1 && (o.flags |= 8), t.elements.push(o), n.slot, n.shadowRoot ? Kt(e, n.shadowRoot, o, r) : Jt(n) || bo(n) || Xt(n) || Kt(e, n, o, r));
       }
 }, mo = function(e, A) {
-  return Xr(A) ? new ho(e, A) : Ho(A) ? new Qo(e, A) : bo(A) ? new po(e, A) : gB(A) ? new Co(e, A) : wB(A) ? new _r(e, A) : hB(A) ? new gn(e, A) : Xt(A) ? new fo(e, A) : Jt(A) ? new Uo(e, A) : vo(A) ? new Fo(e, A) : new jA(e, A);
+  return Xr(A) ? new ho(e, A) : Ho(A) ? new Qo(e, A) : bo(A) ? new po(e, A) : gB(A) ? new Co(e, A) : wB(A) ? new _r(e, A) : hB(A) ? new gn(e, A) : Xt(A) ? new fo(e, A) : Jt(A) ? new Uo(e, A) : ko(A) ? new Fo(e, A) : new jA(e, A);
 }, yo = function(e, A) {
   var t = mo(e, A);
   return t.flags |= 4, Kt(e, A, t, t), t;
@@ -3303,10 +3303,10 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
   return e.isPositioned() || e.isFloating();
 }, Eo = function(e) {
   return e.nodeType === Node.TEXT_NODE;
-}, ve = function(e) {
+}, ke = function(e) {
   return e.nodeType === Node.ELEMENT_NODE;
 }, Jr = function(e) {
-  return ve(e) && e.style !== void 0 && !Lt(e);
+  return ke(e) && e.style !== void 0 && !Lt(e);
 }, Lt = function(e) {
   return typeof e.className == "object";
 }, gB = function(e) {
@@ -3325,7 +3325,7 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
   return e.tagName === "VIDEO";
 }, Xr = function(e) {
   return e.tagName === "IMG";
-}, vo = function(e) {
+}, ko = function(e) {
   return e.tagName === "IFRAME";
 }, Cs = function(e) {
   return e.tagName === "STYLE";
@@ -3333,7 +3333,7 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
   return e.tagName === "TEXTAREA";
 }, Xt = function(e) {
   return e.tagName === "SELECT";
-}, ko = function(e) {
+}, vo = function(e) {
   return e.tagName === "SLOT";
 }, fs = function(e) {
   return e.tagName.indexOf("-") > 0;
@@ -3381,7 +3381,7 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
   return (e < 0 ? "-" : "") + (Io(Math.abs(e), s, r, function(o) {
     return z(Math.floor(o % s) + A);
   }) + n);
-}, ge = function(e, A, t) {
+}, ue = function(e, A, t) {
   t === void 0 && (t = ". ");
   var r = A.length;
   return Io(Math.abs(e), r, !1, function(n) {
@@ -3411,7 +3411,7 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
       var i = q(e, 48, 57, !0, r);
       return i.length < 4 ? "0" + i : i;
     case 4:
-      return ge(e, "〇一二三四五六七八九", n);
+      return ue(e, "〇一二三四五六七八九", n);
     case 6:
       return Ue(e, 1, 3999, Us, 3, r).toLowerCase();
     case 7:
@@ -3435,9 +3435,9 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
     case 30:
       return q(e, 6112, 6121, !0, r);
     case 15:
-      return ge(e, "子丑寅卯辰巳午未申酉戌亥", n);
+      return ue(e, "子丑寅卯辰巳午未申酉戌亥", n);
     case 16:
-      return ge(e, "甲乙丙丁戊己庚辛壬癸", n);
+      return ue(e, "甲乙丙丁戊己庚辛壬癸", n);
     case 17:
     case 48:
       return Ae(e, "零一二三四五六七八九", ms, "負", n, 14);
@@ -3468,15 +3468,15 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
     case 22:
       return Ue(e, 1, 10999, pB, 3, r);
     case 23:
-      return ge(e, "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん");
+      return ue(e, "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん");
     case 24:
-      return ge(e, "いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす");
+      return ue(e, "いろはにほへとちりぬるをわかよたれそつねならむうゐのおくやまけふこえてあさきゆめみしゑひもせす");
     case 27:
       return q(e, 3302, 3311, !0, r);
     case 28:
-      return ge(e, "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン", n);
+      return ue(e, "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヰヱヲン", n);
     case 29:
-      return ge(e, "イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス", n);
+      return ue(e, "イロハニホヘトチリヌルヲワカヨタレソツネナラムウヰノオクヤマケフコエテアサキユメミシヱヒモセス", n);
     case 34:
       return q(e, 3792, 3801, !0, r);
     case 37:
@@ -3600,10 +3600,10 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
     var n = A.ownerDocument.createElement("canvas");
     return n.width = A.offsetWidth, n.height = A.offsetHeight, n;
   }, e.prototype.appendChildNode = function(A, t, r) {
-    ve(t) && (t.tagName === "SCRIPT" || t.hasAttribute(xo) || typeof this.options.ignoreElements == "function" && this.options.ignoreElements(t)) || this.options.copyStyles && ve(t) && Cs(t) || A.appendChild(this.cloneNode(t, r));
+    ke(t) && (t.tagName === "SCRIPT" || t.hasAttribute(xo) || typeof this.options.ignoreElements == "function" && this.options.ignoreElements(t)) || this.options.copyStyles && ke(t) && Cs(t) || A.appendChild(this.cloneNode(t, r));
   }, e.prototype.cloneChildNodes = function(A, t, r) {
     for (var n = this, s = A.shadowRoot ? A.shadowRoot.firstChild : A.firstChild; s; s = s.nextSibling)
-      if (ve(s) && ko(s) && typeof s.assignedNodes == "function") {
+      if (ke(s) && vo(s) && typeof s.assignedNodes == "function") {
         var o = s.assignedNodes();
         o.length && o.forEach(function(i) {
           return n.appendChildNode(t, i, r);
@@ -3616,15 +3616,15 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
     if (!A.ownerDocument)
       return A.cloneNode(!1);
     var r = A.ownerDocument.defaultView;
-    if (r && ve(A) && (Jr(A) || Lt(A))) {
+    if (r && ke(A) && (Jr(A) || Lt(A))) {
       var n = this.createElementClone(A);
       n.style.transitionProperty = "none";
       var s = r.getComputedStyle(A), o = r.getComputedStyle(A, ":before"), i = r.getComputedStyle(A, ":after");
-      this.referenceElement === A && Jr(n) && (this.clonedReferenceElement = n), wn(n) && vB(n);
+      this.referenceElement === A && Jr(n) && (this.clonedReferenceElement = n), wn(n) && kB(n);
       var c = this.counters.parse(new cs(this.context, s)), B = this.resolvePseudoContent(A, n, o, je.BEFORE);
       fs(A) && (t = !0), ps(A) || this.cloneChildNodes(A, n, t), B && n.insertBefore(B, n.firstChild);
       var a = this.resolvePseudoContent(A, n, i, je.AFTER);
-      return a && n.appendChild(a), this.counters.pop(c), (s && (this.options.copyStyles || Lt(A)) && !vo(A) || t) && Fr(s, n), A.scrollTop === 0 && A.scrollLeft === 0 || this.scrolledElements.push([n, A.scrollLeft, A.scrollTop]), (Jt(A) || Xt(A)) && (Jt(n) || Xt(n)) && (n.value = A.value), n;
+      return a && n.appendChild(a), this.counters.pop(c), (s && (this.options.copyStyles || Lt(A)) && !ko(A) || t) && Fr(s, n), A.scrollTop === 0 && A.scrollLeft === 0 || this.scrolledElements.push([n, A.scrollLeft, A.scrollTop]), (Jt(A) || Xt(A)) && (Jt(n) || Xt(n)) && (n.value = A.value), n;
     }
     return A.cloneNode(!1);
   }, e.prototype.resolvePseudoContent = function(A, t, r, n) {
@@ -3653,9 +3653,9 @@ var je, ls = 8, fr = 9, ds = 11, us = 12, Zc = function() {
             } else if (l.name === "counters") {
               var E = l.values.filter(Se), U = (w = E[0], E[1]);
               if (Q = E[2], w && P(w)) {
-                var C = s.counters.getCounterValues(w.value), H = Q && P(Q) ? Vr.parse(s.context, Q.value) : 3, k = U && U.type === 0 ? U.value : "", b = C.map(function(N) {
+                var C = s.counters.getCounterValues(w.value), H = Q && P(Q) ? Vr.parse(s.context, Q.value) : 3, v = U && U.type === 0 ? U.value : "", b = C.map(function(N) {
                   return At(N, H, !1);
-                }).join(k);
+                }).join(v);
                 B.appendChild(i.createTextNode(b));
               }
             }
@@ -3721,10 +3721,10 @@ var G, fB = function(e, A) {
 }, Wr = "___html2canvas___pseudoelement_before", Yr = "___html2canvas___pseudoelement_after", Hs = `{
     content: "" !important;
     display: none !important;
-}`, vB = function(e) {
-  kB(e, "." + Wr + ":before" + Hs + `
+}`, kB = function(e) {
+  vB(e, "." + Wr + ":before" + Hs + `
          .` + Yr + ":after" + Hs);
-}, kB = function(e, A) {
+}, vB = function(e, A) {
   var t = e.ownerDocument;
   if (t) {
     var r = t.createElement("style");
@@ -3850,8 +3850,8 @@ var G, fB = function(e, A) {
   w.push((n + i) / t.width), w.push((g + a) / t.width), w.push((s + u) / t.height), w.push((c + l) / t.height);
   var Q = Math.max.apply(Math, w);
   Q > 1 && (n /= Q, s /= Q, i /= Q, c /= Q, a /= Q, l /= Q, g /= Q, u /= Q);
-  var p = t.width - i, f = t.height - l, E = t.width - a, U = t.height - u, C = A.borderTopWidth, H = A.borderRightWidth, k = A.borderBottomWidth, b = A.borderLeftWidth, N = _(A.paddingTop, e.bounds.width), eA = _(A.paddingRight, e.bounds.width), gA = _(A.paddingBottom, e.bounds.width), X = _(A.paddingLeft, e.bounds.width);
-  this.topLeftBorderDoubleOuterBox = n > 0 || s > 0 ? J(t.left + b / 3, t.top + C / 3, n - b / 3, s - C / 3, G.TOP_LEFT) : new m(t.left + b / 3, t.top + C / 3), this.topRightBorderDoubleOuterBox = n > 0 || s > 0 ? J(t.left + p, t.top + C / 3, i - H / 3, c - C / 3, G.TOP_RIGHT) : new m(t.left + t.width - H / 3, t.top + C / 3), this.bottomRightBorderDoubleOuterBox = a > 0 || l > 0 ? J(t.left + E, t.top + f, a - H / 3, l - k / 3, G.BOTTOM_RIGHT) : new m(t.left + t.width - H / 3, t.top + t.height - k / 3), this.bottomLeftBorderDoubleOuterBox = g > 0 || u > 0 ? J(t.left + b / 3, t.top + U, g - b / 3, u - k / 3, G.BOTTOM_LEFT) : new m(t.left + b / 3, t.top + t.height - k / 3), this.topLeftBorderDoubleInnerBox = n > 0 || s > 0 ? J(t.left + 2 * b / 3, t.top + 2 * C / 3, n - 2 * b / 3, s - 2 * C / 3, G.TOP_LEFT) : new m(t.left + 2 * b / 3, t.top + 2 * C / 3), this.topRightBorderDoubleInnerBox = n > 0 || s > 0 ? J(t.left + p, t.top + 2 * C / 3, i - 2 * H / 3, c - 2 * C / 3, G.TOP_RIGHT) : new m(t.left + t.width - 2 * H / 3, t.top + 2 * C / 3), this.bottomRightBorderDoubleInnerBox = a > 0 || l > 0 ? J(t.left + E, t.top + f, a - 2 * H / 3, l - 2 * k / 3, G.BOTTOM_RIGHT) : new m(t.left + t.width - 2 * H / 3, t.top + t.height - 2 * k / 3), this.bottomLeftBorderDoubleInnerBox = g > 0 || u > 0 ? J(t.left + 2 * b / 3, t.top + U, g - 2 * b / 3, u - 2 * k / 3, G.BOTTOM_LEFT) : new m(t.left + 2 * b / 3, t.top + t.height - 2 * k / 3), this.topLeftBorderStroke = n > 0 || s > 0 ? J(t.left + b / 2, t.top + C / 2, n - b / 2, s - C / 2, G.TOP_LEFT) : new m(t.left + b / 2, t.top + C / 2), this.topRightBorderStroke = n > 0 || s > 0 ? J(t.left + p, t.top + C / 2, i - H / 2, c - C / 2, G.TOP_RIGHT) : new m(t.left + t.width - H / 2, t.top + C / 2), this.bottomRightBorderStroke = a > 0 || l > 0 ? J(t.left + E, t.top + f, a - H / 2, l - k / 2, G.BOTTOM_RIGHT) : new m(t.left + t.width - H / 2, t.top + t.height - k / 2), this.bottomLeftBorderStroke = g > 0 || u > 0 ? J(t.left + b / 2, t.top + U, g - b / 2, u - k / 2, G.BOTTOM_LEFT) : new m(t.left + b / 2, t.top + t.height - k / 2), this.topLeftBorderBox = n > 0 || s > 0 ? J(t.left, t.top, n, s, G.TOP_LEFT) : new m(t.left, t.top), this.topRightBorderBox = i > 0 || c > 0 ? J(t.left + p, t.top, i, c, G.TOP_RIGHT) : new m(t.left + t.width, t.top), this.bottomRightBorderBox = a > 0 || l > 0 ? J(t.left + E, t.top + f, a, l, G.BOTTOM_RIGHT) : new m(t.left + t.width, t.top + t.height), this.bottomLeftBorderBox = g > 0 || u > 0 ? J(t.left, t.top + U, g, u, G.BOTTOM_LEFT) : new m(t.left, t.top + t.height), this.topLeftPaddingBox = n > 0 || s > 0 ? J(t.left + b, t.top + C, Math.max(0, n - b), Math.max(0, s - C), G.TOP_LEFT) : new m(t.left + b, t.top + C), this.topRightPaddingBox = i > 0 || c > 0 ? J(t.left + Math.min(p, t.width - H), t.top + C, p > t.width + H ? 0 : Math.max(0, i - H), Math.max(0, c - C), G.TOP_RIGHT) : new m(t.left + t.width - H, t.top + C), this.bottomRightPaddingBox = a > 0 || l > 0 ? J(t.left + Math.min(E, t.width - b), t.top + Math.min(f, t.height - k), Math.max(0, a - H), Math.max(0, l - k), G.BOTTOM_RIGHT) : new m(t.left + t.width - H, t.top + t.height - k), this.bottomLeftPaddingBox = g > 0 || u > 0 ? J(t.left + b, t.top + Math.min(U, t.height - k), Math.max(0, g - b), Math.max(0, u - k), G.BOTTOM_LEFT) : new m(t.left + b, t.top + t.height - k), this.topLeftContentBox = n > 0 || s > 0 ? J(t.left + b + X, t.top + C + N, Math.max(0, n - (b + X)), Math.max(0, s - (C + N)), G.TOP_LEFT) : new m(t.left + b + X, t.top + C + N), this.topRightContentBox = i > 0 || c > 0 ? J(t.left + Math.min(p, t.width + b + X), t.top + C + N, p > t.width + b + X ? 0 : i - b + X, c - (C + N), G.TOP_RIGHT) : new m(t.left + t.width - (H + eA), t.top + C + N), this.bottomRightContentBox = a > 0 || l > 0 ? J(t.left + Math.min(E, t.width - (b + X)), t.top + Math.min(f, t.height + C + N), Math.max(0, a - (H + eA)), l - (k + gA), G.BOTTOM_RIGHT) : new m(t.left + t.width - (H + eA), t.top + t.height - (k + gA)), this.bottomLeftContentBox = g > 0 || u > 0 ? J(t.left + b + X, t.top + U, Math.max(0, g - (b + X)), u - (k + gA), G.BOTTOM_LEFT) : new m(t.left + b + X, t.top + t.height - (k + gA));
+  var p = t.width - i, f = t.height - l, E = t.width - a, U = t.height - u, C = A.borderTopWidth, H = A.borderRightWidth, v = A.borderBottomWidth, b = A.borderLeftWidth, N = _(A.paddingTop, e.bounds.width), eA = _(A.paddingRight, e.bounds.width), gA = _(A.paddingBottom, e.bounds.width), W = _(A.paddingLeft, e.bounds.width);
+  this.topLeftBorderDoubleOuterBox = n > 0 || s > 0 ? J(t.left + b / 3, t.top + C / 3, n - b / 3, s - C / 3, G.TOP_LEFT) : new m(t.left + b / 3, t.top + C / 3), this.topRightBorderDoubleOuterBox = n > 0 || s > 0 ? J(t.left + p, t.top + C / 3, i - H / 3, c - C / 3, G.TOP_RIGHT) : new m(t.left + t.width - H / 3, t.top + C / 3), this.bottomRightBorderDoubleOuterBox = a > 0 || l > 0 ? J(t.left + E, t.top + f, a - H / 3, l - v / 3, G.BOTTOM_RIGHT) : new m(t.left + t.width - H / 3, t.top + t.height - v / 3), this.bottomLeftBorderDoubleOuterBox = g > 0 || u > 0 ? J(t.left + b / 3, t.top + U, g - b / 3, u - v / 3, G.BOTTOM_LEFT) : new m(t.left + b / 3, t.top + t.height - v / 3), this.topLeftBorderDoubleInnerBox = n > 0 || s > 0 ? J(t.left + 2 * b / 3, t.top + 2 * C / 3, n - 2 * b / 3, s - 2 * C / 3, G.TOP_LEFT) : new m(t.left + 2 * b / 3, t.top + 2 * C / 3), this.topRightBorderDoubleInnerBox = n > 0 || s > 0 ? J(t.left + p, t.top + 2 * C / 3, i - 2 * H / 3, c - 2 * C / 3, G.TOP_RIGHT) : new m(t.left + t.width - 2 * H / 3, t.top + 2 * C / 3), this.bottomRightBorderDoubleInnerBox = a > 0 || l > 0 ? J(t.left + E, t.top + f, a - 2 * H / 3, l - 2 * v / 3, G.BOTTOM_RIGHT) : new m(t.left + t.width - 2 * H / 3, t.top + t.height - 2 * v / 3), this.bottomLeftBorderDoubleInnerBox = g > 0 || u > 0 ? J(t.left + 2 * b / 3, t.top + U, g - 2 * b / 3, u - 2 * v / 3, G.BOTTOM_LEFT) : new m(t.left + 2 * b / 3, t.top + t.height - 2 * v / 3), this.topLeftBorderStroke = n > 0 || s > 0 ? J(t.left + b / 2, t.top + C / 2, n - b / 2, s - C / 2, G.TOP_LEFT) : new m(t.left + b / 2, t.top + C / 2), this.topRightBorderStroke = n > 0 || s > 0 ? J(t.left + p, t.top + C / 2, i - H / 2, c - C / 2, G.TOP_RIGHT) : new m(t.left + t.width - H / 2, t.top + C / 2), this.bottomRightBorderStroke = a > 0 || l > 0 ? J(t.left + E, t.top + f, a - H / 2, l - v / 2, G.BOTTOM_RIGHT) : new m(t.left + t.width - H / 2, t.top + t.height - v / 2), this.bottomLeftBorderStroke = g > 0 || u > 0 ? J(t.left + b / 2, t.top + U, g - b / 2, u - v / 2, G.BOTTOM_LEFT) : new m(t.left + b / 2, t.top + t.height - v / 2), this.topLeftBorderBox = n > 0 || s > 0 ? J(t.left, t.top, n, s, G.TOP_LEFT) : new m(t.left, t.top), this.topRightBorderBox = i > 0 || c > 0 ? J(t.left + p, t.top, i, c, G.TOP_RIGHT) : new m(t.left + t.width, t.top), this.bottomRightBorderBox = a > 0 || l > 0 ? J(t.left + E, t.top + f, a, l, G.BOTTOM_RIGHT) : new m(t.left + t.width, t.top + t.height), this.bottomLeftBorderBox = g > 0 || u > 0 ? J(t.left, t.top + U, g, u, G.BOTTOM_LEFT) : new m(t.left, t.top + t.height), this.topLeftPaddingBox = n > 0 || s > 0 ? J(t.left + b, t.top + C, Math.max(0, n - b), Math.max(0, s - C), G.TOP_LEFT) : new m(t.left + b, t.top + C), this.topRightPaddingBox = i > 0 || c > 0 ? J(t.left + Math.min(p, t.width - H), t.top + C, p > t.width + H ? 0 : Math.max(0, i - H), Math.max(0, c - C), G.TOP_RIGHT) : new m(t.left + t.width - H, t.top + C), this.bottomRightPaddingBox = a > 0 || l > 0 ? J(t.left + Math.min(E, t.width - b), t.top + Math.min(f, t.height - v), Math.max(0, a - H), Math.max(0, l - v), G.BOTTOM_RIGHT) : new m(t.left + t.width - H, t.top + t.height - v), this.bottomLeftPaddingBox = g > 0 || u > 0 ? J(t.left + b, t.top + Math.min(U, t.height - v), Math.max(0, g - b), Math.max(0, u - v), G.BOTTOM_LEFT) : new m(t.left + b, t.top + t.height - v), this.topLeftContentBox = n > 0 || s > 0 ? J(t.left + b + W, t.top + C + N, Math.max(0, n - (b + W)), Math.max(0, s - (C + N)), G.TOP_LEFT) : new m(t.left + b + W, t.top + C + N), this.topRightContentBox = i > 0 || c > 0 ? J(t.left + Math.min(p, t.width + b + W), t.top + C + N, p > t.width + b + W ? 0 : i - b + W, c - (C + N), G.TOP_RIGHT) : new m(t.left + t.width - (H + eA), t.top + C + N), this.bottomRightContentBox = a > 0 || l > 0 ? J(t.left + Math.min(E, t.width - (b + W)), t.top + Math.min(f, t.height + C + N), Math.max(0, a - (H + eA)), l - (v + gA), G.BOTTOM_RIGHT) : new m(t.left + t.width - (H + eA), t.top + t.height - (v + gA)), this.bottomLeftContentBox = g > 0 || u > 0 ? J(t.left + b + W, t.top + U, Math.max(0, g - (b + W)), u - (v + gA), G.BOTTOM_LEFT) : new m(t.left + b + W, t.top + t.height - (v + gA));
 };
 (function(e) {
   e[e.TOP_LEFT = 0] = "TOP_LEFT", e[e.TOP_RIGHT = 1] = "TOP_RIGHT", e[e.BOTTOM_RIGHT = 2] = "BOTTOM_RIGHT", e[e.BOTTOM_LEFT = 3] = "BOTTOM_LEFT";
@@ -3881,7 +3881,7 @@ var J = function(e, A, t, r, n) {
   this.opacity = e, this.type = 2, this.target = 6;
 }, Lo = function(e) {
   return e.type === 1;
-}, vs = function(e, A) {
+}, ks = function(e, A) {
   return e.length === A.length && e.some(function(t, r) {
     return t === A[r];
   });
@@ -3895,7 +3895,7 @@ var J = function(e, A, t, r, n) {
     }
     if (this.container.styles.overflowX !== 0) {
       var o = Wt(this.curves), i = Yt(this.curves);
-      vs(o, i) ? this.effects.push(new mt(o, 6)) : (this.effects.push(new mt(o, 2)), this.effects.push(new mt(i, 4)));
+      ks(o, i) ? this.effects.push(new mt(o, 6)) : (this.effects.push(new mt(o, 2)), this.effects.push(new mt(i, 4)));
     }
   }
   return e.prototype.getEffects = function(A) {
@@ -3906,7 +3906,7 @@ var J = function(e, A, t, r, n) {
       if (t || r.container.styles.position !== 0 || !r.parent) {
         if (n.unshift.apply(n, s), t = [2, 3].indexOf(r.container.styles.position) === -1, r.container.styles.overflowX !== 0) {
           var o = Wt(r.curves), i = Yt(r.curves);
-          vs(o, i) || n.unshift(new mt(i, 6));
+          ks(o, i) || n.unshift(new mt(i, 6));
         }
       } else
         n.unshift.apply(n, s);
@@ -3949,7 +3949,7 @@ var J = function(e, A, t, r, n) {
     var s = A[n];
     s.container instanceof Co && typeof s.container.value == "number" && s.container.value !== 0 && (t = s.container.value), s.listValue = At(t, s.container.styles.listStyleType, !0), t += r ? -1 : 1;
   }
-}, ks = function(e, A) {
+}, vs = function(e, A) {
   switch (A) {
     case 0:
       return KA(e.topLeftBorderBox, e.topLeftPaddingBox, e.topRightBorderBox, e.topRightPaddingBox);
@@ -4294,7 +4294,7 @@ var J = function(e, A, t, r, n) {
         switch (B.label) {
           case 0:
             r = t.styles.backgroundImage.length - 1, n = function(a) {
-              var l, d, g, u, w, Q, p, f, E, U, C, H, k, b, N, eA, gA, X, tA, oA, yA, aA, pA, HA, FA, vA, RA, GA, kA, EA, qA;
+              var l, d, g, u, w, Q, p, f, E, U, C, H, v, b, N, eA, gA, W, tA, oA, yA, aA, pA, HA, FA, kA, RA, GA, vA, EA, qA;
               return QA(this, function($) {
                 switch ($.label) {
                   case 0:
@@ -4310,40 +4310,40 @@ var J = function(e, A, t, r, n) {
                   case 4:
                     return l && (g = Er(t, r, [l.width, l.height, l.width / l.height]), eA = g[0], aA = g[1], pA = g[2], tA = g[3], oA = g[4], b = s.ctx.createPattern(s.resizeImage(l, tA, oA), "repeat"), s.renderRepeat(eA, b, aA, pA)), [3, 6];
                   case 5:
-                    a.type === 1 ? (u = Er(t, r, [null, null, null]), eA = u[0], aA = u[1], pA = u[2], tA = u[3], oA = u[4], w = Ea(a.angle, tA, oA), Q = w[0], p = w[1], f = w[2], E = w[3], U = w[4], (C = document.createElement("canvas")).width = tA, C.height = oA, H = C.getContext("2d"), k = H.createLinearGradient(p, E, f, U), rs(a.stops, Q).forEach(function(L) {
-                      return k.addColorStop(L.stop, iA(L.color));
-                    }), H.fillStyle = k, H.fillRect(0, 0, tA, oA), tA > 0 && oA > 0 && (b = s.ctx.createPattern(C, "repeat"), s.renderRepeat(eA, b, aA, pA))) : function(L) {
+                    a.type === 1 ? (u = Er(t, r, [null, null, null]), eA = u[0], aA = u[1], pA = u[2], tA = u[3], oA = u[4], w = Ea(a.angle, tA, oA), Q = w[0], p = w[1], f = w[2], E = w[3], U = w[4], (C = document.createElement("canvas")).width = tA, C.height = oA, H = C.getContext("2d"), v = H.createLinearGradient(p, E, f, U), rs(a.stops, Q).forEach(function(L) {
+                      return v.addColorStop(L.stop, iA(L.color));
+                    }), H.fillStyle = v, H.fillRect(0, 0, tA, oA), tA > 0 && oA > 0 && (b = s.ctx.createPattern(C, "repeat"), s.renderRepeat(eA, b, aA, pA))) : function(L) {
                       return L.type === 2;
-                    }(a) && (N = Er(t, r, [null, null, null]), eA = N[0], gA = N[1], X = N[2], tA = N[3], oA = N[4], yA = a.position.length === 0 ? [ln] : a.position, aA = _(yA[0], tA), pA = _(yA[yA.length - 1], oA), HA = function(L, D, M, wA, hA) {
-                      var W = 0, cA = 0;
+                    }(a) && (N = Er(t, r, [null, null, null]), eA = N[0], gA = N[1], W = N[2], tA = N[3], oA = N[4], yA = a.position.length === 0 ? [ln] : a.position, aA = _(yA[0], tA), pA = _(yA[yA.length - 1], oA), HA = function(L, D, M, wA, hA) {
+                      var Y = 0, cA = 0;
                       switch (L.size) {
                         case 0:
-                          L.shape === 0 ? W = cA = Math.min(Math.abs(D), Math.abs(D - wA), Math.abs(M), Math.abs(M - hA)) : L.shape === 1 && (W = Math.min(Math.abs(D), Math.abs(D - wA)), cA = Math.min(Math.abs(M), Math.abs(M - hA)));
+                          L.shape === 0 ? Y = cA = Math.min(Math.abs(D), Math.abs(D - wA), Math.abs(M), Math.abs(M - hA)) : L.shape === 1 && (Y = Math.min(Math.abs(D), Math.abs(D - wA)), cA = Math.min(Math.abs(M), Math.abs(M - hA)));
                           break;
                         case 2:
                           if (L.shape === 0)
-                            W = cA = Math.min(OA(D, M), OA(D, M - hA), OA(D - wA, M), OA(D - wA, M - hA));
+                            Y = cA = Math.min(OA(D, M), OA(D, M - hA), OA(D - wA, M), OA(D - wA, M - hA));
                           else if (L.shape === 1) {
                             var VA = Math.min(Math.abs(M), Math.abs(M - hA)) / Math.min(Math.abs(D), Math.abs(D - wA)), T = ns(wA, hA, D, M, !0), V = T[0], I = T[1];
-                            cA = VA * (W = OA(V - D, (I - M) / VA));
+                            cA = VA * (Y = OA(V - D, (I - M) / VA));
                           }
                           break;
                         case 1:
-                          L.shape === 0 ? W = cA = Math.max(Math.abs(D), Math.abs(D - wA), Math.abs(M), Math.abs(M - hA)) : L.shape === 1 && (W = Math.max(Math.abs(D), Math.abs(D - wA)), cA = Math.max(Math.abs(M), Math.abs(M - hA)));
+                          L.shape === 0 ? Y = cA = Math.max(Math.abs(D), Math.abs(D - wA), Math.abs(M), Math.abs(M - hA)) : L.shape === 1 && (Y = Math.max(Math.abs(D), Math.abs(D - wA)), cA = Math.max(Math.abs(M), Math.abs(M - hA)));
                           break;
                         case 3:
                           if (L.shape === 0)
-                            W = cA = Math.max(OA(D, M), OA(D, M - hA), OA(D - wA, M), OA(D - wA, M - hA));
+                            Y = cA = Math.max(OA(D, M), OA(D, M - hA), OA(D - wA, M), OA(D - wA, M - hA));
                           else if (L.shape === 1) {
                             VA = Math.max(Math.abs(M), Math.abs(M - hA)) / Math.max(Math.abs(D), Math.abs(D - wA));
                             var rA = ns(wA, hA, D, M, !1);
-                            V = rA[0], I = rA[1], cA = VA * (W = OA(V - D, (I - M) / VA));
+                            V = rA[0], I = rA[1], cA = VA * (Y = OA(V - D, (I - M) / VA));
                           }
                       }
-                      return Array.isArray(L.size) && (W = _(L.size[0], wA), cA = L.size.length === 2 ? _(L.size[1], hA) : W), [W, cA];
-                    }(a, aA, pA, tA, oA), FA = HA[0], vA = HA[1], FA > 0 && vA > 0 && (RA = s.ctx.createRadialGradient(gA + aA, X + pA, 0, gA + aA, X + pA, FA), rs(a.stops, 2 * FA).forEach(function(L) {
+                      return Array.isArray(L.size) && (Y = _(L.size[0], wA), cA = L.size.length === 2 ? _(L.size[1], hA) : Y), [Y, cA];
+                    }(a, aA, pA, tA, oA), FA = HA[0], kA = HA[1], FA > 0 && kA > 0 && (RA = s.ctx.createRadialGradient(gA + aA, W + pA, 0, gA + aA, W + pA, FA), rs(a.stops, 2 * FA).forEach(function(L) {
                       return RA.addColorStop(L.stop, iA(L.color));
-                    }), s.path(eA), s.ctx.fillStyle = RA, FA !== vA ? (GA = t.bounds.left + 0.5 * t.bounds.width, kA = t.bounds.top + 0.5 * t.bounds.height, qA = 1 / (EA = vA / FA), s.ctx.save(), s.ctx.translate(GA, kA), s.ctx.transform(1, 0, 0, EA, 0, 0), s.ctx.translate(-GA, -kA), s.ctx.fillRect(gA, qA * (X - kA) + kA, tA, oA * qA), s.ctx.restore()) : s.ctx.fill())), $.label = 6;
+                    }), s.path(eA), s.ctx.fillStyle = RA, FA !== kA ? (GA = t.bounds.left + 0.5 * t.bounds.width, vA = t.bounds.top + 0.5 * t.bounds.height, qA = 1 / (EA = kA / FA), s.ctx.save(), s.ctx.translate(GA, vA), s.ctx.transform(1, 0, 0, EA, 0, 0), s.ctx.translate(-GA, -vA), s.ctx.fillRect(gA, qA * (W - vA) + vA, tA, oA * qA), s.ctx.restore()) : s.ctx.fill())), $.label = 6;
                   case 6:
                     return r--, [2];
                 }
@@ -4363,7 +4363,7 @@ var J = function(e, A, t, r, n) {
   }, A.prototype.renderSolidBorder = function(t, r, n) {
     return fA(this, void 0, void 0, function() {
       return QA(this, function(s) {
-        return this.path(ks(n, r)), this.ctx.fillStyle = iA(t), this.ctx.fill(), [2];
+        return this.path(vs(n, r)), this.ctx.fillStyle = iA(t), this.ctx.fill(), [2];
       });
     });
   }, A.prototype.renderDoubleBorder = function(t, r, n, s) {
@@ -4412,8 +4412,8 @@ var J = function(e, A, t, r, n) {
           case 1:
             d.sent(), this.ctx.restore(), r.boxShadow.slice(0).reverse().forEach(function(g) {
               l.ctx.save();
-              var u, w, Q, p, f, E = Wt(t.curves), U = g.inset ? 0 : 1e4, C = (u = E, w = -U + (g.inset ? 1 : -1) * g.spread.number, Q = (g.inset ? 1 : -1) * g.spread.number, p = g.spread.number * (g.inset ? -2 : 2), f = g.spread.number * (g.inset ? -2 : 2), u.map(function(H, k) {
-                switch (k) {
+              var u, w, Q, p, f, E = Wt(t.curves), U = g.inset ? 0 : 1e4, C = (u = E, w = -U + (g.inset ? 1 : -1) * g.spread.number, Q = (g.inset ? 1 : -1) * g.spread.number, p = g.spread.number * (g.inset ? -2 : 2), f = g.spread.number * (g.inset ? -2 : 2), u.map(function(H, v) {
+                switch (v) {
                   case 0:
                     return H.add(w, Q);
                   case 1:
@@ -4457,7 +4457,7 @@ var J = function(e, A, t, r, n) {
   }, A.prototype.renderDashedDottedBorder = function(t, r, n, s, o) {
     return fA(this, void 0, void 0, function() {
       var i, c, B, a, l, d, g, u, w, Q, p, f, E, U, C, H;
-      return QA(this, function(k) {
+      return QA(this, function(v) {
         return this.ctx.save(), i = function(b, N) {
           switch (N) {
             case 0:
@@ -4469,7 +4469,7 @@ var J = function(e, A, t, r, n) {
             default:
               return yt(b.bottomLeftBorderStroke, b.topLeftBorderStroke);
           }
-        }(s, n), c = ks(s, n), o === 2 && (this.path(c), this.ctx.clip()), LA(c[0]) ? (B = c[0].start.x, a = c[0].start.y) : (B = c[0].x, a = c[0].y), LA(c[1]) ? (l = c[1].end.x, d = c[1].end.y) : (l = c[1].x, d = c[1].y), g = Math.abs(n === 0 || n === 2 ? B - l : a - d), this.ctx.beginPath(), o === 3 ? this.formatPath(i) : this.formatPath(c.slice(0, 2)), u = r < 3 ? 3 * r : 2 * r, w = r < 3 ? 2 * r : r, o === 3 && (u = r, w = r), Q = !0, g <= 2 * u ? Q = !1 : g <= 2 * u + w ? (u *= p = g / (2 * u + w), w *= p) : (f = Math.floor((g + w) / (u + w)), E = (g - f * u) / (f - 1), w = (U = (g - (f + 1) * u) / f) <= 0 || Math.abs(w - E) < Math.abs(w - U) ? E : U), Q && (o === 3 ? this.ctx.setLineDash([0, u + w]) : this.ctx.setLineDash([u, w])), o === 3 ? (this.ctx.lineCap = "round", this.ctx.lineWidth = r) : this.ctx.lineWidth = 2 * r + 1.1, this.ctx.strokeStyle = iA(t), this.ctx.stroke(), this.ctx.setLineDash([]), o === 2 && (LA(c[0]) && (C = c[3], H = c[0], this.ctx.beginPath(), this.formatPath([new m(C.end.x, C.end.y), new m(H.start.x, H.start.y)]), this.ctx.stroke()), LA(c[1]) && (C = c[1], H = c[2], this.ctx.beginPath(), this.formatPath([new m(C.end.x, C.end.y), new m(H.start.x, H.start.y)]), this.ctx.stroke())), this.ctx.restore(), [2];
+        }(s, n), c = vs(s, n), o === 2 && (this.path(c), this.ctx.clip()), LA(c[0]) ? (B = c[0].start.x, a = c[0].start.y) : (B = c[0].x, a = c[0].y), LA(c[1]) ? (l = c[1].end.x, d = c[1].end.y) : (l = c[1].x, d = c[1].y), g = Math.abs(n === 0 || n === 2 ? B - l : a - d), this.ctx.beginPath(), o === 3 ? this.formatPath(i) : this.formatPath(c.slice(0, 2)), u = r < 3 ? 3 * r : 2 * r, w = r < 3 ? 2 * r : r, o === 3 && (u = r, w = r), Q = !0, g <= 2 * u ? Q = !1 : g <= 2 * u + w ? (u *= p = g / (2 * u + w), w *= p) : (f = Math.floor((g + w) / (u + w)), E = (g - f * u) / (f - 1), w = (U = (g - (f + 1) * u) / f) <= 0 || Math.abs(w - E) < Math.abs(w - U) ? E : U), Q && (o === 3 ? this.ctx.setLineDash([0, u + w]) : this.ctx.setLineDash([u, w])), o === 3 ? (this.ctx.lineCap = "round", this.ctx.lineWidth = r) : this.ctx.lineWidth = 2 * r + 1.1, this.ctx.strokeStyle = iA(t), this.ctx.stroke(), this.ctx.setLineDash([]), o === 2 && (LA(c[0]) && (C = c[3], H = c[0], this.ctx.beginPath(), this.formatPath([new m(C.end.x, C.end.y), new m(H.start.x, H.start.y)]), this.ctx.stroke()), LA(c[1]) && (C = c[1], H = c[2], this.ctx.beginPath(), this.formatPath([new m(C.end.x, C.end.y), new m(H.start.x, H.start.y)]), this.ctx.stroke())), this.ctx.restore(), [2];
       });
     });
   }, A.prototype.render = function(t) {
@@ -4571,7 +4571,7 @@ var J = function(e, A, t, r, n) {
 typeof window < "u" && Ko.setContext(window);
 var $B = function(e, A) {
   return fA(void 0, void 0, void 0, function() {
-    var t, r, n, s, o, i, c, B, a, l, d, g, u, w, Q, p, f, E, U, C, H, k, b, N, eA, gA, X, tA, oA, yA, aA, pA, HA, FA, vA, RA, GA, kA;
+    var t, r, n, s, o, i, c, B, a, l, d, g, u, w, Q, p, f, E, U, C, H, v, b, N, eA, gA, W, tA, oA, yA, aA, pA, HA, FA, kA, RA, GA, vA;
     return QA(this, function(EA) {
       switch (EA.label) {
         case 0:
@@ -4581,7 +4581,7 @@ var $B = function(e, A) {
             throw new Error("Element is not attached to a Document");
           if (!(r = t.defaultView))
             throw new Error("Document is not attached to a Window");
-          return n = { allowTaint: (k = A.allowTaint) !== null && k !== void 0 && k, imageTimeout: (b = A.imageTimeout) !== null && b !== void 0 ? b : 15e3, proxy: A.proxy, useCORS: (N = A.useCORS) !== null && N !== void 0 && N }, s = xr({ logging: (eA = A.logging) === null || eA === void 0 || eA, cache: A.cache }, n), o = { windowWidth: (gA = A.windowWidth) !== null && gA !== void 0 ? gA : r.innerWidth, windowHeight: (X = A.windowHeight) !== null && X !== void 0 ? X : r.innerHeight, scrollX: (tA = A.scrollX) !== null && tA !== void 0 ? tA : r.pageXOffset, scrollY: (oA = A.scrollY) !== null && oA !== void 0 ? oA : r.pageYOffset }, i = new re(o.scrollX, o.scrollY, o.windowWidth, o.windowHeight), c = new zB(s, i), B = (yA = A.foreignObjectRendering) !== null && yA !== void 0 && yA, a = { allowTaint: (aA = A.allowTaint) !== null && aA !== void 0 && aA, onclone: A.onclone, ignoreElements: A.ignoreElements, inlineImages: B, copyStyles: B }, c.logger.debug("Starting document clone with size " + i.width + "x" + i.height + " scrolled to " + -i.left + "," + -i.top), l = new bs(c, e, a), (d = l.clonedReferenceElement) ? [4, l.toIFrame(t, i)] : [2, Promise.reject("Unable to find element in cloned iframe")];
+          return n = { allowTaint: (v = A.allowTaint) !== null && v !== void 0 && v, imageTimeout: (b = A.imageTimeout) !== null && b !== void 0 ? b : 15e3, proxy: A.proxy, useCORS: (N = A.useCORS) !== null && N !== void 0 && N }, s = xr({ logging: (eA = A.logging) === null || eA === void 0 || eA, cache: A.cache }, n), o = { windowWidth: (gA = A.windowWidth) !== null && gA !== void 0 ? gA : r.innerWidth, windowHeight: (W = A.windowHeight) !== null && W !== void 0 ? W : r.innerHeight, scrollX: (tA = A.scrollX) !== null && tA !== void 0 ? tA : r.pageXOffset, scrollY: (oA = A.scrollY) !== null && oA !== void 0 ? oA : r.pageYOffset }, i = new re(o.scrollX, o.scrollY, o.windowWidth, o.windowHeight), c = new zB(s, i), B = (yA = A.foreignObjectRendering) !== null && yA !== void 0 && yA, a = { allowTaint: (aA = A.allowTaint) !== null && aA !== void 0 && aA, onclone: A.onclone, ignoreElements: A.ignoreElements, inlineImages: B, copyStyles: B }, c.logger.debug("Starting document clone with size " + i.width + "x" + i.height + " scrolled to " + -i.left + "," + -i.top), l = new bs(c, e, a), (d = l.clonedReferenceElement) ? [4, l.toIFrame(t, i)] : [2, Promise.reject("Unable to find element in cloned iframe")];
         case 1:
           return g = EA.sent(), u = wn(d) || d.tagName === "HTML" ? function(qA) {
             var $ = qA.body, L = qA.documentElement;
@@ -4589,7 +4589,7 @@ var $B = function(e, A) {
               throw new Error("Unable to get document size");
             var D = Math.max(Math.max($.scrollWidth, L.scrollWidth), Math.max($.offsetWidth, L.offsetWidth), Math.max($.clientWidth, L.clientWidth)), M = Math.max(Math.max($.scrollHeight, L.scrollHeight), Math.max($.offsetHeight, L.offsetHeight), Math.max($.clientHeight, L.clientHeight));
             return new re(0, 0, D, M);
-          }(d.ownerDocument) : Ar(c, d), w = u.width, Q = u.height, p = u.left, f = u.top, E = Al(c, d, A.backgroundColor), U = { canvas: A.canvas, backgroundColor: E, scale: (HA = (pA = A.scale) !== null && pA !== void 0 ? pA : r.devicePixelRatio) !== null && HA !== void 0 ? HA : 1, x: ((FA = A.x) !== null && FA !== void 0 ? FA : 0) + p, y: ((vA = A.y) !== null && vA !== void 0 ? vA : 0) + f, width: (RA = A.width) !== null && RA !== void 0 ? RA : Math.ceil(w), height: (GA = A.height) !== null && GA !== void 0 ? GA : Math.ceil(Q) }, B ? (c.logger.debug("Document cloned, using foreign object rendering"), [4, new ZB(c, U).render(d)]) : [3, 3];
+          }(d.ownerDocument) : Ar(c, d), w = u.width, Q = u.height, p = u.left, f = u.top, E = Al(c, d, A.backgroundColor), U = { canvas: A.canvas, backgroundColor: E, scale: (HA = (pA = A.scale) !== null && pA !== void 0 ? pA : r.devicePixelRatio) !== null && HA !== void 0 ? HA : 1, x: ((FA = A.x) !== null && FA !== void 0 ? FA : 0) + p, y: ((kA = A.y) !== null && kA !== void 0 ? kA : 0) + f, width: (RA = A.width) !== null && RA !== void 0 ? RA : Math.ceil(w), height: (GA = A.height) !== null && GA !== void 0 ? GA : Math.ceil(Q) }, B ? (c.logger.debug("Document cloned, using foreign object rendering"), [4, new ZB(c, U).render(d)]) : [3, 3];
         case 2:
           return C = EA.sent(), [3, 5];
         case 3:
@@ -4597,7 +4597,7 @@ var $B = function(e, A) {
         case 4:
           C = EA.sent(), EA.label = 5;
         case 5:
-          return ((kA = A.removeContainer) === null || kA === void 0 || kA) && (bs.destroy(g) || c.logger.error("Cannot detach cloned iframe as it is not in the DOM anymore")), c.logger.debug("Finished rendering"), [2, C];
+          return ((vA = A.removeContainer) === null || vA === void 0 || vA) && (bs.destroy(g) || c.logger.error("Cannot detach cloned iframe as it is not in the DOM anymore")), c.logger.debug("Finished rendering"), [2, C];
       }
     });
   });
@@ -4655,27 +4655,27 @@ function Vo(e, A) {
   t == null || t.attachments.push(r), j.localStorage.setShakeState(t);
 }
 function Po() {
-  Z("Returning to Shake.");
+  X("Returning to Shake.");
   const e = jo(j.localStorage.getShakeState());
   document.body.appendChild(e), j.localStorage.setShakeOpened(!0);
 }
 const tt = (e = !0) => {
-  Z("Shake closed");
+  X("Shake closed");
   const A = j.localStorage;
   e && (Hl(), A.setShakeState(null));
   const t = document.getElementById("shake-sdk-root");
   t == null || t.remove(), A.setShakeOpened(!1);
 }, No = () => {
-  Z("Grab screenshot clicked."), tt(!1);
+  X("Grab screenshot clicked."), tt(!1);
   const e = ((A, t) => {
     const r = document.createElement("img");
     r.src = A, r.setAttribute("draggable", "false");
     const n = document.createElement("button");
     n.classList.add("shake-sdk-bubble"), n.appendChild(r);
     const s = document.createElement("div"), o = s.attachShadow({ mode: "open" });
-    return o.adoptedStyleSheets = de, o.appendChild(n), el(n, t), s;
+    return he(o), o.appendChild(n), el(n, t), s;
   })("data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3csvg%20width='16px'%20height='16px'%20viewBox='0%200%2032%2032'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='translate(-35.852326,-90.237974)'%3e%3cpath%20style='fill:%23ff0000'%20d='m%2067.852325,106.23797%20a%2016,16%200%200%201%20-16,16%2016,16%200%200%201%20-16,-16%2016,16%200%200%201%2016,-15.999997%2016,16%200%200%201%2016,15.999997%20z'/%3e%3c/g%3e%3c/svg%3e", () => {
-    e.remove(), (async () => (Z("Capture screenshot click"), Go(await new hn().captureScreenshot()), Po()))();
+    e.remove(), (async () => (X("Capture screenshot click"), Go(await new hn().captureScreenshot()), Po()))();
   });
   document.body.appendChild(e);
 }, zt = class zt {
@@ -4720,11 +4720,11 @@ const tt = (e = !0) => {
 F(zt, "SCREEN_RECORDING_TIME", 3e4);
 let qr = zt;
 const tl = async (e) => {
-  Z("Stop recording click."), function(A) {
+  X("Stop recording click."), function(A) {
     Vo(A, uA.VIDEO);
   }(e), Po();
 }, _o = () => {
-  Z("Record recording click."), tt(!1);
+  X("Record recording click."), tt(!1);
   const e = new qr();
   e.onStopListener = tl, e.start();
 }, rl = { shake_sdk_dialog_add_attachment: "Add attachment", shake_sdk_dialog_add_attachment_grab_screenshot: "Grab screenshot", shake_sdk_dialog_add_attachment_record_screen: "Record screen", shake_sdk_dialog_add_attachment_browse_locations: "Browse other locations", shake_sdk_dialog_add_attachment_type_video: "Video", shake_sdk_dialog_add_attachment_type_image: "Screenshot", shake_sdk_dialog_ticket_sent_title: "Done.", shake_sdk_dialog_ticket_sent_message: "Your ticket was sent.", shake_sdk_error_message: "Something went wrong.", shake_sdk_main_button_title: "Send feedback", shake_sdk_ticket_form_title: "New ticket", shake_sdk_new_ticket_feedback_type_title: "Ticket type", shake_sdk_new_ticket_feedback_type_bug: "Bug report", shake_sdk_new_ticket_feedback_type_question: "Question", shake_sdk_new_ticket_feedback_type_suggestion: "Improvement suggestion", shake_sdk_ticket_form_description_placeholder: "Description", shake_sdk_ticket_form_submit_button_text: "Submit", shake_sdk_ticket_form_submit_button_text_loading: "Submiting..." }, sA = () => {
@@ -4810,7 +4810,7 @@ const tl = async (e) => {
   const n = document.createElement("div");
   n.classList.add("shake-sdk-sheet-background"), n.appendChild(r), n.onclick = () => s.remove();
   const s = document.createElement("div"), o = s.attachShadow({ mode: "open" });
-  return o.appendChild(n), o.adoptedStyleSheets = de, s;
+  return o.appendChild(n), he(o), s;
 }, al = (e, A) => {
   const t = ZA(e.icon), r = ((s) => {
     const o = document.createElement("p");
@@ -4859,7 +4859,7 @@ const tl = async (e) => {
   const t = ZA(e), r = document.createElement("button");
   return r.classList.add("shake-sdk-toolbar-button"), r.onclick = A, r.appendChild(t), r;
 }, Yo = "data:image/svg+xml,%3csvg%20width='50'%20height='51'%20viewBox='0%200%2050%2051'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M20.834%2021.5598L29.1673%2029.8931'%20stroke='%23FFFFFF'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M29.1673%2021.56L20.834%2029.8933'%20stroke='%23FFFFFF'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e", Bl = (e) => {
-  Z(`Opening image: ${e.name}`), document.body.appendChild(((A) => {
+  X(`Opening image: ${e.name}`), document.body.appendChild(((A) => {
     const t = jt({ image: Yo, onClick: () => {
       i.remove();
     } }), r = S();
@@ -4871,10 +4871,10 @@ const tl = async (e) => {
     const o = S();
     o.classList.add("shake-sdk-image-preview-root-fs"), o.appendChild(r), o.appendChild(s);
     const i = document.createElement("div"), c = i.attachShadow({ mode: "open" });
-    return c.adoptedStyleSheets = de, c.appendChild(o), i;
+    return he(c), c.appendChild(o), i;
   })(e.data));
 }, ll = (e) => {
-  Z("Opening video: " + e.name), document.body.appendChild(((A) => {
+  X("Opening video: " + e.name), document.body.appendChild(((A) => {
     const t = jt({ image: Yo, onClick: () => {
       o.remove();
     } }), r = S();
@@ -4884,7 +4884,7 @@ const tl = async (e) => {
     const s = S();
     s.classList.add("shake-sdk-video-preview-root-fs"), s.appendChild(r), s.appendChild(n);
     const o = document.createElement("div"), i = o.attachShadow({ mode: "open" });
-    return i.adoptedStyleSheets = de, i.appendChild(s), o;
+    return he(i), i.appendChild(s), o;
   })(e.data));
 }, dl = (e) => {
   const A = j.attachmentsManager, t = /* @__PURE__ */ new Map(), r = (i) => {
@@ -4946,7 +4946,7 @@ class ul {
     const B = ZA("data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_14021_39143)'%3e%3cpath%20d='M16%208L8%2016'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M16%2016.001L8%208.00098'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_14021_39143'%3e%3crect%20width='24'%20height='24'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
     c.appendChild(B), n.append(c);
     const a = document.createElement("div"), l = a.attachShadow({ mode: "open" });
-    l.appendChild(n), l.adoptedStyleSheets = de, document.body.appendChild(a), setTimeout(function() {
+    l.appendChild(n), he(l), document.body.appendChild(a), setTimeout(function() {
       a.remove();
     }, this.time), c.addEventListener("click", () => {
       n.remove();
@@ -4973,7 +4973,7 @@ const Zo = () => {
   }
   B.disabled = !0, B.onclick = async () => {
     n = !0, a(), await (async ({ feedbackType: w, description: Q }) => {
-      Z("Ticket submitted.");
+      X("Ticket submitted.");
       const p = j.localStorage.getShakeState(), f = Le.shakeFeedbackService, E = p.ticket;
       E && (E.tags.push(w), E.custom_fields = gl(Q, w), await f.sendUserFeedback(E, p.attachments)), Zo(), tt();
     })({ feedbackType: A, description: t }), n = !1;
@@ -4991,8 +4991,8 @@ const Zo = () => {
     U.textContent = f, U.classList.add("shake-sdk-textarea-label");
     const C = document.createElement("textarea");
     return C.classList.add("shake-sdk-textarea"), C.rows = 12, C.textContent = p || null, C.addEventListener("input", function(H) {
-      let k = H.target.value;
-      Q && k.length > Q && (k = k.slice(0, Q), H.target.value = k), w(H.target.value);
+      let v = H.target.value;
+      Q && v.length > Q && (v = v.slice(0, Q), H.target.value = v), w(H.target.value);
     }), E.appendChild(U), E.appendChild(C), E;
   })({ onChange: (w) => {
     t = w, e.description = w, j.localStorage.setShakeState(e), a();
@@ -5021,11 +5021,11 @@ const Zo = () => {
   const c = document.createElement("div");
   c.id = "shake-sdk-root";
   const B = c.attachShadow({ mode: "open" });
-  return B.appendChild(i), B.adoptedStyleSheets = de, c;
+  return B.appendChild(i), he(B), c;
 };
 var br, Hr, $r = { exports: {} };
 br = $r, Hr = $r.exports, function(e, A) {
-  var t = "function", r = "undefined", n = "object", s = "string", o = "major", i = "model", c = "name", B = "type", a = "vendor", l = "version", d = "architecture", g = "console", u = "mobile", w = "tablet", Q = "smarttv", p = "wearable", f = "embedded", E = "Amazon", U = "Apple", C = "ASUS", H = "BlackBerry", k = "Browser", b = "Chrome", N = "Firefox", eA = "Google", gA = "Huawei", X = "LG", tA = "Microsoft", oA = "Motorola", yA = "Opera", aA = "Samsung", pA = "Sharp", HA = "Sony", FA = "Xiaomi", vA = "Zebra", RA = "Facebook", GA = "Chromium OS", kA = "Mac OS", EA = function(T) {
+  var t = "function", r = "undefined", n = "object", s = "string", o = "major", i = "model", c = "name", B = "type", a = "vendor", l = "version", d = "architecture", g = "console", u = "mobile", w = "tablet", Q = "smarttv", p = "wearable", f = "embedded", E = "Amazon", U = "Apple", C = "ASUS", H = "BlackBerry", v = "Browser", b = "Chrome", N = "Firefox", eA = "Google", gA = "Huawei", W = "LG", tA = "Microsoft", oA = "Motorola", yA = "Opera", aA = "Samsung", pA = "Sharp", HA = "Sony", FA = "Xiaomi", kA = "Zebra", RA = "Facebook", GA = "Chromium OS", vA = "Mac OS", EA = function(T) {
     for (var V = {}, I = 0; I < T.length; I++)
       V[T[I].toUpperCase()] = T[I];
     return V;
@@ -5037,12 +5037,12 @@ br = $r, Hr = $r.exports, function(e, A) {
     if (typeof T === s)
       return T = T.replace(/^\s\s*/, ""), typeof V === r ? T : T.substring(0, 500);
   }, D = function(T, V) {
-    for (var I, rA, PA, R, zA, v, TA = 0; TA < V.length && !zA; ) {
-      var ue = V[TA], NA = V[TA + 1];
-      for (I = rA = 0; I < ue.length && !zA && ue[I]; )
-        if (zA = ue[I++].exec(T))
+    for (var I, rA, PA, R, zA, k, TA = 0; TA < V.length && !zA; ) {
+      var de = V[TA], NA = V[TA + 1];
+      for (I = rA = 0; I < de.length && !zA && de[I]; )
+        if (zA = de[I++].exec(T))
           for (PA = 0; PA < NA.length; PA++)
-            v = zA[++rA], typeof (R = NA[PA]) === n && R.length > 0 ? R.length === 2 ? typeof R[1] == t ? this[R[0]] = R[1].call(this, v) : this[R[0]] = R[1] : R.length === 3 ? typeof R[1] !== t || R[1].exec && R[1].test ? this[R[0]] = v ? v.replace(R[1], R[2]) : A : this[R[0]] = v ? R[1].call(this, v, R[2]) : A : R.length === 4 && (this[R[0]] = v ? R[3].call(this, v.replace(R[1], R[2])) : A) : this[R] = v || A;
+            k = zA[++rA], typeof (R = NA[PA]) === n && R.length > 0 ? R.length === 2 ? typeof R[1] == t ? this[R[0]] = R[1].call(this, k) : this[R[0]] = R[1] : R.length === 3 ? typeof R[1] !== t || R[1].exec && R[1].test ? this[R[0]] = k ? k.replace(R[1], R[2]) : A : this[R[0]] = k ? R[1].call(this, k, R[2]) : A : R.length === 4 && (this[R[0]] = k ? R[3].call(this, k.replace(R[1], R[2])) : A) : this[R] = k || A;
       TA += 2;
     }
   }, M = function(T, V) {
@@ -5054,44 +5054,44 @@ br = $r, Hr = $r.exports, function(e, A) {
       } else if (qA(V[I], T))
         return I === "?" ? A : I;
     return T;
-  }, wA = { ME: "4.90", "NT 3.11": "NT3.51", "NT 4.0": "NT4.0", 2e3: "NT 5.0", XP: ["NT 5.1", "NT 5.2"], Vista: "NT 6.0", 7: "NT 6.1", 8: "NT 6.2", 8.1: "NT 6.3", 10: ["NT 6.4", "NT 10.0"], RT: "ARM" }, hA = { browser: [[/\b(?:crmo|crios)\/([\w\.]+)/i], [l, [c, "Chrome"]], [/edg(?:e|ios|a)?\/([\w\.]+)/i], [l, [c, "Edge"]], [/(opera mini)\/([-\w\.]+)/i, /(opera [mobiletab]{3,6})\b.+version\/([-\w\.]+)/i, /(opera)(?:.+version\/|[\/ ]+)([\w\.]+)/i], [c, l], [/opios[\/ ]+([\w\.]+)/i], [l, [c, yA + " Mini"]], [/\bopr\/([\w\.]+)/i], [l, [c, yA]], [/\bb[ai]*d(?:uhd|[ub]*[aekoprswx]{5,6})[\/ ]?([\w\.]+)/i], [l, [c, "Baidu"]], [/(kindle)\/([\w\.]+)/i, /(lunascape|maxthon|netfront|jasmine|blazer)[\/ ]?([\w\.]*)/i, /(avant|iemobile|slim)\s?(?:browser)?[\/ ]?([\w\.]*)/i, /(?:ms|\()(ie) ([\w\.]+)/i, /(flock|rockmelt|midori|epiphany|silk|skyfire|bolt|iron|vivaldi|iridium|phantomjs|bowser|quark|qupzilla|falkon|rekonq|puffin|brave|whale(?!.+naver)|qqbrowserlite|qq|duckduckgo)\/([-\w\.]+)/i, /(heytap|ovi)browser\/([\d\.]+)/i, /(weibo)__([\d\.]+)/i], [c, l], [/(?:\buc? ?browser|(?:juc.+)ucweb)[\/ ]?([\w\.]+)/i], [l, [c, "UC" + k]], [/microm.+\bqbcore\/([\w\.]+)/i, /\bqbcore\/([\w\.]+).+microm/i, /micromessenger\/([\w\.]+)/i], [l, [c, "WeChat"]], [/konqueror\/([\w\.]+)/i], [l, [c, "Konqueror"]], [/trident.+rv[: ]([\w\.]{1,9})\b.+like gecko/i], [l, [c, "IE"]], [/ya(?:search)?browser\/([\w\.]+)/i], [l, [c, "Yandex"]], [/slbrowser\/([\w\.]+)/i], [l, [c, "Smart Lenovo " + k]], [/(avast|avg)\/([\w\.]+)/i], [[c, /(.+)/, "$1 Secure " + k], l], [/\bfocus\/([\w\.]+)/i], [l, [c, N + " Focus"]], [/\bopt\/([\w\.]+)/i], [l, [c, yA + " Touch"]], [/coc_coc\w+\/([\w\.]+)/i], [l, [c, "Coc Coc"]], [/dolfin\/([\w\.]+)/i], [l, [c, "Dolphin"]], [/coast\/([\w\.]+)/i], [l, [c, yA + " Coast"]], [/miuibrowser\/([\w\.]+)/i], [l, [c, "MIUI " + k]], [/fxios\/([-\w\.]+)/i], [l, [c, N]], [/\bqihu|(qi?ho?o?|360)browser/i], [[c, "360 " + k]], [/(oculus|sailfish|huawei|vivo)browser\/([\w\.]+)/i], [[c, /(.+)/, "$1 " + k], l], [/samsungbrowser\/([\w\.]+)/i], [l, [c, aA + " Internet"]], [/(comodo_dragon)\/([\w\.]+)/i], [[c, /_/g, " "], l], [/metasr[\/ ]?([\d\.]+)/i], [l, [c, "Sogou Explorer"]], [/(sogou)mo\w+\/([\d\.]+)/i], [[c, "Sogou Mobile"], l], [/(electron)\/([\w\.]+) safari/i, /(tesla)(?: qtcarbrowser|\/(20\d\d\.[-\w\.]+))/i, /m?(qqbrowser|2345Explorer)[\/ ]?([\w\.]+)/i], [c, l], [/(lbbrowser)/i, /\[(linkedin)app\]/i], [c], [/((?:fban\/fbios|fb_iab\/fb4a)(?!.+fbav)|;fbav\/([\w\.]+);)/i], [[c, RA], l], [/(Klarna)\/([\w\.]+)/i, /(kakao(?:talk|story))[\/ ]([\w\.]+)/i, /(naver)\(.*?(\d+\.[\w\.]+).*\)/i, /safari (line)\/([\w\.]+)/i, /\b(line)\/([\w\.]+)\/iab/i, /(alipay)client\/([\w\.]+)/i, /(chromium|instagram|snapchat)[\/ ]([-\w\.]+)/i], [c, l], [/\bgsa\/([\w\.]+) .*safari\//i], [l, [c, "GSA"]], [/musical_ly(?:.+app_?version\/|_)([\w\.]+)/i], [l, [c, "TikTok"]], [/headlesschrome(?:\/([\w\.]+)| )/i], [l, [c, b + " Headless"]], [/ wv\).+(chrome)\/([\w\.]+)/i], [[c, b + " WebView"], l], [/droid.+ version\/([\w\.]+)\b.+(?:mobile safari|safari)/i], [l, [c, "Android " + k]], [/(chrome|omniweb|arora|[tizenoka]{5} ?browser)\/v?([\w\.]+)/i], [c, l], [/version\/([\w\.\,]+) .*mobile\/\w+ (safari)/i], [l, [c, "Mobile Safari"]], [/version\/([\w(\.|\,)]+) .*(mobile ?safari|safari)/i], [l, c], [/webkit.+?(mobile ?safari|safari)(\/[\w\.]+)/i], [c, [l, M, { "1.0": "/8", 1.2: "/1", 1.3: "/3", "2.0": "/412", "2.0.2": "/416", "2.0.3": "/417", "2.0.4": "/419", "?": "/" }]], [/(webkit|khtml)\/([\w\.]+)/i], [c, l], [/(navigator|netscape\d?)\/([-\w\.]+)/i], [[c, "Netscape"], l], [/mobile vr; rv:([\w\.]+)\).+firefox/i], [l, [c, N + " Reality"]], [/ekiohf.+(flow)\/([\w\.]+)/i, /(swiftfox)/i, /(icedragon|iceweasel|camino|chimera|fennec|maemo browser|minimo|conkeror|klar)[\/ ]?([\w\.\+]+)/i, /(seamonkey|k-meleon|icecat|iceape|firebird|phoenix|palemoon|basilisk|waterfox)\/([-\w\.]+)$/i, /(firefox)\/([\w\.]+)/i, /(mozilla)\/([\w\.]+) .+rv\:.+gecko\/\d+/i, /(polaris|lynx|dillo|icab|doris|amaya|w3m|netsurf|sleipnir|obigo|mosaic|(?:go|ice|up)[\. ]?browser)[-\/ ]?v?([\w\.]+)/i, /(links) \(([\w\.]+)/i, /panasonic;(viera)/i], [c, l], [/(cobalt)\/([\w\.]+)/i], [c, [l, /master.|lts./, ""]]], cpu: [[/(?:(amd|x(?:(?:86|64)[-_])?|wow|win)64)[;\)]/i], [[d, "amd64"]], [/(ia32(?=;))/i], [[d, $]], [/((?:i[346]|x)86)[;\)]/i], [[d, "ia32"]], [/\b(aarch64|arm(v?8e?l?|_?64))\b/i], [[d, "arm64"]], [/\b(arm(?:v[67])?ht?n?[fl]p?)\b/i], [[d, "armhf"]], [/windows (ce|mobile); ppc;/i], [[d, "arm"]], [/((?:ppc|powerpc)(?:64)?)(?: mac|;|\))/i], [[d, /ower/, "", $]], [/(sun4\w)[;\)]/i], [[d, "sparc"]], [/((?:avr32|ia64(?=;))|68k(?=\))|\barm(?=v(?:[1-7]|[5-7]1)l?|;|eabi)|(?=atmel )avr|(?:irix|mips|sparc)(?:64)?\b|pa-risc)/i], [[d, $]]], device: [[/\b(sch-i[89]0\d|shw-m380s|sm-[ptx]\w{2,4}|gt-[pn]\d{2,4}|sgh-t8[56]9|nexus 10)/i], [i, [a, aA], [B, w]], [/\b((?:s[cgp]h|gt|sm)-\w+|sc[g-]?[\d]+a?|galaxy nexus)/i, /samsung[- ]([-\w]+)/i, /sec-(sgh\w+)/i], [i, [a, aA], [B, u]], [/(?:\/|\()(ip(?:hone|od)[\w, ]*)(?:\/|;)/i], [i, [a, U], [B, u]], [/\((ipad);[-\w\),; ]+apple/i, /applecoremedia\/[\w\.]+ \((ipad)/i, /\b(ipad)\d\d?,\d\d?[;\]].+ios/i], [i, [a, U], [B, w]], [/(macintosh);/i], [i, [a, U]], [/\b(sh-?[altvz]?\d\d[a-ekm]?)/i], [i, [a, pA], [B, u]], [/\b((?:ag[rs][23]?|bah2?|sht?|btv)-a?[lw]\d{2})\b(?!.+d\/s)/i], [i, [a, gA], [B, w]], [/(?:huawei|honor)([-\w ]+)[;\)]/i, /\b(nexus 6p|\w{2,4}e?-[atu]?[ln][\dx][012359c][adn]?)\b(?!.+d\/s)/i], [i, [a, gA], [B, u]], [/\b(poco[\w ]+|m2\d{3}j\d\d[a-z]{2})(?: bui|\))/i, /\b; (\w+) build\/hm\1/i, /\b(hm[-_ ]?note?[_ ]?(?:\d\w)?) bui/i, /\b(redmi[\-_ ]?(?:note|k)?[\w_ ]+)(?: bui|\))/i, /oid[^\)]+; (m?[12][0-389][01]\w{3,6}[c-y])( bui|; wv|\))/i, /\b(mi[-_ ]?(?:a\d|one|one[_ ]plus|note lte|max|cc)?[_ ]?(?:\d?\w?)[_ ]?(?:plus|se|lite)?)(?: bui|\))/i], [[i, /_/g, " "], [a, FA], [B, u]], [/oid[^\)]+; (2\d{4}(283|rpbf)[cgl])( bui|\))/i, /\b(mi[-_ ]?(?:pad)(?:[\w_ ]+))(?: bui|\))/i], [[i, /_/g, " "], [a, FA], [B, w]], [/; (\w+) bui.+ oppo/i, /\b(cph[12]\d{3}|p(?:af|c[al]|d\w|e[ar])[mt]\d0|x9007|a101op)\b/i], [i, [a, "OPPO"], [B, u]], [/vivo (\w+)(?: bui|\))/i, /\b(v[12]\d{3}\w?[at])(?: bui|;)/i], [i, [a, "Vivo"], [B, u]], [/\b(rmx[1-3]\d{3})(?: bui|;|\))/i], [i, [a, "Realme"], [B, u]], [/\b(milestone|droid(?:[2-4x]| (?:bionic|x2|pro|razr))?:?( 4g)?)\b[\w ]+build\//i, /\bmot(?:orola)?[- ](\w*)/i, /((?:moto[\w\(\) ]+|xt\d{3,4}|nexus 6)(?= bui|\)))/i], [i, [a, oA], [B, u]], [/\b(mz60\d|xoom[2 ]{0,2}) build\//i], [i, [a, oA], [B, w]], [/((?=lg)?[vl]k\-?\d{3}) bui| 3\.[-\w; ]{10}lg?-([06cv9]{3,4})/i], [i, [a, X], [B, w]], [/(lm(?:-?f100[nv]?|-[\w\.]+)(?= bui|\))|nexus [45])/i, /\blg[-e;\/ ]+((?!browser|netcast|android tv)\w+)/i, /\blg-?([\d\w]+) bui/i], [i, [a, X], [B, u]], [/(ideatab[-\w ]+)/i, /lenovo ?(s[56]000[-\w]+|tab(?:[\w ]+)|yt[-\d\w]{6}|tb[-\d\w]{6})/i], [i, [a, "Lenovo"], [B, w]], [/(?:maemo|nokia).*(n900|lumia \d+)/i, /nokia[-_ ]?([-\w\.]*)/i], [[i, /_/g, " "], [a, "Nokia"], [B, u]], [/(pixel c)\b/i], [i, [a, eA], [B, w]], [/droid.+; (pixel[\daxl ]{0,6})(?: bui|\))/i], [i, [a, eA], [B, u]], [/droid.+ (a?\d[0-2]{2}so|[c-g]\d{4}|so[-gl]\w+|xq-a\w[4-7][12])(?= bui|\).+chrome\/(?![1-6]{0,1}\d\.))/i], [i, [a, HA], [B, u]], [/sony tablet [ps]/i, /\b(?:sony)?sgp\w+(?: bui|\))/i], [[i, "Xperia Tablet"], [a, HA], [B, w]], [/ (kb2005|in20[12]5|be20[12][59])\b/i, /(?:one)?(?:plus)? (a\d0\d\d)(?: b|\))/i], [i, [a, "OnePlus"], [B, u]], [/(alexa)webm/i, /(kf[a-z]{2}wi|aeo[c-r]{2})( bui|\))/i, /(kf[a-z]+)( bui|\)).+silk\//i], [i, [a, E], [B, w]], [/((?:sd|kf)[0349hijorstuw]+)( bui|\)).+silk\//i], [[i, /(.+)/g, "Fire Phone $1"], [a, E], [B, u]], [/(playbook);[-\w\),; ]+(rim)/i], [i, a, [B, w]], [/\b((?:bb[a-f]|st[hv])100-\d)/i, /\(bb10; (\w+)/i], [i, [a, H], [B, u]], [/(?:\b|asus_)(transfo[prime ]{4,10} \w+|eeepc|slider \w+|nexus 7|padfone|p00[cj])/i], [i, [a, C], [B, w]], [/ (z[bes]6[027][012][km][ls]|zenfone \d\w?)\b/i], [i, [a, C], [B, u]], [/(nexus 9)/i], [i, [a, "HTC"], [B, w]], [/(htc)[-;_ ]{1,2}([\w ]+(?=\)| bui)|\w+)/i, /(zte)[- ]([\w ]+?)(?: bui|\/|\))/i, /(alcatel|geeksphone|nexian|panasonic(?!(?:;|\.))|sony(?!-bra))[-_ ]?([-\w]*)/i], [a, [i, /_/g, " "], [B, u]], [/droid.+; ([ab][1-7]-?[0178a]\d\d?)/i], [i, [a, "Acer"], [B, w]], [/droid.+; (m[1-5] note) bui/i, /\bmz-([-\w]{2,})/i], [i, [a, "Meizu"], [B, u]], [/; ((?:power )?armor(?:[\w ]{0,8}))(?: bui|\))/i], [i, [a, "Ulefone"], [B, u]], [/(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus|dell|meizu|motorola|polytron|infinix|tecno)[-_ ]?([-\w]*)/i, /(hp) ([\w ]+\w)/i, /(asus)-?(\w+)/i, /(microsoft); (lumia[\w ]+)/i, /(lenovo)[-_ ]?([-\w]+)/i, /(jolla)/i, /(oppo) ?([\w ]+) bui/i], [a, i, [B, u]], [/(kobo)\s(ereader|touch)/i, /(archos) (gamepad2?)/i, /(hp).+(touchpad(?!.+tablet)|tablet)/i, /(kindle)\/([\w\.]+)/i, /(nook)[\w ]+build\/(\w+)/i, /(dell) (strea[kpr\d ]*[\dko])/i, /(le[- ]+pan)[- ]+(\w{1,9}) bui/i, /(trinity)[- ]*(t\d{3}) bui/i, /(gigaset)[- ]+(q\w{1,9}) bui/i, /(vodafone) ([\w ]+)(?:\)| bui)/i], [a, i, [B, w]], [/(surface duo)/i], [i, [a, tA], [B, w]], [/droid [\d\.]+; (fp\du?)(?: b|\))/i], [i, [a, "Fairphone"], [B, u]], [/(u304aa)/i], [i, [a, "AT&T"], [B, u]], [/\bsie-(\w*)/i], [i, [a, "Siemens"], [B, u]], [/\b(rct\w+) b/i], [i, [a, "RCA"], [B, w]], [/\b(venue[\d ]{2,7}) b/i], [i, [a, "Dell"], [B, w]], [/\b(q(?:mv|ta)\w+) b/i], [i, [a, "Verizon"], [B, w]], [/\b(?:barnes[& ]+noble |bn[rt])([\w\+ ]*) b/i], [i, [a, "Barnes & Noble"], [B, w]], [/\b(tm\d{3}\w+) b/i], [i, [a, "NuVision"], [B, w]], [/\b(k88) b/i], [i, [a, "ZTE"], [B, w]], [/\b(nx\d{3}j) b/i], [i, [a, "ZTE"], [B, u]], [/\b(gen\d{3}) b.+49h/i], [i, [a, "Swiss"], [B, u]], [/\b(zur\d{3}) b/i], [i, [a, "Swiss"], [B, w]], [/\b((zeki)?tb.*\b) b/i], [i, [a, "Zeki"], [B, w]], [/\b([yr]\d{2}) b/i, /\b(dragon[- ]+touch |dt)(\w{5}) b/i], [[a, "Dragon Touch"], i, [B, w]], [/\b(ns-?\w{0,9}) b/i], [i, [a, "Insignia"], [B, w]], [/\b((nxa|next)-?\w{0,9}) b/i], [i, [a, "NextBook"], [B, w]], [/\b(xtreme\_)?(v(1[045]|2[015]|[3469]0|7[05])) b/i], [[a, "Voice"], i, [B, u]], [/\b(lvtel\-)?(v1[12]) b/i], [[a, "LvTel"], i, [B, u]], [/\b(ph-1) /i], [i, [a, "Essential"], [B, u]], [/\b(v(100md|700na|7011|917g).*\b) b/i], [i, [a, "Envizen"], [B, w]], [/\b(trio[-\w\. ]+) b/i], [i, [a, "MachSpeed"], [B, w]], [/\btu_(1491) b/i], [i, [a, "Rotor"], [B, w]], [/(shield[\w ]+) b/i], [i, [a, "Nvidia"], [B, w]], [/(sprint) (\w+)/i], [a, i, [B, u]], [/(kin\.[onetw]{3})/i], [[i, /\./g, " "], [a, tA], [B, u]], [/droid.+; (cc6666?|et5[16]|mc[239][23]x?|vc8[03]x?)\)/i], [i, [a, vA], [B, w]], [/droid.+; (ec30|ps20|tc[2-8]\d[kx])\)/i], [i, [a, vA], [B, u]], [/smart-tv.+(samsung)/i], [a, [B, Q]], [/hbbtv.+maple;(\d+)/i], [[i, /^/, "SmartTV"], [a, aA], [B, Q]], [/(nux; netcast.+smarttv|lg (netcast\.tv-201\d|android tv))/i], [[a, X], [B, Q]], [/(apple) ?tv/i], [a, [i, U + " TV"], [B, Q]], [/crkey/i], [[i, b + "cast"], [a, eA], [B, Q]], [/droid.+aft(\w+)( bui|\))/i], [i, [a, E], [B, Q]], [/\(dtv[\);].+(aquos)/i, /(aquos-tv[\w ]+)\)/i], [i, [a, pA], [B, Q]], [/(bravia[\w ]+)( bui|\))/i], [i, [a, HA], [B, Q]], [/(mitv-\w{5}) bui/i], [i, [a, FA], [B, Q]], [/Hbbtv.*(technisat) (.*);/i], [a, i, [B, Q]], [/\b(roku)[\dx]*[\)\/]((?:dvp-)?[\d\.]*)/i, /hbbtv\/\d+\.\d+\.\d+ +\([\w\+ ]*; *([\w\d][^;]*);([^;]*)/i], [[a, L], [i, L], [B, Q]], [/\b(android tv|smart[- ]?tv|opera tv|tv; rv:)\b/i], [[B, Q]], [/(ouya)/i, /(nintendo) ([wids3utch]+)/i], [a, i, [B, g]], [/droid.+; (shield) bui/i], [i, [a, "Nvidia"], [B, g]], [/(playstation [345portablevi]+)/i], [i, [a, HA], [B, g]], [/\b(xbox(?: one)?(?!; xbox))[\); ]/i], [i, [a, tA], [B, g]], [/((pebble))app/i], [a, i, [B, p]], [/(watch)(?: ?os[,\/]|\d,\d\/)[\d\.]+/i], [i, [a, U], [B, p]], [/droid.+; (glass) \d/i], [i, [a, eA], [B, p]], [/droid.+; (wt63?0{2,3})\)/i], [i, [a, vA], [B, p]], [/(quest( 2| pro)?)/i], [i, [a, RA], [B, p]], [/(tesla)(?: qtcarbrowser|\/[-\w\.]+)/i], [a, [B, f]], [/(aeobc)\b/i], [i, [a, E], [B, f]], [/droid .+?; ([^;]+?)(?: bui|; wv\)|\) applew).+? mobile safari/i], [i, [B, u]], [/droid .+?; ([^;]+?)(?: bui|\) applew).+?(?! mobile) safari/i], [i, [B, w]], [/\b((tablet|tab)[;\/]|focus\/\d(?!.+mobile))/i], [[B, w]], [/(phone|mobile(?:[;\/]| [ \w\/\.]*safari)|pda(?=.+windows ce))/i], [[B, u]], [/(android[-\w\. ]{0,9});.+buil/i], [i, [a, "Generic"]]], engine: [[/windows.+ edge\/([\w\.]+)/i], [l, [c, "EdgeHTML"]], [/webkit\/537\.36.+chrome\/(?!27)([\w\.]+)/i], [l, [c, "Blink"]], [/(presto)\/([\w\.]+)/i, /(webkit|trident|netfront|netsurf|amaya|lynx|w3m|goanna)\/([\w\.]+)/i, /ekioh(flow)\/([\w\.]+)/i, /(khtml|tasman|links)[\/ ]\(?([\w\.]+)/i, /(icab)[\/ ]([23]\.[\d\.]+)/i, /\b(libweb)/i], [c, l], [/rv\:([\w\.]{1,9})\b.+(gecko)/i], [l, c]], os: [[/microsoft (windows) (vista|xp)/i], [c, l], [/(windows (?:phone(?: os)?|mobile))[\/ ]?([\d\.\w ]*)/i], [c, [l, M, wA]], [/windows nt 6\.2; (arm)/i, /windows[\/ ]?([ntce\d\. ]+\w)(?!.+xbox)/i, /(?:win(?=3|9|n)|win 9x )([nt\d\.]+)/i], [[l, M, wA], [c, "Windows"]], [/ip[honead]{2,4}\b(?:.*os ([\w]+) like mac|; opera)/i, /(?:ios;fbsv\/|iphone.+ios[\/ ])([\d\.]+)/i, /cfnetwork\/.+darwin/i], [[l, /_/g, "."], [c, "iOS"]], [/(mac os x) ?([\w\. ]*)/i, /(macintosh|mac_powerpc\b)(?!.+haiku)/i], [[c, kA], [l, /_/g, "."]], [/droid ([\w\.]+)\b.+(android[- ]x86|harmonyos)/i], [l, c], [/(android|webos|qnx|bada|rim tablet os|maemo|meego|sailfish)[-\/ ]?([\w\.]*)/i, /(blackberry)\w*\/([\w\.]*)/i, /(tizen|kaios)[\/ ]([\w\.]+)/i, /\((series40);/i], [c, l], [/\(bb(10);/i], [l, [c, H]], [/(?:symbian ?os|symbos|s60(?=;)|series60)[-\/ ]?([\w\.]*)/i], [l, [c, "Symbian"]], [/mozilla\/[\d\.]+ \((?:mobile|tablet|tv|mobile; [\w ]+); rv:.+ gecko\/([\w\.]+)/i], [l, [c, N + " OS"]], [/web0s;.+rt(tv)/i, /\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i], [l, [c, "webOS"]], [/watch(?: ?os[,\/]|\d,\d\/)([\d\.]+)/i], [l, [c, "watchOS"]], [/crkey\/([\d\.]+)/i], [l, [c, b + "cast"]], [/(cros) [\w]+(?:\)| ([\w\.]+)\b)/i], [[c, GA], l], [/panasonic;(viera)/i, /(netrange)mmh/i, /(nettv)\/(\d+\.[\w\.]+)/i, /(nintendo|playstation) ([wids345portablevuch]+)/i, /(xbox); +xbox ([^\);]+)/i, /\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i, /(mint)[\/\(\) ]?(\w*)/i, /(mageia|vectorlinux)[; ]/i, /([kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?= linux)|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire)(?: gnu\/linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i, /(hurd|linux) ?([\w\.]*)/i, /(gnu) ?([\w\.]*)/i, /\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i, /(haiku) (\w+)/i], [c, l], [/(sunos) ?([\w\.\d]*)/i], [[c, "Solaris"], l], [/((?:open)?solaris)[-\/ ]?([\w\.]*)/i, /(aix) ((\d)(?=\.|\)| )[\w\.])*/i, /\b(beos|os\/2|amigaos|morphos|openvms|fuchsia|hp-ux|serenityos)/i, /(unix) ?([\w\.]*)/i], [c, l]] }, W = function(T, V) {
-    if (typeof T === n && (V = T, T = A), !(this instanceof W))
-      return new W(T, V).getResult();
-    var I = typeof e !== r && e.navigator ? e.navigator : A, rA = T || (I && I.userAgent ? I.userAgent : ""), PA = I && I.userAgentData ? I.userAgentData : A, R = V ? function(v, TA) {
-      var ue = {};
-      for (var NA in v)
-        TA[NA] && TA[NA].length % 2 == 0 ? ue[NA] = TA[NA].concat(v[NA]) : ue[NA] = v[NA];
-      return ue;
+  }, wA = { ME: "4.90", "NT 3.11": "NT3.51", "NT 4.0": "NT4.0", 2e3: "NT 5.0", XP: ["NT 5.1", "NT 5.2"], Vista: "NT 6.0", 7: "NT 6.1", 8: "NT 6.2", 8.1: "NT 6.3", 10: ["NT 6.4", "NT 10.0"], RT: "ARM" }, hA = { browser: [[/\b(?:crmo|crios)\/([\w\.]+)/i], [l, [c, "Chrome"]], [/edg(?:e|ios|a)?\/([\w\.]+)/i], [l, [c, "Edge"]], [/(opera mini)\/([-\w\.]+)/i, /(opera [mobiletab]{3,6})\b.+version\/([-\w\.]+)/i, /(opera)(?:.+version\/|[\/ ]+)([\w\.]+)/i], [c, l], [/opios[\/ ]+([\w\.]+)/i], [l, [c, yA + " Mini"]], [/\bopr\/([\w\.]+)/i], [l, [c, yA]], [/\bb[ai]*d(?:uhd|[ub]*[aekoprswx]{5,6})[\/ ]?([\w\.]+)/i], [l, [c, "Baidu"]], [/(kindle)\/([\w\.]+)/i, /(lunascape|maxthon|netfront|jasmine|blazer)[\/ ]?([\w\.]*)/i, /(avant|iemobile|slim)\s?(?:browser)?[\/ ]?([\w\.]*)/i, /(?:ms|\()(ie) ([\w\.]+)/i, /(flock|rockmelt|midori|epiphany|silk|skyfire|bolt|iron|vivaldi|iridium|phantomjs|bowser|quark|qupzilla|falkon|rekonq|puffin|brave|whale(?!.+naver)|qqbrowserlite|qq|duckduckgo)\/([-\w\.]+)/i, /(heytap|ovi)browser\/([\d\.]+)/i, /(weibo)__([\d\.]+)/i], [c, l], [/(?:\buc? ?browser|(?:juc.+)ucweb)[\/ ]?([\w\.]+)/i], [l, [c, "UC" + v]], [/microm.+\bqbcore\/([\w\.]+)/i, /\bqbcore\/([\w\.]+).+microm/i, /micromessenger\/([\w\.]+)/i], [l, [c, "WeChat"]], [/konqueror\/([\w\.]+)/i], [l, [c, "Konqueror"]], [/trident.+rv[: ]([\w\.]{1,9})\b.+like gecko/i], [l, [c, "IE"]], [/ya(?:search)?browser\/([\w\.]+)/i], [l, [c, "Yandex"]], [/slbrowser\/([\w\.]+)/i], [l, [c, "Smart Lenovo " + v]], [/(avast|avg)\/([\w\.]+)/i], [[c, /(.+)/, "$1 Secure " + v], l], [/\bfocus\/([\w\.]+)/i], [l, [c, N + " Focus"]], [/\bopt\/([\w\.]+)/i], [l, [c, yA + " Touch"]], [/coc_coc\w+\/([\w\.]+)/i], [l, [c, "Coc Coc"]], [/dolfin\/([\w\.]+)/i], [l, [c, "Dolphin"]], [/coast\/([\w\.]+)/i], [l, [c, yA + " Coast"]], [/miuibrowser\/([\w\.]+)/i], [l, [c, "MIUI " + v]], [/fxios\/([-\w\.]+)/i], [l, [c, N]], [/\bqihu|(qi?ho?o?|360)browser/i], [[c, "360 " + v]], [/(oculus|sailfish|huawei|vivo)browser\/([\w\.]+)/i], [[c, /(.+)/, "$1 " + v], l], [/samsungbrowser\/([\w\.]+)/i], [l, [c, aA + " Internet"]], [/(comodo_dragon)\/([\w\.]+)/i], [[c, /_/g, " "], l], [/metasr[\/ ]?([\d\.]+)/i], [l, [c, "Sogou Explorer"]], [/(sogou)mo\w+\/([\d\.]+)/i], [[c, "Sogou Mobile"], l], [/(electron)\/([\w\.]+) safari/i, /(tesla)(?: qtcarbrowser|\/(20\d\d\.[-\w\.]+))/i, /m?(qqbrowser|2345Explorer)[\/ ]?([\w\.]+)/i], [c, l], [/(lbbrowser)/i, /\[(linkedin)app\]/i], [c], [/((?:fban\/fbios|fb_iab\/fb4a)(?!.+fbav)|;fbav\/([\w\.]+);)/i], [[c, RA], l], [/(Klarna)\/([\w\.]+)/i, /(kakao(?:talk|story))[\/ ]([\w\.]+)/i, /(naver)\(.*?(\d+\.[\w\.]+).*\)/i, /safari (line)\/([\w\.]+)/i, /\b(line)\/([\w\.]+)\/iab/i, /(alipay)client\/([\w\.]+)/i, /(chromium|instagram|snapchat)[\/ ]([-\w\.]+)/i], [c, l], [/\bgsa\/([\w\.]+) .*safari\//i], [l, [c, "GSA"]], [/musical_ly(?:.+app_?version\/|_)([\w\.]+)/i], [l, [c, "TikTok"]], [/headlesschrome(?:\/([\w\.]+)| )/i], [l, [c, b + " Headless"]], [/ wv\).+(chrome)\/([\w\.]+)/i], [[c, b + " WebView"], l], [/droid.+ version\/([\w\.]+)\b.+(?:mobile safari|safari)/i], [l, [c, "Android " + v]], [/(chrome|omniweb|arora|[tizenoka]{5} ?browser)\/v?([\w\.]+)/i], [c, l], [/version\/([\w\.\,]+) .*mobile\/\w+ (safari)/i], [l, [c, "Mobile Safari"]], [/version\/([\w(\.|\,)]+) .*(mobile ?safari|safari)/i], [l, c], [/webkit.+?(mobile ?safari|safari)(\/[\w\.]+)/i], [c, [l, M, { "1.0": "/8", 1.2: "/1", 1.3: "/3", "2.0": "/412", "2.0.2": "/416", "2.0.3": "/417", "2.0.4": "/419", "?": "/" }]], [/(webkit|khtml)\/([\w\.]+)/i], [c, l], [/(navigator|netscape\d?)\/([-\w\.]+)/i], [[c, "Netscape"], l], [/mobile vr; rv:([\w\.]+)\).+firefox/i], [l, [c, N + " Reality"]], [/ekiohf.+(flow)\/([\w\.]+)/i, /(swiftfox)/i, /(icedragon|iceweasel|camino|chimera|fennec|maemo browser|minimo|conkeror|klar)[\/ ]?([\w\.\+]+)/i, /(seamonkey|k-meleon|icecat|iceape|firebird|phoenix|palemoon|basilisk|waterfox)\/([-\w\.]+)$/i, /(firefox)\/([\w\.]+)/i, /(mozilla)\/([\w\.]+) .+rv\:.+gecko\/\d+/i, /(polaris|lynx|dillo|icab|doris|amaya|w3m|netsurf|sleipnir|obigo|mosaic|(?:go|ice|up)[\. ]?browser)[-\/ ]?v?([\w\.]+)/i, /(links) \(([\w\.]+)/i, /panasonic;(viera)/i], [c, l], [/(cobalt)\/([\w\.]+)/i], [c, [l, /master.|lts./, ""]]], cpu: [[/(?:(amd|x(?:(?:86|64)[-_])?|wow|win)64)[;\)]/i], [[d, "amd64"]], [/(ia32(?=;))/i], [[d, $]], [/((?:i[346]|x)86)[;\)]/i], [[d, "ia32"]], [/\b(aarch64|arm(v?8e?l?|_?64))\b/i], [[d, "arm64"]], [/\b(arm(?:v[67])?ht?n?[fl]p?)\b/i], [[d, "armhf"]], [/windows (ce|mobile); ppc;/i], [[d, "arm"]], [/((?:ppc|powerpc)(?:64)?)(?: mac|;|\))/i], [[d, /ower/, "", $]], [/(sun4\w)[;\)]/i], [[d, "sparc"]], [/((?:avr32|ia64(?=;))|68k(?=\))|\barm(?=v(?:[1-7]|[5-7]1)l?|;|eabi)|(?=atmel )avr|(?:irix|mips|sparc)(?:64)?\b|pa-risc)/i], [[d, $]]], device: [[/\b(sch-i[89]0\d|shw-m380s|sm-[ptx]\w{2,4}|gt-[pn]\d{2,4}|sgh-t8[56]9|nexus 10)/i], [i, [a, aA], [B, w]], [/\b((?:s[cgp]h|gt|sm)-\w+|sc[g-]?[\d]+a?|galaxy nexus)/i, /samsung[- ]([-\w]+)/i, /sec-(sgh\w+)/i], [i, [a, aA], [B, u]], [/(?:\/|\()(ip(?:hone|od)[\w, ]*)(?:\/|;)/i], [i, [a, U], [B, u]], [/\((ipad);[-\w\),; ]+apple/i, /applecoremedia\/[\w\.]+ \((ipad)/i, /\b(ipad)\d\d?,\d\d?[;\]].+ios/i], [i, [a, U], [B, w]], [/(macintosh);/i], [i, [a, U]], [/\b(sh-?[altvz]?\d\d[a-ekm]?)/i], [i, [a, pA], [B, u]], [/\b((?:ag[rs][23]?|bah2?|sht?|btv)-a?[lw]\d{2})\b(?!.+d\/s)/i], [i, [a, gA], [B, w]], [/(?:huawei|honor)([-\w ]+)[;\)]/i, /\b(nexus 6p|\w{2,4}e?-[atu]?[ln][\dx][012359c][adn]?)\b(?!.+d\/s)/i], [i, [a, gA], [B, u]], [/\b(poco[\w ]+|m2\d{3}j\d\d[a-z]{2})(?: bui|\))/i, /\b; (\w+) build\/hm\1/i, /\b(hm[-_ ]?note?[_ ]?(?:\d\w)?) bui/i, /\b(redmi[\-_ ]?(?:note|k)?[\w_ ]+)(?: bui|\))/i, /oid[^\)]+; (m?[12][0-389][01]\w{3,6}[c-y])( bui|; wv|\))/i, /\b(mi[-_ ]?(?:a\d|one|one[_ ]plus|note lte|max|cc)?[_ ]?(?:\d?\w?)[_ ]?(?:plus|se|lite)?)(?: bui|\))/i], [[i, /_/g, " "], [a, FA], [B, u]], [/oid[^\)]+; (2\d{4}(283|rpbf)[cgl])( bui|\))/i, /\b(mi[-_ ]?(?:pad)(?:[\w_ ]+))(?: bui|\))/i], [[i, /_/g, " "], [a, FA], [B, w]], [/; (\w+) bui.+ oppo/i, /\b(cph[12]\d{3}|p(?:af|c[al]|d\w|e[ar])[mt]\d0|x9007|a101op)\b/i], [i, [a, "OPPO"], [B, u]], [/vivo (\w+)(?: bui|\))/i, /\b(v[12]\d{3}\w?[at])(?: bui|;)/i], [i, [a, "Vivo"], [B, u]], [/\b(rmx[1-3]\d{3})(?: bui|;|\))/i], [i, [a, "Realme"], [B, u]], [/\b(milestone|droid(?:[2-4x]| (?:bionic|x2|pro|razr))?:?( 4g)?)\b[\w ]+build\//i, /\bmot(?:orola)?[- ](\w*)/i, /((?:moto[\w\(\) ]+|xt\d{3,4}|nexus 6)(?= bui|\)))/i], [i, [a, oA], [B, u]], [/\b(mz60\d|xoom[2 ]{0,2}) build\//i], [i, [a, oA], [B, w]], [/((?=lg)?[vl]k\-?\d{3}) bui| 3\.[-\w; ]{10}lg?-([06cv9]{3,4})/i], [i, [a, W], [B, w]], [/(lm(?:-?f100[nv]?|-[\w\.]+)(?= bui|\))|nexus [45])/i, /\blg[-e;\/ ]+((?!browser|netcast|android tv)\w+)/i, /\blg-?([\d\w]+) bui/i], [i, [a, W], [B, u]], [/(ideatab[-\w ]+)/i, /lenovo ?(s[56]000[-\w]+|tab(?:[\w ]+)|yt[-\d\w]{6}|tb[-\d\w]{6})/i], [i, [a, "Lenovo"], [B, w]], [/(?:maemo|nokia).*(n900|lumia \d+)/i, /nokia[-_ ]?([-\w\.]*)/i], [[i, /_/g, " "], [a, "Nokia"], [B, u]], [/(pixel c)\b/i], [i, [a, eA], [B, w]], [/droid.+; (pixel[\daxl ]{0,6})(?: bui|\))/i], [i, [a, eA], [B, u]], [/droid.+ (a?\d[0-2]{2}so|[c-g]\d{4}|so[-gl]\w+|xq-a\w[4-7][12])(?= bui|\).+chrome\/(?![1-6]{0,1}\d\.))/i], [i, [a, HA], [B, u]], [/sony tablet [ps]/i, /\b(?:sony)?sgp\w+(?: bui|\))/i], [[i, "Xperia Tablet"], [a, HA], [B, w]], [/ (kb2005|in20[12]5|be20[12][59])\b/i, /(?:one)?(?:plus)? (a\d0\d\d)(?: b|\))/i], [i, [a, "OnePlus"], [B, u]], [/(alexa)webm/i, /(kf[a-z]{2}wi|aeo[c-r]{2})( bui|\))/i, /(kf[a-z]+)( bui|\)).+silk\//i], [i, [a, E], [B, w]], [/((?:sd|kf)[0349hijorstuw]+)( bui|\)).+silk\//i], [[i, /(.+)/g, "Fire Phone $1"], [a, E], [B, u]], [/(playbook);[-\w\),; ]+(rim)/i], [i, a, [B, w]], [/\b((?:bb[a-f]|st[hv])100-\d)/i, /\(bb10; (\w+)/i], [i, [a, H], [B, u]], [/(?:\b|asus_)(transfo[prime ]{4,10} \w+|eeepc|slider \w+|nexus 7|padfone|p00[cj])/i], [i, [a, C], [B, w]], [/ (z[bes]6[027][012][km][ls]|zenfone \d\w?)\b/i], [i, [a, C], [B, u]], [/(nexus 9)/i], [i, [a, "HTC"], [B, w]], [/(htc)[-;_ ]{1,2}([\w ]+(?=\)| bui)|\w+)/i, /(zte)[- ]([\w ]+?)(?: bui|\/|\))/i, /(alcatel|geeksphone|nexian|panasonic(?!(?:;|\.))|sony(?!-bra))[-_ ]?([-\w]*)/i], [a, [i, /_/g, " "], [B, u]], [/droid.+; ([ab][1-7]-?[0178a]\d\d?)/i], [i, [a, "Acer"], [B, w]], [/droid.+; (m[1-5] note) bui/i, /\bmz-([-\w]{2,})/i], [i, [a, "Meizu"], [B, u]], [/; ((?:power )?armor(?:[\w ]{0,8}))(?: bui|\))/i], [i, [a, "Ulefone"], [B, u]], [/(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus|dell|meizu|motorola|polytron|infinix|tecno)[-_ ]?([-\w]*)/i, /(hp) ([\w ]+\w)/i, /(asus)-?(\w+)/i, /(microsoft); (lumia[\w ]+)/i, /(lenovo)[-_ ]?([-\w]+)/i, /(jolla)/i, /(oppo) ?([\w ]+) bui/i], [a, i, [B, u]], [/(kobo)\s(ereader|touch)/i, /(archos) (gamepad2?)/i, /(hp).+(touchpad(?!.+tablet)|tablet)/i, /(kindle)\/([\w\.]+)/i, /(nook)[\w ]+build\/(\w+)/i, /(dell) (strea[kpr\d ]*[\dko])/i, /(le[- ]+pan)[- ]+(\w{1,9}) bui/i, /(trinity)[- ]*(t\d{3}) bui/i, /(gigaset)[- ]+(q\w{1,9}) bui/i, /(vodafone) ([\w ]+)(?:\)| bui)/i], [a, i, [B, w]], [/(surface duo)/i], [i, [a, tA], [B, w]], [/droid [\d\.]+; (fp\du?)(?: b|\))/i], [i, [a, "Fairphone"], [B, u]], [/(u304aa)/i], [i, [a, "AT&T"], [B, u]], [/\bsie-(\w*)/i], [i, [a, "Siemens"], [B, u]], [/\b(rct\w+) b/i], [i, [a, "RCA"], [B, w]], [/\b(venue[\d ]{2,7}) b/i], [i, [a, "Dell"], [B, w]], [/\b(q(?:mv|ta)\w+) b/i], [i, [a, "Verizon"], [B, w]], [/\b(?:barnes[& ]+noble |bn[rt])([\w\+ ]*) b/i], [i, [a, "Barnes & Noble"], [B, w]], [/\b(tm\d{3}\w+) b/i], [i, [a, "NuVision"], [B, w]], [/\b(k88) b/i], [i, [a, "ZTE"], [B, w]], [/\b(nx\d{3}j) b/i], [i, [a, "ZTE"], [B, u]], [/\b(gen\d{3}) b.+49h/i], [i, [a, "Swiss"], [B, u]], [/\b(zur\d{3}) b/i], [i, [a, "Swiss"], [B, w]], [/\b((zeki)?tb.*\b) b/i], [i, [a, "Zeki"], [B, w]], [/\b([yr]\d{2}) b/i, /\b(dragon[- ]+touch |dt)(\w{5}) b/i], [[a, "Dragon Touch"], i, [B, w]], [/\b(ns-?\w{0,9}) b/i], [i, [a, "Insignia"], [B, w]], [/\b((nxa|next)-?\w{0,9}) b/i], [i, [a, "NextBook"], [B, w]], [/\b(xtreme\_)?(v(1[045]|2[015]|[3469]0|7[05])) b/i], [[a, "Voice"], i, [B, u]], [/\b(lvtel\-)?(v1[12]) b/i], [[a, "LvTel"], i, [B, u]], [/\b(ph-1) /i], [i, [a, "Essential"], [B, u]], [/\b(v(100md|700na|7011|917g).*\b) b/i], [i, [a, "Envizen"], [B, w]], [/\b(trio[-\w\. ]+) b/i], [i, [a, "MachSpeed"], [B, w]], [/\btu_(1491) b/i], [i, [a, "Rotor"], [B, w]], [/(shield[\w ]+) b/i], [i, [a, "Nvidia"], [B, w]], [/(sprint) (\w+)/i], [a, i, [B, u]], [/(kin\.[onetw]{3})/i], [[i, /\./g, " "], [a, tA], [B, u]], [/droid.+; (cc6666?|et5[16]|mc[239][23]x?|vc8[03]x?)\)/i], [i, [a, kA], [B, w]], [/droid.+; (ec30|ps20|tc[2-8]\d[kx])\)/i], [i, [a, kA], [B, u]], [/smart-tv.+(samsung)/i], [a, [B, Q]], [/hbbtv.+maple;(\d+)/i], [[i, /^/, "SmartTV"], [a, aA], [B, Q]], [/(nux; netcast.+smarttv|lg (netcast\.tv-201\d|android tv))/i], [[a, W], [B, Q]], [/(apple) ?tv/i], [a, [i, U + " TV"], [B, Q]], [/crkey/i], [[i, b + "cast"], [a, eA], [B, Q]], [/droid.+aft(\w+)( bui|\))/i], [i, [a, E], [B, Q]], [/\(dtv[\);].+(aquos)/i, /(aquos-tv[\w ]+)\)/i], [i, [a, pA], [B, Q]], [/(bravia[\w ]+)( bui|\))/i], [i, [a, HA], [B, Q]], [/(mitv-\w{5}) bui/i], [i, [a, FA], [B, Q]], [/Hbbtv.*(technisat) (.*);/i], [a, i, [B, Q]], [/\b(roku)[\dx]*[\)\/]((?:dvp-)?[\d\.]*)/i, /hbbtv\/\d+\.\d+\.\d+ +\([\w\+ ]*; *([\w\d][^;]*);([^;]*)/i], [[a, L], [i, L], [B, Q]], [/\b(android tv|smart[- ]?tv|opera tv|tv; rv:)\b/i], [[B, Q]], [/(ouya)/i, /(nintendo) ([wids3utch]+)/i], [a, i, [B, g]], [/droid.+; (shield) bui/i], [i, [a, "Nvidia"], [B, g]], [/(playstation [345portablevi]+)/i], [i, [a, HA], [B, g]], [/\b(xbox(?: one)?(?!; xbox))[\); ]/i], [i, [a, tA], [B, g]], [/((pebble))app/i], [a, i, [B, p]], [/(watch)(?: ?os[,\/]|\d,\d\/)[\d\.]+/i], [i, [a, U], [B, p]], [/droid.+; (glass) \d/i], [i, [a, eA], [B, p]], [/droid.+; (wt63?0{2,3})\)/i], [i, [a, kA], [B, p]], [/(quest( 2| pro)?)/i], [i, [a, RA], [B, p]], [/(tesla)(?: qtcarbrowser|\/[-\w\.]+)/i], [a, [B, f]], [/(aeobc)\b/i], [i, [a, E], [B, f]], [/droid .+?; ([^;]+?)(?: bui|; wv\)|\) applew).+? mobile safari/i], [i, [B, u]], [/droid .+?; ([^;]+?)(?: bui|\) applew).+?(?! mobile) safari/i], [i, [B, w]], [/\b((tablet|tab)[;\/]|focus\/\d(?!.+mobile))/i], [[B, w]], [/(phone|mobile(?:[;\/]| [ \w\/\.]*safari)|pda(?=.+windows ce))/i], [[B, u]], [/(android[-\w\. ]{0,9});.+buil/i], [i, [a, "Generic"]]], engine: [[/windows.+ edge\/([\w\.]+)/i], [l, [c, "EdgeHTML"]], [/webkit\/537\.36.+chrome\/(?!27)([\w\.]+)/i], [l, [c, "Blink"]], [/(presto)\/([\w\.]+)/i, /(webkit|trident|netfront|netsurf|amaya|lynx|w3m|goanna)\/([\w\.]+)/i, /ekioh(flow)\/([\w\.]+)/i, /(khtml|tasman|links)[\/ ]\(?([\w\.]+)/i, /(icab)[\/ ]([23]\.[\d\.]+)/i, /\b(libweb)/i], [c, l], [/rv\:([\w\.]{1,9})\b.+(gecko)/i], [l, c]], os: [[/microsoft (windows) (vista|xp)/i], [c, l], [/(windows (?:phone(?: os)?|mobile))[\/ ]?([\d\.\w ]*)/i], [c, [l, M, wA]], [/windows nt 6\.2; (arm)/i, /windows[\/ ]?([ntce\d\. ]+\w)(?!.+xbox)/i, /(?:win(?=3|9|n)|win 9x )([nt\d\.]+)/i], [[l, M, wA], [c, "Windows"]], [/ip[honead]{2,4}\b(?:.*os ([\w]+) like mac|; opera)/i, /(?:ios;fbsv\/|iphone.+ios[\/ ])([\d\.]+)/i, /cfnetwork\/.+darwin/i], [[l, /_/g, "."], [c, "iOS"]], [/(mac os x) ?([\w\. ]*)/i, /(macintosh|mac_powerpc\b)(?!.+haiku)/i], [[c, vA], [l, /_/g, "."]], [/droid ([\w\.]+)\b.+(android[- ]x86|harmonyos)/i], [l, c], [/(android|webos|qnx|bada|rim tablet os|maemo|meego|sailfish)[-\/ ]?([\w\.]*)/i, /(blackberry)\w*\/([\w\.]*)/i, /(tizen|kaios)[\/ ]([\w\.]+)/i, /\((series40);/i], [c, l], [/\(bb(10);/i], [l, [c, H]], [/(?:symbian ?os|symbos|s60(?=;)|series60)[-\/ ]?([\w\.]*)/i], [l, [c, "Symbian"]], [/mozilla\/[\d\.]+ \((?:mobile|tablet|tv|mobile; [\w ]+); rv:.+ gecko\/([\w\.]+)/i], [l, [c, N + " OS"]], [/web0s;.+rt(tv)/i, /\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i], [l, [c, "webOS"]], [/watch(?: ?os[,\/]|\d,\d\/)([\d\.]+)/i], [l, [c, "watchOS"]], [/crkey\/([\d\.]+)/i], [l, [c, b + "cast"]], [/(cros) [\w]+(?:\)| ([\w\.]+)\b)/i], [[c, GA], l], [/panasonic;(viera)/i, /(netrange)mmh/i, /(nettv)\/(\d+\.[\w\.]+)/i, /(nintendo|playstation) ([wids345portablevuch]+)/i, /(xbox); +xbox ([^\);]+)/i, /\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i, /(mint)[\/\(\) ]?(\w*)/i, /(mageia|vectorlinux)[; ]/i, /([kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?= linux)|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire)(?: gnu\/linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i, /(hurd|linux) ?([\w\.]*)/i, /(gnu) ?([\w\.]*)/i, /\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i, /(haiku) (\w+)/i], [c, l], [/(sunos) ?([\w\.\d]*)/i], [[c, "Solaris"], l], [/((?:open)?solaris)[-\/ ]?([\w\.]*)/i, /(aix) ((\d)(?=\.|\)| )[\w\.])*/i, /\b(beos|os\/2|amigaos|morphos|openvms|fuchsia|hp-ux|serenityos)/i, /(unix) ?([\w\.]*)/i], [c, l]] }, Y = function(T, V) {
+    if (typeof T === n && (V = T, T = A), !(this instanceof Y))
+      return new Y(T, V).getResult();
+    var I = typeof e !== r && e.navigator ? e.navigator : A, rA = T || (I && I.userAgent ? I.userAgent : ""), PA = I && I.userAgentData ? I.userAgentData : A, R = V ? function(k, TA) {
+      var de = {};
+      for (var NA in k)
+        TA[NA] && TA[NA].length % 2 == 0 ? de[NA] = TA[NA].concat(k[NA]) : de[NA] = k[NA];
+      return de;
     }(hA, V) : hA, zA = I && I.userAgent == rA;
     return this.getBrowser = function() {
-      var v = {};
-      return v[c] = A, v[l] = A, D.call(v, rA, R.browser), v[o] = function(TA) {
+      var k = {};
+      return k[c] = A, k[l] = A, D.call(k, rA, R.browser), k[o] = function(TA) {
         return typeof TA === s ? TA.replace(/[^\d\.]/g, "").split(".")[0] : A;
-      }(v[l]), zA && I && I.brave && typeof I.brave.isBrave == t && (v[c] = "Brave"), v;
+      }(k[l]), zA && I && I.brave && typeof I.brave.isBrave == t && (k[c] = "Brave"), k;
     }, this.getCPU = function() {
-      var v = {};
-      return v[d] = A, D.call(v, rA, R.cpu), v;
+      var k = {};
+      return k[d] = A, D.call(k, rA, R.cpu), k;
     }, this.getDevice = function() {
-      var v = {};
-      return v[a] = A, v[i] = A, v[B] = A, D.call(v, rA, R.device), zA && !v[B] && PA && PA.mobile && (v[B] = u), zA && v[i] == "Macintosh" && I && typeof I.standalone !== r && I.maxTouchPoints && I.maxTouchPoints > 2 && (v[i] = "iPad", v[B] = w), v;
+      var k = {};
+      return k[a] = A, k[i] = A, k[B] = A, D.call(k, rA, R.device), zA && !k[B] && PA && PA.mobile && (k[B] = u), zA && k[i] == "Macintosh" && I && typeof I.standalone !== r && I.maxTouchPoints && I.maxTouchPoints > 2 && (k[i] = "iPad", k[B] = w), k;
     }, this.getEngine = function() {
-      var v = {};
-      return v[c] = A, v[l] = A, D.call(v, rA, R.engine), v;
+      var k = {};
+      return k[c] = A, k[l] = A, D.call(k, rA, R.engine), k;
     }, this.getOS = function() {
-      var v = {};
-      return v[c] = A, v[l] = A, D.call(v, rA, R.os), zA && !v[c] && PA && PA.platform != "Unknown" && (v[c] = PA.platform.replace(/chrome os/i, GA).replace(/macos/i, kA)), v;
+      var k = {};
+      return k[c] = A, k[l] = A, D.call(k, rA, R.os), zA && !k[c] && PA && PA.platform != "Unknown" && (k[c] = PA.platform.replace(/chrome os/i, GA).replace(/macos/i, vA)), k;
     }, this.getResult = function() {
       return { ua: this.getUA(), browser: this.getBrowser(), engine: this.getEngine(), os: this.getOS(), device: this.getDevice(), cpu: this.getCPU() };
     }, this.getUA = function() {
       return rA;
-    }, this.setUA = function(v) {
-      return rA = typeof v === s && v.length > 500 ? L(v, 500) : v, this;
+    }, this.setUA = function(k) {
+      return rA = typeof k === s && k.length > 500 ? L(k, 500) : k, this;
     }, this.setUA(rA), this;
   };
-  W.VERSION = "1.0.37", W.BROWSER = EA([c, l, o]), W.CPU = EA([d]), W.DEVICE = EA([i, a, B, g, u, Q, w, p, f]), W.ENGINE = W.OS = EA([c, l]), br.exports && (Hr = br.exports = W), Hr.UAParser = W;
+  Y.VERSION = "1.0.37", Y.BROWSER = EA([c, l, o]), Y.CPU = EA([d]), Y.DEVICE = EA([i, a, B, g, u, Q, w, p, f]), Y.ENGINE = Y.OS = EA([c, l]), br.exports && (Hr = br.exports = Y), Hr.UAParser = Y;
   var cA = typeof e !== r && (e.jQuery || e.Zepto);
   if (cA && !cA.ua) {
-    var VA = new W();
+    var VA = new Y();
     cA.ua = VA.getResult(), cA.ua.get = function() {
       return VA.getUA();
     }, cA.ua.set = function(T) {
@@ -5101,14 +5101,14 @@ br = $r, Hr = $r.exports, function(e, A) {
         cA.ua[I] = V[I];
     };
   }
-}(typeof window == "object" ? window : vi);
+}(typeof window == "object" ? window : ki);
 var Ql = $r.exports;
-class ke {
+class ve {
 }
-F(ke, "metadata", {});
+F(ve, "metadata", {});
 async function qo() {
   const e = new Ql.UAParser(navigator.userAgent), A = await fl().then((t) => (console.log("a"), t));
-  return console.log(A), { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, issue_reported_time: jr((/* @__PURE__ */ new Date()).toString()), os: Tt.WEB, device: pl(), browser_name: e.getBrowser().name, browser_version: e.getBrowser().version, current_view: window.location.pathname, screen_height: Ls().height, screen_width: Ls().width, metadata_: ke.metadata, sdk_version: Bn, platform: Tt.WEB, report_type: Ys.MANUAL, screen_density: window.devicePixelRatio || 1, locale: window.navigator.language || null, os_version: e.getOS().version, os_name: e.getOS().name, device_orientation: Cl(), battery_level: A == null ? void 0 : A.level, battery_status: A != null && A.charging ? 1 : 0, font_scale: Ul(), network_type: Fl(), permissions: await bl().then((t) => t), browser_height: Ss().height, browser_width: Ss().width, cookies_enabled: ml(), is_mobile: yl(), cpu_arch: e.getCPU().architecture, app_version: "1.0", tags: [] };
+  return console.log(A), { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, issue_reported_time: jr((/* @__PURE__ */ new Date()).toString()), os: Tt.WEB, device: pl(), browser_name: e.getBrowser().name, browser_version: e.getBrowser().version, current_view: window.location.pathname, screen_height: Ls().height, screen_width: Ls().width, metadata_: ve.metadata, sdk_version: Bn, platform: Tt.WEB, report_type: Ys.MANUAL, screen_density: window.devicePixelRatio || 1, locale: window.navigator.language || null, os_version: e.getOS().version, os_name: e.getOS().name, device_orientation: Cl(), battery_level: A == null ? void 0 : A.level, battery_status: A != null && A.charging ? 1 : 0, font_scale: Ul(), network_type: Fl(), permissions: await bl().then((t) => t), browser_height: Ss().height, browser_width: Ss().width, cookies_enabled: ml(), is_mobile: yl(), cpu_arch: e.getCPU().architecture, app_version: "1.0", tags: [] };
 }
 function pl() {
   const e = navigator.userAgent;
@@ -5130,7 +5130,7 @@ const fl = async () => {
   try {
     return await navigator.getBattery();
   } catch (e) {
-    return Z("Error getting battery status: " + (e == null ? void 0 : e.message)), null;
+    return X("Error getting battery status: " + (e == null ? void 0 : e.message)), null;
   }
 }, Ul = () => {
   const e = document.createElement("div");
@@ -5148,7 +5148,7 @@ async function El(e) {
   try {
     return await navigator.permissions.query({ name: e });
   } catch (A) {
-    return Z("Error checking permission status: " + A.message), null;
+    return X("Error checking permission status: " + A.message), null;
   }
 }
 async function bl() {
@@ -5157,15 +5157,15 @@ async function bl() {
     try {
       const t = await El(A);
       t && t.state && t.state === "granted" && e.push({ name: A, state: t.state });
-    } catch {
-      return [];
+    } catch (t) {
+      X("Error checking permission status: " + t.message);
     }
   return e;
 }
 const zo = async () => {
-  Z("Shake opened.");
+  X("Shake opened.");
   const e = j.localStorage;
-  Le.shakeAuthService.authenticate(DA.clientId, DA.clientSecret), vl(), Go(await new hn().captureScreenshot());
+  Le.shakeAuthService.authenticate(DA.clientId, DA.clientSecret), kl(), Go(await new hn().captureScreenshot());
   const A = await qo(), t = e.getShakeState();
   t.ticket = A, e.setShakeState(t);
   const r = jo(t);
@@ -5173,11 +5173,11 @@ const zo = async () => {
 }, qt = "shake-sdk-main-button-root", Hl = () => {
   const e = document.getElementById(qt);
   e && (e.style.display = "flex");
-}, vl = () => {
+}, kl = () => {
   const e = document.getElementById(qt);
   e && (e.style.display = "none");
 };
-class kl {
+class vl {
   constructor() {
     F(this, "_language", Mt.EN);
     F(this, "_floatingButtonEnabled", !0);
@@ -5210,7 +5210,7 @@ const An = () => {
         const n = document.createElement("div");
         n.id = qt;
         const s = n.attachShadow({ mode: "open" });
-        return s.adoptedStyleSheets = de, s.appendChild(A), n;
+        return he(s), s.appendChild(A), n;
       })();
       document.body.appendChild(e);
     } else {
@@ -5237,11 +5237,11 @@ const An = () => {
         Qe("Cannot start Shake. Client id is empty.");
   }
 };
-F(CA, "config", new kl()), F(CA, "isLoading", !1), F(CA, "localStorage", j.localStorage), F(CA, "shakeAuthService", Le.shakeAuthService), F(CA, "show", async () => await CA.ifSDKEnabled(async () => {
+F(CA, "config", new vl()), F(CA, "isLoading", !1), F(CA, "localStorage", j.localStorage), F(CA, "shakeAuthService", Le.shakeAuthService), F(CA, "show", async () => await CA.ifSDKEnabled(async () => {
   await zo();
 })), F(CA, "silentReport", async (A, t) => await CA.ifSDKEnabled(async () => {
   await (async (r, n = Il) => {
-    Z("Silent report called.");
+    X("Silent report called.");
     const s = Le.shakeFeedbackService, o = [];
     if (n.takeScreenshot) {
       const c = await new hn().captureScreenshot();
@@ -5252,16 +5252,16 @@ F(CA, "config", new kl()), F(CA, "isLoading", !1), F(CA, "localStorage", j.local
   })(A, t);
 })), F(CA, "setMetadata", (A, t) => {
   ((r, n) => {
-    if (Z(`Set metadata: ${r}`), Object.keys(ke.metadata).length >= 100)
+    if (X(`Set metadata: ${r}`), Object.keys(ve.metadata).length >= 100)
       return void Qe("Cannot set metadata. Limit of 100 items reached.");
-    n.length > Ds && (Qe("Truncating metadata value. Value exceeded 5120 chars."), n = n.substring(0, Ds)), ke.metadata[r] = n;
+    n.length > Ds && (Qe("Truncating metadata value. Value exceeded 5120 chars."), n = n.substring(0, Ds)), ve.metadata[r] = n;
   })(A, t);
 }), F(CA, "removeMetadata", (A) => {
   ((t) => {
-    Z(`Removing metadata: ${t}`), delete ke.metadata[t];
+    X(`Removing metadata: ${t}`), delete ve.metadata[t];
   })(A);
 }), F(CA, "clearMetadata", () => {
-  Z("Clearing metadata"), ke.metadata = {};
+  X("Clearing metadata"), ve.metadata = {};
 }), F(CA, "ifSDKEnabled", async (A) => CA.localStorage.isSDKEnabled() ? (await A(), !0) : (Qe("Please call Shake.start(clientId, clientSecret) before using Shake."), !1));
 let en = CA;
 export {
