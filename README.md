@@ -51,7 +51,7 @@ Call `Shake.start()` in your _index.js_ file.
 // Import the library if using ES6 modules
 import Shake from '@shakebugs/browser';
 
-Shake.start('client-id', 'client-secret', 'bundle-id');
+Shake.start('client-id', 'client-secret', 'website-domain');
 ```
 
 #### Example usage in HTML
@@ -61,12 +61,12 @@ Call `Shake.start()` in your main file.
 ```html
 <body>
 	<script>
-		window.Shake.start('client-id', 'client-secret', 'bundle-id');
+		window.Shake.start('client-id', 'client-secret', 'website-domain');
 	</script>
 </body>
 ```
 
-Replace `client-id`, `client-secret` and `bundle-id` with the actual values you have in [your workspace settings](https://app.shakebugs.com/settings/workspace#general).
+Replace `client-id`, `client-secret` and `website-domain` with the actual values you have in [your workspace settings](https://app.shakebugs.com/settings/workspace#general).
 
 ## Resources
 
