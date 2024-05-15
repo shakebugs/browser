@@ -1,5 +1,49 @@
-declare enum Language {
+/**
+ * Represents SDK interface language.
+ */
+export declare enum Language {
     EN = 0
+}
+
+/**
+ * Custom log level.
+ */
+export declare enum LogLevel {
+    VERBOSE = "VERBOSE",
+    DEBUG = "DEBUG",
+    INFO = "INFO",
+    WARN = "WARN",
+    ERROR = "ERROR"
+}
+
+declare type Metadata = {
+    [key: string]: string;
+};
+
+/**
+ * Keeps Shake ticket related configuration.
+ */
+declare class ReportConfig {
+    static metadata: Metadata;
+    private _isConsoleLogsEnabled;
+    private _isCustomLogsEnabled;
+    private _isNetworkRequestsEnabled;
+    private _isScreenChangesEnabled;
+    private _isSystemEventsEnabled;
+    private _isUserActionsEnabled;
+    get isConsoleLogsEnabled(): boolean;
+    set isConsoleLogsEnabled(enabled: boolean);
+    get isCustomLogsEnabled(): boolean;
+    set isCustomLogsEnabled(enabled: boolean);
+    get isNetworkRequestsEnabled(): boolean;
+    set isNetworkRequestsEnabled(enabled: boolean);
+    get isScreenChangesEnabled(): boolean;
+    set isScreenChangesEnabled(enabled: boolean);
+    get isSystemEventsEnabled(): boolean;
+    set isSystemEventsEnabled(enabled: boolean);
+    get isUserActionsEnabled(): boolean;
+    set isUserActionsEnabled(enabled: boolean);
+    enableActivityHistory: (enabled: boolean) => void;
 }
 
 /**
@@ -7,9 +51,10 @@ declare enum Language {
  */
 declare class Shake {
     static config: ShakeConfig;
-    private static isLoading;
+    static report: ReportConfig;
     private static localStorage;
     private static shakeAuthService;
+    private static isLoading;
     /**
      * Starts Shake SDK. Must be called before using Shake.
      *
@@ -30,6 +75,13 @@ declare class Shake {
      * @param config {SilentReportConfig} object
      */
     static silentReport: (title: string, config?: SilentReportConfig) => Promise<boolean>;
+    /**
+     * Adds custom log to the activity history.
+     *
+     * @param level log level
+     * @param message log message
+     */
+    static log: (level: LogLevel, message: string) => Promise<boolean>;
     /**
      * Adds custom data to the ticket.
      * This data is sent with the report.
@@ -53,6 +105,9 @@ declare class Shake {
 }
 export default Shake;
 
+/**
+ * Keeps Shake SDK related configuration.
+ */
 declare class ShakeConfig {
     private _language;
     private _floatingButtonEnabled;
@@ -62,7 +117,10 @@ declare class ShakeConfig {
     set floatingButtonEnabled(value: boolean);
 }
 
-declare interface SilentReportConfig {
+/**
+ * Silent report configuration interface.
+ */
+export declare interface SilentReportConfig {
     takeScreenshot?: boolean;
     showSuccessMessage?: boolean;
 }
