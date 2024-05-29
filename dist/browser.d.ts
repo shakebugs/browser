@@ -53,16 +53,15 @@ declare class Shake {
     static config: ShakeConfig;
     static report: ReportConfig;
     private static localStorage;
-    private static shakeAuthService;
     private static isLoading;
+    private static isStarted;
     /**
      * Starts Shake SDK. Must be called before using Shake.
      *
-     * @param clientId team client id (check dashboard)
-     * @param clientSecret team client secret (check dashboard)
-     * @param bundleId app bundle id (check dashboard)
+     * @param apiKey app api key - check app settings on dashboard
+     * @param appDomain app domain - check app settings on dashboard
      */
-    static start(clientId: string, clientSecret: string, bundleId: string): Promise<void>;
+    static start(apiKey: string, appDomain: string): Promise<void>;
     /**
      * Shows shake screen from code.
      * Shake.start must be called before this method can be used.
