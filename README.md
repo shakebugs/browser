@@ -14,59 +14,57 @@ Browser plugin for [bug reporting](https://www.shakebugs.com).
 
 ## How to use
 
-### Install Shake
-
 ### NPM
 
-If using npm, execute the npm install command in your terminal:
+### 1. Install Shake
+
+Execute the npm install command in your terminal:
 
 ```bash
 npm install @shakebugs/browser
 ```
 
-### CDN
+### 2. Start Shake
 
-Alternatively, library can be added to your project through CDN. Bundle is delivered through JSDelivr CDN.
-
-Add the following script to your code:
-
-```html
-<script type="module">
-	import Shake from 'https://cdn.jsdelivr.net/npm/@shakebugs/browser@latest/+esm';
-	window.Shake = Shake;
-</script>
-```
-
-### Start Shake
-
-Once installed, you can start using the library by including it in your JavaScript files or directly within your HTML.
-
-Call `Shake.start()` at the top level of your app
-
-#### Example usage in Javascript
-
-Call `Shake.start()` in your _index.js_ file.
+Once installed, you can start using the library by calling `Shake.start()` at the top level of your app
 
 ```javascript
 // Import the library if using ES6 modules
 import Shake from '@shakebugs/browser';
 
-Shake.start('client-id', 'client-secret', 'website-domain');
+Shake.start('app-api-key', 'website-domain');
 ```
 
-#### Example usage in HTML
+Replace `app-api-key` and `website-domain` with the actual value you have in your app settings on dashboard.
 
-Call `Shake.start()` in your main file.
+### CDN
+
+Alternatively, library can be added to your project through CDN. Bundle is delivered through JSDelivr CDN.
+
+### 1. Install Shake
+
+Add the following script to your code:
+
+```html
+<script type="module">
+    import Shake from 'https://cdn.jsdelivr.net/npm/@shakebugs/browser@latest/+esm';
+	window.Shake = Shake;
+</script>
+```
+
+### 2. Start Shake
+
+Once installed, you can start using the library by calling `Shake.start()` at the top level of your app
 
 ```html
 <body>
 	<script>
-		window.Shake.start('client-id', 'client-secret', 'website-domain');
+        window.Shake.start('app-api-key', 'website-domain');
 	</script>
 </body>
 ```
 
-Replace `client-id`, `client-secret` and `website-domain` with the actual values you have in [your workspace settings](https://app.shakebugs.com/settings/workspace#general).
+Replace `app-api-key` and `website-domain` with the actual value you have in your app settings on dashboard.
 
 ## Resources
 
