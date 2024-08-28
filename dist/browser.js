@@ -230,13 +230,13 @@ class ja {
     });
   }
 }
-const wt = window.XMLHttpRequest, kn = wt.prototype.open, _n = wt.prototype.send, Sn = wt.prototype.setRequestHeader;
+const wt = window.XMLHttpRequest, _n = wt.prototype.open, kn = wt.prototype.send, Sn = wt.prototype.setRequestHeader;
 let zi, he, Tt = !1;
 const Ji = { setOnRequestDone(e) {
   zi = e;
 }, enableInterceptor() {
   wt.prototype.open = function(e, t) {
-    he = { event_type: SA.NETWORK_REQUEST, url: "", method: "", request_body: "", response_body: "", request_headers: {}, response_headers: {}, status_code: "", timestamp: "", start: 0, duration: 0 }, he.url = t.toString(), he.method = e, kn.call(this, e, t);
+    he = { event_type: SA.NETWORK_REQUEST, url: "", method: "", request_body: "", response_body: "", request_headers: {}, response_headers: {}, status_code: "", timestamp: "", start: 0, duration: 0 }, he.url = t.toString(), he.method = e, _n.call(this, e, t);
   }, wt.prototype.setRequestHeader = function(e, t) {
     he.request_headers[e] = String(t), Sn.call(this, e, t);
   }, wt.prototype.send = function(e) {
@@ -247,7 +247,7 @@ const Ji = { setOnRequestDone(e) {
     a = a.replace("Z", "000+0000");
     const g = JSON.parse(JSON.stringify(he));
     g.start = r.getTime(), g.timestamp = a, g.request_body = t || "", this.addEventListener && (this.addEventListener("readystatechange", async () => {
-      Tt && this.readyState === this.HEADERS_RECEIVED && this.getAllResponseHeaders() && (g.response_headers = Va(this.getAllResponseHeaders()));
+      Tt && this.readyState === this.HEADERS_RECEIVED && this.getAllResponseHeaders() && (g.response_headers = Ga(this.getAllResponseHeaders()));
     }, !1), this.addEventListener("load", async () => {
       if (!Tt)
         return;
@@ -261,13 +261,13 @@ const Ji = { setOnRequestDone(e) {
       Tt && (g.duration = Date.now() - g.start, g.response_body = "Request timeout.", g.status_code = "t/o", p(g));
     }, !1));
     const p = (w) => {
-      w.method || (w.method = ""), w.status_code || (w.status_code = ""), w.url && Ga(w.url) || (w.url = "https://not_a_valid_url"), zi && zi(w);
+      w.method || (w.method = ""), w.status_code || (w.status_code = ""), w.url && Na(w.url) || (w.url = "https://not_a_valid_url"), zi && zi(w);
     };
-    _n.call(this, e);
+    kn.call(this, e);
   }, Tt = !0;
 }, disableInterceptor() {
-  Tt = !1, wt.prototype.send = _n, wt.prototype.open = kn, wt.prototype.setRequestHeader = Sn;
-} }, Va = (e) => {
+  Tt = !1, wt.prototype.send = kn, wt.prototype.open = _n, wt.prototype.setRequestHeader = Sn;
+} }, Ga = (e) => {
   const t = {};
   try {
     e && e.split(`\r
@@ -278,8 +278,8 @@ const Ji = { setOnRequestDone(e) {
   } catch {
   }
   return t;
-}, Tn = (e) => /\ufffd/.test(e), Ga = (e) => e != null && (e.startsWith("http://") || e.startsWith("https://"));
-class Na {
+}, Tn = (e) => /\ufffd/.test(e), Na = (e) => e != null && (e.startsWith("http://") || e.startsWith("https://"));
+class Va {
   constructor() {
     AA(this, "start", () => {
       Ji.enableInterceptor();
@@ -594,7 +594,7 @@ const { toString: tc } = Object.prototype, { getPrototypeOf: zr } = Object, mi =
   return qi[t] || (qi[t] = t.slice(8, -1).toLowerCase());
 });
 var qi;
-const ht = (e) => (e = e.toLowerCase(), (t) => mi(t) === e), Li = (e) => (t) => typeof t === e, { isArray: Jt } = Array, fe = Li("undefined"), Vn = ht("ArrayBuffer"), ec = Li("string"), YA = Li("function"), Gn = Li("number"), je = (e) => e !== null && typeof e == "object", Ve = (e) => {
+const ht = (e) => (e = e.toLowerCase(), (t) => mi(t) === e), Li = (e) => (t) => typeof t === e, { isArray: Jt } = Array, fe = Li("undefined"), Gn = ht("ArrayBuffer"), ec = Li("string"), YA = Li("function"), Nn = Li("number"), je = (e) => e !== null && typeof e == "object", Ge = (e) => {
   if (mi(e) !== "object")
     return !1;
   const t = zr(e);
@@ -614,7 +614,7 @@ function pe(e, t, { allOwnKeys: r = !1 } = {}) {
       C = p[a], t.call(null, e[C], C, e);
   }
 }
-function Nn(e, t) {
+function Vn(e, t) {
   t = t.toLowerCase();
   const r = Object.keys(e);
   let a, g = r.length;
@@ -631,18 +631,18 @@ const cc = ht("HTMLFormElement"), Wn = (({ hasOwnProperty: e }) => (t, r) => e.c
     let w;
     (w = t(g, p, e)) !== !1 && (a[p] = w || g);
   }), Object.defineProperties(e, a);
-}, $i = "abcdefghijklmnopqrstuvwxyz", zn = "0123456789", Jn = { DIGIT: zn, ALPHA: $i, ALPHA_DIGIT: $i + $i.toUpperCase() + zn }, hc = ht("AsyncFunction"), tA = { isArray: Jt, isArrayBuffer: Vn, isBuffer: function(e) {
+}, $i = "abcdefghijklmnopqrstuvwxyz", zn = "0123456789", Jn = { DIGIT: zn, ALPHA: $i, ALPHA_DIGIT: $i + $i.toUpperCase() + zn }, hc = ht("AsyncFunction"), tA = { isArray: Jt, isArrayBuffer: Gn, isBuffer: function(e) {
   return e !== null && !fe(e) && e.constructor !== null && !fe(e.constructor) && YA(e.constructor.isBuffer) && e.constructor.isBuffer(e);
 }, isFormData: (e) => {
   let t;
   return e && (typeof FormData == "function" && e instanceof FormData || YA(e.append) && ((t = mi(e)) === "formdata" || t === "object" && YA(e.toString) && e.toString() === "[object FormData]"));
 }, isArrayBufferView: function(e) {
   let t;
-  return t = typeof ArrayBuffer < "u" && ArrayBuffer.isView ? ArrayBuffer.isView(e) : e && e.buffer && Vn(e.buffer), t;
-}, isString: ec, isNumber: Gn, isBoolean: (e) => e === !0 || e === !1, isObject: je, isPlainObject: Ve, isUndefined: fe, isDate: ic, isFile: rc, isBlob: nc, isRegExp: lc, isFunction: YA, isStream: (e) => je(e) && YA(e.pipe), isURLSearchParams: oc, isTypedArray: ac, isFileList: sc, forEach: pe, merge: function e() {
+  return t = typeof ArrayBuffer < "u" && ArrayBuffer.isView ? ArrayBuffer.isView(e) : e && e.buffer && Gn(e.buffer), t;
+}, isString: ec, isNumber: Nn, isBoolean: (e) => e === !0 || e === !1, isObject: je, isPlainObject: Ge, isUndefined: fe, isDate: ic, isFile: rc, isBlob: nc, isRegExp: lc, isFunction: YA, isStream: (e) => je(e) && YA(e.pipe), isURLSearchParams: oc, isTypedArray: ac, isFileList: sc, forEach: pe, merge: function e() {
   const { caseless: t } = Xn(this) && this || {}, r = {}, a = (g, p) => {
-    const w = t && Nn(r, p) || p;
-    Ve(r[w]) && Ve(g) ? r[w] = e(r[w], g) : Ve(g) ? r[w] = e({}, g) : Jt(g) ? r[w] = g.slice() : r[w] = g;
+    const w = t && Vn(r, p) || p;
+    Ge(r[w]) && Ge(g) ? r[w] = e(r[w], g) : Ge(g) ? r[w] = e({}, g) : Jt(g) ? r[w] = g.slice() : r[w] = g;
   };
   for (let g = 0, p = arguments.length; g < p; g++)
     arguments[g] && pe(arguments[g], a);
@@ -672,7 +672,7 @@ const cc = ht("HTMLFormElement"), Wn = (({ hasOwnProperty: e }) => (t, r) => e.c
   if (Jt(e))
     return e;
   let t = e.length;
-  if (!Gn(t))
+  if (!Nn(t))
     return null;
   const r = new Array(t);
   for (; t-- > 0; )
@@ -710,7 +710,7 @@ const cc = ht("HTMLFormElement"), Wn = (({ hasOwnProperty: e }) => (t, r) => e.c
 }, toCamelCase: (e) => e.toLowerCase().replace(/[-_\s]([a-z\d])(\w*)/g, function(t, r, a) {
   return r.toUpperCase() + a;
 }), noop: () => {
-}, toFiniteNumber: (e, t) => (e = +e, Number.isFinite(e) ? e : t), findKey: Nn, global: go, isContextDefined: Xn, ALPHABET: Jn, generateString: (e = 16, t = Jn.ALPHA_DIGIT) => {
+}, toFiniteNumber: (e, t) => (e = +e, Number.isFinite(e) ? e : t), findKey: Vn, global: go, isContextDefined: Xn, ALPHABET: Jn, generateString: (e = 16, t = Jn.ALPHA_DIGIT) => {
   let r = "";
   const { length: a } = t;
   for (; e--; )
@@ -1516,7 +1516,7 @@ var yA = ((e) => (e[e.IMAGE = 0] = "IMAGE", e[e.VIDEO = 1] = "VIDEO", e[e.FILE =
 const $r = "shakeSdk: ", mt = (e) => {
 }, ls = (e) => {
   console.info(`${$r} ${e}`);
-}, Ge = (e) => {
+}, Ne = (e) => {
   console.warn(`${$r} ${e}`);
 }, An = (e) => {
   console.error(`${$r} ${e}`);
@@ -1538,7 +1538,7 @@ const $r = "shakeSdk: ", mt = (e) => {
 }, Qo = (e) => {
   const t = document.createElement("p");
   return t.classList.add("shake-sdk-text-accent-button"), t.innerText = e, t;
-}, gA = async (e) => new CSSStyleSheet().replace(e), _t = (e) => {
+}, gA = async (e) => new CSSStyleSheet().replace(e), kt = (e) => {
   (async () => await Promise.all([gA(".shake-sdk-bubble{padding:0;border-radius:100px;border-width:0;cursor:pointer;display:flex;align-items:center;justify-content:center;position:fixed;background-color:#fff;width:50px;height:50px;z-index:2147483647;transition:none}"), gA(".shake-sdk-button{background-color:var(--shake-sdk-color-accent);padding:9px 20px 11px;border-radius:var(--shake-sdk-border-radius-light);display:flex;justify-content:center;align-items:center;cursor:pointer;border:none}.shake-sdk-button:disabled{cursor:not-allowed;opacity:.3}"), gA(".shake-sdk-card{flex:1;background-color:var(--shake-sdk-bg-color-primary);border-radius:var(--shake-sdk-border-radius)}"), gA(".shake-sdk-circle-button{padding:0;border-radius:100px;border-width:0;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5}.shake-sdk-circle-button:hover{opacity:.8}"), gA(""), gA(".shake-sdk-divider-vertical{height:100%;width:1px;background-color:var(--shake-sdk-bg-color-outline-inversed);margin:6px 10px}.shake-sdk-divider-horizontal{width:100%;height:1px;background-color:var(--shake-sdk-bg-color-outline-inversed);margin:6px 10px}"), gA(""), gA(".shake-sdk-context-menu{position:fixed;display:none;width:260px;z-index:2147483647;border-radius:10px;border-width:1px;border-color:var(--shake-sdk-bg-color-outline-inversed);padding:8px 0;background-color:var(--shake-sdk-bg-color-primary-inversed-highlight);box-shadow:0 2px 10px #1c1c1e}"), gA(".shake-sdk-context-menu-header{background-color:transparent;border:0;display:flex;width:100%;padding:8px 20px;cursor:pointer}.shake-sdk-context-menu-header-text{color:var(--shake-sdk-text-color-secondary);font-size:12px}"), gA(".shake-sdk-context-menu-item{background-color:transparent;border:0;display:flex;width:100%;padding:8px 20px;cursor:pointer}.shake-sdk-context-menu-item:hover{background-color:var(--shake-sdk-bg-color-outline-inversed)}.shake-sdk-context-menu-item img{width:20px;height:20px;margin-right:10px}.shake-sdk-context-menu-item p{color:var(--shake-sdk-text-color-popup-menu-item)}"), gA(".shake-sdk-select-dropdown{border-radius:var(--shake-sdk-border-radius-light);border:1px solid var(--shake-sdk-bg-color-primary-highlight);background:var(--shake-sdk-bg-color-secondary);padding:9px 18px 12px 12px;display:flex;flex-direction:column;cursor:pointer;position:relative;-webkit-user-select:none;user-select:none}.shake-sdk-select-dropdown.active{border:1px solid var(--shake-sdk-color-accent)}.shake-sdk-dropdown-icon{position:absolute;right:16px;top:16px;cursor:pointer}.shake-sdk-select-dropdown-label{font-size:12px;color:var(--shake-sdk-text-color-secondary);font-family:Roobert,serif;-webkit-font-smoothing:antialiased;cursor:pointer;-webkit-user-select:none;user-select:none}.shake-sdk-select-dropdown-chosen{color:var(--shake-sdk-text-color-primary)}.shake-sdk-select-options{padding:8px 0;margin-top:2px;background:var(--shake-sdk-bg-color-secondary);border-radius:var(--shake-sdk-border-radius-light);border:1px solid var(--shake-sdk-bg-color-primary-highlight);list-style-type:none;display:none;position:absolute;width:333px;z-index:1}.shake-sdk-select-option{list-style-type:none;font-family:Roobert,serif;padding:10px 20px 12px 12px;cursor:pointer;color:var(--shake-sdk-text-color-primary);font-size:14px;font-weight:500}.shake-sdk-select-option:hover{background-color:var(--shake-sdk-bg-color-primary-highlight)}"), gA(".shake-sdk-palette{display:flex;flex-direction:row}.shake-sdk-palette-close{outline:none;border:none;background:transparent;height:20px;width:20px;margin-left:10px;margin-right:10px;padding:0}.shake-sdk-palette-close:hover{opacity:.7}"), gA(".shake-sdk-color-button{outline:none;border:none;background:transparent;border-radius:50%;height:20px;width:20px;margin-left:12px;margin-right:12px;padding:0}.shake-sdk-color-button:hover{opacity:.7}"), gA(".shake-sdk-sheet-background{position:fixed;top:0;left:0;width:100%;height:100%;z-index:2147483647;display:flex;flex-direction:column-reverse;background-color:#000000b3;box-sizing:border-box}.shake-sdk-sheet{padding:40px;display:flex;flex-direction:column;background-color:var(--shake-sdk-bg-color-primary);border-radius:var(--shake-sdk-border-radius) var(--shake-sdk-border-radius) 0 0}.shake-sdk-sheet>p{text-align:center;margin-bottom:25px}.shake-sdk-sheet-item{cursor:pointer;display:flex;flex-direction:row;background-color:transparent;border:0;padding:12px;margin:0}.shake-sdk-sheet-item:hover{background-color:var(--shake-sdk-bg-color-primary-highlight)}.shake-sdk-sheet-item img{text-align:center;margin-right:12px;width:27px;height:27px}"), gA(".shake-sdk-text-p1{font-size:16px;font-weight:500;line-height:20px;letter-spacing:0;color:var(--shake-sdk-text-color-primary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-p2{font-size:14px;font-weight:500;line-height:18px;letter-spacing:0;color:var(--shake-sdk-text-color-secondary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-p3{color:var(--shake-sdk-text-color-secondary);font-size:12px;font-weight:500;line-height:16px;letter-spacing:0;-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-h2{font-size:24px;font-weight:700;line-height:32px;letter-spacing:0;color:var(--shake-sdk-text-color-primary);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-button{font-size:14px;font-weight:500;line-height:18px;letter-spacing:0;color:var(--shake-sdk-button-accent-text-color);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-accent-button{font-size:14px;font-weight:700;line-height:20px;letter-spacing:0;color:var(--shake-sdk-button-accent-text-color);-webkit-font-smoothing:antialiased;margin:0}.shake-sdk-text-tooltip{font-size:14px;font-weight:500;line-height:18px;letter-spacing:0;color:var(--shake-sdk-text-color-tooltip);-webkit-font-smoothing:antialiased;margin:0}"), gA(".shake-sdk-textarea-container{width:100%;display:flex;position:relative;z-index:0}.shake-sdk-textarea{flex:1;background-color:transparent;border:1px solid var(--shake-sdk-bg-color-primary-highlight);border-radius:var(--shake-sdk-border-radius-light);font-family:Roobert,serif;padding:28px 12px 12px;resize:none;width:100%;color:var(--shake-sdk-text-color-primary);font-size:16px}.shake-sdk-textarea:focus-visible{outline:none;border:1px solid var(--shake-sdk-color-accent)}.shake-sdk-textarea::placeholder{color:var(--shake-sdk-text-color-secondary)}.shake-sdk-textarea-label{position:absolute;font-family:Roobert,serif;top:28px;left:2px;font-size:12px;color:var(--shake-sdk-text-color-secondary);pointer-events:none;transform-origin:top left;transform:translateY(-50%) translate(10px)}"), gA(".toast-notification{width:300px;max-height:min-content;bottom:0;margin-bottom:20px;opacity:1;margin-left:0;top:20px;right:20px;position:fixed;z-index:2147483647;display:flex;flex-direction:row;cursor:default;border:1px solid var(--shake-sdk-bg-color-outline-inversed);border-radius:var(--shake-sdk-border-radius-light);background:var(--shake-sdk-bg-color-primary-inversed-highlight);color:var(--shake-sdk-text-color-popup-menu-item);box-shadow:0 2px 10px var(--shake-sdk-bg-color-primary-inversed)}.message-container{width:88%;padding-bottom:14px;padding-left:20px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:14px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight)}.title-container{width:88%;padding-left:20px;padding-bottom:4px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:16px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight)}.content-container{width:88%;padding-top:14px;padding-left:20px;color:var(--shake-sdk-text-color-popup-menu-item);border-radius:var(--shake-sdk-border-radius-light);cursor:default;font-size:14px;font-family:Roobert,serif;background:var(--shake-sdk-bg-color-primary-inversed-highlight);display:flex;flex-direction:column}.close-notification{width:12%;height:32px}.close-notification>img{padding-top:8px;padding-left:5px;font-weight:900;color:var(--shake-sdk-text-color-popup-menu-item);cursor:pointer}"), gA(".shake-sdk-toolbar{width:100%;height:32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-toolbar-button{display:flex;align-items:center;justify-content:center;border:none;cursor:pointer;width:32px;height:32px;background-color:transparent;margin-left:-10px}.shake-sdk-toolbar-button:hover{opacity:.7}@media only screen and (min-width: 1025px){.shake-sdk-toolbar{display:none}}"), gA(".shake-sdk-tooltip{position:fixed;display:none;z-index:5;padding:6px 12px 8px;background-color:var(--shake-sdk-bg-color-primary-inversed-highlight);box-shadow:0 2px 10px #1c1c1e;opacity:.9;border-radius:5px;border:1px solid var(--shake-sdk-bg-color-outline-inversed);background:var(--shake-sdk-bg-color-tooltip)}"), gA(".shake-sdk-video{width:100%}"), gA(".shake-sdk-main-button{position:fixed;top:50%;right:-32px;height:28px;min-width:138px;z-index:2147483647;transform:rotate(-90deg);margin-top:-14px;border-radius:var(--shake-sdk-button-border-radius);background:var(--shake-sdk-pureWhite);padding:4px 10px 3px 7px;border:1px solid var(--shake-sdk-grey30)}.shake-sdk-main-button-icon{margin-right:4px;width:21px;height:21px;border-radius:4px}.shake-sdk-main-button-text{color:var(--shake-sdk-text-color-primary);letter-spacing:-.04em}"), gA(".shake-sdk-content{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;background-color:#000000b3;z-index:2147483647;overflow:hidden}.shake-sdk-content-wrap{flex:1;display:flex;flex-direction:row;padding:40px}.shake-sdk-content-left{display:flex;flex:1;margin-right:20px;position:relative}.shake-sdk-content-right{display:flex;flex-shrink:0}.shake-sdk-close-button{position:absolute;top:-15px;left:-15px;width:40px;height:40px}@media only screen and (max-width: 1024px){.shake-sdk-content-wrap{background-color:var(--shake-sdk-bg-color-primary);padding:0}.shake-sdk-content-left{display:none}.shake-sdk-content-right{flex:1}.shake-sdk-close-button{display:none}}.shake-sdk-content p,h1,h2,h3,ul,li,label,div{font-family:Roobert,serif;margin:0}.shake-sdk-sheet p,h1,h2,h3,ul,li,label,div{font-family:Roobert,serif}.shake-sdk-content *{scrollbar-width:thin;scrollbar-color:#2C2C2E transparent}.shake-sdk-content *::-webkit-scrollbar{width:6px}.shake-sdk-content *::-webkit-scrollbar-track{background:none}.shake-sdk-content *::-webkit-scrollbar-thumb{background-color:#2c2c2e;border-radius:10px}.shake-sdk-content ::-webkit-scrollbar-corner{background-color:transparent}"), gA(".shake-sdk-new-ticket{padding:32px 20px;display:flex;flex-direction:column;justify-content:space-between;width:336px;background-color:var(--shake-sdk-bg-color-primary)}.shake-sdk-new-ticket-form{display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden}.shake-sdk-new-ticket-title{padding-bottom:32px}.shake-sdk-styled-textarea{padding-top:12px;margin-bottom:12px}.shake-sdk-submit-button{background-color:var(--shake-sdk-color-accent);padding:9px 20px 11px;border-radius:var(--shake-sdk-border-radius-light)}.shake-sdk-new-ticket *{scrollbar-color:#e8e8e8 transparent!important}.shake-sdk-new-ticket *::-webkit-scrollbar-thumb{background-color:#e8e8e8!important}@media only screen and (max-width: 1024px){.shake-sdk-new-ticket{width:0}}"), gA(".shake-sdk-attachments-items-small{display:flex;flex-direction:row;min-height:210px;width:100%;overflow-x:auto;overflow-y:hidden}@media only screen and (min-width: 1025px){.shake-sdk-attachments-items-small{display:none}}"), gA(".shake-sdk-attachment-item-small{display:flex;min-width:100px;max-width:100px;height:200px;margin-right:10px;cursor:pointer;overflow:hidden;position:relative}.shake-sdk-attachment-item-remove-small{position:absolute;top:15px;right:15px;width:30px;height:30px;background-color:var(--shake-sdk-bg-color-primary-inversed);opacity:.7}.shake-sdk-attachment-item-thumbnail-small{background-color:#000;height:100%;width:100%;object-fit:cover;border-radius:10px}.shake-sdk-file-thumbnail-small{box-sizing:border-box;padding:10px;border:2px solid var(--shake-sdk-bg-color-outline);background-color:var(--shake-sdk-bg-color-primary);overflow:hidden;word-wrap:break-word;justify-content:end;flex-direction:column;display:flex}"), gA(".shake-sdk-attachments-add-item-small{display:flex;min-width:100px;max-width:100px;height:200px;margin-right:10px;align-items:center;justify-content:center;overflow:hidden;position:relative}.shake-sdk-attachment-add-button-small{width:29px;height:29px;cursor:pointer;background-color:var(--shake-sdk-bg-color-secondary)}"), gA(".shake-sdk-attachments-card{padding:20px;display:flex;flex-direction:row;background-color:var(--shake-sdk-bg-color-primary-inversed);animation:showAttachments .2s ease-in forwards;translate:25px}.shake-sdk-attachments-page{display:flex;flex-direction:row;width:100%}.shake-sdk-attachments-list-wrap{display:flex;margin-right:12px;flex-shrink:0}.shake-sdk-attachments-preview-wrap{display:flex;flex:1}@keyframes showAttachments{0%{opacity:0;transform:translate(0)}to{opacity:1;transform:translate(-25px)}}@media only screen and (max-width: 1024px){.shake-sdk-attachments-card{display:none}}"), gA(".shake-sdk-attachments-items{display:flex;flex-direction:column;overflow:auto;overflow-x:hidden}"), gA(".shake-sdk-attachments-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1}.shake-sdk-attachments-empty-dragdrop{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;padding:10px 20px;cursor:pointer}.shake-sdk-attachments-empty-dragdrop:hover,.hover{background-color:var(--shake-sdk-bg-color-outline-inversed);border-radius:10px}.shake-sdk-attachments-empty-buttons{display:flex;flex-direction:row;margin-top:50px}.shake-sdk-attachments-empty-buttons img{margin-right:10px}.shake-sdk-attachments-empty-buttons button{height:36px;margin-right:20px;background-color:var(--shake-sdk-button-color);color:var(--shake-sdk-button-text-color);border:1px solid var(--shake-sdk-button-border-color)}.shake-sdk-attachments-empty-buttons button:hover{opacity:.7}.shake-sdk-attachments-empty-buttons>div{display:flex;flex-direction:row;margin-top:20px}.shake-sdk-attachments-empty-buttons>p{max-width:300px;text-align:center;font-size:18px}"), gA(".shake-sdk-attachment-item{width:140px;display:flex;flex-direction:column;margin-bottom:20px;cursor:pointer}.shake-sdk-attachment-item-card{position:relative;padding:8px;background-color:transparent}.shake-sdk-attachment-item-selected .shake-sdk-attachment-item-card{background-color:var(--shake-sdk-bg-color-primary-inversed-highlight)}.shake-sdk-attachment-remove{position:absolute;top:15px;right:15px;width:30px;height:30px;background-color:var(--shake-sdk-bg-color-primary-inversed);opacity:.7}.shake-sdk-attachment-item-thumbnail{background-color:transparent;width:100%;height:61px;object-fit:cover;border-radius:10px}.shake-sdk-attachment-item-title{display:flex;justify-content:center}.shake-sdk-attachment-title-box{display:flex;width:78px;height:20px;margin:2px;text-align:center;align-items:center;justify-content:center;border-radius:4px;background-color:transparent}.shake-sdk-attachment-item-selected .shake-sdk-attachment-title-box{background-color:var(--shake-sdk-color-accent-dark)}.shake-sdk-attachment-title-box p{color:var(--shake-sdk-button-accent-text-color)}.shake-sdk-file-thumbnail{box-sizing:border-box;padding:10px;border:2px solid var(--shake-sdk-bg-color-outline-inversed);background-color:var(--shake-sdk-bg-color-primary-inversed-highlight);overflow:hidden;word-wrap:break-word;justify-content:center;align-items:center;flex-direction:column;display:flex}"), gA(".shake-sdk-attachments-add-item{width:140px;display:flex;align-items:center;justify-content:center}.shake-sdk-attachment-add-button{width:29px;height:29px;background-color:var(--shake-sdk-bg-color-primary-inversed-highlight)}"), gA(".shake-sdk-attachments-preview{margin-top:36px;display:flex;flex-direction:column;overflow:hidden;width:100%}"), gA(".shake-sdk-image-preview{display:flex;flex-direction:column;-webkit-user-select:none;user-select:none;width:100%;min-height:0;max-height:100%;flex:1}.shake-sdk-image-preview-image-container{display:flex;flex:1;align-items:center;flex-direction:column;position:relative;min-height:0;max-height:100%}.shake-sdk-image-preview-image{max-width:100%;max-height:100%;min-height:0;height:auto;width:auto;border-radius:10px}.shake-sdk-image-preview-toolbox-container{flex:0 0 50px;display:flex;flex-direction:column;align-items:center;padding-top:50px;padding-bottom:50px}.shake-sdk-drawing-toolbox{height:48px;width:316px;display:flex;align-items:center;justify-content:center;border-radius:24px;padding:0 10px;border:1px solid var(--shake-sdk-bg-color-outline-inversed);background:var(--shake-sdk-bg-color-primary-inversed-highlight)}.shake-sdk-drawing-toolbox-buttons{display:flex;flex-direction:row;align-items:center;height:100%;padding:6px 0;box-sizing:border-box}.shake-sdk-drawing-toolbox-colors{display:none;flex-direction:row;align-items:center;height:100%;padding:6px 0;box-sizing:border-box;animation:shakeToolboxFadeIn .2s ease-in-out}@keyframes shakeToolboxFadeIn{0%{opacity:0}to{opacity:1}}"), gA(".shake-sdk-video-preview{height:100%}.shake-sdk-video-preview video{border-radius:10px;display:block;max-width:100%;max-height:100%;height:auto;width:auto}"), gA(".shake-sdk-image-preview-root-fs{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;background-color:var(--shake-sdk-bg-color-primary-inversed);z-index:2147483647}.shake-sdk-image-preview-toolbar-fs{width:100%;flex:0 0 32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-image-preview-content-fs{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;margin:32px;min-height:0}"), gA(".shake-sdk-video-preview-root-fs{position:fixed;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;background-color:var(--shake-sdk-bg-color-primary-inversed);z-index:2147483647}.shake-sdk-video-preview-toolbar-fs{width:100%;height:32px;background-color:transparent;display:flex;flex-direction:row;justify-content:right}.shake-sdk-video-preview-fs{width:100%;height:100%}"), gA(`.shake-sdk-canvas{position:absolute;cursor:url("data:image/svg+xml,%3csvg%20width='44'%20height='44'%20viewBox='0%200%2044%2044'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20id='Pen,%20Square%202'%20clip-path='url(%23clip0_15240_1054)'%3e%3cg%20id='Group'%3e%3cg%20id='Vector'%20filter='url(%23filter0_d_15240_1054)'%3e%3cpath%20d='M17.4366%2030.7725C17.092%2031.1171%2016.6263%2031.3096%2016.1405%2031.3096H12.4463V27.6155C12.4463%2027.1296%2012.6406%2026.664%2012.9835%2026.3193L25.6775%2013.6161C26.9095%2012.3841%2028.9078%2012.3841%2030.1398%2013.6161C31.3736%2014.8481%2031.3718%2016.8465%2030.1398%2018.0785L17.4366%2030.7725Z'%20fill='white'/%3e%3cpath%20d='M10.9463%2031.3096C10.9463%2032.1381%2011.6179%2032.8096%2012.4463%2032.8096H16.1405C17.0238%2032.8096%2017.8709%2032.4593%2018.4969%2031.8335C18.497%2031.8334%2018.4972%2031.8333%2018.4973%2031.8331L31.2001%2019.1395L31.2005%2019.1391C33.0172%2017.3224%2033.0213%2014.3737%2031.1997%2012.5547C29.3818%2010.7377%2026.4343%2010.738%2024.6168%2012.5555L24.6164%2012.5559L11.9224%2025.259L11.92%2025.2615C11.3009%2025.8839%2010.9463%2026.7285%2010.9463%2027.6155V31.3096Z'%20stroke='white'%20stroke-width='3'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3cpath%20id='Vector_2'%20d='M17.4366%2030.7725C17.092%2031.1171%2016.6263%2031.3096%2016.1405%2031.3096H12.4463V27.6155C12.4463%2027.1296%2012.6406%2026.664%2012.9835%2026.3193L25.6775%2013.6161C26.9095%2012.3841%2028.9078%2012.3841%2030.1398%2013.6161C31.3736%2014.8481%2031.3718%2016.8465%2030.1398%2018.0785L17.4366%2030.7725Z'%20fill='white'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20id='Vector_3'%20d='M21.6328%2017.6733L26.0878%2022.1283'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20id='Vector_4'%20d='M29.2484%2018.9675L30.9021%2020.6212C31.7711%2021.492%2031.7711%2022.9019%2030.9021%2023.7709L27.8936%2026.7794'%20stroke='black'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3c/g%3e%3cdefs%3e%3cfilter%20id='filter0_d_15240_1054'%20x='7.44629'%20y='9.69214'%20width='28.6182'%20height='28.6174'%20filterUnits='userSpaceOnUse'%20color-interpolation-filters='sRGB'%3e%3cfeFlood%20flood-opacity='0'%20result='BackgroundImageFix'/%3e%3cfeColorMatrix%20in='SourceAlpha'%20type='matrix'%20values='0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%20127%200'%20result='hardAlpha'/%3e%3cfeOffset%20dy='2'/%3e%3cfeGaussianBlur%20stdDeviation='1'/%3e%3cfeComposite%20in2='hardAlpha'%20operator='out'/%3e%3cfeColorMatrix%20type='matrix'%20values='0%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200%200.25%200'/%3e%3cfeBlend%20mode='normal'%20in2='BackgroundImageFix'%20result='effect1_dropShadow_15240_1054'/%3e%3cfeBlend%20mode='normal'%20in='SourceGraphic'%20in2='effect1_dropShadow_15240_1054'%20result='shape'/%3e%3c/filter%3e%3cclipPath%20id='clip0_15240_1054'%3e%3crect%20width='44'%20height='44'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e") 10 30,auto;left:50%!important;transform:translate(-50%);z-index:99999}`), gA(".shake-sdk-attachments-drawing-button{outline:none;border:none;background:transparent;width:42px;height:42px;padding:0}.shake-sdk-attachments-drawing-button:hover{opacity:.7}")]))().then((t) => e.adoptedStyleSheets = t);
 }, vi = (e, t) => {
   const r = rn(e), a = tn(t), g = document.createElement("div");
@@ -1546,7 +1546,7 @@ const $r = "shakeSdk: ", mt = (e) => {
   const p = document.createElement("div");
   p.classList.add("shake-sdk-sheet-background"), p.appendChild(g), p.onclick = () => w.remove();
   const w = document.createElement("div"), C = w.attachShadow({ mode: "open" });
-  return C.appendChild(p), _t(C), w;
+  return C.appendChild(p), kt(C), w;
 }, Fo = (e, t) => {
   const r = rn(e), a = document.createElement("div");
   a.classList.add("shake-sdk-sheet"), a.appendChild(r), t.forEach((C) => {
@@ -1557,7 +1557,7 @@ const $r = "shakeSdk: ", mt = (e) => {
   const g = document.createElement("div");
   g.classList.add("shake-sdk-sheet-background"), g.appendChild(a), g.onclick = () => p.remove();
   const p = document.createElement("div"), w = p.attachShadow({ mode: "open" });
-  return w.appendChild(g), _t(w), p;
+  return w.appendChild(g), kt(w), p;
 }, Qc = (e, t) => {
   const r = XA(e.icon), a = tn(e.text), g = document.createElement("button");
   return g.classList.add("shake-sdk-sheet-item"), g.onclick = t, g.appendChild(r), g.appendChild(a), g;
@@ -1590,7 +1590,7 @@ class Te {
     const Q = XA("data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_14021_39143)'%3e%3cpath%20d='M16%208L8%2016'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M16%2016.001L8%208.00098'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_14021_39143'%3e%3crect%20width='24'%20height='24'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
     y.appendChild(Q), g.append(y);
     const b = document.createElement("div"), E = b.attachShadow({ mode: "open" });
-    E.appendChild(g), _t(E), document.body.appendChild(b), setTimeout(function() {
+    E.appendChild(g), kt(E), document.body.appendChild(b), setTimeout(function() {
       b.remove();
     }, this.time), y.addEventListener("click", () => {
       g.remove();
@@ -1612,10 +1612,10 @@ const Fc = { shake_sdk_dialog_add_attachment: "Add attachment", shake_sdk_dialog
     document.body.append(t), setTimeout(() => t.remove(), 3e3);
   } else
     new Te(dA().shake_sdk_error_title, dA().shake_sdk_error_message);
-}, xo = "2.1.3";
+}, xo = "2.2.0";
 class xc {
   constructor() {
-    AA(this, "data", _A.localStorage);
+    AA(this, "data", kA.localStorage);
     AA(this, "shakeApi", null);
     AA(this, "init", () => {
       const t = { apiKey: ie.apiKey, bundleId: ie.appDomain, version: xo, deviceId: this.data.getShakeDeviceId() ?? "" };
@@ -1708,13 +1708,13 @@ class Uc {
     localStorage.setItem(t, JSON.stringify(r));
   }
 }
-const _e = class _e {
+const ke = class ke {
 };
-AA(_e, "storageProvider", new Uc()), AA(_e, "localStorage", new Pa(_e.storageProvider));
-let _A = _e;
+AA(ke, "storageProvider", new Uc()), AA(ke, "localStorage", new Pa(ke.storageProvider));
+let kA = ke;
 class CA {
 }
-AA(CA, "shakeApiService", new xc()), AA(CA, "consoleLogsTracker", new Ka()), AA(CA, "networkRequestsTracker", new Na()), AA(CA, "screenChangeTracker", new qa()), AA(CA, "userActionTracker", new $a()), AA(CA, "systemEventTracker", new Za()), AA(CA, "customLogTracker", new ja()), AA(CA, "attachmentsManager", new Ra());
+AA(CA, "shakeApiService", new xc()), AA(CA, "consoleLogsTracker", new Ka()), AA(CA, "networkRequestsTracker", new Va()), AA(CA, "screenChangeTracker", new qa()), AA(CA, "userActionTracker", new $a()), AA(CA, "systemEventTracker", new Za()), AA(CA, "customLogTracker", new ja()), AA(CA, "attachmentsManager", new Ra());
 class Ht {
   constructor() {
     AA(this, "_isConsoleLogsEnabled", !0);
@@ -1732,7 +1732,7 @@ class Ht {
   }
   set isConsoleLogsEnabled(t) {
     t != this._isConsoleLogsEnabled && (this._isConsoleLogsEnabled = t, ((r) => {
-      if (!_A.localStorage.isSDKEnabled())
+      if (!kA.localStorage.isSDKEnabled())
         return;
       const a = CA.consoleLogsTracker;
       r ? a.start() : a.stop();
@@ -1749,7 +1749,7 @@ class Ht {
   }
   set isNetworkRequestsEnabled(t) {
     t != this._isNetworkRequestsEnabled && (this._isNetworkRequestsEnabled = t, ((r) => {
-      if (!_A.localStorage.isSDKEnabled())
+      if (!kA.localStorage.isSDKEnabled())
         return;
       const a = CA.networkRequestsTracker;
       r ? a.start() : a.stop();
@@ -1760,7 +1760,7 @@ class Ht {
   }
   set isScreenChangesEnabled(t) {
     t != this._isScreenChangesEnabled && (this._isScreenChangesEnabled = t, ((r) => {
-      if (!_A.localStorage.isSDKEnabled())
+      if (!kA.localStorage.isSDKEnabled())
         return;
       const a = CA.screenChangeTracker;
       r ? a.start() : a.stop();
@@ -1771,7 +1771,7 @@ class Ht {
   }
   set isSystemEventsEnabled(t) {
     t != this._isSystemEventsEnabled && (this._isSystemEventsEnabled = t, ((r) => {
-      if (!_A.localStorage.isSDKEnabled())
+      if (!kA.localStorage.isSDKEnabled())
         return;
       const a = CA.systemEventTracker;
       r ? a.start() : a.stop();
@@ -1782,7 +1782,7 @@ class Ht {
   }
   set isUserActionsEnabled(t) {
     t != this._isUserActionsEnabled && (this._isUserActionsEnabled = t, ((r) => {
-      if (!_A.localStorage.isSDKEnabled())
+      if (!kA.localStorage.isSDKEnabled())
         return;
       const a = CA.userActionTracker;
       r ? a.start() : a.stop();
@@ -1942,7 +1942,7 @@ function RA(e, t) {
     };
   }
 }
-function Ne(e, t, r) {
+function Ve(e, t, r) {
   if (arguments.length === 2)
     for (var a, g = 0, p = t.length; g < p; g++)
       !a && g in t || (a || (a = Array.prototype.slice.call(t, 0, g)), a[g] = t[g]);
@@ -1974,7 +1974,7 @@ for (var vt = function() {
       t.push(g);
   }
   return t;
-}, kA = function() {
+}, _A = function() {
   for (var e = [], t = 0; t < arguments.length; t++)
     e[t] = arguments[t];
   if (String.fromCodePoint)
@@ -1987,10 +1987,10 @@ for (var vt = function() {
     w <= 65535 ? a.push(w) : (w -= 65536, a.push(55296 + (w >> 10), w % 1024 + 56320)), (g + 1 === r || a.length > 16384) && (p += String.fromCharCode.apply(String, a), a.length = 0);
   }
   return p;
-}, Ec = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", kc = typeof Uint8Array > "u" ? [] : new Uint8Array(256), Xe = 0; Xe < 64; Xe++)
-  kc[Ec.charCodeAt(Xe)] = Xe;
-for (var _c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", Be = typeof Uint8Array > "u" ? [] : new Uint8Array(256), We = 0; We < 64; We++)
-  Be[_c.charCodeAt(We)] = We;
+}, Ec = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", _c = typeof Uint8Array > "u" ? [] : new Uint8Array(256), Xe = 0; Xe < 64; Xe++)
+  _c[Ec.charCodeAt(Xe)] = Xe;
+for (var kc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", Be = typeof Uint8Array > "u" ? [] : new Uint8Array(256), We = 0; We < 64; We++)
+  Be[kc.charCodeAt(We)] = We;
 for (var us = function(e, t, r) {
   return e.slice ? e.slice(t, r) : new Uint16Array(Array.prototype.slice.call(e, t, r));
 }, Sc = function() {
@@ -2013,7 +2013,7 @@ for (var us = function(e, t, r) {
   }, e;
 }(), Tc = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", Ic = typeof Uint8Array > "u" ? [] : new Uint8Array(256), Ye = 0; Ye < 64; Ye++)
   Ic[Tc.charCodeAt(Ye)] = Ye;
-var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge = 22, jt = 24, NA = 25, me = 26, Ce = 27, Vt = 28, qt = 30, Je = 32, qe = 33, Er = 34, kr = 35, Fe = 37, _r = 38, ui = 39, di = 40, gs = 42, Oc = [9001, 65288], fA = "×", Ze = "÷", Sr = function(e, t) {
+var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge = 22, jt = 24, VA = 25, me = 26, Ce = 27, Gt = 28, qt = 30, Je = 32, qe = 33, Er = 34, _r = 35, Fe = 37, kr = 38, ui = 39, di = 40, gs = 42, Oc = [9001, 65288], fA = "×", Ze = "÷", Sr = function(e, t) {
   var r, a, g, p = function(b) {
     var E, S, L, H, j, B = 0.75 * b.length, J = b.length, iA = 0;
     b[b.length - 1] === "=" && (B--, b[b.length - 2] === "=" && B--);
@@ -2031,7 +2031,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     return S;
   }(p) : new Uint16Array(p), y = us(C, 12, w[4] / 2), Q = w[5] === 2 ? us(C, (24 + w[4]) / 2) : (r = w, a = Math.ceil((24 + w[4]) / 4), r.slice ? r.slice(a, g) : new Uint32Array(Array.prototype.slice.call(r, a, g)));
   return new Sc(w[0], w[1], w[2], w[3], y, Q);
-}("KwAAAAAAAAAACA4AUD0AADAgAAACAAAAAAAIABAAGABAAEgAUABYAGAAaABgAGgAYgBqAF8AZwBgAGgAcQB5AHUAfQCFAI0AlQCdAKIAqgCyALoAYABoAGAAaABgAGgAwgDKAGAAaADGAM4A0wDbAOEA6QDxAPkAAQEJAQ8BFwF1AH0AHAEkASwBNAE6AUIBQQFJAVEBWQFhAWgBcAF4ATAAgAGGAY4BlQGXAZ8BpwGvAbUBvQHFAc0B0wHbAeMB6wHxAfkBAQIJAvEBEQIZAiECKQIxAjgCQAJGAk4CVgJeAmQCbAJ0AnwCgQKJApECmQKgAqgCsAK4ArwCxAIwAMwC0wLbAjAA4wLrAvMC+AIAAwcDDwMwABcDHQMlAy0DNQN1AD0DQQNJA0kDSQNRA1EDVwNZA1kDdQB1AGEDdQBpA20DdQN1AHsDdQCBA4kDkQN1AHUAmQOhA3UAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AKYDrgN1AHUAtgO+A8YDzgPWAxcD3gPjA+sD8wN1AHUA+wMDBAkEdQANBBUEHQQlBCoEFwMyBDgEYABABBcDSARQBFgEYARoBDAAcAQzAXgEgASIBJAEdQCXBHUAnwSnBK4EtgS6BMIEyAR1AHUAdQB1AHUAdQCVANAEYABgAGAAYABgAGAAYABgANgEYADcBOQEYADsBPQE/AQEBQwFFAUcBSQFLAU0BWQEPAVEBUsFUwVbBWAAYgVgAGoFcgV6BYIFigWRBWAAmQWfBaYFYABgAGAAYABgAKoFYACxBbAFuQW6BcEFwQXHBcEFwQXPBdMF2wXjBeoF8gX6BQIGCgYSBhoGIgYqBjIGOgZgAD4GRgZMBmAAUwZaBmAAYABgAGAAYABgAGAAYABgAGAAYABgAGIGYABpBnAGYABgAGAAYABgAGAAYABgAGAAYAB4Bn8GhQZgAGAAYAB1AHcDFQSLBmAAYABgAJMGdQA9A3UAmwajBqsGqwaVALMGuwbDBjAAywbSBtIG1QbSBtIG0gbSBtIG0gbdBuMG6wbzBvsGAwcLBxMHAwcbByMHJwcsBywHMQcsB9IGOAdAB0gHTgfSBkgHVgfSBtIG0gbSBtIG0gbSBtIG0gbSBiwHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAdgAGAALAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAdbB2MHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsB2kH0gZwB64EdQB1AHUAdQB1AHUAdQB1AHUHfQdgAIUHjQd1AHUAlQedB2AAYAClB6sHYACzB7YHvgfGB3UAzgfWBzMB3gfmB1EB7gf1B/0HlQENAQUIDQh1ABUIHQglCBcDLQg1CD0IRQhNCEEDUwh1AHUAdQBbCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIcAh3CHoIMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIgggwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAALAcsBywHLAcsBywHLAcsBywHLAcsB4oILAcsB44I0gaWCJ4Ipgh1AHUAqgiyCHUAdQB1AHUAdQB1AHUAdQB1AHUAtwh8AXUAvwh1AMUIyQjRCNkI4AjoCHUAdQB1AO4I9gj+CAYJDgkTCS0HGwkjCYIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiAAIAAAAFAAYABgAGIAXwBgAHEAdQBFAJUAogCyAKAAYABgAEIA4ABGANMA4QDxAMEBDwE1AFwBLAE6AQEBUQF4QkhCmEKoQrhCgAHIQsAB0MLAAcABwAHAAeDC6ABoAHDCwMMAAcABwAHAAdDDGMMAAcAB6MM4wwjDWMNow3jDaABoAGgAaABoAGgAaABoAGgAaABoAGgAaABoAGgAaABoAGgAaABoAEjDqABWw6bDqABpg6gAaABoAHcDvwOPA+gAaABfA/8DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DpcPAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcAB9cPKwkyCToJMAB1AHUAdQBCCUoJTQl1AFUJXAljCWcJawkwADAAMAAwAHMJdQB2CX4JdQCECYoJjgmWCXUAngkwAGAAYABxAHUApgn3A64JtAl1ALkJdQDACTAAMAAwADAAdQB1AHUAdQB1AHUAdQB1AHUAowYNBMUIMAAwADAAMADICcsJ0wnZCRUE4QkwAOkJ8An4CTAAMAB1AAAKvwh1AAgKDwoXCh8KdQAwACcKLgp1ADYKqAmICT4KRgowADAAdQB1AE4KMAB1AFYKdQBeCnUAZQowADAAMAAwADAAMAAwADAAMAAVBHUAbQowADAAdQC5CXUKMAAwAHwBxAijBogEMgF9CoQKiASMCpQKmgqIBKIKqgquCogEDQG2Cr4KxgrLCjAAMADTCtsKCgHjCusK8Qr5CgELMAAwADAAMAB1AIsECQsRC3UANAEZCzAAMAAwADAAMAB1ACELKQswAHUANAExCzkLdQBBC0kLMABRC1kLMAAwADAAMAAwADAAdQBhCzAAMAAwAGAAYABpC3ELdwt/CzAAMACHC4sLkwubC58Lpwt1AK4Ltgt1APsDMAAwADAAMAAwADAAMAAwAL4LwwvLC9IL1wvdCzAAMADlC+kL8Qv5C/8LSQswADAAMAAwADAAMAAwADAAMAAHDDAAMAAwADAAMAAODBYMHgx1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1ACYMMAAwADAAdQB1AHUALgx1AHUAdQB1AHUAdQA2DDAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AD4MdQBGDHUAdQB1AHUAdQB1AEkMdQB1AHUAdQB1AFAMMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQBYDHUAdQB1AF8MMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUA+wMVBGcMMAAwAHwBbwx1AHcMfwyHDI8MMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAYABgAJcMMAAwADAAdQB1AJ8MlQClDDAAMACtDCwHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsB7UMLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AA0EMAC9DDAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAsBywHLAcsBywHLAcsBywHLQcwAMEMyAwsBywHLAcsBywHLAcsBywHLAcsBywHzAwwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAHUAdQB1ANQM2QzhDDAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMABgAGAAYABgAGAAYABgAOkMYADxDGAA+AwADQYNYABhCWAAYAAODTAAMAAwADAAFg1gAGAAHg37AzAAMAAwADAAYABgACYNYAAsDTQNPA1gAEMNPg1LDWAAYABgAGAAYABgAGAAYABgAGAAUg1aDYsGVglhDV0NcQBnDW0NdQ15DWAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAlQCBDZUAiA2PDZcNMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAnw2nDTAAMAAwADAAMAAwAHUArw23DTAAMAAwADAAMAAwADAAMAAwADAAMAB1AL8NMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAB1AHUAdQB1AHUAdQDHDTAAYABgAM8NMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAA1w11ANwNMAAwAD0B5A0wADAAMAAwADAAMADsDfQN/A0EDgwOFA4wABsOMAAwADAAMAAwADAAMAAwANIG0gbSBtIG0gbSBtIG0gYjDigOwQUuDsEFMw7SBjoO0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGQg5KDlIOVg7SBtIGXg5lDm0OdQ7SBtIGfQ6EDooOjQ6UDtIGmg6hDtIG0gaoDqwO0ga0DrwO0gZgAGAAYADEDmAAYAAkBtIGzA5gANIOYADaDokO0gbSBt8O5w7SBu8O0gb1DvwO0gZgAGAAxA7SBtIG0gbSBtIGYABgAGAAYAAED2AAsAUMD9IG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGFA8sBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAccD9IGLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHJA8sBywHLAcsBywHLAccDywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywPLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAc0D9IG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAccD9IG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGFA8sBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHPA/SBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gYUD0QPlQCVAJUAMAAwADAAMACVAJUAlQCVAJUAlQCVAEwPMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAA//8EAAQABAAEAAQABAAEAAQABAANAAMAAQABAAIABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQACgATABcAHgAbABoAHgAXABYAEgAeABsAGAAPABgAHABLAEsASwBLAEsASwBLAEsASwBLABgAGAAeAB4AHgATAB4AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQABYAGwASAB4AHgAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAWAA0AEQAeAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAFAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAJABYAGgAbABsAGwAeAB0AHQAeAE8AFwAeAA0AHgAeABoAGwBPAE8ADgBQAB0AHQAdAE8ATwAXAE8ATwBPABYAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAFAAUABQAFAAUABQAFAAUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAB4AHgAeAFAATwBAAE8ATwBPAEAATwBQAFAATwBQAB4AHgAeAB4AHgAeAB0AHQAdAB0AHgAdAB4ADgBQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgBQAB4AUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAJAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAkACQAJAAkACQAJAAkABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgAeAFAAHgAeAB4AKwArAFAAUABQAFAAGABQACsAKwArACsAHgAeAFAAHgBQAFAAUAArAFAAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAEAAQABAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAUAAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAYAA0AKwArAB4AHgAbACsABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQADQAEAB4ABAAEAB4ABAAEABMABAArACsAKwArACsAKwArACsAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAKwArACsAKwBWAFYAVgBWAB4AHgArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AGgAaABoAGAAYAB4AHgAEAAQABAAEAAQABAAEAAQABAAEAAQAEwAEACsAEwATAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABLAEsASwBLAEsASwBLAEsASwBLABoAGQAZAB4AUABQAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQABMAUAAEAAQABAAEAAQABAAEAB4AHgAEAAQABAAEAAQABABQAFAABAAEAB4ABAAEAAQABABQAFAASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUAAeAB4AUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAFAABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQAUABQAB4AHgAYABMAUAArACsABAAbABsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAFAABAAEAAQABAAEAFAABAAEAAQAUAAEAAQABAAEAAQAKwArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAArACsAHgArAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAB4ABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAUAAEAAQABAAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAABAAEAA0ADQBLAEsASwBLAEsASwBLAEsASwBLAB4AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAArAFAAUABQAFAAUABQAFAAUAArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUAArACsAKwBQAFAAUABQACsAKwAEAFAABAAEAAQABAAEAAQABAArACsABAAEACsAKwAEAAQABABQACsAKwArACsAKwArACsAKwAEACsAKwArACsAUABQACsAUABQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAFAAUAAaABoAUABQAFAAUABQAEwAHgAbAFAAHgAEACsAKwAEAAQABAArAFAAUABQAFAAUABQACsAKwArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQACsAUABQACsAKwAEACsABAAEAAQABAAEACsAKwArACsABAAEACsAKwAEAAQABAArACsAKwAEACsAKwArACsAKwArACsAUABQAFAAUAArAFAAKwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLAAQABABQAFAAUAAEAB4AKwArACsAKwArACsAKwArACsAKwAEAAQABAArAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQAFAAUABQACsAKwAEAFAABAAEAAQABAAEAAQABAAEACsABAAEAAQAKwAEAAQABAArACsAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAB4AGwArACsAKwArACsAKwArAFAABAAEAAQABAAEAAQAKwAEAAQABAArAFAAUABQAFAAUABQAFAAUAArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAArACsABAAEACsAKwAEAAQABAArACsAKwArACsAKwArAAQABAAEACsAKwArACsAUABQACsAUABQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAB4AUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArAAQAUAArAFAAUABQAFAAUABQACsAKwArAFAAUABQACsAUABQAFAAUAArACsAKwBQAFAAKwBQACsAUABQACsAKwArAFAAUAArACsAKwBQAFAAUAArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArAAQABAAEAAQABAArACsAKwAEAAQABAArAAQABAAEAAQAKwArAFAAKwArACsAKwArACsABAArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAUABQAFAAHgAeAB4AHgAeAB4AGwAeACsAKwArACsAKwAEAAQABAAEAAQAUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAUAAEAAQABAAEAAQABAAEACsABAAEAAQAKwAEAAQABAAEACsAKwArACsAKwArACsABAAEACsAUABQAFAAKwArACsAKwArAFAAUAAEAAQAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAKwAOAFAAUABQAFAAUABQAFAAHgBQAAQABAAEAA4AUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAKwArAAQAUAAEAAQABAAEAAQABAAEACsABAAEAAQAKwAEAAQABAAEACsAKwArACsAKwArACsABAAEACsAKwArACsAKwArACsAUAArAFAAUAAEAAQAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwBQAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAFAABAAEAAQABAAEAAQABAArAAQABAAEACsABAAEAAQABABQAB4AKwArACsAKwBQAFAAUAAEAFAAUABQAFAAUABQAFAAUABQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAFAAUABQAFAAUABQAFAAUABQABoAUABQAFAAUABQAFAAKwAEAAQABAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQACsAUAArACsAUABQAFAAUABQAFAAUAArACsAKwAEACsAKwArACsABAAEAAQABAAEAAQAKwAEACsABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArAAQABAAeACsAKwArACsAKwArACsAKwArACsAKwArAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAAqAFwAXAAqACoAKgAqACoAKgAqACsAKwArACsAGwBcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAeAEsASwBLAEsASwBLAEsASwBLAEsADQANACsAKwArACsAKwBcAFwAKwBcACsAXABcAFwAXABcACsAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACsAXAArAFwAXABcAFwAXABcAFwAXABcAFwAKgBcAFwAKgAqACoAKgAqACoAKgAqACoAXAArACsAXABcAFwAXABcACsAXAArACoAKgAqACoAKgAqACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwBcAFwAXABcAFAADgAOAA4ADgAeAA4ADgAJAA4ADgANAAkAEwATABMAEwATAAkAHgATAB4AHgAeAAQABAAeAB4AHgAeAB4AHgBLAEsASwBLAEsASwBLAEsASwBLAFAAUABQAFAAUABQAFAAUABQAFAADQAEAB4ABAAeAAQAFgARABYAEQAEAAQAUABQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQADQAEAAQABAAEAAQADQAEAAQAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABAArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArAA0ADQAeAB4AHgAeAB4AHgAEAB4AHgAeAB4AHgAeACsAHgAeAA4ADgANAA4AHgAeAB4AHgAeAAkACQArACsAKwArACsAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgBcAEsASwBLAEsASwBLAEsASwBLAEsADQANAB4AHgAeAB4AXABcAFwAXABcAFwAKgAqACoAKgBcAFwAXABcACoAKgAqAFwAKgAqACoAXABcACoAKgAqACoAKgAqACoAXABcAFwAKgAqACoAKgBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAqACoAKgAqAFwAKgBLAEsASwBLAEsASwBLAEsASwBLACoAKgAqACoAKgAqAFAAUABQAFAAUABQACsAUAArACsAKwArACsAUAArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgBQAFAAUABQAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAUAArACsAUABQAFAAUABQAFAAUAArAFAAKwBQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAKwArAFAAUABQAFAAUABQAFAAKwBQACsAUABQAFAAUAArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsABAAEAAQAHgANAB4AHgAeAB4AHgAeAB4AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUAArACsADQBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAANAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAWABEAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAA0ADQANAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAAQABAAEACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAANAA0AKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUAArAAQABAArACsAKwArACsAKwArACsAKwArACsAKwBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqAA0ADQAVAFwADQAeAA0AGwBcACoAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwAeAB4AEwATAA0ADQAOAB4AEwATAB4ABAAEAAQACQArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUAAEAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQAUAArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAArACsAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAHgArACsAKwATABMASwBLAEsASwBLAEsASwBLAEsASwBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAArACsAXABcAFwAXABcACsAKwArACsAKwArACsAKwArACsAKwBcAFwAXABcAFwAXABcAFwAXABcAFwAXAArACsAKwArAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAXAArACsAKwAqACoAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAArACsAHgAeAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAqACoAKwAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKwArAAQASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwArACsAKwArACoAKgAqACoAKgAqACoAXAAqACoAKgAqACoAKgArACsABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsABAAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABABQAFAAUABQAFAAUABQACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwANAA0AHgANAA0ADQANAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAEAAQABAAEAAQAHgAeAB4AHgAeAB4AHgAeAB4AKwArACsABAAEAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwAeAB4AHgAeAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArAA0ADQANAA0ADQBLAEsASwBLAEsASwBLAEsASwBLACsAKwArAFAAUABQAEsASwBLAEsASwBLAEsASwBLAEsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAA0ADQBQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUAAeAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArAAQABAAEAB4ABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAAQAUABQAFAAUABQAFAABABQAFAABAAEAAQAUAArACsAKwArACsABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsABAAEAAQABAAEAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAKwBQACsAUAArAFAAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArAB4AHgAeAB4AHgAeAB4AHgBQAB4AHgAeAFAAUABQACsAHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQACsAKwAeAB4AHgAeAB4AHgArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArAFAAUABQACsAHgAeAB4AHgAeAB4AHgAOAB4AKwANAA0ADQANAA0ADQANAAkADQANAA0ACAAEAAsABAAEAA0ACQANAA0ADAAdAB0AHgAXABcAFgAXABcAFwAWABcAHQAdAB4AHgAUABQAFAANAAEAAQAEAAQABAAEAAQACQAaABoAGgAaABoAGgAaABoAHgAXABcAHQAVABUAHgAeAB4AHgAeAB4AGAAWABEAFQAVABUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ADQAeAA0ADQANAA0AHgANAA0ADQAHAB4AHgAeAB4AKwAEAAQABAAEAAQABAAEAAQABAAEAFAAUAArACsATwBQAFAAUABQAFAAHgAeAB4AFgARAE8AUABPAE8ATwBPAFAAUABQAFAAUAAeAB4AHgAWABEAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArABsAGwAbABsAGwAbABsAGgAbABsAGwAbABsAGwAbABsAGwAbABsAGwAbABsAGgAbABsAGwAbABoAGwAbABoAGwAbABsAGwAbABsAGwAbABsAGwAbABsAGwAbABsAGwAbAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAHgAeAFAAGgAeAB0AHgBQAB4AGgAeAB4AHgAeAB4AHgAeAB4AHgBPAB4AUAAbAB4AHgBQAFAAUABQAFAAHgAeAB4AHQAdAB4AUAAeAFAAHgBQAB4AUABPAFAAUAAeAB4AHgAeAB4AHgAeAFAAUABQAFAAUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAAHgBQAFAAUABQAE8ATwBQAFAAUABQAFAATwBQAFAATwBQAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAFAAUABQAFAATwBPAE8ATwBPAE8ATwBPAE8ATwBQAFAAUABQAFAAUABQAFAAUAAeAB4AUABQAFAAUABPAB4AHgArACsAKwArAB0AHQAdAB0AHQAdAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB4AHQAdAB4AHgAeAB0AHQAeAB4AHQAeAB4AHgAdAB4AHQAbABsAHgAdAB4AHgAeAB4AHQAeAB4AHQAdAB0AHQAeAB4AHQAeAB0AHgAdAB0AHQAdAB0AHQAeAB0AHgAeAB4AHgAeAB0AHQAdAB0AHgAeAB4AHgAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB4AHgAeAB0AHgAeAB4AHgAeAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHgAeAB0AHQAdAB0AHgAeAB0AHQAeAB4AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHQAeAB4AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHQAeAB4AHgAdAB4AHgAeAB4AHgAeAB4AHQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AFAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeABYAEQAWABEAHgAeAB4AHgAeAB4AHQAeAB4AHgAeAB4AHgAeACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAWABEAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAFAAHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHgAeAB4AHgAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAeAB4AHQAdAB0AHQAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHQAeAB0AHQAdAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB0AHQAeAB4AHQAdAB4AHgAeAB4AHQAdAB4AHgAeAB4AHQAdAB0AHgAeAB0AHgAeAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlAB4AHQAdAB4AHgAdAB4AHgAeAB4AHQAdAB4AHgAeAB4AJQAlAB0AHQAlAB4AJQAlACUAIAAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAeAB4AHgAeAB0AHgAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHgAdAB0AHQAeAB0AJQAdAB0AHgAdAB0AHgAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACUAJQAlACUAJQAdAB0AHQAdACUAHgAlACUAJQAdACUAJQAdAB0AHQAlACUAHQAdACUAHQAdACUAJQAlAB4AHQAeAB4AHgAeAB0AHQAlAB0AHQAdAB0AHQAdACUAJQAlACUAJQAdACUAJQAgACUAHQAdACUAJQAlACUAJQAlACUAJQAeAB4AHgAlACUAIAAgACAAIAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAeAB4AFwAXABcAFwAXABcAHgATABMAJQAeAB4AHgAWABEAFgARABYAEQAWABEAFgARABYAEQAWABEATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeABYAEQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAWABEAFgARABYAEQAWABEAFgARAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AFgARABYAEQAWABEAFgARABYAEQAWABEAFgARABYAEQAWABEAFgARABYAEQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAWABEAFgARAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AFgARAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AUABQAFAAUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAEAAQABAAeAB4AKwArACsAKwArABMADQANAA0AUAATAA0AUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAUAANACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAA0ADQANAA0ADQANAA0ADQAeAA0AFgANAB4AHgAXABcAHgAeABcAFwAWABEAFgARABYAEQAWABEADQANAA0ADQATAFAADQANAB4ADQANAB4AHgAeAB4AHgAMAAwADQANAA0AHgANAA0AFgANAA0ADQANAA0ADQANAA0AHgANAB4ADQANAB4AHgAeACsAKwArACsAKwArACsAKwArACsAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAKwArACsAKwArACsAKwArACsAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAlACUAJQAlACUAJQAlACUAJQAlACUAJQArACsAKwArAA0AEQARACUAJQBHAFcAVwAWABEAFgARABYAEQAWABEAFgARACUAJQAWABEAFgARABYAEQAWABEAFQAWABEAEQAlAFcAVwBXAFcAVwBXAFcAVwBXAAQABAAEAAQABAAEACUAVwBXAFcAVwA2ACUAJQBXAFcAVwBHAEcAJQAlACUAKwBRAFcAUQBXAFEAVwBRAFcAUQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFEAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBRAFcAUQBXAFEAVwBXAFcAVwBXAFcAUQBXAFcAVwBXAFcAVwBRAFEAKwArAAQABAAVABUARwBHAFcAFQBRAFcAUQBXAFEAVwBRAFcAUQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFEAVwBRAFcAUQBXAFcAVwBXAFcAVwBRAFcAVwBXAFcAVwBXAFEAUQBXAFcAVwBXABUAUQBHAEcAVwArACsAKwArACsAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAKwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAKwAlACUAVwBXAFcAVwAlACUAJQAlACUAJQAlACUAJQAlACsAKwArACsAKwArACsAKwArACsAKwArAFEAUQBRAFEAUQBRAFEAUQBRAFEAUQBRAFEAUQBRAFEAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQArAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQBPAE8ATwBPAE8ATwBPAE8AJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACUAJQAlAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAEcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAADQATAA0AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABLAEsASwBLAEsASwBLAEsASwBLAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAABAAEAAQABAAeAAQABAAEAAQABAAEAAQABAAEAAQAHgBQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AUABQAAQABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAeAA0ADQANAA0ADQArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAB4AHgAeAB4AHgAeAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAHgAeAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAeAB4AUABQAFAAUABQAFAAUABQAFAAUABQAAQAUABQAFAABABQAFAAUABQAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAeAB4AHgAeAAQAKwArACsAUABQAFAAUABQAFAAHgAeABoAHgArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAADgAOABMAEwArACsAKwArACsAKwArACsABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwANAA0ASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArACsAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAFAAUAAeAB4AHgBQAA4AUABQAAQAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAA0ADQBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArACsAKwArACsAKwArAB4AWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYACsAKwArAAQAHgAeAB4AHgAeAB4ADQANAA0AHgAeAB4AHgArAFAASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArAB4AHgBcAFwAXABcAFwAKgBcAFwAXABcAFwAXABcAFwAXABcAEsASwBLAEsASwBLAEsASwBLAEsAXABcAFwAXABcACsAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwArAFAAUABQAAQAUABQAFAAUABQAFAAUABQAAQABAArACsASwBLAEsASwBLAEsASwBLAEsASwArACsAHgANAA0ADQBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAKgAqACoAXAAqACoAKgBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAAqAFwAKgAqACoAXABcACoAKgBcAFwAXABcAFwAKgAqAFwAKgBcACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFwAXABcACoAKgBQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAA0ADQBQAFAAUAAEAAQAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUAArACsAUABQAFAAUABQAFAAKwArAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQADQAEAAQAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAVABVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBUAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVACsAKwArACsAKwArACsAKwArACsAKwArAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAKwArACsAKwBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAKwArACsAKwAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAKwArACsAKwArAFYABABWAFYAVgBWAFYAVgBWAFYAVgBWAB4AVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgArAFYAVgBWAFYAVgArAFYAKwBWAFYAKwBWAFYAKwBWAFYAVgBWAFYAVgBWAFYAVgBWAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAEQAWAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUAAaAB4AKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAGAARABEAGAAYABMAEwAWABEAFAArACsAKwArACsAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACUAJQAlACUAJQAWABEAFgARABYAEQAWABEAFgARABYAEQAlACUAFgARACUAJQAlACUAJQAlACUAEQAlABEAKwAVABUAEwATACUAFgARABYAEQAWABEAJQAlACUAJQAlACUAJQAlACsAJQAbABoAJQArACsAKwArAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAcAKwATACUAJQAbABoAJQAlABYAEQAlACUAEQAlABEAJQBXAFcAVwBXAFcAVwBXAFcAVwBXABUAFQAlACUAJQATACUAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXABYAJQARACUAJQAlAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwAWACUAEQAlABYAEQARABYAEQARABUAVwBRAFEAUQBRAFEAUQBRAFEAUQBRAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAEcARwArACsAVwBXAFcAVwBXAFcAKwArAFcAVwBXAFcAVwBXACsAKwBXAFcAVwBXAFcAVwArACsAVwBXAFcAKwArACsAGgAbACUAJQAlABsAGwArAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwAEAAQABAAQAB0AKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsADQANAA0AKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAB4AHgAeAB4AHgAeAB4AHgAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAAQAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAA0AUABQAFAAUAArACsAKwArAFAAUABQAFAAUABQAFAAUAANAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwAeACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAKwArAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUAArACsAKwBQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwANAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAB4AUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUAArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAA0AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAUABQAFAAUABQAAQABAAEACsABAAEACsAKwArACsAKwAEAAQABAAEAFAAUABQAFAAKwBQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAQABAAEACsAKwArACsABABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAA0ADQANAA0ADQANAA0ADQAeACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAFAAUABQAFAAUABQAFAAUAAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAArACsAKwArAFAAUABQAFAAUAANAA0ADQANAA0ADQAUACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsADQANAA0ADQANAA0ADQBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAAQABAAEAAQAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUAArAAQABAANACsAKwBQAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAB4AHgAeAB4AHgArACsAKwArACsAKwAEAAQABAAEAAQABAAEAA0ADQAeAB4AHgAeAB4AKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgANAA0ADQANACsAKwArACsAKwArACsAKwArACsAKwAeACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwArACsAKwArAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsASwBLAEsASwBLAEsASwBLAEsASwANAA0ADQANAFAABAAEAFAAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAeAA4AUAArACsAKwArACsAKwArACsAKwAEAFAAUABQAFAADQANAB4ADQAEAAQABAAEAB4ABAAEAEsASwBLAEsASwBLAEsASwBLAEsAUAAOAFAADQANAA0AKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAANAA0AHgANAA0AHgAEACsAUABQAFAAUABQAFAAUAArAFAAKwBQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAA0AKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsABAAEAAQABAArAFAAUABQAFAAUABQAFAAUAArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQAFAAUABQACsABAAEAFAABAAEAAQABAAEAAQABAArACsABAAEACsAKwAEAAQABAArACsAUAArACsAKwArACsAKwAEACsAKwArACsAKwBQAFAAUABQAFAABAAEACsAKwAEAAQABAAEAAQABAAEACsAKwArAAQABAAEAAQABAArACsAKwArACsAKwArACsAKwArACsABAAEAAQABAAEAAQABABQAFAAUABQAA0ADQANAA0AHgBLAEsASwBLAEsASwBLAEsASwBLAA0ADQArAB4ABABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAAQABAAEAFAAUAAeAFAAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAArACsABAAEAAQABAAEAAQABAAEAAQADgANAA0AEwATAB4AHgAeAA0ADQANAA0ADQANAA0ADQANAA0ADQANAA0ADQANAFAAUABQAFAABAAEACsAKwAEAA0ADQAeAFAAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAFAAKwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAKwArACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwBcAFwADQANAA0AKgBQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAKwArAFAAKwArAFAAUABQAFAAUABQAFAAUAArAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQAKwAEAAQAKwArAAQABAAEAAQAUAAEAFAABAAEAA0ADQANACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAArACsABAAEAAQABAAEAAQABABQAA4AUAAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAFAABAAEAAQABAAOAB4ADQANAA0ADQAOAB4ABAArACsAKwArACsAKwArACsAUAAEAAQABAAEAAQABAAEAAQABAAEAAQAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAA0ADQANAFAADgAOAA4ADQANACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEACsABAAEAAQABAAEAAQABAAEAFAADQANAA0ADQANACsAKwArACsAKwArACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwAOABMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAArACsAKwAEACsABAAEACsABAAEAAQABAAEAAQABABQAAQAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAKwBQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQAKwAEAAQAKwAEAAQABAAEAAQAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAaABoAGgAaAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArACsAKwArAA0AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsADQANAA0ADQANACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAASABIAEgAQwBDAEMAUABQAFAAUABDAFAAUABQAEgAQwBIAEMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAASABDAEMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwAJAAkACQAJAAkACQAJABYAEQArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABIAEMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwANAA0AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAQABAAEAAQABAANACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAA0ADQANAB4AHgAeAB4AHgAeAFAAUABQAFAADQAeACsAKwArACsAKwArACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwArAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAANAA0AHgAeACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwAEAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArACsAKwAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAARwBHABUARwAJACsAKwArACsAKwArACsAKwArACsAKwAEAAQAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACsAKwArACsAKwArACsAKwBXAFcAVwBXAFcAVwBXAFcAVwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUQBRAFEAKwArACsAKwArACsAKwArACsAKwArACsAKwBRAFEAUQBRACsAKwArACsAKwArACsAKwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUAArACsAHgAEAAQADQAEAAQABAAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArAB4AHgAeAB4AHgAeAB4AKwArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAAQABAAEAAQABAAeAB4AHgAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAB4AHgAEAAQABAAEAAQABAAEAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQAHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwBQAFAAKwArAFAAKwArAFAAUAArACsAUABQAFAAUAArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAUAArAFAAUABQAFAAUABQAFAAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwBQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAHgAeAFAAUABQAFAAUAArAFAAKwArACsAUABQAFAAUABQAFAAUAArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeACsAKwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgAeAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgAeAB4AHgAeAB4ABAAeAB4AHgAeAB4AHgAeAB4AHgAeAAQAHgAeAA0ADQANAA0AHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAAQABAAEAAQAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAEAAQAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArAAQABAAEAAQABAAEAAQAKwAEAAQAKwAEAAQABAAEAAQAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwAEAAQABAAEAAQABAAEAFAAUABQAFAAUABQAFAAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwBQAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArABsAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwArAB4AHgAeAB4ABAAEAAQABAAEAAQABABQACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArABYAFgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAGgBQAFAAUAAaAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAKwBQACsAKwBQACsAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAKwBQACsAUAArACsAKwArACsAKwBQACsAKwArACsAUAArAFAAKwBQACsAUABQAFAAKwBQAFAAKwBQACsAKwBQACsAUAArAFAAKwBQACsAUAArAFAAUAArAFAAKwArAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQAFAAUAArAFAAUABQAFAAKwBQACsAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAUABQAFAAKwBQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8AJQAlACUAHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHgAeAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB4AHgAeACUAJQAlAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAJQAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlAB4AHgAlACUAJQAlACUAHgAlACUAJQAlACUAIAAgACAAJQAlACAAJQAlACAAIAAgACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACEAIQAhACEAIQAlACUAIAAgACUAJQAgACAAIAAgACAAIAAgACAAIAAgACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAJQAlACUAIAAlACUAJQAlACAAIAAgACUAIAAgACAAJQAlACUAJQAlACUAJQAgACUAIAAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAlAB4AJQAeACUAJQAlACUAJQAgACUAJQAlACUAHgAlAB4AHgAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAJQAlACUAJQAgACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACAAIAAgACUAJQAlACAAIAAgACAAIAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeABcAFwAXABUAFQAVAB4AHgAeAB4AJQAlACUAIAAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAgACUAJQAlACUAJQAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAgACUAJQAgACUAJQAlACUAJQAlACUAJQAgACAAIAAgACAAIAAgACAAJQAlACUAJQAlACUAIAAlACUAJQAlACUAJQAlACUAJQAgACAAIAAgACAAIAAgACAAIAAgACUAJQAgACAAIAAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAgACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAlACAAIAAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAgACAAIAAlACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAJQAlAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAKwArAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwAlACUAJQAlACUAJQAlACUAJQAlACUAVwBXACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAKwAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAA=="), ft = [qt, 36], Tr = [1, 2, 3, 5], Eo = [Qt, 8], fs = [Ce, me], Lc = Tr.concat(Eo), ps = [_r, ui, di, Er, kr], Dc = [we, xr], rr = function(e, t, r, a) {
+}("KwAAAAAAAAAACA4AUD0AADAgAAACAAAAAAAIABAAGABAAEgAUABYAGAAaABgAGgAYgBqAF8AZwBgAGgAcQB5AHUAfQCFAI0AlQCdAKIAqgCyALoAYABoAGAAaABgAGgAwgDKAGAAaADGAM4A0wDbAOEA6QDxAPkAAQEJAQ8BFwF1AH0AHAEkASwBNAE6AUIBQQFJAVEBWQFhAWgBcAF4ATAAgAGGAY4BlQGXAZ8BpwGvAbUBvQHFAc0B0wHbAeMB6wHxAfkBAQIJAvEBEQIZAiECKQIxAjgCQAJGAk4CVgJeAmQCbAJ0AnwCgQKJApECmQKgAqgCsAK4ArwCxAIwAMwC0wLbAjAA4wLrAvMC+AIAAwcDDwMwABcDHQMlAy0DNQN1AD0DQQNJA0kDSQNRA1EDVwNZA1kDdQB1AGEDdQBpA20DdQN1AHsDdQCBA4kDkQN1AHUAmQOhA3UAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AKYDrgN1AHUAtgO+A8YDzgPWAxcD3gPjA+sD8wN1AHUA+wMDBAkEdQANBBUEHQQlBCoEFwMyBDgEYABABBcDSARQBFgEYARoBDAAcAQzAXgEgASIBJAEdQCXBHUAnwSnBK4EtgS6BMIEyAR1AHUAdQB1AHUAdQCVANAEYABgAGAAYABgAGAAYABgANgEYADcBOQEYADsBPQE/AQEBQwFFAUcBSQFLAU0BWQEPAVEBUsFUwVbBWAAYgVgAGoFcgV6BYIFigWRBWAAmQWfBaYFYABgAGAAYABgAKoFYACxBbAFuQW6BcEFwQXHBcEFwQXPBdMF2wXjBeoF8gX6BQIGCgYSBhoGIgYqBjIGOgZgAD4GRgZMBmAAUwZaBmAAYABgAGAAYABgAGAAYABgAGAAYABgAGIGYABpBnAGYABgAGAAYABgAGAAYABgAGAAYAB4Bn8GhQZgAGAAYAB1AHcDFQSLBmAAYABgAJMGdQA9A3UAmwajBqsGqwaVALMGuwbDBjAAywbSBtIG1QbSBtIG0gbSBtIG0gbdBuMG6wbzBvsGAwcLBxMHAwcbByMHJwcsBywHMQcsB9IGOAdAB0gHTgfSBkgHVgfSBtIG0gbSBtIG0gbSBtIG0gbSBiwHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAdgAGAALAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAdbB2MHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsB2kH0gZwB64EdQB1AHUAdQB1AHUAdQB1AHUHfQdgAIUHjQd1AHUAlQedB2AAYAClB6sHYACzB7YHvgfGB3UAzgfWBzMB3gfmB1EB7gf1B/0HlQENAQUIDQh1ABUIHQglCBcDLQg1CD0IRQhNCEEDUwh1AHUAdQBbCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIaQhjCGQIZQhmCGcIaAhpCGMIZAhlCGYIZwhoCGkIYwhkCGUIZghnCGgIcAh3CHoIMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIgggwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAALAcsBywHLAcsBywHLAcsBywHLAcsB4oILAcsB44I0gaWCJ4Ipgh1AHUAqgiyCHUAdQB1AHUAdQB1AHUAdQB1AHUAtwh8AXUAvwh1AMUIyQjRCNkI4AjoCHUAdQB1AO4I9gj+CAYJDgkTCS0HGwkjCYIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiCCIIIggiAAIAAAAFAAYABgAGIAXwBgAHEAdQBFAJUAogCyAKAAYABgAEIA4ABGANMA4QDxAMEBDwE1AFwBLAE6AQEBUQF4QkhCmEKoQrhCgAHIQsAB0MLAAcABwAHAAeDC6ABoAHDCwMMAAcABwAHAAdDDGMMAAcAB6MM4wwjDWMNow3jDaABoAGgAaABoAGgAaABoAGgAaABoAGgAaABoAGgAaABoAGgAaABoAEjDqABWw6bDqABpg6gAaABoAHcDvwOPA+gAaABfA/8DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DvwO/A78DpcPAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcAB9cPKwkyCToJMAB1AHUAdQBCCUoJTQl1AFUJXAljCWcJawkwADAAMAAwAHMJdQB2CX4JdQCECYoJjgmWCXUAngkwAGAAYABxAHUApgn3A64JtAl1ALkJdQDACTAAMAAwADAAdQB1AHUAdQB1AHUAdQB1AHUAowYNBMUIMAAwADAAMADICcsJ0wnZCRUE4QkwAOkJ8An4CTAAMAB1AAAKvwh1AAgKDwoXCh8KdQAwACcKLgp1ADYKqAmICT4KRgowADAAdQB1AE4KMAB1AFYKdQBeCnUAZQowADAAMAAwADAAMAAwADAAMAAVBHUAbQowADAAdQC5CXUKMAAwAHwBxAijBogEMgF9CoQKiASMCpQKmgqIBKIKqgquCogEDQG2Cr4KxgrLCjAAMADTCtsKCgHjCusK8Qr5CgELMAAwADAAMAB1AIsECQsRC3UANAEZCzAAMAAwADAAMAB1ACELKQswAHUANAExCzkLdQBBC0kLMABRC1kLMAAwADAAMAAwADAAdQBhCzAAMAAwAGAAYABpC3ELdwt/CzAAMACHC4sLkwubC58Lpwt1AK4Ltgt1APsDMAAwADAAMAAwADAAMAAwAL4LwwvLC9IL1wvdCzAAMADlC+kL8Qv5C/8LSQswADAAMAAwADAAMAAwADAAMAAHDDAAMAAwADAAMAAODBYMHgx1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1ACYMMAAwADAAdQB1AHUALgx1AHUAdQB1AHUAdQA2DDAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AD4MdQBGDHUAdQB1AHUAdQB1AEkMdQB1AHUAdQB1AFAMMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQBYDHUAdQB1AF8MMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUA+wMVBGcMMAAwAHwBbwx1AHcMfwyHDI8MMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAYABgAJcMMAAwADAAdQB1AJ8MlQClDDAAMACtDCwHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsB7UMLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHdQB1AHUAdQB1AHUAdQB1AHUAdQB1AHUAdQB1AA0EMAC9DDAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAsBywHLAcsBywHLAcsBywHLQcwAMEMyAwsBywHLAcsBywHLAcsBywHLAcsBywHzAwwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwAHUAdQB1ANQM2QzhDDAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMABgAGAAYABgAGAAYABgAOkMYADxDGAA+AwADQYNYABhCWAAYAAODTAAMAAwADAAFg1gAGAAHg37AzAAMAAwADAAYABgACYNYAAsDTQNPA1gAEMNPg1LDWAAYABgAGAAYABgAGAAYABgAGAAUg1aDYsGVglhDV0NcQBnDW0NdQ15DWAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAlQCBDZUAiA2PDZcNMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAnw2nDTAAMAAwADAAMAAwAHUArw23DTAAMAAwADAAMAAwADAAMAAwADAAMAB1AL8NMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAB1AHUAdQB1AHUAdQDHDTAAYABgAM8NMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAA1w11ANwNMAAwAD0B5A0wADAAMAAwADAAMADsDfQN/A0EDgwOFA4wABsOMAAwADAAMAAwADAAMAAwANIG0gbSBtIG0gbSBtIG0gYjDigOwQUuDsEFMw7SBjoO0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGQg5KDlIOVg7SBtIGXg5lDm0OdQ7SBtIGfQ6EDooOjQ6UDtIGmg6hDtIG0gaoDqwO0ga0DrwO0gZgAGAAYADEDmAAYAAkBtIGzA5gANIOYADaDokO0gbSBt8O5w7SBu8O0gb1DvwO0gZgAGAAxA7SBtIG0gbSBtIGYABgAGAAYAAED2AAsAUMD9IG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGFA8sBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAccD9IGLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHJA8sBywHLAcsBywHLAccDywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywPLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAc0D9IG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAccD9IG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIGFA8sBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHLAcsBywHPA/SBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gbSBtIG0gYUD0QPlQCVAJUAMAAwADAAMACVAJUAlQCVAJUAlQCVAEwPMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAA//8EAAQABAAEAAQABAAEAAQABAANAAMAAQABAAIABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQACgATABcAHgAbABoAHgAXABYAEgAeABsAGAAPABgAHABLAEsASwBLAEsASwBLAEsASwBLABgAGAAeAB4AHgATAB4AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQABYAGwASAB4AHgAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAWAA0AEQAeAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAFAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAJABYAGgAbABsAGwAeAB0AHQAeAE8AFwAeAA0AHgAeABoAGwBPAE8ADgBQAB0AHQAdAE8ATwAXAE8ATwBPABYAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAFAAUABQAFAAUABQAFAAUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAB4AHgAeAFAATwBAAE8ATwBPAEAATwBQAFAATwBQAB4AHgAeAB4AHgAeAB0AHQAdAB0AHgAdAB4ADgBQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgBQAB4AUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAJAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAkACQAJAAkACQAJAAkABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgAeAFAAHgAeAB4AKwArAFAAUABQAFAAGABQACsAKwArACsAHgAeAFAAHgBQAFAAUAArAFAAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAEAAQABAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAUAAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAYAA0AKwArAB4AHgAbACsABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQADQAEAB4ABAAEAB4ABAAEABMABAArACsAKwArACsAKwArACsAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAKwArACsAKwBWAFYAVgBWAB4AHgArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AGgAaABoAGAAYAB4AHgAEAAQABAAEAAQABAAEAAQABAAEAAQAEwAEACsAEwATAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABLAEsASwBLAEsASwBLAEsASwBLABoAGQAZAB4AUABQAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQABMAUAAEAAQABAAEAAQABAAEAB4AHgAEAAQABAAEAAQABABQAFAABAAEAB4ABAAEAAQABABQAFAASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUAAeAB4AUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAFAABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQAUABQAB4AHgAYABMAUAArACsABAAbABsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAFAABAAEAAQABAAEAFAABAAEAAQAUAAEAAQABAAEAAQAKwArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAArACsAHgArAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAB4ABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAUAAEAAQABAAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAABAAEAA0ADQBLAEsASwBLAEsASwBLAEsASwBLAB4AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAArAFAAUABQAFAAUABQAFAAUAArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUAArACsAKwBQAFAAUABQACsAKwAEAFAABAAEAAQABAAEAAQABAArACsABAAEACsAKwAEAAQABABQACsAKwArACsAKwArACsAKwAEACsAKwArACsAUABQACsAUABQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAFAAUAAaABoAUABQAFAAUABQAEwAHgAbAFAAHgAEACsAKwAEAAQABAArAFAAUABQAFAAUABQACsAKwArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQACsAUABQACsAKwAEACsABAAEAAQABAAEACsAKwArACsABAAEACsAKwAEAAQABAArACsAKwAEACsAKwArACsAKwArACsAUABQAFAAUAArAFAAKwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLAAQABABQAFAAUAAEAB4AKwArACsAKwArACsAKwArACsAKwAEAAQABAArAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQAFAAUABQACsAKwAEAFAABAAEAAQABAAEAAQABAAEACsABAAEAAQAKwAEAAQABAArACsAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAB4AGwArACsAKwArACsAKwArAFAABAAEAAQABAAEAAQAKwAEAAQABAArAFAAUABQAFAAUABQAFAAUAArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAArACsABAAEACsAKwAEAAQABAArACsAKwArACsAKwArAAQABAAEACsAKwArACsAUABQACsAUABQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAB4AUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArAAQAUAArAFAAUABQAFAAUABQACsAKwArAFAAUABQACsAUABQAFAAUAArACsAKwBQAFAAKwBQACsAUABQACsAKwArAFAAUAArACsAKwBQAFAAUAArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArAAQABAAEAAQABAArACsAKwAEAAQABAArAAQABAAEAAQAKwArAFAAKwArACsAKwArACsABAArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAUABQAFAAHgAeAB4AHgAeAB4AGwAeACsAKwArACsAKwAEAAQABAAEAAQAUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAUAAEAAQABAAEAAQABAAEACsABAAEAAQAKwAEAAQABAAEACsAKwArACsAKwArACsABAAEACsAUABQAFAAKwArACsAKwArAFAAUAAEAAQAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAKwAOAFAAUABQAFAAUABQAFAAHgBQAAQABAAEAA4AUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAKwArAAQAUAAEAAQABAAEAAQABAAEACsABAAEAAQAKwAEAAQABAAEACsAKwArACsAKwArACsABAAEACsAKwArACsAKwArACsAUAArAFAAUAAEAAQAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwBQAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAFAABAAEAAQABAAEAAQABAArAAQABAAEACsABAAEAAQABABQAB4AKwArACsAKwBQAFAAUAAEAFAAUABQAFAAUABQAFAAUABQAFAABAAEACsAKwBLAEsASwBLAEsASwBLAEsASwBLAFAAUABQAFAAUABQAFAAUABQABoAUABQAFAAUABQAFAAKwAEAAQABAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQACsAUAArACsAUABQAFAAUABQAFAAUAArACsAKwAEACsAKwArACsABAAEAAQABAAEAAQAKwAEACsABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArAAQABAAeACsAKwArACsAKwArACsAKwArACsAKwArAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAAqAFwAXAAqACoAKgAqACoAKgAqACsAKwArACsAGwBcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAeAEsASwBLAEsASwBLAEsASwBLAEsADQANACsAKwArACsAKwBcAFwAKwBcACsAXABcAFwAXABcACsAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACsAXAArAFwAXABcAFwAXABcAFwAXABcAFwAKgBcAFwAKgAqACoAKgAqACoAKgAqACoAXAArACsAXABcAFwAXABcACsAXAArACoAKgAqACoAKgAqACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwBcAFwAXABcAFAADgAOAA4ADgAeAA4ADgAJAA4ADgANAAkAEwATABMAEwATAAkAHgATAB4AHgAeAAQABAAeAB4AHgAeAB4AHgBLAEsASwBLAEsASwBLAEsASwBLAFAAUABQAFAAUABQAFAAUABQAFAADQAEAB4ABAAeAAQAFgARABYAEQAEAAQAUABQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQADQAEAAQABAAEAAQADQAEAAQAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABAArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArAA0ADQAeAB4AHgAeAB4AHgAEAB4AHgAeAB4AHgAeACsAHgAeAA4ADgANAA4AHgAeAB4AHgAeAAkACQArACsAKwArACsAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgBcAEsASwBLAEsASwBLAEsASwBLAEsADQANAB4AHgAeAB4AXABcAFwAXABcAFwAKgAqACoAKgBcAFwAXABcACoAKgAqAFwAKgAqACoAXABcACoAKgAqACoAKgAqACoAXABcAFwAKgAqACoAKgBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAqACoAKgAqAFwAKgBLAEsASwBLAEsASwBLAEsASwBLACoAKgAqACoAKgAqAFAAUABQAFAAUABQACsAUAArACsAKwArACsAUAArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgBQAFAAUABQAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAUAArACsAUABQAFAAUABQAFAAUAArAFAAKwBQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAKwArAFAAUABQAFAAUABQAFAAKwBQACsAUABQAFAAUAArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsABAAEAAQAHgANAB4AHgAeAB4AHgAeAB4AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUAArACsADQBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAANAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAWABEAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAA0ADQANAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAAQABAAEACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAANAA0AKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUAArAAQABAArACsAKwArACsAKwArACsAKwArACsAKwBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqAA0ADQAVAFwADQAeAA0AGwBcACoAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwAeAB4AEwATAA0ADQAOAB4AEwATAB4ABAAEAAQACQArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUAAEAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQAUAArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAArACsAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAHgArACsAKwATABMASwBLAEsASwBLAEsASwBLAEsASwBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAArACsAXABcAFwAXABcACsAKwArACsAKwArACsAKwArACsAKwBcAFwAXABcAFwAXABcAFwAXABcAFwAXAArACsAKwArAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAXAArACsAKwAqACoAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAArACsAHgAeAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcACoAKgAqACoAKgAqACoAKgAqACoAKwAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKwArAAQASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwArACsAKwArACoAKgAqACoAKgAqACoAXAAqACoAKgAqACoAKgArACsABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsABAAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABABQAFAAUABQAFAAUABQACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwANAA0AHgANAA0ADQANAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAEAAQABAAEAAQAHgAeAB4AHgAeAB4AHgAeAB4AKwArACsABAAEAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwAeAB4AHgAeAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArAA0ADQANAA0ADQBLAEsASwBLAEsASwBLAEsASwBLACsAKwArAFAAUABQAEsASwBLAEsASwBLAEsASwBLAEsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAA0ADQBQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUAAeAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArAAQABAAEAB4ABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAAQAUABQAFAAUABQAFAABABQAFAABAAEAAQAUAArACsAKwArACsABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsABAAEAAQABAAEAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAKwBQACsAUAArAFAAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArAB4AHgAeAB4AHgAeAB4AHgBQAB4AHgAeAFAAUABQACsAHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQACsAKwAeAB4AHgAeAB4AHgArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArAFAAUABQACsAHgAeAB4AHgAeAB4AHgAOAB4AKwANAA0ADQANAA0ADQANAAkADQANAA0ACAAEAAsABAAEAA0ACQANAA0ADAAdAB0AHgAXABcAFgAXABcAFwAWABcAHQAdAB4AHgAUABQAFAANAAEAAQAEAAQABAAEAAQACQAaABoAGgAaABoAGgAaABoAHgAXABcAHQAVABUAHgAeAB4AHgAeAB4AGAAWABEAFQAVABUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ADQAeAA0ADQANAA0AHgANAA0ADQAHAB4AHgAeAB4AKwAEAAQABAAEAAQABAAEAAQABAAEAFAAUAArACsATwBQAFAAUABQAFAAHgAeAB4AFgARAE8AUABPAE8ATwBPAFAAUABQAFAAUAAeAB4AHgAWABEAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArABsAGwAbABsAGwAbABsAGgAbABsAGwAbABsAGwAbABsAGwAbABsAGwAbABsAGgAbABsAGwAbABoAGwAbABoAGwAbABsAGwAbABsAGwAbABsAGwAbABsAGwAbABsAGwAbAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAHgAeAFAAGgAeAB0AHgBQAB4AGgAeAB4AHgAeAB4AHgAeAB4AHgBPAB4AUAAbAB4AHgBQAFAAUABQAFAAHgAeAB4AHQAdAB4AUAAeAFAAHgBQAB4AUABPAFAAUAAeAB4AHgAeAB4AHgAeAFAAUABQAFAAUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAAHgBQAFAAUABQAE8ATwBQAFAAUABQAFAATwBQAFAATwBQAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAFAAUABQAFAATwBPAE8ATwBPAE8ATwBPAE8ATwBQAFAAUABQAFAAUABQAFAAUAAeAB4AUABQAFAAUABPAB4AHgArACsAKwArAB0AHQAdAB0AHQAdAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB4AHQAdAB4AHgAeAB0AHQAeAB4AHQAeAB4AHgAdAB4AHQAbABsAHgAdAB4AHgAeAB4AHQAeAB4AHQAdAB0AHQAeAB4AHQAeAB0AHgAdAB0AHQAdAB0AHQAeAB0AHgAeAB4AHgAeAB0AHQAdAB0AHgAeAB4AHgAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB4AHgAeAB0AHgAeAB4AHgAeAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHgAeAB0AHQAdAB0AHgAeAB0AHQAeAB4AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHQAeAB4AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHQAeAB4AHgAdAB4AHgAeAB4AHgAeAB4AHQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AFAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeABYAEQAWABEAHgAeAB4AHgAeAB4AHQAeAB4AHgAeAB4AHgAeACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAWABEAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAFAAHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHgAeAB4AHgAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAeAB4AHQAdAB0AHQAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHQAeAB0AHQAdAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB0AHQAeAB4AHQAdAB4AHgAeAB4AHQAdAB4AHgAeAB4AHQAdAB0AHgAeAB0AHgAeAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlAB4AHQAdAB4AHgAdAB4AHgAeAB4AHQAdAB4AHgAeAB4AJQAlAB0AHQAlAB4AJQAlACUAIAAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAeAB4AHgAeAB0AHgAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHgAdAB0AHQAeAB0AJQAdAB0AHgAdAB0AHgAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHQAdAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACUAJQAlACUAJQAdAB0AHQAdACUAHgAlACUAJQAdACUAJQAdAB0AHQAlACUAHQAdACUAHQAdACUAJQAlAB4AHQAeAB4AHgAeAB0AHQAlAB0AHQAdAB0AHQAdACUAJQAlACUAJQAdACUAJQAgACUAHQAdACUAJQAlACUAJQAlACUAJQAeAB4AHgAlACUAIAAgACAAIAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB0AHgAeAB4AFwAXABcAFwAXABcAHgATABMAJQAeAB4AHgAWABEAFgARABYAEQAWABEAFgARABYAEQAWABEATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeABYAEQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAWABEAFgARABYAEQAWABEAFgARAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AFgARABYAEQAWABEAFgARABYAEQAWABEAFgARABYAEQAWABEAFgARABYAEQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAWABEAFgARAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AFgARAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAdAB0AHQAdAB0AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AUABQAFAAUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAEAAQABAAeAB4AKwArACsAKwArABMADQANAA0AUAATAA0AUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAUAANACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAA0ADQANAA0ADQANAA0ADQAeAA0AFgANAB4AHgAXABcAHgAeABcAFwAWABEAFgARABYAEQAWABEADQANAA0ADQATAFAADQANAB4ADQANAB4AHgAeAB4AHgAMAAwADQANAA0AHgANAA0AFgANAA0ADQANAA0ADQANAA0AHgANAB4ADQANAB4AHgAeACsAKwArACsAKwArACsAKwArACsAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAKwArACsAKwArACsAKwArACsAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAlACUAJQAlACUAJQAlACUAJQAlACUAJQArACsAKwArAA0AEQARACUAJQBHAFcAVwAWABEAFgARABYAEQAWABEAFgARACUAJQAWABEAFgARABYAEQAWABEAFQAWABEAEQAlAFcAVwBXAFcAVwBXAFcAVwBXAAQABAAEAAQABAAEACUAVwBXAFcAVwA2ACUAJQBXAFcAVwBHAEcAJQAlACUAKwBRAFcAUQBXAFEAVwBRAFcAUQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFEAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBRAFcAUQBXAFEAVwBXAFcAVwBXAFcAUQBXAFcAVwBXAFcAVwBRAFEAKwArAAQABAAVABUARwBHAFcAFQBRAFcAUQBXAFEAVwBRAFcAUQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFEAVwBRAFcAUQBXAFcAVwBXAFcAVwBRAFcAVwBXAFcAVwBXAFEAUQBXAFcAVwBXABUAUQBHAEcAVwArACsAKwArACsAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAKwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAKwAlACUAVwBXAFcAVwAlACUAJQAlACUAJQAlACUAJQAlACsAKwArACsAKwArACsAKwArACsAKwArAFEAUQBRAFEAUQBRAFEAUQBRAFEAUQBRAFEAUQBRAFEAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQArAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQBPAE8ATwBPAE8ATwBPAE8AJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACUAJQAlAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAEcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAADQATAA0AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABLAEsASwBLAEsASwBLAEsASwBLAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAABAAEAAQABAAeAAQABAAEAAQABAAEAAQABAAEAAQAHgBQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AUABQAAQABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAeAA0ADQANAA0ADQArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AUAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAB4AHgAeAB4AHgAeAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAHgAeAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAeAB4AUABQAFAAUABQAFAAUABQAFAAUABQAAQAUABQAFAABABQAFAAUABQAAQAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAeAB4AHgAeAAQAKwArACsAUABQAFAAUABQAFAAHgAeABoAHgArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAADgAOABMAEwArACsAKwArACsAKwArACsABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwANAA0ASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArACsAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAFAAUAAeAB4AHgBQAA4AUABQAAQAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAA0ADQBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArACsAKwArACsAKwArAB4AWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYAFgAWABYACsAKwArAAQAHgAeAB4AHgAeAB4ADQANAA0AHgAeAB4AHgArAFAASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArAB4AHgBcAFwAXABcAFwAKgBcAFwAXABcAFwAXABcAFwAXABcAEsASwBLAEsASwBLAEsASwBLAEsAXABcAFwAXABcACsAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwArAFAAUABQAAQAUABQAFAAUABQAFAAUABQAAQABAArACsASwBLAEsASwBLAEsASwBLAEsASwArACsAHgANAA0ADQBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAKgAqACoAXAAqACoAKgBcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXAAqAFwAKgAqACoAXABcACoAKgBcAFwAXABcAFwAKgAqAFwAKgBcACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFwAXABcACoAKgBQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAA0ADQBQAFAAUAAEAAQAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUAArACsAUABQAFAAUABQAFAAKwArAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQADQAEAAQAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAVABVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBUAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVAFUAVQBVACsAKwArACsAKwArACsAKwArACsAKwArAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAWQBZAFkAKwArACsAKwBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAWgBaAFoAKwArACsAKwAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYABgAGAAYAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAKwArACsAKwArAFYABABWAFYAVgBWAFYAVgBWAFYAVgBWAB4AVgBWAFYAVgBWAFYAVgBWAFYAVgBWAFYAVgArAFYAVgBWAFYAVgArAFYAKwBWAFYAKwBWAFYAKwBWAFYAVgBWAFYAVgBWAFYAVgBWAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAEQAWAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUAAaAB4AKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAGAARABEAGAAYABMAEwAWABEAFAArACsAKwArACsAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACUAJQAlACUAJQAWABEAFgARABYAEQAWABEAFgARABYAEQAlACUAFgARACUAJQAlACUAJQAlACUAEQAlABEAKwAVABUAEwATACUAFgARABYAEQAWABEAJQAlACUAJQAlACUAJQAlACsAJQAbABoAJQArACsAKwArAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAcAKwATACUAJQAbABoAJQAlABYAEQAlACUAEQAlABEAJQBXAFcAVwBXAFcAVwBXAFcAVwBXABUAFQAlACUAJQATACUAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXABYAJQARACUAJQAlAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwAWACUAEQAlABYAEQARABYAEQARABUAVwBRAFEAUQBRAFEAUQBRAFEAUQBRAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAEcARwArACsAVwBXAFcAVwBXAFcAKwArAFcAVwBXAFcAVwBXACsAKwBXAFcAVwBXAFcAVwArACsAVwBXAFcAKwArACsAGgAbACUAJQAlABsAGwArAB4AHgAeAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwAEAAQABAAQAB0AKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsADQANAA0AKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAB4AHgAeAB4AHgAeAB4AHgAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAAQAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAA0AUABQAFAAUAArACsAKwArAFAAUABQAFAAUABQAFAAUAANAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwAeACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAKwArAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUAArACsAKwBQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwANAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAB4AUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUAArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArAA0AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAUABQAFAAUABQAAQABAAEACsABAAEACsAKwArACsAKwAEAAQABAAEAFAAUABQAFAAKwBQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAQABAAEACsAKwArACsABABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAA0ADQANAA0ADQANAA0ADQAeACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAFAAUABQAFAAUABQAFAAUAAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAArACsAKwArAFAAUABQAFAAUAANAA0ADQANAA0ADQAUACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsADQANAA0ADQANAA0ADQBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAB4AHgAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAAQABAAEAAQAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUAArAAQABAANACsAKwBQAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAB4AHgAeAB4AHgArACsAKwArACsAKwAEAAQABAAEAAQABAAEAA0ADQAeAB4AHgAeAB4AKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgANAA0ADQANACsAKwArACsAKwArACsAKwArACsAKwAeACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwArACsAKwArAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEACsASwBLAEsASwBLAEsASwBLAEsASwANAA0ADQANAFAABAAEAFAAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAeAA4AUAArACsAKwArACsAKwArACsAKwAEAFAAUABQAFAADQANAB4ADQAEAAQABAAEAB4ABAAEAEsASwBLAEsASwBLAEsASwBLAEsAUAAOAFAADQANAA0AKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAANAA0AHgANAA0AHgAEACsAUABQAFAAUABQAFAAUAArAFAAKwBQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAA0AKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsABAAEAAQABAArAFAAUABQAFAAUABQAFAAUAArACsAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQAFAAUABQACsABAAEAFAABAAEAAQABAAEAAQABAArACsABAAEACsAKwAEAAQABAArACsAUAArACsAKwArACsAKwAEACsAKwArACsAKwBQAFAAUABQAFAABAAEACsAKwAEAAQABAAEAAQABAAEACsAKwArAAQABAAEAAQABAArACsAKwArACsAKwArACsAKwArACsABAAEAAQABAAEAAQABABQAFAAUABQAA0ADQANAA0AHgBLAEsASwBLAEsASwBLAEsASwBLAA0ADQArAB4ABABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAAQABAAEAFAAUAAeAFAAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAArACsABAAEAAQABAAEAAQABAAEAAQADgANAA0AEwATAB4AHgAeAA0ADQANAA0ADQANAA0ADQANAA0ADQANAA0ADQANAFAAUABQAFAABAAEACsAKwAEAA0ADQAeAFAAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAFAAKwArACsAKwArACsAKwBLAEsASwBLAEsASwBLAEsASwBLACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAXABcAFwAKwArACoAKgAqACoAKgAqACoAKgAqACoAKgAqACoAKgAqACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwBcAFwADQANAA0AKgBQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAKwArAFAAKwArAFAAUABQAFAAUABQAFAAUAArAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQAKwAEAAQAKwArAAQABAAEAAQAUAAEAFAABAAEAA0ADQANACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAArACsABAAEAAQABAAEAAQABABQAA4AUAAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAABAAEAAQABAAEAAQABAAEAAQABABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAFAABAAEAAQABAAOAB4ADQANAA0ADQAOAB4ABAArACsAKwArACsAKwArACsAUAAEAAQABAAEAAQABAAEAAQABAAEAAQAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAA0ADQANAFAADgAOAA4ADQANACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAEAAQABAAEACsABAAEAAQABAAEAAQABAAEAFAADQANAA0ADQANACsAKwArACsAKwArACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwAOABMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQACsAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAArACsAKwAEACsABAAEACsABAAEAAQABAAEAAQABABQAAQAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAUABQAFAAUABQAFAAKwBQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQAKwAEAAQAKwAEAAQABAAEAAQAUAArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAABAAEAAQABAAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAaABoAGgAaAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArACsAKwArAA0AUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsADQANAA0ADQANACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAASABIAEgAQwBDAEMAUABQAFAAUABDAFAAUABQAEgAQwBIAEMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAASABDAEMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwAJAAkACQAJAAkACQAJABYAEQArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABIAEMAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwANAA0AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArAAQABAAEAAQABAANACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEAA0ADQANAB4AHgAeAB4AHgAeAFAAUABQAFAADQAeACsAKwArACsAKwArACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwArAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAANAA0AHgAeACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwAEAFAABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArACsAKwAEAAQABAAEAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAARwBHABUARwAJACsAKwArACsAKwArACsAKwArACsAKwAEAAQAKwArACsAKwArACsAKwArACsAKwArACsAKwArAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACsAKwArACsAKwArACsAKwBXAFcAVwBXAFcAVwBXAFcAVwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUQBRAFEAKwArACsAKwArACsAKwArACsAKwArACsAKwBRAFEAUQBRACsAKwArACsAKwArACsAKwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUAArACsAHgAEAAQADQAEAAQABAAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArAB4AHgAeAB4AHgAeAB4AKwArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAAQABAAEAAQABAAeAB4AHgAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAB4AHgAEAAQABAAEAAQABAAEAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQABAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4ABAAEAAQAHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwArACsAKwArACsAKwArACsAKwArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwBQAFAAKwArAFAAKwArAFAAUAArACsAUABQAFAAUAArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACsAUAArAFAAUABQAFAAUABQAFAAKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwBQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAHgAeAFAAUABQAFAAUAArAFAAKwArACsAUABQAFAAUABQAFAAUAArAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAB4AHgAeAB4AHgAeAB4AHgAeACsAKwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAEsASwBLAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgAeAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAeAB4AHgAeAB4AHgAeAB4ABAAeAB4AHgAeAB4AHgAeAB4AHgAeAAQAHgAeAA0ADQANAA0AHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAEAAQABAAEAAQAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAEAAQAKwAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArAAQABAAEAAQABAAEAAQAKwAEAAQAKwAEAAQABAAEAAQAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwAEAAQABAAEAAQABAAEAFAAUABQAFAAUABQAFAAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwBQAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArABsAUABQAFAAUABQACsAKwBQAFAAUABQAFAAUABQAFAAUAAEAAQABAAEAAQABAAEACsAKwArACsAKwArACsAKwArAB4AHgAeAB4ABAAEAAQABAAEAAQABABQACsAKwArACsASwBLAEsASwBLAEsASwBLAEsASwArACsAKwArABYAFgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAGgBQAFAAUAAaAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAeAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQACsAKwBQAFAAUABQACsAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwBQAFAAKwBQACsAKwBQACsAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAKwBQACsAUAArACsAKwArACsAKwBQACsAKwArACsAUAArAFAAKwBQACsAUABQAFAAKwBQAFAAKwBQACsAKwBQACsAUAArAFAAKwBQACsAUAArAFAAUAArAFAAKwArAFAAUABQAFAAKwBQAFAAUABQAFAAUABQACsAUABQAFAAUAArAFAAUABQAFAAKwBQACsAUABQAFAAUABQAFAAUABQAFAAUAArAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAArACsAKwArACsAUABQAFAAKwBQAFAAUABQAFAAKwBQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwAeAB4AKwArACsAKwArACsAKwArACsAKwArACsAKwArAE8ATwBPAE8ATwBPAE8ATwBPAE8ATwBPAE8AJQAlACUAHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHgAeAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB4AHgAeACUAJQAlAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAdAB0AHQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAKQApACkAJQAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlAB4AHgAlACUAJQAlACUAHgAlACUAJQAlACUAIAAgACAAJQAlACAAJQAlACAAIAAgACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACEAIQAhACEAIQAlACUAIAAgACUAJQAgACAAIAAgACAAIAAgACAAIAAgACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAJQAlACUAIAAlACUAJQAlACAAIAAgACUAIAAgACAAJQAlACUAJQAlACUAJQAgACUAIAAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAlAB4AJQAeACUAJQAlACUAJQAgACUAJQAlACUAHgAlAB4AHgAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAJQAlACUAJQAgACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACAAIAAgACUAJQAlACAAIAAgACAAIAAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeABcAFwAXABUAFQAVAB4AHgAeAB4AJQAlACUAIAAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAgACUAJQAlACUAJQAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlACUAJQAeAB4AHgAeAB4AHgAeAB4AHgAeACUAJQAlACUAJQAlAB4AHgAeAB4AHgAeAB4AHgAlACUAJQAlACUAJQAlACUAHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAgACUAJQAgACUAJQAlACUAJQAlACUAJQAgACAAIAAgACAAIAAgACAAJQAlACUAJQAlACUAIAAlACUAJQAlACUAJQAlACUAJQAgACAAIAAgACAAIAAgACAAIAAgACUAJQAgACAAIAAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAgACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACAAIAAlACAAIAAlACAAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAgACAAIAAlACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAJQAlAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AKwAeAB4AHgAeAB4AHgAeAB4AHgAeAB4AHgArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAEsASwBLAEsASwBLAEsASwBLAEsAKwArACsAKwArACsAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAKwArAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwAlACUAJQAlACUAJQAlACUAJQAlACUAVwBXACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAJQAlACUAKwAEACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArACsAKwArAA=="), ft = [qt, 36], Tr = [1, 2, 3, 5], Eo = [Qt, 8], fs = [Ce, me], Lc = Tr.concat(Eo), ps = [kr, ui, di, Er, _r], Dc = [we, xr], rr = function(e, t, r, a) {
   var g = a[r];
   if (Array.isArray(e) ? e.indexOf(g) !== -1 : e === g)
     for (var p = r; p <= a.length; ) {
@@ -2078,7 +2078,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     return fA;
   if (Bs(p, t) === 8)
     return Ze;
-  if (Sr.get(e[p]) === 11 || (y === Je || y === qe) && Sr.get(e[C]) === 11 || y === 7 || b === 7 || y === 9 || [Qt, xr, we].indexOf(y) === -1 && b === 9 || [ze, de, Hc, jt, Vt].indexOf(b) !== -1 || Bs(p, t) === ge || rr(23, ge, p, t) || rr([ze, de], Ur, p, t) || rr(12, 12, p, t))
+  if (Sr.get(e[p]) === 11 || (y === Je || y === qe) && Sr.get(e[C]) === 11 || y === 7 || b === 7 || y === 9 || [Qt, xr, we].indexOf(y) === -1 && b === 9 || [ze, de, Hc, jt, Gt].indexOf(b) !== -1 || Bs(p, t) === ge || rr(23, ge, p, t) || rr([ze, de], Ur, p, t) || rr(12, 12, p, t))
     return fA;
   if (y === Qt)
     return Ze;
@@ -2086,26 +2086,26 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     return fA;
   if (b === 16 || y === 16)
     return Ze;
-  if ([xr, we, Ur].indexOf(b) !== -1 || y === 14 || Q === 36 && Dc.indexOf(y) !== -1 || y === Vt && b === 36 || b === ds || ft.indexOf(b) !== -1 && y === NA || ft.indexOf(y) !== -1 && b === NA || y === Ce && [Fe, Je, qe].indexOf(b) !== -1 || [Fe, Je, qe].indexOf(y) !== -1 && b === me || ft.indexOf(y) !== -1 && fs.indexOf(b) !== -1 || fs.indexOf(y) !== -1 && ft.indexOf(b) !== -1 || [Ce, me].indexOf(y) !== -1 && (b === NA || [ge, we].indexOf(b) !== -1 && t[C + 1] === NA) || [ge, we].indexOf(y) !== -1 && b === NA || y === NA && [NA, Vt, jt].indexOf(b) !== -1)
+  if ([xr, we, Ur].indexOf(b) !== -1 || y === 14 || Q === 36 && Dc.indexOf(y) !== -1 || y === Gt && b === 36 || b === ds || ft.indexOf(b) !== -1 && y === VA || ft.indexOf(y) !== -1 && b === VA || y === Ce && [Fe, Je, qe].indexOf(b) !== -1 || [Fe, Je, qe].indexOf(y) !== -1 && b === me || ft.indexOf(y) !== -1 && fs.indexOf(b) !== -1 || fs.indexOf(y) !== -1 && ft.indexOf(b) !== -1 || [Ce, me].indexOf(y) !== -1 && (b === VA || [ge, we].indexOf(b) !== -1 && t[C + 1] === VA) || [ge, we].indexOf(y) !== -1 && b === VA || y === VA && [VA, Gt, jt].indexOf(b) !== -1)
     return fA;
-  if ([NA, Vt, jt, ze, de].indexOf(b) !== -1)
+  if ([VA, Gt, jt, ze, de].indexOf(b) !== -1)
     for (var E = p; E >= 0; ) {
-      if ((S = t[E]) === NA)
+      if ((S = t[E]) === VA)
         return fA;
-      if ([Vt, jt].indexOf(S) === -1)
+      if ([Gt, jt].indexOf(S) === -1)
         break;
       E--;
     }
   if ([Ce, me].indexOf(b) !== -1)
     for (E = [ze, de].indexOf(y) !== -1 ? w : p; E >= 0; ) {
       var S;
-      if ((S = t[E]) === NA)
+      if ((S = t[E]) === VA)
         return fA;
-      if ([Vt, jt].indexOf(S) === -1)
+      if ([Gt, jt].indexOf(S) === -1)
         break;
       E--;
     }
-  if (_r === y && [_r, ui, Er, kr].indexOf(b) !== -1 || [ui, Er].indexOf(y) !== -1 && [ui, di].indexOf(b) !== -1 || [di, kr].indexOf(y) !== -1 && b === di || ps.indexOf(y) !== -1 && [ds, me].indexOf(b) !== -1 || ps.indexOf(b) !== -1 && y === Ce || ft.indexOf(y) !== -1 && ft.indexOf(b) !== -1 || y === jt && ft.indexOf(b) !== -1 || ft.concat(NA).indexOf(y) !== -1 && b === ge && Oc.indexOf(e[C]) === -1 || ft.concat(NA).indexOf(b) !== -1 && y === de)
+  if (kr === y && [kr, ui, Er, _r].indexOf(b) !== -1 || [ui, Er].indexOf(y) !== -1 && [ui, di].indexOf(b) !== -1 || [di, _r].indexOf(y) !== -1 && b === di || ps.indexOf(y) !== -1 && [ds, me].indexOf(b) !== -1 || ps.indexOf(b) !== -1 && y === Ce || ft.indexOf(y) !== -1 && ft.indexOf(b) !== -1 || y === jt && ft.indexOf(b) !== -1 || ft.concat(VA).indexOf(y) !== -1 && b === ge && Oc.indexOf(e[C]) === -1 || ft.concat(VA).indexOf(b) !== -1 && y === de)
     return fA;
   if (y === 41 && b === 41) {
     for (var L = r[p], H = 1; L > 0 && t[--L] === 41; )
@@ -2133,7 +2133,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     }), [b, Q, E];
   }(e, t.lineBreak), a = r[0], g = r[1], p = r[2];
   t.wordBreak !== "break-all" && t.wordBreak !== "break-word" || (g = g.map(function(C) {
-    return [NA, qt, gs].indexOf(C) !== -1 ? Fe : C;
+    return [VA, qt, gs].indexOf(C) !== -1 ? Fe : C;
   }));
   var w = t.wordBreak === "keep-all" ? p.map(function(C, y) {
     return C && e[y] >= 19968 && e[y] <= 40959;
@@ -2144,11 +2144,11 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     this.codePoints = t, this.required = r === "!", this.start = a, this.end = g;
   }
   return e.prototype.slice = function() {
-    return kA.apply(void 0, this.codePoints.slice(this.start, this.end));
+    return _A.apply(void 0, this.codePoints.slice(this.start, this.end));
   }, e;
-}(), GA = 45, Lt = 43, ot = -1, jA = function(e) {
+}(), NA = 45, Lt = 43, ot = -1, jA = function(e) {
   return e >= 48 && e <= 57;
-}, Gt = function(e) {
+}, Nt = function(e) {
   return jA(e) || e >= 65 && e <= 70 || e >= 97 && e <= 102;
 }, $e = function(e) {
   return e === 10 || e === 9 || e === 32;
@@ -2163,33 +2163,33 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     return t >= 128;
   }(e) || e === 95;
 }, ws = function(e) {
-  return bi(e) || jA(e) || e === GA;
+  return bi(e) || jA(e) || e === NA;
 }, Kc = function(e) {
   return e >= 0 && e <= 8 || e === 11 || e >= 14 && e <= 31 || e === 127;
 }, bt = function(e, t) {
   return e === 92 && t !== 10;
 }, Ai = function(e, t, r) {
-  return e === GA ? bi(t) || bt(t, r) : !!bi(e) || !(e !== 92 || !bt(e, t));
+  return e === NA ? bi(t) || bt(t, r) : !!bi(e) || !(e !== 92 || !bt(e, t));
 }, nr = function(e, t, r) {
-  return e === Lt || e === GA ? !!jA(t) || t === 46 && jA(r) : jA(e === 46 ? t : e);
+  return e === Lt || e === NA ? !!jA(t) || t === 46 && jA(r) : jA(e === 46 ? t : e);
 }, jc = function(e) {
   var t = 0, r = 1;
-  e[t] !== Lt && e[t] !== GA || (e[t] === GA && (r = -1), t++);
+  e[t] !== Lt && e[t] !== NA || (e[t] === NA && (r = -1), t++);
   for (var a = []; jA(e[t]); )
     a.push(e[t++]);
-  var g = a.length ? parseInt(kA.apply(void 0, a), 10) : 0;
+  var g = a.length ? parseInt(_A.apply(void 0, a), 10) : 0;
   e[t] === 46 && t++;
   for (var p = []; jA(e[t]); )
     p.push(e[t++]);
-  var w = p.length, C = w ? parseInt(kA.apply(void 0, p), 10) : 0;
+  var w = p.length, C = w ? parseInt(_A.apply(void 0, p), 10) : 0;
   e[t] !== 69 && e[t] !== 101 || t++;
   var y = 1;
-  e[t] !== Lt && e[t] !== GA || (e[t] === GA && (y = -1), t++);
+  e[t] !== Lt && e[t] !== NA || (e[t] === NA && (y = -1), t++);
   for (var Q = []; jA(e[t]); )
     Q.push(e[t++]);
-  var b = Q.length ? parseInt(kA.apply(void 0, Q), 10) : 0;
+  var b = Q.length ? parseInt(_A.apply(void 0, Q), 10) : 0;
   return r * (g + C * Math.pow(10, -w)) * Math.pow(10, y * b);
-}, Vc = { type: 2 }, Gc = { type: 3 }, Nc = { type: 4 }, Xc = { type: 13 }, Wc = { type: 8 }, Yc = { type: 21 }, zc = { type: 9 }, Jc = { type: 10 }, qc = { type: 11 }, Zc = { type: 12 }, $c = { type: 14 }, ti = { type: 23 }, Al = { type: 1 }, tl = { type: 25 }, el = { type: 24 }, il = { type: 26 }, rl = { type: 27 }, nl = { type: 28 }, sl = { type: 29 }, ol = { type: 31 }, Ir = { type: 32 }, ko = function() {
+}, Gc = { type: 2 }, Nc = { type: 3 }, Vc = { type: 4 }, Xc = { type: 13 }, Wc = { type: 8 }, Yc = { type: 21 }, zc = { type: 9 }, Jc = { type: 10 }, qc = { type: 11 }, Zc = { type: 12 }, $c = { type: 14 }, ti = { type: 23 }, Al = { type: 1 }, tl = { type: 25 }, el = { type: 24 }, il = { type: 26 }, rl = { type: 27 }, nl = { type: 28 }, sl = { type: 29 }, ol = { type: 31 }, Ir = { type: 32 }, _o = function() {
   function e() {
     this._value = [];
   }
@@ -2218,9 +2218,9 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
       case 39:
         return this.consumeStringToken(39);
       case 40:
-        return Vc;
-      case 41:
         return Gc;
+      case 41:
+        return Nc;
       case 42:
         if (this.peekCodePoint(0) === 61)
           return this.consumeCodePoint(), $c;
@@ -2230,14 +2230,14 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
           return this.reconsumeCodePoint(t), this.consumeNumericToken();
         break;
       case 44:
-        return Nc;
-      case GA:
+        return Vc;
+      case NA:
         var w = t, C = this.peekCodePoint(0), y = this.peekCodePoint(1);
         if (nr(w, C, y))
           return this.reconsumeCodePoint(t), this.consumeNumericToken();
         if (Ai(w, C, y))
           return this.reconsumeCodePoint(t), this.consumeIdentLikeToken();
-        if (C === GA && y === 62)
+        if (C === NA && y === 62)
           return this.consumeCodePoint(), this.consumeCodePoint(), el;
         break;
       case 46:
@@ -2259,7 +2259,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
       case 59:
         return rl;
       case 60:
-        if (this.peekCodePoint(0) === 33 && this.peekCodePoint(1) === GA && this.peekCodePoint(2) === GA)
+        if (this.peekCodePoint(0) === 33 && this.peekCodePoint(1) === NA && this.peekCodePoint(2) === NA)
           return this.consumeCodePoint(), this.consumeCodePoint(), tl;
         break;
       case 64:
@@ -2286,7 +2286,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
       case 117:
       case 85:
         var L = this.peekCodePoint(0), H = this.peekCodePoint(1);
-        return L !== Lt || !Gt(H) && H !== 63 || (this.consumeCodePoint(), this.consumeUnicodeRangeToken()), this.reconsumeCodePoint(t), this.consumeIdentLikeToken();
+        return L !== Lt || !Nt(H) && H !== 63 || (this.consumeCodePoint(), this.consumeUnicodeRangeToken()), this.reconsumeCodePoint(t), this.consumeIdentLikeToken();
       case 124:
         if (this.peekCodePoint(0) === 61)
           return this.consumeCodePoint(), zc;
@@ -2300,7 +2300,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
       case ot:
         return Ir;
     }
-    return $e(t) ? (this.consumeWhiteSpace(), ol) : jA(t) ? (this.reconsumeCodePoint(t), this.consumeNumericToken()) : bi(t) ? (this.reconsumeCodePoint(t), this.consumeIdentLikeToken()) : { type: 6, value: kA(t) };
+    return $e(t) ? (this.consumeWhiteSpace(), ol) : jA(t) ? (this.reconsumeCodePoint(t), this.consumeNumericToken()) : bi(t) ? (this.reconsumeCodePoint(t), this.consumeIdentLikeToken()) : { type: 6, value: _A(t) };
   }, e.prototype.consumeCodePoint = function() {
     var t = this._value.shift();
     return t === void 0 ? -1 : t;
@@ -2309,22 +2309,22 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
   }, e.prototype.peekCodePoint = function(t) {
     return t >= this._value.length ? -1 : this._value[t];
   }, e.prototype.consumeUnicodeRangeToken = function() {
-    for (var t = [], r = this.consumeCodePoint(); Gt(r) && t.length < 6; )
+    for (var t = [], r = this.consumeCodePoint(); Nt(r) && t.length < 6; )
       t.push(r), r = this.consumeCodePoint();
     for (var a = !1; r === 63 && t.length < 6; )
       t.push(r), r = this.consumeCodePoint(), a = !0;
     if (a)
-      return { type: 30, start: parseInt(kA.apply(void 0, t.map(function(w) {
+      return { type: 30, start: parseInt(_A.apply(void 0, t.map(function(w) {
         return w === 63 ? 48 : w;
-      })), 16), end: parseInt(kA.apply(void 0, t.map(function(w) {
+      })), 16), end: parseInt(_A.apply(void 0, t.map(function(w) {
         return w === 63 ? 70 : w;
       })), 16) };
-    var g = parseInt(kA.apply(void 0, t), 16);
-    if (this.peekCodePoint(0) === GA && Gt(this.peekCodePoint(1))) {
+    var g = parseInt(_A.apply(void 0, t), 16);
+    if (this.peekCodePoint(0) === NA && Nt(this.peekCodePoint(1))) {
       this.consumeCodePoint(), r = this.consumeCodePoint();
-      for (var p = []; Gt(r) && p.length < 6; )
+      for (var p = []; Nt(r) && p.length < 6; )
         p.push(r), r = this.consumeCodePoint();
-      return { type: 30, start: g, end: parseInt(kA.apply(void 0, p), 16) };
+      return { type: 30, start: g, end: parseInt(_A.apply(void 0, p), 16) };
     }
     return { type: 30, start: g, end: g };
   }, e.prototype.consumeIdentLikeToken = function() {
@@ -2342,9 +2342,9 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     for (; ; ) {
       var g = this.consumeCodePoint();
       if (g === ot || g === 41)
-        return { type: 22, value: kA.apply(void 0, t) };
+        return { type: 22, value: _A.apply(void 0, t) };
       if ($e(g))
-        return this.consumeWhiteSpace(), this.peekCodePoint(0) === ot || this.peekCodePoint(0) === 41 ? (this.consumeCodePoint(), { type: 22, value: kA.apply(void 0, t) }) : (this.consumeBadUrlRemnants(), ti);
+        return this.consumeWhiteSpace(), this.peekCodePoint(0) === ot || this.peekCodePoint(0) === 41 ? (this.consumeCodePoint(), { type: 22, value: _A.apply(void 0, t) }) : (this.consumeBadUrlRemnants(), ti);
       if (g === 34 || g === 39 || g === 40 || Kc(g))
         return this.consumeBadUrlRemnants(), ti;
       if (g === 92) {
@@ -2367,7 +2367,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
   }, e.prototype.consumeStringSlice = function(t) {
     for (var r = ""; t > 0; ) {
       var a = Math.min(5e4, t);
-      r += kA.apply(void 0, this._value.splice(0, a)), t -= a;
+      r += _A.apply(void 0, this._value.splice(0, a)), t -= a;
     }
     return this._value.shift(), r;
   }, e.prototype.consumeStringToken = function(t) {
@@ -2379,13 +2379,13 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
         return this._value.splice(0, a), Al;
       if (g === 92) {
         var p = this._value[a + 1];
-        p !== ot && p !== void 0 && (p === 10 ? (r += this.consumeStringSlice(a), a = -1, this._value.shift()) : bt(g, p) && (r += this.consumeStringSlice(a), r += kA(this.consumeEscapedCodePoint()), a = -1));
+        p !== ot && p !== void 0 && (p === 10 ? (r += this.consumeStringSlice(a), a = -1, this._value.shift()) : bt(g, p) && (r += this.consumeStringSlice(a), r += _A(this.consumeEscapedCodePoint()), a = -1));
       }
       a++;
     }
   }, e.prototype.consumeNumber = function() {
     var t = [], r = 4, a = this.peekCodePoint(0);
-    for (a !== Lt && a !== GA || t.push(this.consumeCodePoint()); jA(this.peekCodePoint(0)); )
+    for (a !== Lt && a !== NA || t.push(this.consumeCodePoint()); jA(this.peekCodePoint(0)); )
       t.push(this.consumeCodePoint());
     a = this.peekCodePoint(0);
     var g = this.peekCodePoint(1);
@@ -2394,7 +2394,7 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
         t.push(this.consumeCodePoint());
     a = this.peekCodePoint(0), g = this.peekCodePoint(1);
     var p = this.peekCodePoint(2);
-    if ((a === 69 || a === 101) && ((g === Lt || g === GA) && jA(p) || jA(g)))
+    if ((a === 69 || a === 101) && ((g === Lt || g === NA) && jA(p) || jA(g)))
       for (t.push(this.consumeCodePoint(), this.consumeCodePoint()), r = 8; jA(this.peekCodePoint(0)); )
         t.push(this.consumeCodePoint());
     return [jc(t), r];
@@ -2403,9 +2403,9 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     return Ai(g, p, w) ? { type: 15, number: r, flags: a, unit: this.consumeName() } : g === 37 ? (this.consumeCodePoint(), { type: 16, number: r, flags: a }) : { type: 17, number: r, flags: a };
   }, e.prototype.consumeEscapedCodePoint = function() {
     var t = this.consumeCodePoint();
-    if (Gt(t)) {
-      for (var r = kA(t); Gt(this.peekCodePoint(0)) && r.length < 6; )
-        r += kA(this.consumeCodePoint());
+    if (Nt(t)) {
+      for (var r = _A(t); Nt(this.peekCodePoint(0)) && r.length < 6; )
+        r += _A(this.consumeCodePoint());
       $e(this.peekCodePoint(0)) && this.consumeCodePoint();
       var a = parseInt(r, 16);
       return a === 0 || function(g) {
@@ -2417,20 +2417,20 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
     for (var t = ""; ; ) {
       var r = this.consumeCodePoint();
       if (ws(r))
-        t += kA(r);
+        t += _A(r);
       else {
         if (!bt(r, this.peekCodePoint(0)))
           return this.reconsumeCodePoint(r), t;
-        t += kA(this.consumeEscapedCodePoint());
+        t += _A(this.consumeEscapedCodePoint());
       }
     }
   }, e;
-}(), _o = function() {
+}(), ko = function() {
   function e(t) {
     this._tokens = t;
   }
   return e.create = function(t) {
-    var r = new ko();
+    var r = new _o();
     return r.write(t), new e(r.read());
   }, e.parseValue = function(t) {
     return e.create(t).parseComponentValue();
@@ -2512,10 +2512,10 @@ var Qt = 10, xr = 13, we = 15, ze = 17, de = 18, Hc = 19, ds = 20, Ur = 21, ge =
   }), r.length && t.push(r), t;
 }, cl = function(e, t) {
   return t === 11 && e.type === 12 || t === 28 && e.type === 29 || t === 2 && e.type === 3;
-}, kt = function(e) {
+}, _t = function(e) {
   return e.type === 17 || e.type === 15;
 }, TA = function(e) {
-  return e.type === 16 || kt(e);
+  return e.type === 16 || _t(e);
 }, So = function(e) {
   return e.length > 1 ? [e[0], e[1]] : [e[0]];
 }, PA = { type: 17, number: 0, flags: 4 }, nn = { type: 16, number: 50, flags: 4 }, Ft = { type: 16, number: 100, flags: 4 }, ve = function(e, t, r) {
@@ -2653,7 +2653,7 @@ var ys = function(e, t) {
   var E = Q <= 0.5 ? Q * (y + 1) : Q + y - Q * y, S = 2 * Q - E, L = sr(S, E, C + 1 / 3), H = sr(S, E, C), j = sr(S, E, C - 1 / 3);
   return xt(255 * L, 255 * H, 255 * j, b);
 }, ll = { hsl: ys, hsla: ys, rgb: vs, rgba: vs }, xe = function(e, t) {
-  return Ut(e, _o.create(t).parseComponentValue());
+  return Ut(e, ko.create(t).parseComponentValue());
 }, Ct = { ALICEBLUE: 4042850303, ANTIQUEWHITE: 4209760255, AQUA: 16777215, AQUAMARINE: 2147472639, AZURE: 4043309055, BEIGE: 4126530815, BISQUE: 4293182719, BLACK: 255, BLANCHEDALMOND: 4293643775, BLUE: 65535, BLUEVIOLET: 2318131967, BROWN: 2771004159, BURLYWOOD: 3736635391, CADETBLUE: 1604231423, CHARTREUSE: 2147418367, CHOCOLATE: 3530104575, CORAL: 4286533887, CORNFLOWERBLUE: 1687547391, CORNSILK: 4294499583, CRIMSON: 3692313855, CYAN: 16777215, DARKBLUE: 35839, DARKCYAN: 9145343, DARKGOLDENROD: 3095837695, DARKGRAY: 2846468607, DARKGREEN: 6553855, DARKGREY: 2846468607, DARKKHAKI: 3182914559, DARKMAGENTA: 2332068863, DARKOLIVEGREEN: 1433087999, DARKORANGE: 4287365375, DARKORCHID: 2570243327, DARKRED: 2332033279, DARKSALMON: 3918953215, DARKSEAGREEN: 2411499519, DARKSLATEBLUE: 1211993087, DARKSLATEGRAY: 793726975, DARKSLATEGREY: 793726975, DARKTURQUOISE: 13554175, DARKVIOLET: 2483082239, DEEPPINK: 4279538687, DEEPSKYBLUE: 12582911, DIMGRAY: 1768516095, DIMGREY: 1768516095, DODGERBLUE: 512819199, FIREBRICK: 2988581631, FLORALWHITE: 4294635775, FORESTGREEN: 579543807, FUCHSIA: 4278255615, GAINSBORO: 3705462015, GHOSTWHITE: 4177068031, GOLD: 4292280575, GOLDENROD: 3668254975, GRAY: 2155905279, GREEN: 8388863, GREENYELLOW: 2919182335, GREY: 2155905279, HONEYDEW: 4043305215, HOTPINK: 4285117695, INDIANRED: 3445382399, INDIGO: 1258324735, IVORY: 4294963455, KHAKI: 4041641215, LAVENDER: 3873897215, LAVENDERBLUSH: 4293981695, LAWNGREEN: 2096890111, LEMONCHIFFON: 4294626815, LIGHTBLUE: 2916673279, LIGHTCORAL: 4034953471, LIGHTCYAN: 3774873599, LIGHTGOLDENRODYELLOW: 4210742015, LIGHTGRAY: 3553874943, LIGHTGREEN: 2431553791, LIGHTGREY: 3553874943, LIGHTPINK: 4290167295, LIGHTSALMON: 4288707327, LIGHTSEAGREEN: 548580095, LIGHTSKYBLUE: 2278488831, LIGHTSLATEGRAY: 2005441023, LIGHTSLATEGREY: 2005441023, LIGHTSTEELBLUE: 2965692159, LIGHTYELLOW: 4294959359, LIME: 16711935, LIMEGREEN: 852308735, LINEN: 4210091775, MAGENTA: 4278255615, MAROON: 2147483903, MEDIUMAQUAMARINE: 1724754687, MEDIUMBLUE: 52735, MEDIUMORCHID: 3126187007, MEDIUMPURPLE: 2473647103, MEDIUMSEAGREEN: 1018393087, MEDIUMSLATEBLUE: 2070474495, MEDIUMSPRINGGREEN: 16423679, MEDIUMTURQUOISE: 1221709055, MEDIUMVIOLETRED: 3340076543, MIDNIGHTBLUE: 421097727, MINTCREAM: 4127193855, MISTYROSE: 4293190143, MOCCASIN: 4293178879, NAVAJOWHITE: 4292783615, NAVY: 33023, OLDLACE: 4260751103, OLIVE: 2155872511, OLIVEDRAB: 1804477439, ORANGE: 4289003775, ORANGERED: 4282712319, ORCHID: 3664828159, PALEGOLDENROD: 4008225535, PALEGREEN: 2566625535, PALETURQUOISE: 2951671551, PALEVIOLETRED: 3681588223, PAPAYAWHIP: 4293907967, PEACHPUFF: 4292524543, PERU: 3448061951, PINK: 4290825215, PLUM: 3718307327, POWDERBLUE: 2967529215, PURPLE: 2147516671, REBECCAPURPLE: 1714657791, RED: 4278190335, ROSYBROWN: 3163525119, ROYALBLUE: 1097458175, SADDLEBROWN: 2336560127, SALMON: 4202722047, SANDYBROWN: 4104413439, SEAGREEN: 780883967, SEASHELL: 4294307583, SIENNA: 2689740287, SILVER: 3233857791, SKYBLUE: 2278484991, SLATEBLUE: 1784335871, SLATEGRAY: 1887473919, SLATEGREY: 1887473919, SNOW: 4294638335, SPRINGGREEN: 16744447, STEELBLUE: 1182971135, TAN: 3535047935, TEAL: 8421631, THISTLE: 3636451583, TOMATO: 4284696575, TRANSPARENT: 0, TURQUOISE: 1088475391, VIOLET: 4001558271, WHEAT: 4125012991, WHITE: 4294967295, WHITESMOKE: 4126537215, YELLOW: 4294902015, YELLOWGREEN: 2597139199 }, hl = { name: "background-clip", initialValue: "border-box", prefix: !1, type: 1, parse: function(e, t) {
   return t.map(function(r) {
     if (vA(r))
@@ -2719,7 +2719,7 @@ var ys = function(e, t) {
     var C = Qi(e, g);
     a.push(C);
   }), { angle: r, stops: a, type: 1 };
-}, Lo = "closest-side", Do = "farthest-side", Mo = "closest-corner", Po = "farthest-corner", Ro = "circle", Ko = "ellipse", jo = "cover", Vo = "contain", ii = function(e, t) {
+}, Lo = "closest-side", Do = "farthest-side", Mo = "closest-corner", Po = "farthest-corner", Ro = "circle", Ko = "ellipse", jo = "cover", Go = "contain", ii = function(e, t) {
   var r = 0, a = 3, g = [], p = [];
   return lt(t).forEach(function(w, C) {
     var y = !0;
@@ -2735,7 +2735,7 @@ var ys = function(e, t) {
           case "bottom":
             return p.push(Ft), !1;
         }
-      else if (TA(E) || kt(E))
+      else if (TA(E) || _t(E))
         return p.push(E), !1;
       return b;
     }, y) : C === 1 && (y = w.reduce(function(b, E) {
@@ -2745,7 +2745,7 @@ var ys = function(e, t) {
             return r = 0, !1;
           case Ko:
             return r = 1, !1;
-          case Vo:
+          case Go:
           case Lo:
             return a = 0, !1;
           case Do:
@@ -2756,7 +2756,7 @@ var ys = function(e, t) {
           case Po:
             return a = 3, !1;
         }
-      else if (kt(E) || TA(E))
+      else if (_t(E) || TA(E))
         return Array.isArray(a) || (a = []), a.push(E), !1;
       return b;
     }, y)), y) {
@@ -2770,13 +2770,13 @@ var ys = function(e, t) {
     return e.cache.addImage(t.value), r;
   }
   if (t.type === 18) {
-    var a = Go[t.name];
+    var a = No[t.name];
     if (a === void 0)
       throw new Error('Attempting to parse an unsupported image function "' + t.name + '"');
     return a(e, t.values);
   }
   throw new Error("Unsupported image type " + t.type);
-}, ee, Go = { "linear-gradient": function(e, t) {
+}, ee, No = { "linear-gradient": function(e, t) {
   var r = At(180), a = [];
   return lt(t).forEach(function(g, p) {
     if (p === 0) {
@@ -2809,7 +2809,7 @@ var ys = function(e, t) {
                 return p.push(Ft), E;
             }
           else
-            (TA(S) || kt(S)) && p.push(S);
+            (TA(S) || _t(S)) && p.push(S);
         else if (vA(S))
           switch (S.value) {
             case Ro:
@@ -2823,13 +2823,13 @@ var ys = function(e, t) {
             case jo:
             case Do:
               return a = 1, !1;
-            case Vo:
+            case Go:
             case Mo:
               return a = 2, !1;
             case Po:
               return a = 3, !1;
           }
-        else if (kt(S) || TA(S))
+        else if (_t(S) || TA(S))
           return Array.isArray(a) || (a = []), a.push(S), !1;
         return E;
       }, y);
@@ -2871,7 +2871,7 @@ var ys = function(e, t) {
   var r = t[0];
   return r.type === 20 && r.value === "none" ? [] : t.filter(function(a) {
     return ne(a) && function(g) {
-      return !(g.type === 20 && g.value === "none" || g.type === 18 && !Go[g.name]);
+      return !(g.type === 20 && g.value === "none" || g.type === 18 && !No[g.name]);
     }(a);
   }).map(function(a) {
     return sn(e, a);
@@ -2940,7 +2940,7 @@ var Fi, ml = { name: "background-size", initialValue: "0", prefix: !1, type: 1, 
     }
     return 1;
   } };
-}, kl = Ki("top"), _l = Ki("right"), Sl = Ki("bottom"), Tl = Ki("left"), ji = function(e) {
+}, _l = Ki("top"), kl = Ki("right"), Sl = Ki("bottom"), Tl = Ki("left"), ji = function(e) {
   return { name: "border-" + e + "-width", initialValue: "0", type: 0, prefix: !1, parse: function(t, r) {
     return Ie(r) ? r.number : 0;
   } };
@@ -3033,11 +3033,11 @@ var Fi, ml = { name: "background-size", initialValue: "0", prefix: !1, type: 1, 
 (function(e) {
   e.NORMAL = "normal", e.STRICT = "strict";
 })(Fi || (Fi = {}));
-var Ue, Vl = { name: "line-break", initialValue: "normal", prefix: !1, type: 2, parse: function(e, t) {
+var Ue, Gl = { name: "line-break", initialValue: "normal", prefix: !1, type: 2, parse: function(e, t) {
   return t === "strict" ? Fi.STRICT : Fi.NORMAL;
-} }, Gl = { name: "line-height", initialValue: "normal", prefix: !1, type: 4 }, Fs = function(e, t) {
+} }, Nl = { name: "line-height", initialValue: "normal", prefix: !1, type: 4 }, Fs = function(e, t) {
   return vA(e) && e.value === "normal" ? 1.2 * t : e.type === 17 ? t * e.number : TA(e) ? bA(e, t) : t;
-}, Nl = { name: "list-style-image", initialValue: "none", type: 0, prefix: !1, parse: function(e, t) {
+}, Vl = { name: "list-style-image", initialValue: "none", type: 0, prefix: !1, parse: function(e, t) {
   return t.type === 20 && t.value === "none" ? null : sn(e, t);
 } }, Xl = { name: "list-style-position", initialValue: "outside", prefix: !1, type: 2, parse: function(e, t) {
   return t === "inside" ? 0 : 1;
@@ -3151,9 +3151,9 @@ var Ue, Vl = { name: "line-break", initialValue: "normal", prefix: !1, type: 2, 
     default:
       return -1;
   }
-} }, Vi = function(e) {
+} }, Gi = function(e) {
   return { name: "margin-" + e, initialValue: "0", prefix: !1, type: 4 };
-}, Wl = Vi("top"), Yl = Vi("right"), zl = Vi("bottom"), Jl = Vi("left"), ql = { name: "overflow", initialValue: "visible", prefix: !1, type: 1, parse: function(e, t) {
+}, Wl = Gi("top"), Yl = Gi("right"), zl = Gi("bottom"), Jl = Gi("left"), ql = { name: "overflow", initialValue: "visible", prefix: !1, type: 1, parse: function(e, t) {
   return t.filter(vA).map(function(r) {
     switch (r.value) {
       case "hidden":
@@ -3170,9 +3170,9 @@ var Ue, Vl = { name: "line-break", initialValue: "normal", prefix: !1, type: 2, 
   });
 } }, Zl = { name: "overflow-wrap", initialValue: "normal", prefix: !1, type: 2, parse: function(e, t) {
   return t === "break-word" ? "break-word" : "normal";
-} }, Gi = function(e) {
+} }, Ni = function(e) {
   return { name: "padding-" + e, initialValue: "0", prefix: !1, type: 3, format: "length-percentage" };
-}, $l = Gi("top"), Ah = Gi("right"), th = Gi("bottom"), eh = Gi("left"), ih = { name: "text-align", initialValue: "left", prefix: !1, type: 2, parse: function(e, t) {
+}, $l = Ni("top"), Ah = Ni("right"), th = Ni("bottom"), eh = Ni("left"), ih = { name: "text-align", initialValue: "left", prefix: !1, type: 2, parse: function(e, t) {
   switch (t) {
     case "right":
       return 2;
@@ -3198,7 +3198,7 @@ var Ue, Vl = { name: "line-break", initialValue: "normal", prefix: !1, type: 2, 
   return t.length === 1 && Hr(t[0], "none") ? [] : lt(t).map(function(r) {
     for (var a = { color: Ct.TRANSPARENT, offsetX: PA, offsetY: PA, blur: PA }, g = 0, p = 0; p < r.length; p++) {
       var w = r[p];
-      kt(w) ? (g === 0 ? a.offsetX = w : g === 1 ? a.offsetY = w : a.blur = w, g++) : a.color = Ut(e, w);
+      _t(w) ? (g === 0 ? a.offsetX = w : g === 1 ? a.offsetY = w : a.blur = w, g++) : a.color = Ut(e, w);
     }
     return a;
   });
@@ -3389,7 +3389,7 @@ for (var uh = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
   return t.length === 1 && Hr(t[0], "none") ? [] : lt(t).map(function(r) {
     for (var a = { color: 255, offsetX: PA, offsetY: PA, blur: PA, spread: PA, inset: !1 }, g = 0, p = 0; p < r.length; p++) {
       var w = r[p];
-      Hr(w, "inset") ? a.inset = !0 : kt(w) ? (g === 0 ? a.offsetX = w : g === 1 ? a.offsetY = w : g === 2 ? a.blur = w : a.spread = w, g++) : a.color = Ut(e, w);
+      Hr(w, "inset") ? a.inset = !0 : _t(w) ? (g === 0 ? a.offsetX = w : g === 1 ? a.offsetY = w : g === 2 ? a.blur = w : a.spread = w, g++) : a.color = Ut(e, w);
     }
     return a;
   });
@@ -3409,14 +3409,14 @@ for (var uh = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
   }), [0, 1, 2].forEach(function(a) {
     r.indexOf(a) === -1 && r.push(a);
   }), r;
-} }, kh = { name: "-webkit-text-stroke-color", initialValue: "currentcolor", prefix: !1, type: 3, format: "color" }, _h = { name: "-webkit-text-stroke-width", initialValue: "0", type: 0, prefix: !1, parse: function(e, t) {
+} }, _h = { name: "-webkit-text-stroke-color", initialValue: "currentcolor", prefix: !1, type: 3, format: "color" }, kh = { name: "-webkit-text-stroke-width", initialValue: "0", type: 0, prefix: !1, parse: function(e, t) {
   return Ie(t) ? t.number : 0;
 } }, Sh = function() {
   function e(t, r) {
     var a, g;
-    this.animationDuration = aA(t, Fh, r.animationDuration), this.backgroundClip = aA(t, hl, r.backgroundClip), this.backgroundColor = aA(t, ul, r.backgroundColor), this.backgroundImage = aA(t, gl, r.backgroundImage), this.backgroundOrigin = aA(t, fl, r.backgroundOrigin), this.backgroundPosition = aA(t, pl, r.backgroundPosition), this.backgroundRepeat = aA(t, Bl, r.backgroundRepeat), this.backgroundSize = aA(t, ml, r.backgroundSize), this.borderTopColor = aA(t, vl, r.borderTopColor), this.borderRightColor = aA(t, yl, r.borderRightColor), this.borderBottomColor = aA(t, bl, r.borderBottomColor), this.borderLeftColor = aA(t, Ql, r.borderLeftColor), this.borderTopLeftRadius = aA(t, Fl, r.borderTopLeftRadius), this.borderTopRightRadius = aA(t, xl, r.borderTopRightRadius), this.borderBottomRightRadius = aA(t, Ul, r.borderBottomRightRadius), this.borderBottomLeftRadius = aA(t, El, r.borderBottomLeftRadius), this.borderTopStyle = aA(t, kl, r.borderTopStyle), this.borderRightStyle = aA(t, _l, r.borderRightStyle), this.borderBottomStyle = aA(t, Sl, r.borderBottomStyle), this.borderLeftStyle = aA(t, Tl, r.borderLeftStyle), this.borderTopWidth = aA(t, Il, r.borderTopWidth), this.borderRightWidth = aA(t, Hl, r.borderRightWidth), this.borderBottomWidth = aA(t, Ol, r.borderBottomWidth), this.borderLeftWidth = aA(t, Ll, r.borderLeftWidth), this.boxShadow = aA(t, Uh, r.boxShadow), this.color = aA(t, Dl, r.color), this.direction = aA(t, Ml, r.direction), this.display = aA(t, Pl, r.display), this.float = aA(t, Kl, r.cssFloat), this.fontFamily = aA(t, Bh, r.fontFamily), this.fontSize = aA(t, wh, r.fontSize), this.fontStyle = aA(t, vh, r.fontStyle), this.fontVariant = aA(t, Ch, r.fontVariant), this.fontWeight = aA(t, mh, r.fontWeight), this.letterSpacing = aA(t, jl, r.letterSpacing), this.lineBreak = aA(t, Vl, r.lineBreak), this.lineHeight = aA(t, Gl, r.lineHeight), this.listStyleImage = aA(t, Nl, r.listStyleImage), this.listStylePosition = aA(t, Xl, r.listStylePosition), this.listStyleType = aA(t, Or, r.listStyleType), this.marginTop = aA(t, Wl, r.marginTop), this.marginRight = aA(t, Yl, r.marginRight), this.marginBottom = aA(t, zl, r.marginBottom), this.marginLeft = aA(t, Jl, r.marginLeft), this.opacity = aA(t, gh, r.opacity);
+    this.animationDuration = aA(t, Fh, r.animationDuration), this.backgroundClip = aA(t, hl, r.backgroundClip), this.backgroundColor = aA(t, ul, r.backgroundColor), this.backgroundImage = aA(t, gl, r.backgroundImage), this.backgroundOrigin = aA(t, fl, r.backgroundOrigin), this.backgroundPosition = aA(t, pl, r.backgroundPosition), this.backgroundRepeat = aA(t, Bl, r.backgroundRepeat), this.backgroundSize = aA(t, ml, r.backgroundSize), this.borderTopColor = aA(t, vl, r.borderTopColor), this.borderRightColor = aA(t, yl, r.borderRightColor), this.borderBottomColor = aA(t, bl, r.borderBottomColor), this.borderLeftColor = aA(t, Ql, r.borderLeftColor), this.borderTopLeftRadius = aA(t, Fl, r.borderTopLeftRadius), this.borderTopRightRadius = aA(t, xl, r.borderTopRightRadius), this.borderBottomRightRadius = aA(t, Ul, r.borderBottomRightRadius), this.borderBottomLeftRadius = aA(t, El, r.borderBottomLeftRadius), this.borderTopStyle = aA(t, _l, r.borderTopStyle), this.borderRightStyle = aA(t, kl, r.borderRightStyle), this.borderBottomStyle = aA(t, Sl, r.borderBottomStyle), this.borderLeftStyle = aA(t, Tl, r.borderLeftStyle), this.borderTopWidth = aA(t, Il, r.borderTopWidth), this.borderRightWidth = aA(t, Hl, r.borderRightWidth), this.borderBottomWidth = aA(t, Ol, r.borderBottomWidth), this.borderLeftWidth = aA(t, Ll, r.borderLeftWidth), this.boxShadow = aA(t, Uh, r.boxShadow), this.color = aA(t, Dl, r.color), this.direction = aA(t, Ml, r.direction), this.display = aA(t, Pl, r.display), this.float = aA(t, Kl, r.cssFloat), this.fontFamily = aA(t, Bh, r.fontFamily), this.fontSize = aA(t, wh, r.fontSize), this.fontStyle = aA(t, vh, r.fontStyle), this.fontVariant = aA(t, Ch, r.fontVariant), this.fontWeight = aA(t, mh, r.fontWeight), this.letterSpacing = aA(t, jl, r.letterSpacing), this.lineBreak = aA(t, Gl, r.lineBreak), this.lineHeight = aA(t, Nl, r.lineHeight), this.listStyleImage = aA(t, Vl, r.listStyleImage), this.listStylePosition = aA(t, Xl, r.listStylePosition), this.listStyleType = aA(t, Or, r.listStyleType), this.marginTop = aA(t, Wl, r.marginTop), this.marginRight = aA(t, Yl, r.marginRight), this.marginBottom = aA(t, zl, r.marginBottom), this.marginLeft = aA(t, Jl, r.marginLeft), this.opacity = aA(t, gh, r.opacity);
     var p = aA(t, ql, r.overflow);
-    this.overflowX = p[0], this.overflowY = p[p.length > 1 ? 1 : 0], this.overflowWrap = aA(t, Zl, r.overflowWrap), this.paddingTop = aA(t, $l, r.paddingTop), this.paddingRight = aA(t, Ah, r.paddingRight), this.paddingBottom = aA(t, th, r.paddingBottom), this.paddingLeft = aA(t, eh, r.paddingLeft), this.paintOrder = aA(t, Eh, r.paintOrder), this.position = aA(t, rh, r.position), this.textAlign = aA(t, ih, r.textAlign), this.textDecorationColor = aA(t, fh, (a = r.textDecorationColor) !== null && a !== void 0 ? a : r.color), this.textDecorationLine = aA(t, ph, (g = r.textDecorationLine) !== null && g !== void 0 ? g : r.textDecoration), this.textShadow = aA(t, nh, r.textShadow), this.textTransform = aA(t, sh, r.textTransform), this.transform = aA(t, oh, r.transform), this.transformOrigin = aA(t, lh, r.transformOrigin), this.visibility = aA(t, hh, r.visibility), this.webkitTextStrokeColor = aA(t, kh, r.webkitTextStrokeColor), this.webkitTextStrokeWidth = aA(t, _h, r.webkitTextStrokeWidth), this.wordBreak = aA(t, uh, r.wordBreak), this.zIndex = aA(t, dh, r.zIndex);
+    this.overflowX = p[0], this.overflowY = p[p.length > 1 ? 1 : 0], this.overflowWrap = aA(t, Zl, r.overflowWrap), this.paddingTop = aA(t, $l, r.paddingTop), this.paddingRight = aA(t, Ah, r.paddingRight), this.paddingBottom = aA(t, th, r.paddingBottom), this.paddingLeft = aA(t, eh, r.paddingLeft), this.paintOrder = aA(t, Eh, r.paintOrder), this.position = aA(t, rh, r.position), this.textAlign = aA(t, ih, r.textAlign), this.textDecorationColor = aA(t, fh, (a = r.textDecorationColor) !== null && a !== void 0 ? a : r.color), this.textDecorationLine = aA(t, ph, (g = r.textDecorationLine) !== null && g !== void 0 ? g : r.textDecoration), this.textShadow = aA(t, nh, r.textShadow), this.textTransform = aA(t, sh, r.textTransform), this.transform = aA(t, oh, r.transform), this.transformOrigin = aA(t, lh, r.transformOrigin), this.visibility = aA(t, hh, r.visibility), this.webkitTextStrokeColor = aA(t, _h, r.webkitTextStrokeColor), this.webkitTextStrokeWidth = aA(t, kh, r.webkitTextStrokeWidth), this.wordBreak = aA(t, uh, r.wordBreak), this.zIndex = aA(t, dh, r.zIndex);
   }
   return e.prototype.isVisible = function() {
     return this.display > 0 && this.opacity > 0 && this.visibility === 0;
@@ -3435,12 +3435,12 @@ for (var uh = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
   }, e;
 }(), Th = function(e, t) {
   this.content = aA(e, yh, t.content), this.quotes = aA(e, xh, t.quotes);
-}, ks = function(e, t) {
+}, _s = function(e, t) {
   this.counterIncrement = aA(e, bh, t.counterIncrement), this.counterReset = aA(e, Qh, t.counterReset);
 }, aA = function(e, t, r) {
-  var a = new ko(), g = r != null ? r.toString() : t.initialValue;
+  var a = new _o(), g = r != null ? r.toString() : t.initialValue;
   a.write(g);
-  var p = new _o(a.read());
+  var p = new ko(a.read());
   switch (t.type) {
     case 2:
       var w = p.parseComponentValue();
@@ -3461,7 +3461,7 @@ for (var uh = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
           return sn(e, p.parseComponentValue());
         case "length":
           var C = p.parseComponentValue();
-          return kt(C) ? C : PA;
+          return _t(C) ? C : PA;
         case "length-percentage":
           var y = p.parseComponentValue();
           return TA(y) ? y : PA;
@@ -3491,7 +3491,7 @@ for (var uh = { name: "word-break", initialValue: "normal", prefix: !1, type: 2,
   }) && (t.style.animationDuration = "0s"), this.styles.transform !== null && (t.style.transform = "none")), this.bounds = Di(this.context, t), Lr(t, 4) && (this.flags |= 16);
 }, Ih = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/", ye = typeof Uint8Array > "u" ? [] : new Uint8Array(256), ri = 0; ri < 64; ri++)
   ye[Ih.charCodeAt(ri)] = ri;
-for (var _s = function(e, t, r) {
+for (var ks = function(e, t, r) {
   return e.slice ? e.slice(t, r) : new Uint16Array(Array.prototype.slice.call(e, t, r));
 }, Hh = function() {
   function e(t, r, a, g, p, w) {
@@ -3542,7 +3542,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
     for (var E = b.length, S = [], L = 0; L < E; L += 2)
       S.push(b[L + 1] << 8 | b[L]);
     return S;
-  }(p) : new Uint16Array(p), y = _s(C, 12, w[4] / 2), Q = w[5] === 2 ? _s(C, (24 + w[4]) / 2) : (r = w, a = Math.ceil((24 + w[4]) / 4), r.slice ? r.slice(a, g) : new Uint32Array(Array.prototype.slice.call(r, a, g)));
+  }(p) : new Uint16Array(p), y = ks(C, 12, w[4] / 2), Q = w[5] === 2 ? ks(C, (24 + w[4]) / 2) : (r = w, a = Math.ceil((24 + w[4]) / 4), r.slice ? r.slice(a, g) : new Uint32Array(Array.prototype.slice.call(r, a, g)));
   return new Hh(w[0], w[1], w[2], w[3], y, Q);
 }("AAAAAAAAAAAAEA4AGBkAAFAaAAACAAAAAAAIABAAGAAwADgACAAQAAgAEAAIABAACAAQAAgAEAAIABAACAAQAAgAEAAIABAAQABIAEQATAAIABAACAAQAAgAEAAIABAAVABcAAgAEAAIABAACAAQAGAAaABwAHgAgACIAI4AlgAIABAAmwCjAKgAsAC2AL4AvQDFAMoA0gBPAVYBWgEIAAgACACMANoAYgFkAWwBdAF8AX0BhQGNAZUBlgGeAaMBlQGWAasBswF8AbsBwwF0AcsBYwHTAQgA2wG/AOMBdAF8AekB8QF0AfkB+wHiAHQBfAEIAAMC5gQIAAsCEgIIAAgAFgIeAggAIgIpAggAMQI5AkACygEIAAgASAJQAlgCYAIIAAgACAAKBQoFCgUTBRMFGQUrBSsFCAAIAAgACAAIAAgACAAIAAgACABdAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACABoAmgCrwGvAQgAbgJ2AggAHgEIAAgACADnAXsCCAAIAAgAgwIIAAgACAAIAAgACACKAggAkQKZAggAPADJAAgAoQKkAqwCsgK6AsICCADJAggA0AIIAAgACAAIANYC3gIIAAgACAAIAAgACABAAOYCCAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAkASoB+QIEAAgACAA8AEMCCABCBQgACABJBVAFCAAIAAgACAAIAAgACAAIAAgACABTBVoFCAAIAFoFCABfBWUFCAAIAAgACAAIAAgAbQUIAAgACAAIAAgACABzBXsFfQWFBYoFigWKBZEFigWKBYoFmAWfBaYFrgWxBbkFCAAIAAgACAAIAAgACAAIAAgACAAIAMEFCAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAMgFCADQBQgACAAIAAgACAAIAAgACAAIAAgACAAIAO4CCAAIAAgAiQAIAAgACABAAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAD0AggACAD8AggACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIANYFCAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAMDvwAIAAgAJAIIAAgACAAIAAgACAAIAAgACwMTAwgACAB9BOsEGwMjAwgAKwMyAwsFYgE3A/MEPwMIAEUDTQNRAwgAWQOsAGEDCAAIAAgACAAIAAgACABpAzQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFOgU0BTUFNgU3BTgFOQU6BTQFNQU2BTcFOAU5BToFNAU1BTYFNwU4BTkFIQUoBSwFCAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACABtAwgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACABMAEwACAAIAAgACAAIABgACAAIAAgACAC/AAgACAAyAQgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACACAAIAAwAAgACAAIAAgACAAIAAgACAAIAAAARABIAAgACAAIABQASAAIAAgAIABwAEAAjgCIABsAqAC2AL0AigDQAtwC+IJIQqVAZUBWQqVAZUBlQGVAZUBlQGrC5UBlQGVAZUBlQGVAZUBlQGVAXsKlQGVAbAK6wsrDGUMpQzlDJUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAZUBlQGVAfAKAAuZA64AtwCJALoC6ADwAAgAuACgA/oEpgO6AqsD+AAIAAgAswMIAAgACAAIAIkAuwP5AfsBwwPLAwgACAAIAAgACADRA9kDCAAIAOED6QMIAAgACAAIAAgACADuA/YDCAAIAP4DyQAIAAgABgQIAAgAXQAOBAgACAAIAAgACAAIABMECAAIAAgACAAIAAgACAD8AAQBCAAIAAgAGgQiBCoECAExBAgAEAEIAAgACAAIAAgACAAIAAgACAAIAAgACAA4BAgACABABEYECAAIAAgATAQYAQgAVAQIAAgACAAIAAgACAAIAAgACAAIAFoECAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAOQEIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAB+BAcACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAEABhgSMBAgACAAIAAgAlAQIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAwAEAAQABAADAAMAAwADAAQABAAEAAQABAAEAAQABHATAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAdQMIAAgACAAIAAgACAAIAMkACAAIAAgAfQMIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACACFA4kDCAAIAAgACAAIAOcBCAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAIcDCAAIAAgACAAIAAgACAAIAAgACAAIAJEDCAAIAAgACADFAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACABgBAgAZgQIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAbAQCBXIECAAIAHkECAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACABAAJwEQACjBKoEsgQIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAC6BMIECAAIAAgACAAIAAgACABmBAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAxwQIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAGYECAAIAAgAzgQIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgAigWKBYoFigWKBYoFigWKBd0FXwUIAOIF6gXxBYoF3gT5BQAGCAaKBYoFigWKBYoFigWKBYoFigWKBYoFigXWBIoFigWKBYoFigWKBYoFigWKBYsFEAaKBYoFigWKBYoFigWKBRQGCACKBYoFigWKBQgACAAIANEECAAIABgGigUgBggAJgYIAC4GMwaKBYoF0wQ3Bj4GigWKBYoFigWKBYoFigWKBYoFigWKBYoFigUIAAgACAAIAAgACAAIAAgAigWKBYoFigWKBYoFigWKBYoFigWKBYoFigWKBYoFigWKBYoFigWKBYoFigWKBYoFigWKBYoFigWKBYoFigWLBf///////wQABAAEAAQABAAEAAQABAAEAAQAAwAEAAQAAgAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAQADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAUAAAAFAAUAAAAFAAUAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAQABAAEAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUAAQAAAAUABQAFAAUABQAFAAAAAAAFAAUAAAAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAFAAUAAQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABwAFAAUABQAFAAAABwAHAAcAAAAHAAcABwAFAAEAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAcABwAFAAUABQAFAAcABwAFAAUAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAQABAAAAAAAAAAAAAAAFAAUABQAFAAAABwAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAHAAcABwAHAAcAAAAHAAcAAAAAAAUABQAHAAUAAQAHAAEABwAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABwABAAUABQAFAAUAAAAAAAAAAAAAAAEAAQABAAEAAQABAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABwAFAAUAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUAAQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABQANAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQABAAEAAQABAAEAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAEAAQABAAEAAQABAAEAAQABAAEAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAQABAAEAAQABAAEAAQABAAAAAAAAAAAAAAAAAAAAAAABQAHAAUABQAFAAAAAAAAAAcABQAFAAUABQAFAAQABAAEAAQABAAEAAQABAAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUAAAAFAAUABQAFAAUAAAAFAAUABQAAAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAAAAAAAAAAAAUABQAFAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAHAAUAAAAHAAcABwAFAAUABQAFAAUABQAFAAUABwAHAAcABwAFAAcABwAAAAUABQAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABwAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAUABwAHAAUABQAFAAUAAAAAAAcABwAAAAAABwAHAAUAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAABQAFAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAABwAHAAcABQAFAAAAAAAAAAAABQAFAAAAAAAFAAUABQAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAFAAUABQAFAAUAAAAFAAUABwAAAAcABwAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAFAAUABwAFAAUABQAFAAAAAAAHAAcAAAAAAAcABwAFAAAAAAAAAAAAAAAAAAAABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAcABwAAAAAAAAAHAAcABwAAAAcABwAHAAUAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAABQAHAAcABwAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABwAHAAcABwAAAAUABQAFAAAABQAFAAUABQAAAAAAAAAAAAAAAAAAAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAcABQAHAAcABQAHAAcAAAAFAAcABwAAAAcABwAFAAUAAAAAAAAAAAAAAAAAAAAFAAUAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAcABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAAAAUABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAFAAcABwAFAAUABQAAAAUAAAAHAAcABwAHAAcABwAHAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAHAAUABQAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAABwAFAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAUAAAAFAAAAAAAAAAAABwAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABwAFAAUABQAFAAUAAAAFAAUAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABwAFAAUABQAFAAUABQAAAAUABQAHAAcABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAcABQAFAAAAAAAAAAAABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAcABQAFAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAHAAUABQAFAAUABQAFAAUABwAHAAcABwAHAAcABwAHAAUABwAHAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABwAHAAcABwAFAAUABwAHAAcAAAAAAAAAAAAHAAcABQAHAAcABwAHAAcABwAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAcABwAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABQAHAAUABQAFAAUABQAFAAUAAAAFAAAABQAAAAAABQAFAAUABQAFAAUABQAFAAcABwAHAAcABwAHAAUABQAFAAUABQAFAAUABQAFAAUAAAAAAAUABQAFAAUABQAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUABwAFAAcABwAHAAcABwAFAAcABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAUABQAFAAUABwAHAAUABQAHAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAcABQAFAAcABwAHAAUABwAFAAUABQAHAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAHAAcABwAHAAcABwAHAAUABQAFAAUABQAFAAUABQAHAAcABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUAAAAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAcABQAFAAUABQAFAAUABQAAAAAAAAAAAAUAAAAAAAAAAAAAAAAABQAAAAAABwAFAAUAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAAABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUAAAAFAAUABQAFAAUABQAFAAUABQAFAAAAAAAAAAAABQAAAAAAAAAFAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAHAAUABQAHAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABwAHAAcABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAUABQAFAAUABQAHAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAcABwAFAAUABQAFAAcABwAFAAUABwAHAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAFAAcABwAFAAUABwAHAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAFAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAFAAUABQAAAAAABQAFAAAAAAAAAAAAAAAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABQAFAAcABwAAAAAAAAAAAAAABwAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABwAFAAcABwAFAAcABwAAAAcABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAAAAAAAAAAAAAAAAAFAAUABQAAAAUABQAAAAAAAAAAAAAABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAAAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABQAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABwAFAAUABQAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAHAAcABQAFAAUABQAFAAUABQAFAAUABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAcABwAFAAUABQAHAAcABQAHAAUABQAAAAAAAAAAAAAAAAAFAAAABwAHAAcABQAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABwAHAAcABwAAAAAABwAHAAAAAAAHAAcABwAAAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAHAAAAAAAFAAUABQAFAAUABQAFAAAAAAAAAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAcABwAFAAUABQAFAAUABQAFAAUABwAHAAUABQAFAAcABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAHAAcABQAFAAUABQAFAAUABwAFAAcABwAFAAcABQAFAAcABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAHAAcABQAFAAUABQAAAAAABwAHAAcABwAFAAUABwAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABwAHAAUABQAFAAUABQAFAAUABQAHAAcABQAHAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABwAFAAcABwAFAAUABQAFAAUABQAHAAUAAAAAAAAAAAAAAAAAAAAAAAcABwAFAAUABQAFAAcABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAcABwAFAAUABQAFAAUABQAFAAUABQAHAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAcABwAFAAUABQAFAAAAAAAFAAUABwAHAAcABwAFAAAAAAAAAAcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABwAHAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABQAFAAUABQAFAAUABQAAAAUABQAFAAUABQAFAAcABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUAAAAHAAUABQAFAAUABQAFAAUABwAFAAUABwAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUAAAAAAAAABQAAAAUABQAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAcABwAHAAcAAAAFAAUAAAAHAAcABQAHAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABwAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAAAAAAAAAAAAAAAAAAABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAAAAUABQAFAAAAAAAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAAAAAAAAAAABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAFAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABQAFAAUABQAAAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABQAAAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAFAAUABQAAAAAABQAFAAUABQAFAAUABQAAAAUABQAAAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAUABQAFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAFAAUABQAFAAUABQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAFAAUABQAFAAUADgAOAA4ADgAOAA4ADwAPAA8ADwAPAA8ADwAPAA8ADwAPAA8ADwAPAA8ADwAPAA8ADwAPAA8ADwAPAA8ADwAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAcABwAHAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAgACAAIAAAAAAAAAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAMAAwADAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkACQAJAAkAAAAAAAAAAAAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAKAAoACgAAAAAAAAAAAAsADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwACwAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAMAAwADAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAOAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4ADgAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAA4ADgAOAA4ADgAOAA4ADgAOAAAAAAAAAAAADgAOAA4AAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAA4ADgAAAA4ADgAOAA4ADgAOAAAADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4AAAAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4AAAAAAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAAAA4AAAAOAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAADgAAAAAAAAAAAA4AAAAOAAAAAAAAAAAADgAOAA4AAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAOAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4ADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4ADgAOAA4ADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAADgAOAA4ADgAOAA4ADgAOAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAAAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAA4ADgAOAA4ADgAOAA4ADgAOAAAADgAOAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4AAAAAAAAAAAAAAAAADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAA4ADgAOAA4ADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAOAA4ADgAOAA4AAAAAAAAAAAAAAAAAAAAAAA4ADgAOAA4ADgAOAA4ADgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4AAAAOAA4ADgAOAA4ADgAAAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4ADgAOAA4AAAAAAAAAAAA="), JA = "×", Ph = function(e) {
   return Mh.get(e);
@@ -3624,7 +3624,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
     var a = t.createRange();
     r.innerHTML = typeof "".repeat == "function" ? "&#128104;".repeat(10) : "";
     var g = r.firstChild, p = yi(g.data).map(function(Q) {
-      return kA(Q);
+      return _A(Q);
     }), w = 0, C = {}, y = p.every(function(Q, b) {
       a.setStart(g, w), a.setEnd(g, w + Q.length);
       var E = a.getBoundingClientRect();
@@ -3685,7 +3685,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
 }, get SUPPORT_NATIVE_TEXT_SEGMENTATION() {
   var e = !(typeof Intl > "u" || !Intl.Segmenter);
   return Object.defineProperty(MA, "SUPPORT_NATIVE_TEXT_SEGMENTATION", { value: e }), e;
-} }, ke = function(e, t) {
+} }, _e = function(e, t) {
   this.text = e, this.bounds = t;
 }, jh = function(e, t) {
   var r = t.ownerDocument;
@@ -3718,7 +3718,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
       a.value && p.push(a.value.slice());
     return p;
   }(e);
-}, Vh = function(e, t) {
+}, Gh = function(e, t) {
   return t.letterSpacing !== 0 ? on(e) : function(r, a) {
     if (MA.SUPPORT_NATIVE_TEXT_SEGMENTATION) {
       var g = new Intl.Segmenter(void 0, { granularity: "word" });
@@ -3726,9 +3726,9 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
         return p.segment;
       });
     }
-    return Nh(r, a);
+    return Vh(r, a);
   }(e, t);
-}, Gh = [32, 160, 4961, 65792, 65793, 4153, 4241], Nh = function(e, t) {
+}, Nh = [32, 160, 4961, 65792, 65793, 4153, 4241], Vh = function(e, t) {
   for (var r, a = function(w, C) {
     var y = yi(w), Q = Pc(y, C), b = Q[0], E = Q[1], S = Q[2], L = y.length, H = 0, j = 0;
     return { next: function() {
@@ -3746,7 +3746,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
     if (r.value) {
       var w = r.value.slice(), C = yi(w), y = "";
       C.forEach(function(Q) {
-        Gh.indexOf(Q) === -1 ? y += kA(Q) : (y.length && g.push(y), g.push(kA(Q)), y = "");
+        Nh.indexOf(Q) === -1 ? y += _A(Q) : (y.length && g.push(y), g.push(_A(Q)), y = "");
       }), y.length && g.push(y);
     }
   }; !(r = a.next()).done; )
@@ -3754,7 +3754,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
   return g;
 }, Xh = function(e, t, r) {
   this.text = Wh(t.data, r.textTransform), this.textBounds = function(a, g, p, w) {
-    var C = Vh(g, p), y = [], Q = 0;
+    var C = Gh(g, p), y = [], Q = 0;
     return C.forEach(function(b) {
       if (p.textDecorationLine.length || b.trim().length > 0)
         if (MA.SUPPORT_RANGE_BOUNDS) {
@@ -3762,13 +3762,13 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
           if (E.length > 1) {
             var S = on(b), L = 0;
             S.forEach(function(j) {
-              y.push(new ke(j, vt.fromDOMRectList(a, Ls(w, L + Q, j.length).getClientRects()))), L += j.length;
+              y.push(new _e(j, vt.fromDOMRectList(a, Ls(w, L + Q, j.length).getClientRects()))), L += j.length;
             });
           } else
-            y.push(new ke(b, vt.fromDOMRectList(a, E)));
+            y.push(new _e(b, vt.fromDOMRectList(a, E)));
         } else {
           var H = w.splitText(b.length);
-          y.push(new ke(b, jh(a, w))), w = H;
+          y.push(new _e(b, jh(a, w))), w = H;
         }
       else
         MA.SUPPORT_RANGE_BOUNDS || (w = w.splitText(b.length));
@@ -3788,7 +3788,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
   }
 }, Yh = /(^|\s|:|-|\(|\))([a-z])/g, zh = function(e, t, r) {
   return e.length > 0 ? t + r.toUpperCase() : e;
-}, No = function(e) {
+}, Vo = function(e) {
   function t(r, a) {
     var g = e.call(this, r, a) || this;
     return g.src = a.currentSrc || a.src, g.intrinsicWidth = a.naturalWidth, g.intrinsicHeight = a.naturalHeight, g.context.cache.addImage(g.src), g;
@@ -3869,10 +3869,10 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
         });
       else {
         var w = Zo(e, g);
-        w.styles.isVisible() && (Au(g, w, a) ? w.flags |= 4 : tu(w.styles) && (w.flags |= 2), $h.indexOf(g.tagName) !== -1 && (w.flags |= 8), r.elements.push(w), g.slot, g.shadowRoot ? gi(e, g.shadowRoot, w, a) : Ei(g) || ta(g) || ki(g) || gi(e, g, w, a));
+        w.styles.isVisible() && (Au(g, w, a) ? w.flags |= 4 : tu(w.styles) && (w.flags |= 2), $h.indexOf(g.tagName) !== -1 && (w.flags |= 8), r.elements.push(w), g.slot, g.shadowRoot ? gi(e, g.shadowRoot, w, a) : Ei(g) || ta(g) || _i(g) || gi(e, g, w, a));
       }
 }, Zo = function(e, t) {
-  return Rr(t) ? new No(e, t) : ea(t) ? new Xo(e, t) : ta(t) ? new Wo(e, t) : eu(t) ? new Yo(e, t) : iu(t) ? new Mr(e, t) : ru(t) ? new an(e, t) : ki(t) ? new zo(e, t) : Ei(t) ? new Jo(e, t) : ia(t) ? new qo(e, t) : new ut(e, t);
+  return Rr(t) ? new Vo(e, t) : ea(t) ? new Xo(e, t) : ta(t) ? new Wo(e, t) : eu(t) ? new Yo(e, t) : iu(t) ? new Mr(e, t) : ru(t) ? new an(e, t) : _i(t) ? new zo(e, t) : Ei(t) ? new Jo(e, t) : ia(t) ? new qo(e, t) : new ut(e, t);
 }, $o = function(e, t) {
   var r = Zo(e, t);
   return r.flags |= 4, gi(e, t, r, r), r;
@@ -3910,7 +3910,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
   return e.tagName === "STYLE";
 }, Ei = function(e) {
   return e.tagName === "TEXTAREA";
-}, ki = function(e) {
+}, _i = function(e) {
   return e.tagName === "SELECT";
 }, ra = function(e) {
   return e.tagName === "SLOT";
@@ -3943,7 +3943,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
       w.push(C.counter), y || (y = r.counters[C.counter] = []), y.push(C.reset);
     }), w;
   }, e;
-}(), Ks = { integers: [1e3, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1], values: ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"] }, js = { integers: [9e3, 8e3, 7e3, 6e3, 5e3, 4e3, 3e3, 2e3, 1e3, 900, 800, 700, 600, 500, 400, 300, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], values: ["Ք", "Փ", "Ւ", "Ց", "Ր", "Տ", "Վ", "Ս", "Ռ", "Ջ", "Պ", "Չ", "Ո", "Շ", "Ն", "Յ", "Մ", "Ճ", "Ղ", "Ձ", "Հ", "Կ", "Ծ", "Խ", "Լ", "Ի", "Ժ", "Թ", "Ը", "Է", "Զ", "Ե", "Դ", "Գ", "Բ", "Ա"] }, su = { integers: [1e4, 9e3, 8e3, 7e3, 6e3, 5e3, 4e3, 3e3, 2e3, 1e3, 400, 300, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 19, 18, 17, 16, 15, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], values: ["י׳", "ט׳", "ח׳", "ז׳", "ו׳", "ה׳", "ד׳", "ג׳", "ב׳", "א׳", "ת", "ש", "ר", "ק", "צ", "פ", "ע", "ס", "נ", "מ", "ל", "כ", "יט", "יח", "יז", "טז", "טו", "י", "ט", "ח", "ז", "ו", "ה", "ד", "ג", "ב", "א"] }, ou = { integers: [1e4, 9e3, 8e3, 7e3, 6e3, 5e3, 4e3, 3e3, 2e3, 1e3, 900, 800, 700, 600, 500, 400, 300, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], values: ["ჵ", "ჰ", "ჯ", "ჴ", "ხ", "ჭ", "წ", "ძ", "ც", "ჩ", "შ", "ყ", "ღ", "ქ", "ფ", "ჳ", "ტ", "ს", "რ", "ჟ", "პ", "ო", "ჲ", "ნ", "მ", "ლ", "კ", "ი", "თ", "ჱ", "ზ", "ვ", "ე", "დ", "გ", "ბ", "ა"] }, Nt = function(e, t, r, a, g, p) {
+}(), Ks = { integers: [1e3, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1], values: ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"] }, js = { integers: [9e3, 8e3, 7e3, 6e3, 5e3, 4e3, 3e3, 2e3, 1e3, 900, 800, 700, 600, 500, 400, 300, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], values: ["Ք", "Փ", "Ւ", "Ց", "Ր", "Տ", "Վ", "Ս", "Ռ", "Ջ", "Պ", "Չ", "Ո", "Շ", "Ն", "Յ", "Մ", "Ճ", "Ղ", "Ձ", "Հ", "Կ", "Ծ", "Խ", "Լ", "Ի", "Ժ", "Թ", "Ը", "Է", "Զ", "Ե", "Դ", "Գ", "Բ", "Ա"] }, su = { integers: [1e4, 9e3, 8e3, 7e3, 6e3, 5e3, 4e3, 3e3, 2e3, 1e3, 400, 300, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 19, 18, 17, 16, 15, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], values: ["י׳", "ט׳", "ח׳", "ז׳", "ו׳", "ה׳", "ד׳", "ג׳", "ב׳", "א׳", "ת", "ש", "ר", "ק", "צ", "פ", "ע", "ס", "נ", "מ", "ל", "כ", "יט", "יח", "יז", "טז", "טו", "י", "ט", "ח", "ז", "ו", "ה", "ד", "ג", "ב", "א"] }, ou = { integers: [1e4, 9e3, 8e3, 7e3, 6e3, 5e3, 4e3, 3e3, 2e3, 1e3, 900, 800, 700, 600, 500, 400, 300, 200, 100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1], values: ["ჵ", "ჰ", "ჯ", "ჴ", "ხ", "ჭ", "წ", "ძ", "ც", "ჩ", "შ", "ყ", "ღ", "ქ", "ფ", "ჳ", "ტ", "ს", "რ", "ჟ", "პ", "ო", "ჲ", "ნ", "მ", "ლ", "კ", "ი", "თ", "ჱ", "ზ", "ვ", "ე", "დ", "გ", "ბ", "ა"] }, Vt = function(e, t, r, a, g, p) {
   return e < t || e > r ? He(e, g, p.length > 0) : a.integers.reduce(function(w, C, y) {
     for (; e >= C; )
       e -= C, w += a.values[y];
@@ -3958,7 +3958,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
 }, UA = function(e, t, r, a, g) {
   var p = r - t + 1;
   return (e < 0 ? "-" : "") + (na(Math.abs(e), p, a, function(w) {
-    return kA(Math.floor(w % p) + t);
+    return _A(Math.floor(w % p) + t);
   }) + g);
 }, It = function(e, t, r) {
   r === void 0 && (r = ". ");
@@ -3977,7 +3977,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
     Q === 0 && IA(p, 1) && C !== "" ? C = t[Q] + C : Q > 1 || Q === 1 && y === 0 || Q === 1 && y === 1 && IA(p, 2) || Q === 1 && y === 1 && IA(p, 4) && e > 100 || Q === 1 && y > 1 && IA(p, 8) ? C = t[Q] + (y > 0 ? r[y - 1] : "") + C : Q === 1 && y > 0 && (C = r[y - 1] + C), w = Math.floor(w / 10);
   }
   return (e < 0 ? a : "") + C;
-}, Vs = "十百千萬", Gs = "拾佰仟萬", Ns = "マイナス", ar = "마이너스", He = function(e, t, r) {
+}, Gs = "十百千萬", Ns = "拾佰仟萬", Vs = "マイナス", ar = "마이너스", He = function(e, t, r) {
   var a = r ? ". " : "", g = r ? "、" : "", p = r ? ", " : "", w = r ? " " : "";
   switch (t) {
     case 0:
@@ -3992,9 +3992,9 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
     case 4:
       return It(e, "〇一二三四五六七八九", g);
     case 6:
-      return Nt(e, 1, 3999, Ks, 3, a).toLowerCase();
+      return Vt(e, 1, 3999, Ks, 3, a).toLowerCase();
     case 7:
-      return Nt(e, 1, 3999, Ks, 3, a);
+      return Vt(e, 1, 3999, Ks, 3, a);
     case 8:
       return UA(e, 945, 969, !1, a);
     case 9:
@@ -4005,9 +4005,9 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
       return UA(e, 1632, 1641, !0, a);
     case 12:
     case 49:
-      return Nt(e, 1, 9999, js, 3, a);
+      return Vt(e, 1, 9999, js, 3, a);
     case 35:
-      return Nt(e, 1, 9999, js, 3, a).toLowerCase();
+      return Vt(e, 1, 9999, js, 3, a).toLowerCase();
     case 13:
       return UA(e, 2534, 2543, !0, a);
     case 14:
@@ -4019,17 +4019,17 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
       return It(e, "甲乙丙丁戊己庚辛壬癸", g);
     case 17:
     case 48:
-      return pt(e, "零一二三四五六七八九", Vs, "負", g, 14);
+      return pt(e, "零一二三四五六七八九", Gs, "負", g, 14);
     case 47:
-      return pt(e, "零壹貳參肆伍陸柒捌玖", Gs, "負", g, 15);
+      return pt(e, "零壹貳參肆伍陸柒捌玖", Ns, "負", g, 15);
     case 42:
-      return pt(e, "零一二三四五六七八九", Vs, "负", g, 14);
+      return pt(e, "零一二三四五六七八九", Gs, "负", g, 14);
     case 41:
-      return pt(e, "零壹贰叁肆伍陆柒捌玖", Gs, "负", g, 15);
+      return pt(e, "零壹贰叁肆伍陆柒捌玖", Ns, "负", g, 15);
     case 26:
-      return pt(e, "〇一二三四五六七八九", "十百千万", Ns, g, 0);
+      return pt(e, "〇一二三四五六七八九", "十百千万", Vs, g, 0);
     case 25:
-      return pt(e, "零壱弐参四伍六七八九", "拾百千万", Ns, g, 7);
+      return pt(e, "零壱弐参四伍六七八九", "拾百千万", Vs, g, 7);
     case 31:
       return pt(e, "영일이삼사오육칠팔구", "십백천만", ar, p, 7);
     case 33:
@@ -4039,13 +4039,13 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
     case 18:
       return UA(e, 2406, 2415, !0, a);
     case 20:
-      return Nt(e, 1, 19999, ou, 3, a);
+      return Vt(e, 1, 19999, ou, 3, a);
     case 21:
       return UA(e, 2790, 2799, !0, a);
     case 22:
       return UA(e, 2662, 2671, !0, a);
     case 22:
-      return Nt(e, 1, 10999, su, 3, a);
+      return Vt(e, 1, 10999, su, 3, a);
     case 23:
       return It(e, "あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわゐゑをん");
     case 24:
@@ -4200,10 +4200,10 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
       g.style.transitionProperty = "none";
       var p = a.getComputedStyle(t), w = a.getComputedStyle(t, ":before"), C = a.getComputedStyle(t, ":after");
       this.referenceElement === t && Pr(g) && (this.clonedReferenceElement = g), cn(g) && pu(g);
-      var y = this.counters.parse(new ks(this.context, p)), Q = this.resolvePseudoContent(t, g, w, Ee.BEFORE);
+      var y = this.counters.parse(new _s(this.context, p)), Q = this.resolvePseudoContent(t, g, w, Ee.BEFORE);
       Rs(t) && (r = !0), Ms(t) || this.cloneChildNodes(t, g, r), Q && g.insertBefore(Q, g.firstChild);
       var b = this.resolvePseudoContent(t, g, C, Ee.AFTER);
-      return b && g.appendChild(b), this.counters.pop(y), (p && (this.options.copyStyles || fi(t)) && !ia(t) || r) && cr(p, g), t.scrollTop === 0 && t.scrollLeft === 0 || this.scrolledElements.push([g, t.scrollLeft, t.scrollTop]), (Ei(t) || ki(t)) && (Ei(g) || ki(g)) && (g.value = t.value), g;
+      return b && g.appendChild(b), this.counters.pop(y), (p && (this.options.copyStyles || fi(t)) && !ia(t) || r) && cr(p, g), t.scrollTop === 0 && t.scrollLeft === 0 || this.scrolledElements.push([g, t.scrollLeft, t.scrollTop]), (Ei(t) || _i(t)) && (Ei(g) || _i(g)) && (g.value = t.value), g;
     }
     return t.cloneNode(!1);
   }, e.prototype.resolvePseudoContent = function(t, r, a, g) {
@@ -4211,7 +4211,7 @@ var Ee, Ss = 8, or = 9, Ts = 11, Is = 12, Dh = function() {
     if (a) {
       var w = a.content, C = r.ownerDocument;
       if (C && w && w !== "none" && w !== "-moz-alt-content" && a.display !== "none") {
-        this.counters.parse(new ks(this.context, a));
+        this.counters.parse(new _s(this.context, a));
         var y = new Th(this.context, a), Q = C.createElement("html2canvaspseudoelement");
         cr(a, Q), y.content.forEach(function(E) {
           if (E.type === 0)
@@ -4448,7 +4448,7 @@ var QA = function(e, t, r, a, g) {
     default:
       return new si(new oA(y, Q), new oA(y - w, Q), new oA(e, t + C), new oA(e, t));
   }
-}, _i = function(e) {
+}, ki = function(e) {
   return [e.topLeftBorderBox, e.topRightBorderBox, e.bottomRightBorderBox, e.bottomLeftBorderBox];
 }, Si = function(e) {
   return [e.topLeftPaddingBox, e.topRightPaddingBox, e.bottomRightPaddingBox, e.bottomLeftPaddingBox];
@@ -4473,7 +4473,7 @@ var QA = function(e, t, r, a, g) {
       this.effects.push(new xu(a, g, p));
     }
     if (this.container.styles.overflowX !== 0) {
-      var w = _i(this.curves), C = Si(this.curves);
+      var w = ki(this.curves), C = Si(this.curves);
       Ys(w, C) ? this.effects.push(new oi(w, 6)) : (this.effects.push(new oi(w, 2)), this.effects.push(new oi(C, 4)));
     }
   }
@@ -4484,7 +4484,7 @@ var QA = function(e, t, r, a, g) {
       });
       if (r || a.container.styles.position !== 0 || !a.parent) {
         if (g.unshift.apply(g, p), r = [2, 3].indexOf(a.container.styles.position) === -1, a.container.styles.overflowX !== 0) {
-          var w = _i(a.curves), C = Si(a.curves);
+          var w = ki(a.curves), C = Si(a.curves);
           Ys(w, C) || g.unshift(new oi(C, 6));
         }
       } else
@@ -4495,7 +4495,7 @@ var QA = function(e, t, r, a, g) {
       return IA(y.target, t);
     });
   }, e;
-}(), Vr = function(e, t, r, a) {
+}(), Gr = function(e, t, r, a) {
   e.container.elements.forEach(function(g) {
     var p = IA(g.flags, 4), w = IA(g.flags, 2), C = new la(g, e);
     IA(g.styles.display, 2048) && a.push(C);
@@ -4518,9 +4518,9 @@ var QA = function(e, t, r, a, g) {
           Q.zeroOrAutoZIndexOrTransformedOrOpacity.push(b);
       } else
         g.styles.isFloating() ? Q.nonPositionedFloats.push(b) : Q.nonPositionedInlineLevel.push(b);
-      Vr(C, b, p ? b : r, y);
+      Gr(C, b, p ? b : r, y);
     } else
-      g.styles.isInlineLevel() ? t.inlineLevel.push(C) : t.nonInlineLevel.push(C), Vr(C, t, r, y);
+      g.styles.isInlineLevel() ? t.inlineLevel.push(C) : t.nonInlineLevel.push(C), Gr(C, t, r, y);
     IA(g.flags, 8) && ha(g, y);
   });
 }, ha = function(e, t) {
@@ -4557,7 +4557,7 @@ var QA = function(e, t, r, a, g) {
   }($t(e.styles.backgroundOrigin, t), e), g = function(Q, b) {
     return Q === 0 ? b.bounds : Q === 2 ? Ti(b) : Js(b);
   }($t(e.styles.backgroundClip, t), e), p = Eu($t(e.styles.backgroundSize, t), r, a), w = p[0], C = p[1], y = ve($t(e.styles.backgroundPosition, t), a.width - w, a.height - C);
-  return [ku($t(e.styles.backgroundRepeat, t), y, p, a, g), Math.round(a.left + y[0]), Math.round(a.top + y[1]), w, C];
+  return [_u($t(e.styles.backgroundRepeat, t), y, p, a, g), Math.round(a.left + y[0]), Math.round(a.top + y[1]), w, C];
 }, Wt = function(e) {
   return vA(e) && e.value === ee.AUTO;
 }, ci = function(e) {
@@ -4585,7 +4585,7 @@ var QA = function(e, t, r, a, g) {
 }, $t = function(e, t) {
   var r = e[t];
   return r === void 0 ? e[0] : r;
-}, ku = function(e, t, r, a, g) {
+}, _u = function(e, t, r, a, g) {
   var p = t[0], w = t[1], C = r[0], y = r[1];
   switch (e) {
     case 2:
@@ -4597,7 +4597,7 @@ var QA = function(e, t, r, a, g) {
     default:
       return [new oA(Math.round(g.left), Math.round(g.top)), new oA(Math.round(g.left + g.width), Math.round(g.top)), new oA(Math.round(g.left + g.width), Math.round(g.height + g.top)), new oA(Math.round(g.left), Math.round(g.height + g.top))];
   }
-}, qs = "Hidden Text", _u = function() {
+}, qs = "Hidden Text", ku = function() {
   function e(t) {
     this._data = {}, this._document = t;
   }
@@ -4617,7 +4617,7 @@ var QA = function(e, t, r, a, g) {
 }, Su = function(e) {
   function t(r, a) {
     var g = e.call(this, r, a) || this;
-    return g._activeEffects = [], g.canvas = a.canvas ? a.canvas : document.createElement("canvas"), g.ctx = g.canvas.getContext("2d"), a.canvas || (g.canvas.width = Math.floor(a.width * a.scale), g.canvas.height = Math.floor(a.height * a.scale), g.canvas.style.width = a.width + "px", g.canvas.style.height = a.height + "px"), g.fontMetrics = new _u(document), g.ctx.scale(g.options.scale, g.options.scale), g.ctx.translate(-a.x, -a.y), g.ctx.textBaseline = "bottom", g._activeEffects = [], g.context.logger.debug("Canvas renderer initialized (" + a.width + "x" + a.height + ") with scale " + a.scale), g;
+    return g._activeEffects = [], g.canvas = a.canvas ? a.canvas : document.createElement("canvas"), g.ctx = g.canvas.getContext("2d"), a.canvas || (g.canvas.width = Math.floor(a.width * a.scale), g.canvas.height = Math.floor(a.height * a.scale), g.canvas.style.width = a.width + "px", g.canvas.style.height = a.height + "px"), g.fontMetrics = new ku(document), g.ctx.scale(g.options.scale, g.options.scale), g.ctx.translate(-a.x, -a.y), g.ctx.textBaseline = "bottom", g._activeEffects = [], g.context.logger.debug("Canvas renderer initialized (" + a.width + "x" + a.height + ") with scale " + a.scale), g;
   }
   return st(t, e), t.prototype.applyEffects = function(r) {
     for (var a = this; this._activeEffects.length; )
@@ -4722,7 +4722,7 @@ var QA = function(e, t, r, a, g) {
           case 3:
             return w++, [3, 1];
           case 4:
-            if (!(a instanceof No))
+            if (!(a instanceof Vo))
               return [3, 8];
             s.label = 5;
           case 5:
@@ -4754,7 +4754,7 @@ var QA = function(e, t, r, a, g) {
                 case 2:
                   H += u.width;
               }
-              j = u.add(H, 0, 0, -u.height / 2 + 1), this.ctx.save(), this.path([new oA(u.left, u.top), new oA(u.left + u.width, u.top), new oA(u.left + u.width, u.top + u.height), new oA(u.left, u.top + u.height)]), this.ctx.clip(), this.renderTextWithLetterSpacing(new ke(a.value, j), p.letterSpacing, L), this.ctx.restore(), this.ctx.textBaseline = "alphabetic", this.ctx.textAlign = "left";
+              j = u.add(H, 0, 0, -u.height / 2 + 1), this.ctx.save(), this.path([new oA(u.left, u.top), new oA(u.left + u.width, u.top), new oA(u.left + u.width, u.top + u.height), new oA(u.left, u.top + u.height)]), this.ctx.clip(), this.renderTextWithLetterSpacing(new _e(a.value, j), p.letterSpacing, L), this.ctx.restore(), this.ctx.textBaseline = "alphabetic", this.ctx.textAlign = "left";
             }
             if (!IA(a.styles.display, 2048))
               return [3, 20];
@@ -4772,7 +4772,7 @@ var QA = function(e, t, r, a, g) {
           case 18:
             return [3, 20];
           case 19:
-            r.listValue && a.styles.listStyleType !== -1 && (cA = this.createFontStyle(p)[0], this.ctx.font = cA, this.ctx.fillStyle = HA(p.color), this.ctx.textBaseline = "middle", this.ctx.textAlign = "right", u = new vt(a.bounds.left, a.bounds.top + bA(a.styles.paddingTop, a.bounds.width), a.bounds.width, Fs(p.lineHeight, p.fontSize.number) / 2 + 1), this.renderTextWithLetterSpacing(new ke(r.listValue, u), p.letterSpacing, Fs(p.lineHeight, p.fontSize.number) / 2 + 2), this.ctx.textBaseline = "bottom", this.ctx.textAlign = "left"), s.label = 20;
+            r.listValue && a.styles.listStyleType !== -1 && (cA = this.createFontStyle(p)[0], this.ctx.font = cA, this.ctx.fillStyle = HA(p.color), this.ctx.textBaseline = "middle", this.ctx.textAlign = "right", u = new vt(a.bounds.left, a.bounds.top + bA(a.styles.paddingTop, a.bounds.width), a.bounds.width, Fs(p.lineHeight, p.fontSize.number) / 2 + 1), this.renderTextWithLetterSpacing(new _e(r.listValue, u), p.letterSpacing, Fs(p.lineHeight, p.fontSize.number) / 2 + 2), this.ctx.textBaseline = "bottom", this.ctx.textAlign = "left"), s.label = 20;
           case 20:
             return [2];
         }
@@ -4873,19 +4873,19 @@ var QA = function(e, t, r, a, g) {
         switch (Q.label) {
           case 0:
             a = r.styles.backgroundImage.length - 1, g = function(b) {
-              var E, S, L, H, j, B, J, iA, cA, u, s, o, d, A, i, n, h, c, l, f, m, v, x, U, F, _, O, P, R, Y, N;
-              return RA(this, function(k) {
-                switch (k.label) {
+              var E, S, L, H, j, B, J, iA, cA, u, s, o, d, A, i, n, h, c, l, f, m, v, x, U, F, k, O, P, R, Y, V;
+              return RA(this, function(_) {
+                switch (_.label) {
                   case 0:
                     if (b.type !== 0)
                       return [3, 5];
-                    E = void 0, S = b.url, k.label = 1;
+                    E = void 0, S = b.url, _.label = 1;
                   case 1:
-                    return k.trys.push([1, 3, , 4]), [4, p.context.cache.match(S)];
+                    return _.trys.push([1, 3, , 4]), [4, p.context.cache.match(S)];
                   case 2:
-                    return E = k.sent(), [3, 4];
+                    return E = _.sent(), [3, 4];
                   case 3:
-                    return k.sent(), p.context.logger.error("Error loading background-image " + S), [3, 4];
+                    return _.sent(), p.context.logger.error("Error loading background-image " + S), [3, 4];
                   case 4:
                     return E && (L = ur(r, a, [E.width, E.height, E.width / E.height]), n = L[0], v = L[1], x = L[2], l = L[3], f = L[4], A = p.ctx.createPattern(p.resizeImage(E, l, f), "repeat"), p.renderRepeat(n, A, v, x)), [3, 6];
                   case 5:
@@ -4893,36 +4893,36 @@ var QA = function(e, t, r, a, g) {
                       return d.addColorStop(T.stop, HA(T.color));
                     }), o.fillStyle = d, o.fillRect(0, 0, l, f), l > 0 && f > 0 && (A = p.ctx.createPattern(s, "repeat"), p.renderRepeat(n, A, v, x))) : function(T) {
                       return T.type === 2;
-                    }(b) && (i = ur(r, a, [null, null, null]), n = i[0], h = i[1], c = i[2], l = i[3], f = i[4], m = b.position.length === 0 ? [nn] : b.position, v = bA(m[0], l), x = bA(m[m.length - 1], f), U = function(T, M, G, X, D) {
+                    }(b) && (i = ur(r, a, [null, null, null]), n = i[0], h = i[1], c = i[2], l = i[3], f = i[4], m = b.position.length === 0 ? [nn] : b.position, v = bA(m[0], l), x = bA(m[m.length - 1], f), U = function(T, M, N, X, D) {
                       var I = 0, K = 0;
                       switch (T.size) {
                         case 0:
-                          T.shape === 0 ? I = K = Math.min(Math.abs(M), Math.abs(M - X), Math.abs(G), Math.abs(G - D)) : T.shape === 1 && (I = Math.min(Math.abs(M), Math.abs(M - X)), K = Math.min(Math.abs(G), Math.abs(G - D)));
+                          T.shape === 0 ? I = K = Math.min(Math.abs(M), Math.abs(M - X), Math.abs(N), Math.abs(N - D)) : T.shape === 1 && (I = Math.min(Math.abs(M), Math.abs(M - X)), K = Math.min(Math.abs(N), Math.abs(N - D)));
                           break;
                         case 2:
                           if (T.shape === 0)
-                            I = K = Math.min(rt(M, G), rt(M, G - D), rt(M - X, G), rt(M - X, G - D));
+                            I = K = Math.min(rt(M, N), rt(M, N - D), rt(M - X, N), rt(M - X, N - D));
                           else if (T.shape === 1) {
-                            var W = Math.min(Math.abs(G), Math.abs(G - D)) / Math.min(Math.abs(M), Math.abs(M - X)), V = Qs(X, D, M, G, !0), z = V[0], $ = V[1];
-                            K = W * (I = rt(z - M, ($ - G) / W));
+                            var W = Math.min(Math.abs(N), Math.abs(N - D)) / Math.min(Math.abs(M), Math.abs(M - X)), G = Qs(X, D, M, N, !0), z = G[0], $ = G[1];
+                            K = W * (I = rt(z - M, ($ - N) / W));
                           }
                           break;
                         case 1:
-                          T.shape === 0 ? I = K = Math.max(Math.abs(M), Math.abs(M - X), Math.abs(G), Math.abs(G - D)) : T.shape === 1 && (I = Math.max(Math.abs(M), Math.abs(M - X)), K = Math.max(Math.abs(G), Math.abs(G - D)));
+                          T.shape === 0 ? I = K = Math.max(Math.abs(M), Math.abs(M - X), Math.abs(N), Math.abs(N - D)) : T.shape === 1 && (I = Math.max(Math.abs(M), Math.abs(M - X)), K = Math.max(Math.abs(N), Math.abs(N - D)));
                           break;
                         case 3:
                           if (T.shape === 0)
-                            I = K = Math.max(rt(M, G), rt(M, G - D), rt(M - X, G), rt(M - X, G - D));
+                            I = K = Math.max(rt(M, N), rt(M, N - D), rt(M - X, N), rt(M - X, N - D));
                           else if (T.shape === 1) {
-                            W = Math.max(Math.abs(G), Math.abs(G - D)) / Math.max(Math.abs(M), Math.abs(M - X));
-                            var eA = Qs(X, D, M, G, !1);
-                            z = eA[0], $ = eA[1], K = W * (I = rt(z - M, ($ - G) / W));
+                            W = Math.max(Math.abs(N), Math.abs(N - D)) / Math.max(Math.abs(M), Math.abs(M - X));
+                            var eA = Qs(X, D, M, N, !1);
+                            z = eA[0], $ = eA[1], K = W * (I = rt(z - M, ($ - N) / W));
                           }
                       }
                       return Array.isArray(T.size) && (I = bA(T.size[0], X), K = T.size.length === 2 ? bA(T.size[1], D) : I), [I, K];
-                    }(b, v, x, l, f), F = U[0], _ = U[1], F > 0 && _ > 0 && (O = p.ctx.createRadialGradient(h + v, c + x, 0, h + v, c + x, F), bs(b.stops, 2 * F).forEach(function(T) {
+                    }(b, v, x, l, f), F = U[0], k = U[1], F > 0 && k > 0 && (O = p.ctx.createRadialGradient(h + v, c + x, 0, h + v, c + x, F), bs(b.stops, 2 * F).forEach(function(T) {
                       return O.addColorStop(T.stop, HA(T.color));
-                    }), p.path(n), p.ctx.fillStyle = O, F !== _ ? (P = r.bounds.left + 0.5 * r.bounds.width, R = r.bounds.top + 0.5 * r.bounds.height, N = 1 / (Y = _ / F), p.ctx.save(), p.ctx.translate(P, R), p.ctx.transform(1, 0, 0, Y, 0, 0), p.ctx.translate(-P, -R), p.ctx.fillRect(h, N * (c - R) + R, l, f * N), p.ctx.restore()) : p.ctx.fill())), k.label = 6;
+                    }), p.path(n), p.ctx.fillStyle = O, F !== k ? (P = r.bounds.left + 0.5 * r.bounds.width, R = r.bounds.top + 0.5 * r.bounds.height, V = 1 / (Y = k / F), p.ctx.save(), p.ctx.translate(P, R), p.ctx.transform(1, 0, 0, Y, 0, 0), p.ctx.translate(-P, -R), p.ctx.fillRect(h, V * (c - R) + R, l, f * V), p.ctx.restore()) : p.ctx.fill())), _.label = 6;
                   case 6:
                     return a--, [2];
                 }
@@ -4991,7 +4991,7 @@ var QA = function(e, t, r, a, g) {
           case 1:
             S.sent(), this.ctx.restore(), a.boxShadow.slice(0).reverse().forEach(function(L) {
               E.ctx.save();
-              var H, j, B, J, iA, cA = _i(r.curves), u = L.inset ? 0 : 1e4, s = (H = cA, j = -u + (L.inset ? 1 : -1) * L.spread.number, B = (L.inset ? 1 : -1) * L.spread.number, J = L.spread.number * (L.inset ? -2 : 2), iA = L.spread.number * (L.inset ? -2 : 2), H.map(function(o, d) {
+              var H, j, B, J, iA, cA = ki(r.curves), u = L.inset ? 0 : 1e4, s = (H = cA, j = -u + (L.inset ? 1 : -1) * L.spread.number, B = (L.inset ? 1 : -1) * L.spread.number, J = L.spread.number * (L.inset ? -2 : 2), iA = L.spread.number * (L.inset ? -2 : 2), H.map(function(o, d) {
                 switch (d) {
                   case 0:
                     return o.add(j, B);
@@ -5057,7 +5057,7 @@ var QA = function(e, t, r, a, g) {
       return RA(this, function(g) {
         switch (g.label) {
           case 0:
-            return this.options.backgroundColor && (this.ctx.fillStyle = HA(this.options.backgroundColor), this.ctx.fillRect(this.options.x, this.options.y, this.options.width, this.options.height)), p = new la(r, null), w = new ca(p), Vr(p, w, w, C = []), ha(p.container, C), a = w, [4, this.renderStack(a)];
+            return this.options.backgroundColor && (this.ctx.fillStyle = HA(this.options.backgroundColor), this.ctx.fillRect(this.options.x, this.options.y, this.options.width, this.options.height)), p = new la(r, null), w = new ca(p), Gr(p, w, w, C = []), ha(p.container, C), a = w, [4, this.renderStack(a)];
           case 1:
             return g.sent(), this.applyEffects([]), [2, this.canvas];
         }
@@ -5070,7 +5070,7 @@ var QA = function(e, t, r, a, g) {
 }, Iu = function(e, t) {
   switch (e) {
     case 0:
-      return _i(t);
+      return ki(t);
     case 2:
       return function(r) {
         return [r.topLeftContentBox, r.topRightContentBox, r.bottomRightContentBox, r.bottomLeftContentBox];
@@ -5124,21 +5124,21 @@ var QA = function(e, t, r, a, g) {
   return e.prototype.debug = function() {
     for (var t = [], r = 0; r < arguments.length; r++)
       t[r] = arguments[r];
-    this.enabled && (typeof window < "u" && window.console && typeof console.debug == "function" ? console.debug.apply(console, Ne([this.id, this.getTime() + "ms"], t)) : this.info.apply(this, t));
+    this.enabled && (typeof window < "u" && window.console && typeof console.debug == "function" ? console.debug.apply(console, Ve([this.id, this.getTime() + "ms"], t)) : this.info.apply(this, t));
   }, e.prototype.getTime = function() {
     return Date.now() - this.start;
   }, e.prototype.info = function() {
     for (var t = [], r = 0; r < arguments.length; r++)
       t[r] = arguments[r];
-    this.enabled && typeof window < "u" && window.console && typeof console.info == "function" && console.info.apply(console, Ne([this.id, this.getTime() + "ms"], t));
+    this.enabled && typeof window < "u" && window.console && typeof console.info == "function" && console.info.apply(console, Ve([this.id, this.getTime() + "ms"], t));
   }, e.prototype.warn = function() {
     for (var t = [], r = 0; r < arguments.length; r++)
       t[r] = arguments[r];
-    this.enabled && (typeof window < "u" && window.console && typeof console.warn == "function" ? console.warn.apply(console, Ne([this.id, this.getTime() + "ms"], t)) : this.info.apply(this, t));
+    this.enabled && (typeof window < "u" && window.console && typeof console.warn == "function" ? console.warn.apply(console, Ve([this.id, this.getTime() + "ms"], t)) : this.info.apply(this, t));
   }, e.prototype.error = function() {
     for (var t = [], r = 0; r < arguments.length; r++)
       t[r] = arguments[r];
-    this.enabled && (typeof window < "u" && window.console && typeof console.error == "function" ? console.error.apply(console, Ne([this.id, this.getTime() + "ms"], t)) : this.info.apply(this, t));
+    this.enabled && (typeof window < "u" && window.console && typeof console.error == "function" ? console.error.apply(console, Ve([this.id, this.getTime() + "ms"], t)) : this.info.apply(this, t));
   }, e.instances = {}, e;
 }(), Ru = function() {
   function e(t, r) {
@@ -5150,7 +5150,7 @@ var QA = function(e, t, r, a, g) {
 typeof window < "u" && oa.setContext(window);
 var Ku = function(e, t) {
   return KA(void 0, 0, void 0, function() {
-    var r, a, g, p, w, C, y, Q, b, E, S, L, H, j, B, J, iA, cA, u, s, o, d, A, i, n, h, c, l, f, m, v, x, U, F, _, O, P, R;
+    var r, a, g, p, w, C, y, Q, b, E, S, L, H, j, B, J, iA, cA, u, s, o, d, A, i, n, h, c, l, f, m, v, x, U, F, k, O, P, R;
     return RA(this, function(Y) {
       switch (Y.label) {
         case 0:
@@ -5162,13 +5162,13 @@ var Ku = function(e, t) {
             throw new Error("Document is not attached to a Window");
           return g = { allowTaint: (d = t.allowTaint) !== null && d !== void 0 && d, imageTimeout: (A = t.imageTimeout) !== null && A !== void 0 ? A : 15e3, proxy: t.proxy, useCORS: (i = t.useCORS) !== null && i !== void 0 && i }, p = Fr({ logging: (n = t.logging) === null || n === void 0 || n, cache: t.cache }, g), w = { windowWidth: (h = t.windowWidth) !== null && h !== void 0 ? h : a.innerWidth, windowHeight: (c = t.windowHeight) !== null && c !== void 0 ? c : a.innerHeight, scrollX: (l = t.scrollX) !== null && l !== void 0 ? l : a.pageXOffset, scrollY: (f = t.scrollY) !== null && f !== void 0 ? f : a.pageYOffset }, C = new vt(w.scrollX, w.scrollY, w.windowWidth, w.windowHeight), y = new Ru(p, C), Q = (m = t.foreignObjectRendering) !== null && m !== void 0 && m, b = { allowTaint: (v = t.allowTaint) !== null && v !== void 0 && v, onclone: t.onclone, ignoreElements: t.ignoreElements, inlineImages: Q, copyStyles: Q }, y.logger.debug("Starting document clone with size " + C.width + "x" + C.height + " scrolled to " + -C.left + "," + -C.top), E = new Xs(y, e, b), (S = E.clonedReferenceElement) ? [4, E.toIFrame(r, C)] : [2, Promise.reject("Unable to find element in cloned iframe")];
         case 1:
-          return L = Y.sent(), H = cn(S) || S.tagName === "HTML" ? function(N) {
-            var k = N.body, T = N.documentElement;
-            if (!k || !T)
+          return L = Y.sent(), H = cn(S) || S.tagName === "HTML" ? function(V) {
+            var _ = V.body, T = V.documentElement;
+            if (!_ || !T)
               throw new Error("Unable to get document size");
-            var M = Math.max(Math.max(k.scrollWidth, T.scrollWidth), Math.max(k.offsetWidth, T.offsetWidth), Math.max(k.clientWidth, T.clientWidth)), G = Math.max(Math.max(k.scrollHeight, T.scrollHeight), Math.max(k.offsetHeight, T.offsetHeight), Math.max(k.clientHeight, T.clientHeight));
-            return new vt(0, 0, M, G);
-          }(S.ownerDocument) : Di(y, S), j = H.width, B = H.height, J = H.left, iA = H.top, cA = ju(y, S, t.backgroundColor), u = { canvas: t.canvas, backgroundColor: cA, scale: (U = (x = t.scale) !== null && x !== void 0 ? x : a.devicePixelRatio) !== null && U !== void 0 ? U : 1, x: ((F = t.x) !== null && F !== void 0 ? F : 0) + J, y: ((_ = t.y) !== null && _ !== void 0 ? _ : 0) + iA, width: (O = t.width) !== null && O !== void 0 ? O : Math.ceil(j), height: (P = t.height) !== null && P !== void 0 ? P : Math.ceil(B) }, Q ? (y.logger.debug("Document cloned, using foreign object rendering"), [4, new Du(y, u).render(S)]) : [3, 3];
+            var M = Math.max(Math.max(_.scrollWidth, T.scrollWidth), Math.max(_.offsetWidth, T.offsetWidth), Math.max(_.clientWidth, T.clientWidth)), N = Math.max(Math.max(_.scrollHeight, T.scrollHeight), Math.max(_.offsetHeight, T.offsetHeight), Math.max(_.clientHeight, T.clientHeight));
+            return new vt(0, 0, M, N);
+          }(S.ownerDocument) : Di(y, S), j = H.width, B = H.height, J = H.left, iA = H.top, cA = ju(y, S, t.backgroundColor), u = { canvas: t.canvas, backgroundColor: cA, scale: (U = (x = t.scale) !== null && x !== void 0 ? x : a.devicePixelRatio) !== null && U !== void 0 ? U : 1, x: ((F = t.x) !== null && F !== void 0 ? F : 0) + J, y: ((k = t.y) !== null && k !== void 0 ? k : 0) + iA, width: (O = t.width) !== null && O !== void 0 ? O : Math.ceil(j), height: (P = t.height) !== null && P !== void 0 ? P : Math.ceil(B) }, Q ? (y.logger.debug("Document cloned, using foreign object rendering"), [4, new Du(y, u).render(S)]) : [3, 3];
         case 2:
           return s = Y.sent(), [3, 5];
         case 3:
@@ -5207,7 +5207,7 @@ class ln {
 const hn = () => {
   const e = document.createElement("div");
   return e.classList.add("shake-sdk-card"), e;
-}, Vu = ({ label: e, items: t, onSelectionChange: r, selectedValue: a }) => {
+}, Gu = ({ label: e, items: t, onSelectionChange: r, selectedValue: a }) => {
   const g = uA(), p = uA();
   p.classList.add("shake-sdk-select-dropdown");
   const w = XA("data:image/svg+xml,%3csvg%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20id='caret-down-icon'%20clip-path='url(%23clip0_15248_22126)'%3e%3cpath%20id='Vector'%20d='M8%2010L12%2014L16%2010'%20stroke='%23636366'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_15248_22126'%3e%3crect%20width='24'%20height='24'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
@@ -5243,12 +5243,12 @@ const hn = () => {
     const S = E.target;
     p.contains(S) || Q.contains(S) || (Q.style.display = "none", p.classList.remove("active"));
   }), p.append(y), g.appendChild(p), g.appendChild(Q), g;
-}, Gr = "data:image/svg+xml,%3csvg%20width='50'%20height='51'%20viewBox='0%200%2050%2051'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M20.834%2021.5598L29.1673%2029.8931'%20stroke='%231C1C1E'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M29.1673%2021.56L20.834%2029.8933'%20stroke='%231C1C1E'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e", se = (e = !0) => {
+}, Nr = "data:image/svg+xml,%3csvg%20width='50'%20height='51'%20viewBox='0%200%2050%2051'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M20.834%2021.5598L29.1673%2029.8931'%20stroke='%231C1C1E'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M29.1673%2021.56L20.834%2029.8933'%20stroke='%231C1C1E'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e", se = (e = !0) => {
   const t = document.getElementById("shake-sdk-root");
   if (t) {
     t.remove();
-    const r = _A.localStorage;
-    e && (wd(), r.clearShakeState(), new Promise((a, g) => {
+    const r = kA.localStorage;
+    e && (md(), r.clearShakeState(), new Promise((a, g) => {
       const p = indexedDB.open(tt, 3);
       p.onerror = function() {
         g("Error opening database");
@@ -5286,8 +5286,8 @@ const hn = () => {
   const p = document.createElement("button");
   p.classList.add("shake-sdk-bubble"), p.style.backgroundColor = t, p.style.boxShadow = `0 2px 2px ${r}`, p.appendChild(g);
   const w = document.createElement("div"), C = w.attachShadow({ mode: "open" });
-  return _t(C), C.appendChild(p), Gu(p, a), w;
-}, Gu = (e, t) => {
+  return kt(C), C.appendChild(p), Nu(p, a), w;
+}, Nu = (e, t) => {
   let r = !1, a = 0, g = 0, p = !1;
   e.style.left = window.innerWidth - e.offsetWidth - 100 + "px", e.style.top = window.innerHeight - e.offsetHeight - 100 + "px", e.addEventListener("mousedown", function(w) {
     r = !0, p = !1, a = w.clientX - e.getBoundingClientRect().left, g = w.clientY - e.getBoundingClientRect().top;
@@ -5363,12 +5363,12 @@ const Oe = (e) => {
   }
 };
 AA(Oi, "SCREEN_RECORDING_TIME", 3e4);
-let Nr = Oi;
+let Vr = Oi;
 const pn = async () => {
   try {
     const e = da("data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3csvg%20width='15px'%20height='15px'%20viewBox='0%200%2032%2032'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%3e%3crect%20stroke='%23000'%20rx='3'%20stroke-width='0'%20height='32'%20width='32'%20y='0'%20x='0'%20fill='%23ffffff'/%3e%3c/g%3e%3c/svg%3e", "red", "#d90000", () => {
       t.stop();
-    }), t = new Nr();
+    }), t = new Vr();
     t.onStartListener = () => {
       document.body.appendChild(e), se(!1);
     }, t.onStopListener = (r) => {
@@ -5427,7 +5427,7 @@ const pn = async () => {
 }, Hi = () => {
   const e = navigator.userAgent;
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(e) || window.ontouchstart !== void 0;
-}, Nu = (e) => {
+}, Vu = (e) => {
   const t = [];
   t.push(dr({ img: fa, text: dA().shake_sdk_dialog_add_attachment_grab_screenshot, onClick: wn })), Hi() || t.push(dr({ img: pa, text: dA().shake_sdk_dialog_add_attachment_record_screen, onClick: pn })), t.push(dr({ img: "data:image/svg+xml,%3csvg%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_15055_29723)'%3e%3cpath%20d='M15.3453%205.345L12.9887%202.98833C12.6762%202.67583%2012.252%202.5%2011.8103%202.5H5.83366C4.91283%202.5%204.16699%203.24583%204.16699%204.16667V15.8333C4.16699%2016.7542%204.91283%2017.5%205.83366%2017.5H14.167C15.0878%2017.5%2015.8337%2016.7542%2015.8337%2015.8333V6.52333C15.8337%206.08167%2015.6578%205.6575%2015.3453%205.345Z'%20stroke='%23AEAEB2'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M15.8337%206.66667H12.5003C12.0403%206.66667%2011.667%206.29333%2011.667%205.83333V2.5'%20stroke='%23AEAEB2'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_15055_29723'%3e%3crect%20width='20'%20height='20'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e", text: dA().shake_sdk_dialog_add_attachment_browse_locations, onClick: un }));
   const { menu: r, toggle: a } = ((g, p, w) => {
@@ -5442,7 +5442,7 @@ const pn = async () => {
   return e.onclick = async (g) => {
     g.stopPropagation(), await Bn() ? new Te(dA().shake_sdk_dialog_attachment_count_limit_title, dA().shake_sdk_dialog_attachment_count_limit_message) : a();
   }, r;
-}, Ca = "data:image/svg+xml,%3csvg%20width='31'%20height='32'%20viewBox='0%200%2031%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12.7285%2013.4543L17.8197%2018.5455'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M17.8197%2013.4545L12.7285%2018.5457'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e", Ni = ({ src: e, controls: t, autoplay: r }) => {
+}, Ca = "data:image/svg+xml,%3csvg%20width='31'%20height='32'%20viewBox='0%200%2031%2032'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M12.7285%2013.4543L17.8197%2018.5455'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M17.8197%2013.4545L12.7285%2018.5457'%20stroke='%23F2F2F7'%20stroke-width='1.5'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/svg%3e", Vi = ({ src: e, controls: t, autoplay: r }) => {
   const a = document.createElement("video");
   return a.classList.add("shake-sdk-video"), a.src = e, a.controls = t ?? !1, a.preload = "metadata", a.autoplay = r ?? !1, a.loop = !0, a;
 }, Xu = (e) => {
@@ -5470,7 +5470,7 @@ const pn = async () => {
         i.stopPropagation(), B(H);
       };
       const u = URL.createObjectURL(H.drawingData ?? H.data);
-      H.type == yA.IMAGE ? (iA = dA().shake_sdk_dialog_add_attachment_type_image, cA = XA(u)) : H.type == yA.VIDEO ? (iA = dA().shake_sdk_dialog_add_attachment_type_video, cA = Ni({ src: u + "#t=0.1", autoplay: !0 })) : (iA = dA().shake_sdk_dialog_add_attachment_type_file, cA = Wu(H.name)), cA.classList.add("shake-sdk-attachment-item-thumbnail");
+      H.type == yA.IMAGE ? (iA = dA().shake_sdk_dialog_add_attachment_type_image, cA = XA(u)) : H.type == yA.VIDEO ? (iA = dA().shake_sdk_dialog_add_attachment_type_video, cA = Vi({ src: u + "#t=0.1", autoplay: !0 })) : (iA = dA().shake_sdk_dialog_add_attachment_type_file, cA = Wu(H.name)), cA.classList.add("shake-sdk-attachment-item-thumbnail");
       const s = hn();
       s.classList.add("shake-sdk-attachment-item-card"), s.appendChild(cA), s.appendChild(J);
       const o = Xu(iA), d = uA();
@@ -5482,7 +5482,7 @@ const pn = async () => {
       const H = Oe(ma);
       H.classList.add("shake-sdk-attachment-add-button");
       const j = uA();
-      return j.classList.add("shake-sdk-attachments-add-item"), j.appendChild(H), j.appendChild(Nu(H)), j;
+      return j.classList.add("shake-sdk-attachments-add-item"), j.appendChild(H), j.appendChild(Vu(H)), j;
     })());
   };
   r.removeObservers.push((E) => {
@@ -5695,12 +5695,12 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
         return new B.Point(x.x * U * m.x, x.y * U * m.y);
       };
       return n.length <= 1 || n.forEach(function(x, U) {
-        var F, _, O = new B.Point(x.x, x.y);
-        U === 0 ? (_ = n[U + 1], F = c ? v(B.util.createVector(_, O)).addEquals(O) : n[n.length - 1]) : U === n.length - 1 ? (F = n[U - 1], _ = c ? v(B.util.createVector(F, O)).addEquals(O) : n[0]) : (F = n[U - 1], _ = n[U + 1]);
-        var P, R, Y = B.util.getBisector(O, F, _), N = Y.vector, k = Y.angle;
-        if (h.strokeLineJoin === "miter" && (P = -f / Math.sin(k / 2), R = new B.Point(N.x * P * m.x, N.y * P * m.y), Math.hypot(R.x, R.y) / f <= h.strokeMiterLimit))
+        var F, k, O = new B.Point(x.x, x.y);
+        U === 0 ? (k = n[U + 1], F = c ? v(B.util.createVector(k, O)).addEquals(O) : n[n.length - 1]) : U === n.length - 1 ? (F = n[U - 1], k = c ? v(B.util.createVector(F, O)).addEquals(O) : n[0]) : (F = n[U - 1], k = n[U + 1]);
+        var P, R, Y = B.util.getBisector(O, F, k), V = Y.vector, _ = Y.angle;
+        if (h.strokeLineJoin === "miter" && (P = -f / Math.sin(_ / 2), R = new B.Point(V.x * P * m.x, V.y * P * m.y), Math.hypot(R.x, R.y) / f <= h.strokeMiterLimit))
           return l.push(O.add(R)), void l.push(O.subtract(R));
-        P = -f * Math.SQRT2, R = new B.Point(N.x * P * m.x, N.y * P * m.y), l.push(O.add(R)), l.push(O.subtract(R));
+        P = -f * Math.SQRT2, R = new B.Point(V.x * P * m.x, V.y * P * m.y), l.push(O.add(R)), l.push(O.subtract(R));
       }), l;
     }, transformPoint: function(n, h, c) {
       return c ? new B.Point(h[0] * n.x + h[2] * n.y, h[1] * n.x + h[3] * n.y) : new B.Point(h[0] * n.x + h[2] * n.y + h[4], h[1] * n.x + h[3] * n.y + h[5]);
@@ -5780,8 +5780,8 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
         }));
       }
       v ? n.forEach(function(U, F) {
-        U && U.type ? B.util.getKlass(U.type, c).fromObject(U, function(_, O) {
-          O || (f[F] = _), l && l(U, _, O), x();
+        U && U.type ? B.util.getKlass(U.type, c).fromObject(U, function(k, O) {
+          O || (f[F] = k), l && l(U, k, O), x();
         }) : x();
       }) : h && h(f);
     }, enlivenObjectEnlivables: function(n, h, c) {
@@ -5908,123 +5908,123 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     } };
   }(e), function() {
     var u = Array.prototype.join, s = { m: 2, l: 2, h: 1, v: 1, c: 6, s: 4, q: 4, t: 2, a: 7 }, o = { m: "l", M: "L" };
-    function d(U, F, _, O, P, R, Y, N, k, T, M) {
-      var G = B.util.cos(U), X = B.util.sin(U), D = B.util.cos(F), I = B.util.sin(F), K = _ * P * D - O * R * I + Y, W = O * P * D + _ * R * I + N;
-      return ["C", T + k * (-_ * P * X - O * R * G), M + k * (-O * P * X + _ * R * G), K + k * (_ * P * I + O * R * D), W + k * (O * P * I - _ * R * D), K, W];
+    function d(U, F, k, O, P, R, Y, V, _, T, M) {
+      var N = B.util.cos(U), X = B.util.sin(U), D = B.util.cos(F), I = B.util.sin(F), K = k * P * D - O * R * I + Y, W = O * P * D + k * R * I + V;
+      return ["C", T + _ * (-k * P * X - O * R * N), M + _ * (-O * P * X + k * R * N), K + _ * (k * P * I + O * R * D), W + _ * (O * P * I - k * R * D), K, W];
     }
-    function A(U, F, _, O) {
-      var P = Math.atan2(F, U), R = Math.atan2(O, _);
+    function A(U, F, k, O) {
+      var P = Math.atan2(F, U), R = Math.atan2(O, k);
       return R >= P ? R - P : 2 * Math.PI - (P - R);
     }
-    function i(U, F, _) {
-      for (var O = _[1], P = _[2], R = _[3], Y = _[4], N = _[5], k = function(G, X, D, I, K, W, V) {
-        var z = Math.PI, $ = V * z / 180, eA = B.util.sin($), rA = B.util.cos($), Z = 0, nA = 0, q = -rA * G * 0.5 - eA * X * 0.5, lA = -rA * X * 0.5 + eA * G * 0.5, sA = (D = Math.abs(D)) * D, hA = (I = Math.abs(I)) * I, BA = lA * lA, VA = q * q, dt = sA * hA - sA * BA - hA * VA, St = 0;
+    function i(U, F, k) {
+      for (var O = k[1], P = k[2], R = k[3], Y = k[4], V = k[5], _ = function(N, X, D, I, K, W, G) {
+        var z = Math.PI, $ = G * z / 180, eA = B.util.sin($), rA = B.util.cos($), Z = 0, nA = 0, q = -rA * N * 0.5 - eA * X * 0.5, lA = -rA * X * 0.5 + eA * N * 0.5, sA = (D = Math.abs(D)) * D, hA = (I = Math.abs(I)) * I, BA = lA * lA, GA = q * q, dt = sA * hA - sA * BA - hA * GA, St = 0;
         if (dt < 0) {
           var xA = Math.sqrt(1 - dt / (sA * hA));
           D *= xA, I *= xA;
         } else
-          St = (K === W ? -1 : 1) * Math.sqrt(dt / (sA * BA + hA * VA));
-        var WA = St * D * lA / I, gt = -St * I * q / D, Rt = rA * WA - eA * gt + 0.5 * G, ae = eA * WA + rA * gt + 0.5 * X, Xi = A(1, 0, (q - WA) / D, (lA - gt) / I), Kt = A((q - WA) / D, (lA - gt) / I, (-q - WA) / D, (-lA - gt) / I);
+          St = (K === W ? -1 : 1) * Math.sqrt(dt / (sA * BA + hA * GA));
+        var WA = St * D * lA / I, gt = -St * I * q / D, Rt = rA * WA - eA * gt + 0.5 * N, ae = eA * WA + rA * gt + 0.5 * X, Xi = A(1, 0, (q - WA) / D, (lA - gt) / I), Kt = A((q - WA) / D, (lA - gt) / I, (-q - WA) / D, (-lA - gt) / I);
         W === 0 && Kt > 0 ? Kt -= 2 * z : W === 1 && Kt < 0 && (Kt += 2 * z);
-        for (var mn = Math.ceil(Math.abs(Kt / z * 2)), Pe = [], ce = Kt / mn, _a = 8 / 3 * Math.sin(ce / 4) * Math.sin(ce / 4) / Math.sin(ce / 2), Wi = Xi + ce, le = 0; le < mn; le++)
-          Pe[le] = d(Xi, Wi, rA, eA, D, I, Rt, ae, _a, Z, nA), Z = Pe[le][5], nA = Pe[le][6], Xi = Wi, Wi += ce;
+        for (var mn = Math.ceil(Math.abs(Kt / z * 2)), Pe = [], ce = Kt / mn, ka = 8 / 3 * Math.sin(ce / 4) * Math.sin(ce / 4) / Math.sin(ce / 2), Wi = Xi + ce, le = 0; le < mn; le++)
+          Pe[le] = d(Xi, Wi, rA, eA, D, I, Rt, ae, ka, Z, nA), Z = Pe[le][5], nA = Pe[le][6], Xi = Wi, Wi += ce;
         return Pe;
-      }(_[6] - U, _[7] - F, O, P, Y, N, R), T = 0, M = k.length; T < M; T++)
-        k[T][1] += U, k[T][2] += F, k[T][3] += U, k[T][4] += F, k[T][5] += U, k[T][6] += F;
-      return k;
+      }(k[6] - U, k[7] - F, O, P, Y, V, R), T = 0, M = _.length; T < M; T++)
+        _[T][1] += U, _[T][2] += F, _[T][3] += U, _[T][4] += F, _[T][5] += U, _[T][6] += F;
+      return _;
     }
-    function n(U, F, _, O) {
-      return Math.sqrt((_ - U) * (_ - U) + (O - F) * (O - F));
+    function n(U, F, k, O) {
+      return Math.sqrt((k - U) * (k - U) + (O - F) * (O - F));
     }
-    function h(U, F, _, O, P, R, Y, N) {
-      return function(k) {
-        var T, M = (T = k) * T * T, G = function(I) {
+    function h(U, F, k, O, P, R, Y, V) {
+      return function(_) {
+        var T, M = (T = _) * T * T, N = function(I) {
           return 3 * I * I * (1 - I);
-        }(k), X = function(I) {
+        }(_), X = function(I) {
           return 3 * I * (1 - I) * (1 - I);
-        }(k), D = function(I) {
+        }(_), D = function(I) {
           return (1 - I) * (1 - I) * (1 - I);
-        }(k);
-        return { x: Y * M + P * G + _ * X + U * D, y: N * M + R * G + O * X + F * D };
+        }(_);
+        return { x: Y * M + P * N + k * X + U * D, y: V * M + R * N + O * X + F * D };
       };
     }
-    function c(U, F, _, O, P, R, Y, N) {
-      return function(k) {
-        var T = 1 - k, M = 3 * T * T * (_ - U) + 6 * T * k * (P - _) + 3 * k * k * (Y - P), G = 3 * T * T * (O - F) + 6 * T * k * (R - O) + 3 * k * k * (N - R);
-        return Math.atan2(G, M);
+    function c(U, F, k, O, P, R, Y, V) {
+      return function(_) {
+        var T = 1 - _, M = 3 * T * T * (k - U) + 6 * T * _ * (P - k) + 3 * _ * _ * (Y - P), N = 3 * T * T * (O - F) + 6 * T * _ * (R - O) + 3 * _ * _ * (V - R);
+        return Math.atan2(N, M);
       };
     }
-    function l(U, F, _, O, P, R) {
+    function l(U, F, k, O, P, R) {
       return function(Y) {
-        var N, k = (N = Y) * N, T = function(G) {
-          return 2 * G * (1 - G);
-        }(Y), M = function(G) {
-          return (1 - G) * (1 - G);
+        var V, _ = (V = Y) * V, T = function(N) {
+          return 2 * N * (1 - N);
+        }(Y), M = function(N) {
+          return (1 - N) * (1 - N);
         }(Y);
-        return { x: P * k + _ * T + U * M, y: R * k + O * T + F * M };
+        return { x: P * _ + k * T + U * M, y: R * _ + O * T + F * M };
       };
     }
-    function f(U, F, _, O, P, R) {
+    function f(U, F, k, O, P, R) {
       return function(Y) {
-        var N = 1 - Y, k = 2 * N * (_ - U) + 2 * Y * (P - _), T = 2 * N * (O - F) + 2 * Y * (R - O);
-        return Math.atan2(T, k);
+        var V = 1 - Y, _ = 2 * V * (k - U) + 2 * Y * (P - k), T = 2 * V * (O - F) + 2 * Y * (R - O);
+        return Math.atan2(T, _);
       };
     }
-    function m(U, F, _) {
-      var O, P, R = { x: F, y: _ }, Y = 0;
+    function m(U, F, k) {
+      var O, P, R = { x: F, y: k }, Y = 0;
       for (P = 1; P <= 100; P += 1)
         O = U(P / 100), Y += n(R.x, R.y, O.x, O.y), R = O;
       return Y;
     }
     function v(U, F) {
-      for (var _, O, P, R = 0, Y = 0, N = U.iterator, k = { x: U.x, y: U.y }, T = 0.01, M = U.angleFinder; Y < F && T > 1e-4; )
-        _ = N(R), P = R, (O = n(k.x, k.y, _.x, _.y)) + Y > F ? (R -= T, T /= 2) : (k = _, R += T, Y += O);
-      return _.angle = M(P), _;
+      for (var k, O, P, R = 0, Y = 0, V = U.iterator, _ = { x: U.x, y: U.y }, T = 0.01, M = U.angleFinder; Y < F && T > 1e-4; )
+        k = V(R), P = R, (O = n(_.x, _.y, k.x, k.y)) + Y > F ? (R -= T, T /= 2) : (_ = k, R += T, Y += O);
+      return k.angle = M(P), k;
     }
     function x(U) {
-      for (var F, _, O, P, R = 0, Y = U.length, N = 0, k = 0, T = 0, M = 0, G = [], X = 0; X < Y; X++) {
-        switch (O = { x: N, y: k, command: (F = U[X])[0] }, F[0]) {
+      for (var F, k, O, P, R = 0, Y = U.length, V = 0, _ = 0, T = 0, M = 0, N = [], X = 0; X < Y; X++) {
+        switch (O = { x: V, y: _, command: (F = U[X])[0] }, F[0]) {
           case "M":
-            O.length = 0, T = N = F[1], M = k = F[2];
+            O.length = 0, T = V = F[1], M = _ = F[2];
             break;
           case "L":
-            O.length = n(N, k, F[1], F[2]), N = F[1], k = F[2];
+            O.length = n(V, _, F[1], F[2]), V = F[1], _ = F[2];
             break;
           case "C":
-            _ = h(N, k, F[1], F[2], F[3], F[4], F[5], F[6]), P = c(N, k, F[1], F[2], F[3], F[4], F[5], F[6]), O.iterator = _, O.angleFinder = P, O.length = m(_, N, k), N = F[5], k = F[6];
+            k = h(V, _, F[1], F[2], F[3], F[4], F[5], F[6]), P = c(V, _, F[1], F[2], F[3], F[4], F[5], F[6]), O.iterator = k, O.angleFinder = P, O.length = m(k, V, _), V = F[5], _ = F[6];
             break;
           case "Q":
-            _ = l(N, k, F[1], F[2], F[3], F[4]), P = f(N, k, F[1], F[2], F[3], F[4]), O.iterator = _, O.angleFinder = P, O.length = m(_, N, k), N = F[3], k = F[4];
+            k = l(V, _, F[1], F[2], F[3], F[4]), P = f(V, _, F[1], F[2], F[3], F[4]), O.iterator = k, O.angleFinder = P, O.length = m(k, V, _), V = F[3], _ = F[4];
             break;
           case "Z":
           case "z":
-            O.destX = T, O.destY = M, O.length = n(N, k, T, M), N = T, k = M;
+            O.destX = T, O.destY = M, O.length = n(V, _, T, M), V = T, _ = M;
         }
-        R += O.length, G.push(O);
+        R += O.length, N.push(O);
       }
-      return G.push({ length: R, x: N, y: k }), G;
+      return N.push({ length: R, x: V, y: _ }), N;
     }
     B.util.joinPath = function(U) {
       return U.map(function(F) {
         return F.join(" ");
       }).join(" ");
     }, B.util.parsePath = function(U) {
-      var F, _, O, P, R, Y = [], N = [], k = B.rePathCommand, T = "[-+]?(?:\\d*\\.\\d+|\\d+\\.?)(?:[eE][-+]?\\d+)?\\s*", M = "(" + T + ")" + B.commaWsp, G = "([01])" + B.commaWsp + "?", X = new RegExp(M + "?" + M + "?" + M + G + G + M + "?(" + T + ")", "g");
+      var F, k, O, P, R, Y = [], V = [], _ = B.rePathCommand, T = "[-+]?(?:\\d*\\.\\d+|\\d+\\.?)(?:[eE][-+]?\\d+)?\\s*", M = "(" + T + ")" + B.commaWsp, N = "([01])" + B.commaWsp + "?", X = new RegExp(M + "?" + M + "?" + M + N + N + M + "?(" + T + ")", "g");
       if (!U || !U.match)
         return Y;
       for (var D, I = 0, K = (R = U.match(/[mzlhvcsqta][^mzlhvcsqta]*/gi)).length; I < K; I++) {
-        P = (F = R[I]).slice(1).trim(), N.length = 0;
+        P = (F = R[I]).slice(1).trim(), V.length = 0;
         var W = F.charAt(0);
         if (D = [W], W.toLowerCase() === "a")
-          for (var V; V = X.exec(P); )
-            for (var z = 1; z < V.length; z++)
-              N.push(V[z]);
+          for (var G; G = X.exec(P); )
+            for (var z = 1; z < G.length; z++)
+              V.push(G[z]);
         else
-          for (; O = k.exec(P); )
-            N.push(O[0]);
+          for (; O = _.exec(P); )
+            V.push(O[0]);
         z = 0;
-        for (var $ = N.length; z < $; z++)
-          _ = parseFloat(N[z]), isNaN(_) || D.push(_);
+        for (var $ = V.length; z < $; z++)
+          k = parseFloat(V[z]), isNaN(k) || D.push(k);
         var eA = s[W.toLowerCase()], rA = o[W] || W;
         if (D.length - 1 > eA)
           for (var Z = 1, nA = D.length; Z < nA; Z += eA)
@@ -6034,108 +6034,108 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       }
       return Y;
     }, B.util.makePathSimpler = function(U) {
-      var F, _, O, P, R, Y, N = 0, k = 0, T = U.length, M = 0, G = 0, X = [];
-      for (_ = 0; _ < T; ++_) {
-        switch (O = !1, (F = U[_].slice(0))[0]) {
+      var F, k, O, P, R, Y, V = 0, _ = 0, T = U.length, M = 0, N = 0, X = [];
+      for (k = 0; k < T; ++k) {
+        switch (O = !1, (F = U[k].slice(0))[0]) {
           case "l":
-            F[0] = "L", F[1] += N, F[2] += k;
+            F[0] = "L", F[1] += V, F[2] += _;
           case "L":
-            N = F[1], k = F[2];
+            V = F[1], _ = F[2];
             break;
           case "h":
-            F[1] += N;
+            F[1] += V;
           case "H":
-            F[0] = "L", F[2] = k, N = F[1];
+            F[0] = "L", F[2] = _, V = F[1];
             break;
           case "v":
-            F[1] += k;
+            F[1] += _;
           case "V":
-            F[0] = "L", k = F[1], F[1] = N, F[2] = k;
+            F[0] = "L", _ = F[1], F[1] = V, F[2] = _;
             break;
           case "m":
-            F[0] = "M", F[1] += N, F[2] += k;
+            F[0] = "M", F[1] += V, F[2] += _;
           case "M":
-            N = F[1], k = F[2], M = F[1], G = F[2];
+            V = F[1], _ = F[2], M = F[1], N = F[2];
             break;
           case "c":
-            F[0] = "C", F[1] += N, F[2] += k, F[3] += N, F[4] += k, F[5] += N, F[6] += k;
+            F[0] = "C", F[1] += V, F[2] += _, F[3] += V, F[4] += _, F[5] += V, F[6] += _;
           case "C":
-            R = F[3], Y = F[4], N = F[5], k = F[6];
+            R = F[3], Y = F[4], V = F[5], _ = F[6];
             break;
           case "s":
-            F[0] = "S", F[1] += N, F[2] += k, F[3] += N, F[4] += k;
+            F[0] = "S", F[1] += V, F[2] += _, F[3] += V, F[4] += _;
           case "S":
-            P === "C" ? (R = 2 * N - R, Y = 2 * k - Y) : (R = N, Y = k), N = F[3], k = F[4], F[0] = "C", F[5] = F[3], F[6] = F[4], F[3] = F[1], F[4] = F[2], F[1] = R, F[2] = Y, R = F[3], Y = F[4];
+            P === "C" ? (R = 2 * V - R, Y = 2 * _ - Y) : (R = V, Y = _), V = F[3], _ = F[4], F[0] = "C", F[5] = F[3], F[6] = F[4], F[3] = F[1], F[4] = F[2], F[1] = R, F[2] = Y, R = F[3], Y = F[4];
             break;
           case "q":
-            F[0] = "Q", F[1] += N, F[2] += k, F[3] += N, F[4] += k;
+            F[0] = "Q", F[1] += V, F[2] += _, F[3] += V, F[4] += _;
           case "Q":
-            R = F[1], Y = F[2], N = F[3], k = F[4];
+            R = F[1], Y = F[2], V = F[3], _ = F[4];
             break;
           case "t":
-            F[0] = "T", F[1] += N, F[2] += k;
+            F[0] = "T", F[1] += V, F[2] += _;
           case "T":
-            P === "Q" ? (R = 2 * N - R, Y = 2 * k - Y) : (R = N, Y = k), F[0] = "Q", N = F[1], k = F[2], F[1] = R, F[2] = Y, F[3] = N, F[4] = k;
+            P === "Q" ? (R = 2 * V - R, Y = 2 * _ - Y) : (R = V, Y = _), F[0] = "Q", V = F[1], _ = F[2], F[1] = R, F[2] = Y, F[3] = V, F[4] = _;
             break;
           case "a":
-            F[0] = "A", F[6] += N, F[7] += k;
+            F[0] = "A", F[6] += V, F[7] += _;
           case "A":
-            O = !0, X = X.concat(i(N, k, F)), N = F[6], k = F[7];
+            O = !0, X = X.concat(i(V, _, F)), V = F[6], _ = F[7];
             break;
           case "z":
           case "Z":
-            N = M, k = G;
+            V = M, _ = N;
         }
         O || X.push(F), P = F[0];
       }
       return X;
     }, B.util.getSmoothPathFromPoints = function(U, F) {
-      var _, O = [], P = new B.Point(U[0].x, U[0].y), R = new B.Point(U[1].x, U[1].y), Y = U.length, N = 1, k = 0, T = Y > 2;
-      for (F = F || 0, T && (N = U[2].x < R.x ? -1 : U[2].x === R.x ? 0 : 1, k = U[2].y < R.y ? -1 : U[2].y === R.y ? 0 : 1), O.push(["M", P.x - N * F, P.y - k * F]), _ = 1; _ < Y; _++) {
+      var k, O = [], P = new B.Point(U[0].x, U[0].y), R = new B.Point(U[1].x, U[1].y), Y = U.length, V = 1, _ = 0, T = Y > 2;
+      for (F = F || 0, T && (V = U[2].x < R.x ? -1 : U[2].x === R.x ? 0 : 1, _ = U[2].y < R.y ? -1 : U[2].y === R.y ? 0 : 1), O.push(["M", P.x - V * F, P.y - _ * F]), k = 1; k < Y; k++) {
         if (!P.eq(R)) {
           var M = P.midPointFrom(R);
           O.push(["Q", P.x, P.y, M.x, M.y]);
         }
-        P = U[_], _ + 1 < U.length && (R = U[_ + 1]);
+        P = U[k], k + 1 < U.length && (R = U[k + 1]);
       }
-      return T && (N = P.x > U[_ - 2].x ? 1 : P.x === U[_ - 2].x ? 0 : -1, k = P.y > U[_ - 2].y ? 1 : P.y === U[_ - 2].y ? 0 : -1), O.push(["L", P.x + N * F, P.y + k * F]), O;
-    }, B.util.getPathSegmentsInfo = x, B.util.getBoundsOfCurve = function(U, F, _, O, P, R, Y, N) {
-      var k;
-      if (B.cachesBoundsOfCurve && (k = u.call(arguments), B.boundsOfCurveCache[k]))
-        return B.boundsOfCurveCache[k];
-      var T, M, G, X, D, I, K, W, V = Math.sqrt, z = Math.min, $ = Math.max, eA = Math.abs, rA = [], Z = [[], []];
-      M = 6 * U - 12 * _ + 6 * P, T = -3 * U + 9 * _ - 9 * P + 3 * Y, G = 3 * _ - 3 * U;
+      return T && (V = P.x > U[k - 2].x ? 1 : P.x === U[k - 2].x ? 0 : -1, _ = P.y > U[k - 2].y ? 1 : P.y === U[k - 2].y ? 0 : -1), O.push(["L", P.x + V * F, P.y + _ * F]), O;
+    }, B.util.getPathSegmentsInfo = x, B.util.getBoundsOfCurve = function(U, F, k, O, P, R, Y, V) {
+      var _;
+      if (B.cachesBoundsOfCurve && (_ = u.call(arguments), B.boundsOfCurveCache[_]))
+        return B.boundsOfCurveCache[_];
+      var T, M, N, X, D, I, K, W, G = Math.sqrt, z = Math.min, $ = Math.max, eA = Math.abs, rA = [], Z = [[], []];
+      M = 6 * U - 12 * k + 6 * P, T = -3 * U + 9 * k - 9 * P + 3 * Y, N = 3 * k - 3 * U;
       for (var nA = 0; nA < 2; ++nA)
-        if (nA > 0 && (M = 6 * F - 12 * O + 6 * R, T = -3 * F + 9 * O - 9 * R + 3 * N, G = 3 * O - 3 * F), eA(T) < 1e-12) {
+        if (nA > 0 && (M = 6 * F - 12 * O + 6 * R, T = -3 * F + 9 * O - 9 * R + 3 * V, N = 3 * O - 3 * F), eA(T) < 1e-12) {
           if (eA(M) < 1e-12)
             continue;
-          0 < (X = -G / M) && X < 1 && rA.push(X);
+          0 < (X = -N / M) && X < 1 && rA.push(X);
         } else
-          (K = M * M - 4 * G * T) < 0 || (0 < (D = (-M + (W = V(K))) / (2 * T)) && D < 1 && rA.push(D), 0 < (I = (-M - W) / (2 * T)) && I < 1 && rA.push(I));
+          (K = M * M - 4 * N * T) < 0 || (0 < (D = (-M + (W = G(K))) / (2 * T)) && D < 1 && rA.push(D), 0 < (I = (-M - W) / (2 * T)) && I < 1 && rA.push(I));
       for (var q, lA, sA, hA = rA.length, BA = hA; hA--; )
-        q = (sA = 1 - (X = rA[hA])) * sA * sA * U + 3 * sA * sA * X * _ + 3 * sA * X * X * P + X * X * X * Y, Z[0][hA] = q, lA = sA * sA * sA * F + 3 * sA * sA * X * O + 3 * sA * X * X * R + X * X * X * N, Z[1][hA] = lA;
-      Z[0][BA] = U, Z[1][BA] = F, Z[0][BA + 1] = Y, Z[1][BA + 1] = N;
-      var VA = [{ x: z.apply(null, Z[0]), y: z.apply(null, Z[1]) }, { x: $.apply(null, Z[0]), y: $.apply(null, Z[1]) }];
-      return B.cachesBoundsOfCurve && (B.boundsOfCurveCache[k] = VA), VA;
-    }, B.util.getPointOnPath = function(U, F, _) {
-      _ || (_ = x(U));
-      for (var O = 0; F - _[O].length > 0 && O < _.length - 2; )
-        F -= _[O].length, O++;
-      var P, R = _[O], Y = F / R.length, N = R.command, k = U[O];
-      switch (N) {
+        q = (sA = 1 - (X = rA[hA])) * sA * sA * U + 3 * sA * sA * X * k + 3 * sA * X * X * P + X * X * X * Y, Z[0][hA] = q, lA = sA * sA * sA * F + 3 * sA * sA * X * O + 3 * sA * X * X * R + X * X * X * V, Z[1][hA] = lA;
+      Z[0][BA] = U, Z[1][BA] = F, Z[0][BA + 1] = Y, Z[1][BA + 1] = V;
+      var GA = [{ x: z.apply(null, Z[0]), y: z.apply(null, Z[1]) }, { x: $.apply(null, Z[0]), y: $.apply(null, Z[1]) }];
+      return B.cachesBoundsOfCurve && (B.boundsOfCurveCache[_] = GA), GA;
+    }, B.util.getPointOnPath = function(U, F, k) {
+      k || (k = x(U));
+      for (var O = 0; F - k[O].length > 0 && O < k.length - 2; )
+        F -= k[O].length, O++;
+      var P, R = k[O], Y = F / R.length, V = R.command, _ = U[O];
+      switch (V) {
         case "M":
           return { x: R.x, y: R.y, angle: 0 };
         case "Z":
         case "z":
           return (P = new B.Point(R.x, R.y).lerp(new B.Point(R.destX, R.destY), Y)).angle = Math.atan2(R.destY - R.y, R.destX - R.x), P;
         case "L":
-          return (P = new B.Point(R.x, R.y).lerp(new B.Point(k[1], k[2]), Y)).angle = Math.atan2(k[2] - R.y, k[1] - R.x), P;
+          return (P = new B.Point(R.x, R.y).lerp(new B.Point(_[1], _[2]), Y)).angle = Math.atan2(_[2] - R.y, _[1] - R.x), P;
         case "C":
         case "Q":
           return v(R, F);
       }
-    }, B.util.transformPath = function(U, F, _) {
-      return _ && (F = B.util.multiplyTransformMatrices(F, [1, 0, 0, 1, -_.x, -_.y])), U.map(function(O) {
+    }, B.util.transformPath = function(U, F, k) {
+      return k && (F = B.util.multiplyTransformMatrices(F, [1, 0, 0, 1, -k.x, -k.y])), U.map(function(O) {
         for (var P = O.slice(0), R = {}, Y = 1; Y < O.length - 1; Y += 2)
           R.x = O[Y], R.y = O[Y + 1], R = B.util.transformPoint(R, F), P[Y] = R.x, P[Y + 1] = R.y;
         return P;
@@ -6428,16 +6428,16 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       return l = u(s(c), { cancel: function() {
         return f = !0, m();
       }, currentValue: "startValue" in c ? c.startValue : 0, completionRate: 0, durationRate: 0 }), B.runningAnimations.push(l), h(function(v) {
-        var x, U = v || +/* @__PURE__ */ new Date(), F = c.duration || 500, _ = U + F, O = c.onChange || d, P = c.abort || d, R = c.onComplete || d, Y = c.easing || A, N = "startValue" in c && c.startValue.length > 0, k = "startValue" in c ? c.startValue : 0, T = "endValue" in c ? c.endValue : 100, M = c.byValue || (N ? k.map(function(G, X) {
-          return T[X] - k[X];
-        }) : T - k);
-        c.onStart && c.onStart(), function G(X) {
-          var D = (x = X || +/* @__PURE__ */ new Date()) > _ ? F : x - U, I = D / F, K = N ? k.map(function(V, z) {
-            return Y(D, k[z], M[z], F);
-          }) : Y(D, k, M, F), W = Math.abs(N ? (K[0] - k[0]) / M[0] : (K - k) / M);
-          if (l.currentValue = N ? K.slice() : K, l.completionRate = W, l.durationRate = I, !f) {
+        var x, U = v || +/* @__PURE__ */ new Date(), F = c.duration || 500, k = U + F, O = c.onChange || d, P = c.abort || d, R = c.onComplete || d, Y = c.easing || A, V = "startValue" in c && c.startValue.length > 0, _ = "startValue" in c ? c.startValue : 0, T = "endValue" in c ? c.endValue : 100, M = c.byValue || (V ? _.map(function(N, X) {
+          return T[X] - _[X];
+        }) : T - _);
+        c.onStart && c.onStart(), function N(X) {
+          var D = (x = X || +/* @__PURE__ */ new Date()) > k ? F : x - U, I = D / F, K = V ? _.map(function(G, z) {
+            return Y(D, _[z], M[z], F);
+          }) : Y(D, _, M, F), W = Math.abs(V ? (K[0] - _[0]) / M[0] : (K - _) / M);
+          if (l.currentValue = V ? K.slice() : K, l.completionRate = W, l.durationRate = I, !f) {
             if (!P(K, W, I))
-              return x > _ ? (l.currentValue = N ? T.slice() : T, l.completionRate = 1, l.durationRate = 1, O(N ? T.slice() : T, 1, 1), R(T, 1, 1), void m()) : (O(K, W, I), void h(G));
+              return x > k ? (l.currentValue = V ? T.slice() : T, l.completionRate = 1, l.durationRate = 1, O(V ? T.slice() : T, 1, 1), R(T, 1, 1), void m()) : (O(K, W, I), void h(N));
             m();
           }
         }(U);
@@ -6552,80 +6552,80 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     } };
   }(), function(u) {
     var s = u.fabric || (u.fabric = {}), o = s.util.object.extend, d = s.util.object.clone, A = s.util.toFixed, i = s.util.parseUnit, n = s.util.multiplyTransformMatrices, h = { cx: "left", x: "left", r: "radius", cy: "top", y: "top", display: "visible", visibility: "visible", transform: "transformMatrix", "fill-opacity": "fillOpacity", "fill-rule": "fillRule", "font-family": "fontFamily", "font-size": "fontSize", "font-style": "fontStyle", "font-weight": "fontWeight", "letter-spacing": "charSpacing", "paint-order": "paintFirst", "stroke-dasharray": "strokeDashArray", "stroke-dashoffset": "strokeDashOffset", "stroke-linecap": "strokeLineCap", "stroke-linejoin": "strokeLineJoin", "stroke-miterlimit": "strokeMiterLimit", "stroke-opacity": "strokeOpacity", "stroke-width": "strokeWidth", "text-decoration": "textDecoration", "text-anchor": "textAnchor", opacity: "opacity", "clip-path": "clipPath", "clip-rule": "clipRule", "vector-effect": "strokeUniform", "image-rendering": "imageSmoothing" }, c = { stroke: "strokeOpacity", fill: "fillOpacity" }, l = "font-size", f = "clip-path";
-    function m(k) {
-      return k in h ? h[k] : k;
+    function m(_) {
+      return _ in h ? h[_] : _;
     }
-    function v(k, T, M, G) {
+    function v(_, T, M, N) {
       var X, D = Array.isArray(T);
-      if (k !== "fill" && k !== "stroke" || T !== "none") {
-        if (k === "strokeUniform")
+      if (_ !== "fill" && _ !== "stroke" || T !== "none") {
+        if (_ === "strokeUniform")
           return T === "non-scaling-stroke";
-        if (k === "strokeDashArray")
+        if (_ === "strokeDashArray")
           T = T === "none" ? null : T.replace(/,/g, " ").split(/\s+/).map(parseFloat);
-        else if (k === "transformMatrix")
+        else if (_ === "transformMatrix")
           T = M && M.transformMatrix ? n(M.transformMatrix, s.parseTransformAttribute(T)) : s.parseTransformAttribute(T);
-        else if (k === "visible")
+        else if (_ === "visible")
           T = T !== "none" && T !== "hidden", M && M.visible === !1 && (T = !1);
-        else if (k === "opacity")
+        else if (_ === "opacity")
           T = parseFloat(T), M && M.opacity !== void 0 && (T *= M.opacity);
-        else if (k === "textAnchor")
+        else if (_ === "textAnchor")
           T = T === "start" ? "left" : T === "end" ? "right" : "center";
-        else if (k === "charSpacing")
-          X = i(T, G) / G * 1e3;
-        else if (k === "paintFirst") {
+        else if (_ === "charSpacing")
+          X = i(T, N) / N * 1e3;
+        else if (_ === "paintFirst") {
           var I = T.indexOf("fill"), K = T.indexOf("stroke");
           T = "fill", (I > -1 && K > -1 && K < I || I === -1 && K > -1) && (T = "stroke");
         } else {
-          if (k === "href" || k === "xlink:href" || k === "font")
+          if (_ === "href" || _ === "xlink:href" || _ === "font")
             return T;
-          if (k === "imageSmoothing")
+          if (_ === "imageSmoothing")
             return T === "optimizeQuality";
-          X = D ? T.map(i) : i(T, G);
+          X = D ? T.map(i) : i(T, N);
         }
       } else
         T = "";
       return !D && isNaN(X) ? T : X;
     }
-    function x(k) {
-      return new RegExp("^(" + k.join("|") + ")\\b", "i");
+    function x(_) {
+      return new RegExp("^(" + _.join("|") + ")\\b", "i");
     }
-    function U(k, T) {
-      var M, G, X, D, I = [];
+    function U(_, T) {
+      var M, N, X, D, I = [];
       for (X = 0, D = T.length; X < D; X++)
-        M = T[X], G = k.getElementsByTagName(M), I = I.concat(Array.prototype.slice.call(G));
+        M = T[X], N = _.getElementsByTagName(M), I = I.concat(Array.prototype.slice.call(N));
       return I;
     }
-    function F(k, T) {
-      var M, G = !0;
-      return (M = _(k, T.pop())) && T.length && (G = function(X, D) {
+    function F(_, T) {
+      var M, N = !0;
+      return (M = k(_, T.pop())) && T.length && (N = function(X, D) {
         for (var I, K = !0; X.parentNode && X.parentNode.nodeType === 1 && D.length; )
-          K && (I = D.pop()), K = _(X = X.parentNode, I);
+          K && (I = D.pop()), K = k(X = X.parentNode, I);
         return D.length === 0;
-      }(k, T)), M && G && T.length === 0;
+      }(_, T)), M && N && T.length === 0;
     }
-    function _(k, T) {
-      var M, G, X = k.nodeName, D = k.getAttribute("class"), I = k.getAttribute("id");
+    function k(_, T) {
+      var M, N, X = _.nodeName, D = _.getAttribute("class"), I = _.getAttribute("id");
       if (M = new RegExp("^" + X, "i"), T = T.replace(M, ""), I && T.length && (M = new RegExp("#" + I + "(?![a-zA-Z\\-]+)", "i"), T = T.replace(M, "")), D && T.length)
-        for (G = (D = D.split(" ")).length; G--; )
-          M = new RegExp("\\." + D[G] + "(?![a-zA-Z\\-]+)", "i"), T = T.replace(M, "");
+        for (N = (D = D.split(" ")).length; N--; )
+          M = new RegExp("\\." + D[N] + "(?![a-zA-Z\\-]+)", "i"), T = T.replace(M, "");
       return T.length === 0;
     }
-    function O(k, T) {
+    function O(_, T) {
       var M;
-      if (k.getElementById && (M = k.getElementById(T)), M)
+      if (_.getElementById && (M = _.getElementById(T)), M)
         return M;
-      var G, X, D, I = k.getElementsByTagName("*");
+      var N, X, D, I = _.getElementsByTagName("*");
       for (X = 0, D = I.length; X < D; X++)
-        if (T === (G = I[X]).getAttribute("id"))
-          return G;
+        if (T === (N = I[X]).getAttribute("id"))
+          return N;
     }
     s.svgValidTagNamesRegEx = x(["path", "circle", "polygon", "polyline", "ellipse", "rect", "line", "image", "text"]), s.svgViewBoxElementsRegEx = x(["symbol", "image", "marker", "pattern", "view", "svg"]), s.svgInvalidAncestorsRegEx = x(["pattern", "defs", "symbol", "metadata", "clipPath", "mask", "desc"]), s.svgValidParentsRegEx = x(["symbol", "g", "a", "svg", "clipPath", "defs"]), s.cssRules = {}, s.gradientDefs = {}, s.clipPaths = {}, s.parseTransformAttribute = function() {
-      function k(K, W, V) {
-        K[V] = Math.tan(s.util.degreesToRadians(W[0]));
+      function _(K, W, G) {
+        K[G] = Math.tan(s.util.degreesToRadians(W[0]));
       }
-      var T = s.iMatrix, M = s.reNum, G = s.commaWsp, X = "(?:" + ("(?:(matrix)\\s*\\(\\s*(" + M + ")" + G + "(" + M + ")" + G + "(" + M + ")" + G + "(" + M + ")" + G + "(" + M + ")" + G + "(" + M + ")\\s*\\))") + "|" + ("(?:(translate)\\s*\\(\\s*(" + M + ")(?:" + G + "(" + M + "))?\\s*\\))") + "|" + ("(?:(scale)\\s*\\(\\s*(" + M + ")(?:" + G + "(" + M + "))?\\s*\\))") + "|" + ("(?:(rotate)\\s*\\(\\s*(" + M + ")(?:" + G + "(" + M + ")" + G + "(" + M + "))?\\s*\\))") + "|" + ("(?:(skewX)\\s*\\(\\s*(" + M + ")\\s*\\))") + "|" + ("(?:(skewY)\\s*\\(\\s*(" + M + ")\\s*\\))") + ")", D = new RegExp("^\\s*(?:" + ("(?:" + X + "(?:" + G + "*" + X + ")*)") + "?)\\s*$"), I = new RegExp(X, "g");
+      var T = s.iMatrix, M = s.reNum, N = s.commaWsp, X = "(?:" + ("(?:(matrix)\\s*\\(\\s*(" + M + ")" + N + "(" + M + ")" + N + "(" + M + ")" + N + "(" + M + ")" + N + "(" + M + ")" + N + "(" + M + ")\\s*\\))") + "|" + ("(?:(translate)\\s*\\(\\s*(" + M + ")(?:" + N + "(" + M + "))?\\s*\\))") + "|" + ("(?:(scale)\\s*\\(\\s*(" + M + ")(?:" + N + "(" + M + "))?\\s*\\))") + "|" + ("(?:(rotate)\\s*\\(\\s*(" + M + ")(?:" + N + "(" + M + ")" + N + "(" + M + "))?\\s*\\))") + "|" + ("(?:(skewX)\\s*\\(\\s*(" + M + ")\\s*\\))") + "|" + ("(?:(skewY)\\s*\\(\\s*(" + M + ")\\s*\\))") + ")", D = new RegExp("^\\s*(?:" + ("(?:" + X + "(?:" + N + "*" + X + ")*)") + "?)\\s*$"), I = new RegExp(X, "g");
       return function(K) {
-        var W = T.concat(), V = [];
+        var W = T.concat(), G = [];
         if (!K || K && !D.test(K))
           return W;
         K.replace(I, function($) {
@@ -6651,57 +6651,57 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
               })(W, Z);
               break;
             case "skewX":
-              k(W, Z, 2);
+              _(W, Z, 2);
               break;
             case "skewY":
-              k(W, Z, 1);
+              _(W, Z, 1);
               break;
             case "matrix":
               W = Z;
           }
-          V.push(W.concat()), W = T.concat();
+          G.push(W.concat()), W = T.concat();
         });
-        for (var z = V[0]; V.length > 1; )
-          V.shift(), z = s.util.multiplyTransformMatrices(z, V[0]);
+        for (var z = G[0]; G.length > 1; )
+          G.shift(), z = s.util.multiplyTransformMatrices(z, G[0]);
         return z;
       };
     }();
     var P = new RegExp("^\\s*(" + s.reNum + "+)\\s*,?\\s*(" + s.reNum + "+)\\s*,?\\s*(" + s.reNum + "+)\\s*,?\\s*(" + s.reNum + "+)\\s*$");
-    function R(k) {
-      if (!s.svgViewBoxElementsRegEx.test(k.nodeName))
+    function R(_) {
+      if (!s.svgViewBoxElementsRegEx.test(_.nodeName))
         return {};
-      var T, M, G, X, D, I, K = k.getAttribute("viewBox"), W = 1, V = 1, z = k.getAttribute("width"), $ = k.getAttribute("height"), eA = k.getAttribute("x") || 0, rA = k.getAttribute("y") || 0, Z = k.getAttribute("preserveAspectRatio") || "", nA = !K || !(K = K.match(P)), q = !z || !$ || z === "100%" || $ === "100%", lA = nA && q, sA = {}, hA = "", BA = 0, VA = 0;
-      if (sA.width = 0, sA.height = 0, sA.toBeParsed = lA, nA && (eA || rA) && k.parentNode && k.parentNode.nodeName !== "#document" && (hA = " translate(" + i(eA) + " " + i(rA) + ") ", D = (k.getAttribute("transform") || "") + hA, k.setAttribute("transform", D), k.removeAttribute("x"), k.removeAttribute("y")), lA)
+      var T, M, N, X, D, I, K = _.getAttribute("viewBox"), W = 1, G = 1, z = _.getAttribute("width"), $ = _.getAttribute("height"), eA = _.getAttribute("x") || 0, rA = _.getAttribute("y") || 0, Z = _.getAttribute("preserveAspectRatio") || "", nA = !K || !(K = K.match(P)), q = !z || !$ || z === "100%" || $ === "100%", lA = nA && q, sA = {}, hA = "", BA = 0, GA = 0;
+      if (sA.width = 0, sA.height = 0, sA.toBeParsed = lA, nA && (eA || rA) && _.parentNode && _.parentNode.nodeName !== "#document" && (hA = " translate(" + i(eA) + " " + i(rA) + ") ", D = (_.getAttribute("transform") || "") + hA, _.setAttribute("transform", D), _.removeAttribute("x"), _.removeAttribute("y")), lA)
         return sA;
       if (nA)
         return sA.width = i(z), sA.height = i($), sA;
-      if (T = -parseFloat(K[1]), M = -parseFloat(K[2]), G = parseFloat(K[3]), X = parseFloat(K[4]), sA.minX = T, sA.minY = M, sA.viewBoxWidth = G, sA.viewBoxHeight = X, q ? (sA.width = G, sA.height = X) : (sA.width = i(z), sA.height = i($), W = sA.width / G, V = sA.height / X), (Z = s.util.parsePreserveAspectRatioAttribute(Z)).alignX !== "none" && (Z.meetOrSlice === "meet" && (V = W = W > V ? V : W), Z.meetOrSlice === "slice" && (V = W = W > V ? W : V), BA = sA.width - G * W, VA = sA.height - X * W, Z.alignX === "Mid" && (BA /= 2), Z.alignY === "Mid" && (VA /= 2), Z.alignX === "Min" && (BA = 0), Z.alignY === "Min" && (VA = 0)), W === 1 && V === 1 && T === 0 && M === 0 && eA === 0 && rA === 0)
+      if (T = -parseFloat(K[1]), M = -parseFloat(K[2]), N = parseFloat(K[3]), X = parseFloat(K[4]), sA.minX = T, sA.minY = M, sA.viewBoxWidth = N, sA.viewBoxHeight = X, q ? (sA.width = N, sA.height = X) : (sA.width = i(z), sA.height = i($), W = sA.width / N, G = sA.height / X), (Z = s.util.parsePreserveAspectRatioAttribute(Z)).alignX !== "none" && (Z.meetOrSlice === "meet" && (G = W = W > G ? G : W), Z.meetOrSlice === "slice" && (G = W = W > G ? W : G), BA = sA.width - N * W, GA = sA.height - X * W, Z.alignX === "Mid" && (BA /= 2), Z.alignY === "Mid" && (GA /= 2), Z.alignX === "Min" && (BA = 0), Z.alignY === "Min" && (GA = 0)), W === 1 && G === 1 && T === 0 && M === 0 && eA === 0 && rA === 0)
         return sA;
-      if ((eA || rA) && k.parentNode.nodeName !== "#document" && (hA = " translate(" + i(eA) + " " + i(rA) + ") "), D = hA + " matrix(" + W + " 0 0 " + V + " " + (T * W + BA) + " " + (M * V + VA) + ") ", k.nodeName === "svg") {
-        for (I = k.ownerDocument.createElementNS(s.svgNS, "g"); k.firstChild; )
-          I.appendChild(k.firstChild);
-        k.appendChild(I);
+      if ((eA || rA) && _.parentNode.nodeName !== "#document" && (hA = " translate(" + i(eA) + " " + i(rA) + ") "), D = hA + " matrix(" + W + " 0 0 " + G + " " + (T * W + BA) + " " + (M * G + GA) + ") ", _.nodeName === "svg") {
+        for (I = _.ownerDocument.createElementNS(s.svgNS, "g"); _.firstChild; )
+          I.appendChild(_.firstChild);
+        _.appendChild(I);
       } else
-        (I = k).removeAttribute("x"), I.removeAttribute("y"), D = I.getAttribute("transform") + D;
+        (I = _).removeAttribute("x"), I.removeAttribute("y"), D = I.getAttribute("transform") + D;
       return I.setAttribute("transform", D), sA;
     }
-    function Y(k, T) {
-      var M = "xlink:href", G = O(k, T.getAttribute(M).slice(1));
-      if (G && G.getAttribute(M) && Y(k, G), ["gradientTransform", "x1", "x2", "y1", "y2", "gradientUnits", "cx", "cy", "r", "fx", "fy"].forEach(function(D) {
-        G && !T.hasAttribute(D) && G.hasAttribute(D) && T.setAttribute(D, G.getAttribute(D));
+    function Y(_, T) {
+      var M = "xlink:href", N = O(_, T.getAttribute(M).slice(1));
+      if (N && N.getAttribute(M) && Y(_, N), ["gradientTransform", "x1", "x2", "y1", "y2", "gradientUnits", "cx", "cy", "r", "fx", "fy"].forEach(function(D) {
+        N && !T.hasAttribute(D) && N.hasAttribute(D) && T.setAttribute(D, N.getAttribute(D));
       }), !T.children.length)
-        for (var X = G.cloneNode(!0); X.firstChild; )
+        for (var X = N.cloneNode(!0); X.firstChild; )
           T.appendChild(X.firstChild);
       T.removeAttribute(M);
     }
-    s.parseSVGDocument = function(k, T, M, G) {
-      if (k) {
+    s.parseSVGDocument = function(_, T, M, N) {
+      if (_) {
         (function(eA) {
           for (var rA = U(eA, ["use", "svg:use"]), Z = 0; rA.length && Z < rA.length; ) {
             var nA = rA[Z], q = nA.getAttribute("xlink:href") || nA.getAttribute("href");
             if (q === null)
               return;
-            var lA, sA, hA, BA, VA = q.slice(1), dt = nA.getAttribute("x") || 0, St = nA.getAttribute("y") || 0, xA = O(eA, VA).cloneNode(!0), WA = (xA.getAttribute("transform") || "") + " translate(" + dt + ", " + St + ")", gt = rA.length, Rt = s.svgNS;
+            var lA, sA, hA, BA, GA = q.slice(1), dt = nA.getAttribute("x") || 0, St = nA.getAttribute("y") || 0, xA = O(eA, GA).cloneNode(!0), WA = (xA.getAttribute("transform") || "") + " translate(" + dt + ", " + St + ")", gt = rA.length, Rt = s.svgNS;
             if (R(xA), /^svg$/i.test(xA.nodeName)) {
               var ae = xA.ownerDocument.createElementNS(Rt, "g");
               for (sA = 0, BA = (hA = xA.attributes).length; sA < BA; sA++)
@@ -6714,13 +6714,13 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
               (lA = hA.item(sA)).nodeName !== "x" && lA.nodeName !== "y" && lA.nodeName !== "xlink:href" && lA.nodeName !== "href" && (lA.nodeName === "transform" ? WA = lA.nodeValue + " " + WA : xA.setAttribute(lA.nodeName, lA.nodeValue));
             xA.setAttribute("transform", WA), xA.setAttribute("instantiated_by_use", "1"), xA.removeAttribute("id"), nA.parentNode.replaceChild(xA, nA), rA.length === gt && Z++;
           }
-        })(k);
-        var X, D, I = s.Object.__uid++, K = R(k), W = s.util.toArray(k.getElementsByTagName("*"));
-        if (K.crossOrigin = G && G.crossOrigin, K.svgUid = I, W.length === 0 && s.isLikelyNode) {
-          var V = [];
-          for (X = 0, D = (W = k.selectNodes('//*[name(.)!="svg"]')).length; X < D; X++)
-            V[X] = W[X];
-          W = V;
+        })(_);
+        var X, D, I = s.Object.__uid++, K = R(_), W = s.util.toArray(_.getElementsByTagName("*"));
+        if (K.crossOrigin = N && N.crossOrigin, K.svgUid = I, W.length === 0 && s.isLikelyNode) {
+          var G = [];
+          for (X = 0, D = (W = _.selectNodes('//*[name(.)!="svg"]')).length; X < D; X++)
+            G[X] = W[X];
+          W = G;
         }
         var z = W.filter(function(eA) {
           return R(eA), s.svgValidTagNamesRegEx.test(eA.nodeName.replace("svg:", "")) && !function(rA, Z) {
@@ -6741,30 +6741,30 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
             $[rA] = s.util.toArray(eA.getElementsByTagName("*")).filter(function(Z) {
               return s.svgValidTagNamesRegEx.test(Z.nodeName.replace("svg:", ""));
             });
-          }), s.gradientDefs[I] = s.getGradientDefs(k), s.cssRules[I] = s.getCSSRules(k), s.clipPaths[I] = $, s.parseElements(z, function(eA, rA) {
+          }), s.gradientDefs[I] = s.getGradientDefs(_), s.cssRules[I] = s.getCSSRules(_), s.clipPaths[I] = $, s.parseElements(z, function(eA, rA) {
             T && (T(eA, K, rA, W), delete s.gradientDefs[I], delete s.cssRules[I], delete s.clipPaths[I]);
-          }, d(K), M, G);
+          }, d(K), M, N);
         }
       }
     };
-    var N = new RegExp("(normal|italic)?\\s*(normal|small-caps)?\\s*(normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900)?\\s*(" + s.reNum + "(?:px|cm|mm|em|pt|pc|in)*)(?:\\/(normal|" + s.reNum + "))?\\s+(.*)");
-    o(s, { parseFontDeclaration: function(k, T) {
-      var M = k.match(N);
+    var V = new RegExp("(normal|italic)?\\s*(normal|small-caps)?\\s*(normal|bold|bolder|lighter|100|200|300|400|500|600|700|800|900)?\\s*(" + s.reNum + "(?:px|cm|mm|em|pt|pc|in)*)(?:\\/(normal|" + s.reNum + "))?\\s+(.*)");
+    o(s, { parseFontDeclaration: function(_, T) {
+      var M = _.match(V);
       if (M) {
-        var G = M[1], X = M[3], D = M[4], I = M[5], K = M[6];
-        G && (T.fontStyle = G), X && (T.fontWeight = isNaN(parseFloat(X)) ? X : parseFloat(X)), D && (T.fontSize = i(D)), K && (T.fontFamily = K), I && (T.lineHeight = I === "normal" ? 1 : I);
+        var N = M[1], X = M[3], D = M[4], I = M[5], K = M[6];
+        N && (T.fontStyle = N), X && (T.fontWeight = isNaN(parseFloat(X)) ? X : parseFloat(X)), D && (T.fontSize = i(D)), K && (T.fontFamily = K), I && (T.lineHeight = I === "normal" ? 1 : I);
       }
-    }, getGradientDefs: function(k) {
-      var T, M = U(k, ["linearGradient", "radialGradient", "svg:linearGradient", "svg:radialGradient"]), G = 0, X = {};
-      for (G = M.length; G--; )
-        (T = M[G]).getAttribute("xlink:href") && Y(k, T), X[T.getAttribute("id")] = T;
+    }, getGradientDefs: function(_) {
+      var T, M = U(_, ["linearGradient", "radialGradient", "svg:linearGradient", "svg:radialGradient"]), N = 0, X = {};
+      for (N = M.length; N--; )
+        (T = M[N]).getAttribute("xlink:href") && Y(_, T), X[T.getAttribute("id")] = T;
       return X;
-    }, parseAttributes: function(k, T, M) {
-      if (k) {
-        var G, X, D, I = {};
-        M === void 0 && (M = k.getAttribute("svgUid")), k.parentNode && s.svgValidParentsRegEx.test(k.parentNode.nodeName) && (I = s.parseAttributes(k.parentNode, T, M));
+    }, parseAttributes: function(_, T, M) {
+      if (_) {
+        var N, X, D, I = {};
+        M === void 0 && (M = _.getAttribute("svgUid")), _.parentNode && s.svgValidParentsRegEx.test(_.parentNode.nodeName) && (I = s.parseAttributes(_.parentNode, T, M));
         var K = T.reduce(function(Z, nA) {
-          return (G = k.getAttribute(nA)) && (Z[nA] = G), Z;
+          return (N = _.getAttribute(nA)) && (Z[nA] = N), Z;
         }, {}), W = o(function(Z, nA) {
           var q = {};
           for (var lA in s.cssRules[nA])
@@ -6772,14 +6772,14 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
               for (var sA in s.cssRules[nA][lA])
                 q[sA] = s.cssRules[nA][lA][sA];
           return q;
-        }(k, M), s.parseStyleAttribute(k));
-        K = o(K, W), W[f] && k.setAttribute(f, W[f]), X = D = I.fontSize || s.Text.DEFAULT_SVG_FONT_SIZE, K[l] && (K[l] = X = i(K[l], D));
-        var V, z, $ = {};
+        }(_, M), s.parseStyleAttribute(_));
+        K = o(K, W), W[f] && _.setAttribute(f, W[f]), X = D = I.fontSize || s.Text.DEFAULT_SVG_FONT_SIZE, K[l] && (K[l] = X = i(K[l], D));
+        var G, z, $ = {};
         for (var eA in K)
-          z = v(V = m(eA), K[eA], I, X), $[V] = z;
+          z = v(G = m(eA), K[eA], I, X), $[G] = z;
         $ && $.font && s.parseFontDeclaration($.font, $);
         var rA = o(I, $);
-        return s.svgValidParentsRegEx.test(k.nodeName) ? rA : function(Z) {
+        return s.svgValidParentsRegEx.test(_.nodeName) ? rA : function(Z) {
           for (var nA in c)
             if (Z[c[nA]] !== void 0 && Z[nA] !== "") {
               if (Z[nA] === void 0) {
@@ -6795,40 +6795,40 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
           return Z;
         }(rA);
       }
-    }, parseElements: function(k, T, M, G, X) {
-      new s.ElementsParser(k, T, M, G, X).parse();
-    }, parseStyleAttribute: function(k) {
-      var T = {}, M = k.getAttribute("style");
-      return M && (typeof M == "string" ? function(G, X) {
+    }, parseElements: function(_, T, M, N, X) {
+      new s.ElementsParser(_, T, M, N, X).parse();
+    }, parseStyleAttribute: function(_) {
+      var T = {}, M = _.getAttribute("style");
+      return M && (typeof M == "string" ? function(N, X) {
         var D, I;
-        G.replace(/;\s*$/, "").split(";").forEach(function(K) {
+        N.replace(/;\s*$/, "").split(";").forEach(function(K) {
           var W = K.split(":");
           D = W[0].trim().toLowerCase(), I = W[1].trim(), X[D] = I;
         });
-      }(M, T) : function(G, X) {
+      }(M, T) : function(N, X) {
         var D, I;
-        for (var K in G)
-          G[K] !== void 0 && (D = K.toLowerCase(), I = G[K], X[D] = I);
+        for (var K in N)
+          N[K] !== void 0 && (D = K.toLowerCase(), I = N[K], X[D] = I);
       }(M, T)), T;
-    }, parsePointsAttribute: function(k) {
-      if (!k)
+    }, parsePointsAttribute: function(_) {
+      if (!_)
         return null;
-      var T, M, G = [];
-      for (T = 0, M = (k = (k = k.replace(/,/g, " ").trim()).split(/\s+/)).length; T < M; T += 2)
-        G.push({ x: parseFloat(k[T]), y: parseFloat(k[T + 1]) });
-      return G;
-    }, getCSSRules: function(k) {
-      var T, M, G = k.getElementsByTagName("style"), X = {};
-      for (T = 0, M = G.length; T < M; T++) {
-        var D = G[T].textContent;
+      var T, M, N = [];
+      for (T = 0, M = (_ = (_ = _.replace(/,/g, " ").trim()).split(/\s+/)).length; T < M; T += 2)
+        N.push({ x: parseFloat(_[T]), y: parseFloat(_[T + 1]) });
+      return N;
+    }, getCSSRules: function(_) {
+      var T, M, N = _.getElementsByTagName("style"), X = {};
+      for (T = 0, M = N.length; T < M; T++) {
+        var D = N[T].textContent;
         (D = D.replace(/\/\*[\s\S]*?\*\//g, "")).trim() !== "" && D.split("}").filter(function(I) {
           return I.trim();
         }).forEach(function(I) {
-          var K = I.split("{"), W = {}, V = K[1].trim().split(";").filter(function(rA) {
+          var K = I.split("{"), W = {}, G = K[1].trim().split(";").filter(function(rA) {
             return rA.trim();
           });
-          for (T = 0, M = V.length; T < M; T++) {
-            var z = V[T].split(":"), $ = z[0].trim(), eA = z[1].trim();
+          for (T = 0, M = G.length; T < M; T++) {
+            var z = G[T].split(":"), $ = z[0].trim(), eA = z[1].trim();
             W[$] = eA;
           }
           (I = K[0].trim()).split(",").forEach(function(rA) {
@@ -6837,20 +6837,20 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
         });
       }
       return X;
-    }, loadSVGFromURL: function(k, T, M, G) {
-      k = k.replace(/^\n\s*/, "").trim(), new s.util.request(k, { method: "get", onComplete: function(X) {
+    }, loadSVGFromURL: function(_, T, M, N) {
+      _ = _.replace(/^\n\s*/, "").trim(), new s.util.request(_, { method: "get", onComplete: function(X) {
         var D = X.responseXML;
         if (!D || !D.documentElement)
           return T && T(null), !1;
-        s.parseSVGDocument(D.documentElement, function(I, K, W, V) {
-          T && T(I, K, W, V);
-        }, M, G);
+        s.parseSVGDocument(D.documentElement, function(I, K, W, G) {
+          T && T(I, K, W, G);
+        }, M, N);
       } });
-    }, loadSVGFromString: function(k, T, M, G) {
-      var X = new s.window.DOMParser().parseFromString(k.trim(), "text/xml");
+    }, loadSVGFromString: function(_, T, M, N) {
+      var X = new s.window.DOMParser().parseFromString(_.trim(), "text/xml");
       s.parseSVGDocument(X.documentElement, function(D, I, K, W) {
         T(D, I, K, W);
-      }, M, G);
+      }, M, N);
     } });
   }(e), B.ElementsParser = function(u, s, o, d, A, i) {
     this.elements = u, this.callback = s, this.options = o, this.reviver = d, this.svgUid = o && o.svgUid || 0, this.parsingOptions = A, this.regexUrl = /^url\(['"]?#([^'"]+)['"]?\)/g, this.doc = i;
@@ -7125,91 +7125,91 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       return Math.round(K % 360 / 45);
     }
     function U(D, I) {
-      var K = I.transform.target, W = K.canvas, V = s.util.object.clone(I);
-      V.target = K, W && W.fire("object:" + D, V), K.fire(D, I);
+      var K = I.transform.target, W = K.canvas, G = s.util.object.clone(I);
+      G.target = K, W && W.fire("object:" + D, G), K.fire(D, I);
     }
     function F(D, I) {
       var K = I.canvas, W = D[K.uniScaleKey];
       return K.uniformScaling && !W || !K.uniformScaling && W;
     }
-    function _(D) {
+    function k(D) {
       return D.originX === l && D.originY === l;
     }
     function O(D, I, K) {
-      var W = D.lockScalingX, V = D.lockScalingY;
-      return !(!W || !V) || !(I || !W && !V || !K) || !(!W || I !== "x") || !(!V || I !== "y");
+      var W = D.lockScalingX, G = D.lockScalingY;
+      return !(!W || !G) || !(I || !W && !G || !K) || !(!W || I !== "x") || !(!G || I !== "y");
     }
     function P(D, I, K, W) {
       return { e: D, transform: I, pointer: { x: K, y: W } };
     }
     function R(D) {
-      return function(I, K, W, V) {
-        var z = K.target, $ = z.getCenterPoint(), eA = z.translateToOriginPoint($, K.originX, K.originY), rA = D(I, K, W, V);
+      return function(I, K, W, G) {
+        var z = K.target, $ = z.getCenterPoint(), eA = z.translateToOriginPoint($, K.originX, K.originY), rA = D(I, K, W, G);
         return z.setPositionByOrigin(eA, K.originX, K.originY), rA;
       };
     }
     function Y(D, I) {
-      return function(K, W, V, z) {
-        var $ = I(K, W, V, z);
-        return $ && U(D, P(K, W, V, z)), $;
+      return function(K, W, G, z) {
+        var $ = I(K, W, G, z);
+        return $ && U(D, P(K, W, G, z)), $;
       };
     }
-    function N(D, I, K, W, V) {
-      var z = D.target, $ = z.controls[D.corner], eA = z.canvas.getZoom(), rA = z.padding / eA, Z = z.toLocalPoint(new s.Point(W, V), I, K);
+    function V(D, I, K, W, G) {
+      var z = D.target, $ = z.controls[D.corner], eA = z.canvas.getZoom(), rA = z.padding / eA, Z = z.toLocalPoint(new s.Point(W, G), I, K);
       return Z.x >= rA && (Z.x -= rA), Z.x <= -rA && (Z.x += rA), Z.y >= rA && (Z.y -= rA), Z.y <= rA && (Z.y += rA), Z.x -= $.offsetX, Z.y -= $.offsetY, Z;
     }
-    function k(D) {
+    function _(D) {
       return D.flipX !== D.flipY;
     }
-    function T(D, I, K, W, V) {
+    function T(D, I, K, W, G) {
       if (D[I] !== 0) {
-        var z = V / D._getTransformedDimensions()[W] * D[K];
+        var z = G / D._getTransformedDimensions()[W] * D[K];
         D.set(K, z);
       }
     }
     function M(D, I, K, W) {
-      var V, z = I.target, $ = z._getTransformedDimensions(0, z.skewY), eA = N(I, I.originX, I.originY, K, W), rA = Math.abs(2 * eA.x) - $.x, Z = z.skewX;
-      rA < 2 ? V = 0 : (V = m(Math.atan2(rA / z.scaleX, $.y / z.scaleY)), I.originX === i && I.originY === c && (V = -V), I.originX === h && I.originY === n && (V = -V), k(z) && (V = -V));
-      var nA = Z !== V;
+      var G, z = I.target, $ = z._getTransformedDimensions(0, z.skewY), eA = V(I, I.originX, I.originY, K, W), rA = Math.abs(2 * eA.x) - $.x, Z = z.skewX;
+      rA < 2 ? G = 0 : (G = m(Math.atan2(rA / z.scaleX, $.y / z.scaleY)), I.originX === i && I.originY === c && (G = -G), I.originX === h && I.originY === n && (G = -G), _(z) && (G = -G));
+      var nA = Z !== G;
       if (nA) {
         var q = z._getTransformedDimensions().y;
-        z.set("skewX", V), T(z, "skewY", "scaleY", "y", q);
+        z.set("skewX", G), T(z, "skewY", "scaleY", "y", q);
       }
       return nA;
     }
-    function G(D, I, K, W) {
-      var V, z = I.target, $ = z._getTransformedDimensions(z.skewX, 0), eA = N(I, I.originX, I.originY, K, W), rA = Math.abs(2 * eA.y) - $.y, Z = z.skewY;
-      rA < 2 ? V = 0 : (V = m(Math.atan2(rA / z.scaleY, $.x / z.scaleX)), I.originX === i && I.originY === c && (V = -V), I.originX === h && I.originY === n && (V = -V), k(z) && (V = -V));
-      var nA = Z !== V;
+    function N(D, I, K, W) {
+      var G, z = I.target, $ = z._getTransformedDimensions(z.skewX, 0), eA = V(I, I.originX, I.originY, K, W), rA = Math.abs(2 * eA.y) - $.y, Z = z.skewY;
+      rA < 2 ? G = 0 : (G = m(Math.atan2(rA / z.scaleY, $.x / z.scaleX)), I.originX === i && I.originY === c && (G = -G), I.originX === h && I.originY === n && (G = -G), _(z) && (G = -G));
+      var nA = Z !== G;
       if (nA) {
         var q = z._getTransformedDimensions().x;
-        z.set("skewY", V), T(z, "skewX", "scaleX", "x", q);
+        z.set("skewY", G), T(z, "skewX", "scaleX", "x", q);
       }
       return nA;
     }
-    function X(D, I, K, W, V) {
-      V = V || {};
-      var z, $, eA, rA, Z, nA, q = I.target, lA = q.lockScalingX, sA = q.lockScalingY, hA = V.by, BA = F(D, q), VA = O(q, hA, BA), dt = I.gestureScale;
-      if (VA)
+    function X(D, I, K, W, G) {
+      G = G || {};
+      var z, $, eA, rA, Z, nA, q = I.target, lA = q.lockScalingX, sA = q.lockScalingY, hA = G.by, BA = F(D, q), GA = O(q, hA, BA), dt = I.gestureScale;
+      if (GA)
         return !1;
       if (dt)
         $ = I.scaleX * dt, eA = I.scaleY * dt;
       else {
-        if (z = N(I, I.originX, I.originY, K, W), Z = hA !== "y" ? v(z.x) : 1, nA = hA !== "x" ? v(z.y) : 1, I.signX || (I.signX = Z), I.signY || (I.signY = nA), q.lockScalingFlip && (I.signX !== Z || I.signY !== nA))
+        if (z = V(I, I.originX, I.originY, K, W), Z = hA !== "y" ? v(z.x) : 1, nA = hA !== "x" ? v(z.y) : 1, I.signX || (I.signX = Z), I.signY || (I.signY = nA), q.lockScalingFlip && (I.signX !== Z || I.signY !== nA))
           return !1;
         if (rA = q._getTransformedDimensions(), BA && !hA) {
           var St = Math.abs(z.x) + Math.abs(z.y), xA = I.original, WA = St / (Math.abs(rA.x * xA.scaleX / q.scaleX) + Math.abs(rA.y * xA.scaleY / q.scaleY));
           $ = xA.scaleX * WA, eA = xA.scaleY * WA;
         } else
           $ = Math.abs(z.x * q.scaleX / rA.x), eA = Math.abs(z.y * q.scaleY / rA.y);
-        _(I) && ($ *= 2, eA *= 2), I.signX !== Z && hA !== "y" && (I.originX = f[I.originX], $ *= -1, I.signX = Z), I.signY !== nA && hA !== "x" && (I.originY = f[I.originY], eA *= -1, I.signY = nA);
+        k(I) && ($ *= 2, eA *= 2), I.signX !== Z && hA !== "y" && (I.originX = f[I.originX], $ *= -1, I.signX = Z), I.signY !== nA && hA !== "x" && (I.originY = f[I.originY], eA *= -1, I.signY = nA);
       }
       var gt = q.scaleX, Rt = q.scaleY;
       return hA ? (hA === "x" && q.set("scaleX", $), hA === "y" && q.set("scaleY", eA)) : (!lA && q.set("scaleX", $), !sA && q.set("scaleY", eA)), gt !== q.scaleX || Rt !== q.scaleY;
     }
     A.scaleCursorStyleHandler = function(D, I, K) {
-      var W = F(D, K), V = "";
-      if (I.x !== 0 && I.y === 0 ? V = "x" : I.x === 0 && I.y !== 0 && (V = "y"), O(K, V, W))
+      var W = F(D, K), G = "";
+      if (I.x !== 0 && I.y === 0 ? G = "x" : I.x === 0 && I.y !== 0 && (G = "y"), O(K, G, W))
         return "not-allowed";
       var z = x(K, I);
       return o[z] + "-resize";
@@ -7217,15 +7217,15 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       var W = "not-allowed";
       if (I.x !== 0 && K.lockSkewingY || I.y !== 0 && K.lockSkewingX)
         return W;
-      var V = x(K, I) % 4;
-      return d[V] + "-resize";
+      var G = x(K, I) % 4;
+      return d[G] + "-resize";
     }, A.scaleSkewCursorStyleHandler = function(D, I, K) {
       return D[K.canvas.altActionKey] ? A.skewCursorStyleHandler(D, I, K) : A.scaleCursorStyleHandler(D, I, K);
     }, A.rotationWithSnapping = Y("rotating", R(function(D, I, K, W) {
-      var V = I, z = V.target, $ = z.translateToOriginPoint(z.getCenterPoint(), V.originX, V.originY);
+      var G = I, z = G.target, $ = z.translateToOriginPoint(z.getCenterPoint(), G.originX, G.originY);
       if (z.lockRotation)
         return !1;
-      var eA, rA = Math.atan2(V.ey - $.y, V.ex - $.x), Z = Math.atan2(W - $.y, K - $.x), nA = m(Z - rA + V.theta);
+      var eA, rA = Math.atan2(G.ey - $.y, G.ex - $.x), Z = Math.atan2(W - $.y, K - $.x), nA = m(Z - rA + G.theta);
       if (z.snapAngle > 0) {
         var q = z.snapAngle, lA = z.snapThreshold || q, sA = Math.ceil(nA / q) * q, hA = Math.floor(nA / q) * q;
         Math.abs(nA - hA) < lA ? nA = hA : Math.abs(nA - sA) < lA && (nA = sA);
@@ -7242,29 +7242,29 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     }, A.scalingXOrSkewingY = function(D, I, K, W) {
       return D[I.target.canvas.altActionKey] ? A.skewHandlerY(D, I, K, W) : A.scalingX(D, I, K, W);
     }, A.changeWidth = Y("resizing", R(function(D, I, K, W) {
-      var V = I.target, z = N(I, I.originX, I.originY, K, W), $ = V.strokeWidth / (V.strokeUniform ? V.scaleX : 1), eA = _(I) ? 2 : 1, rA = V.width, Z = Math.abs(z.x * eA / V.scaleX) - $;
-      return V.set("width", Math.max(Z, 0)), rA !== Z;
+      var G = I.target, z = V(I, I.originX, I.originY, K, W), $ = G.strokeWidth / (G.strokeUniform ? G.scaleX : 1), eA = k(I) ? 2 : 1, rA = G.width, Z = Math.abs(z.x * eA / G.scaleX) - $;
+      return G.set("width", Math.max(Z, 0)), rA !== Z;
     })), A.skewHandlerX = function(D, I, K, W) {
-      var V, z = I.target, $ = z.skewX, eA = I.originY;
-      return !z.lockSkewingX && ($ === 0 ? V = N(I, l, l, K, W).x > 0 ? i : h : ($ > 0 && (V = eA === n ? i : h), $ < 0 && (V = eA === n ? h : i), k(z) && (V = V === i ? h : i)), I.originX = V, Y("skewing", R(M))(D, I, K, W));
+      var G, z = I.target, $ = z.skewX, eA = I.originY;
+      return !z.lockSkewingX && ($ === 0 ? G = V(I, l, l, K, W).x > 0 ? i : h : ($ > 0 && (G = eA === n ? i : h), $ < 0 && (G = eA === n ? h : i), _(z) && (G = G === i ? h : i)), I.originX = G, Y("skewing", R(M))(D, I, K, W));
     }, A.skewHandlerY = function(D, I, K, W) {
-      var V, z = I.target, $ = z.skewY, eA = I.originX;
-      return !z.lockSkewingY && ($ === 0 ? V = N(I, l, l, K, W).y > 0 ? n : c : ($ > 0 && (V = eA === i ? n : c), $ < 0 && (V = eA === i ? c : n), k(z) && (V = V === n ? c : n)), I.originY = V, Y("skewing", R(G))(D, I, K, W));
+      var G, z = I.target, $ = z.skewY, eA = I.originX;
+      return !z.lockSkewingY && ($ === 0 ? G = V(I, l, l, K, W).y > 0 ? n : c : ($ > 0 && (G = eA === i ? n : c), $ < 0 && (G = eA === i ? c : n), _(z) && (G = G === n ? c : n)), I.originY = G, Y("skewing", R(N))(D, I, K, W));
     }, A.dragHandler = function(D, I, K, W) {
-      var V = I.target, z = K - I.offsetX, $ = W - I.offsetY, eA = !V.get("lockMovementX") && V.left !== z, rA = !V.get("lockMovementY") && V.top !== $;
-      return eA && V.set("left", z), rA && V.set("top", $), (eA || rA) && U("moving", P(D, I, K, W)), eA || rA;
+      var G = I.target, z = K - I.offsetX, $ = W - I.offsetY, eA = !G.get("lockMovementX") && G.left !== z, rA = !G.get("lockMovementY") && G.top !== $;
+      return eA && G.set("left", z), rA && G.set("top", $), (eA || rA) && U("moving", P(D, I, K, W)), eA || rA;
     }, A.scaleOrSkewActionName = function(D, I, K) {
       var W = D[K.canvas.altActionKey];
       return I.x === 0 ? W ? "skewX" : "scaleY" : I.y === 0 ? W ? "skewY" : "scaleX" : void 0;
     }, A.rotationStyleHandler = function(D, I, K) {
       return K.lockRotation ? "not-allowed" : I.cursorStyle;
-    }, A.fireEvent = U, A.wrapWithFixedAnchor = R, A.wrapWithFireEvent = Y, A.getLocalPoint = N, s.controlsUtils = A;
+    }, A.fireEvent = U, A.wrapWithFixedAnchor = R, A.wrapWithFireEvent = Y, A.getLocalPoint = V, s.controlsUtils = A;
   }(e), function(u) {
     var s = u.fabric || (u.fabric = {}), o = s.util.degreesToRadians, d = s.controlsUtils;
     d.renderCircleControl = function(A, i, n, h, c) {
       h = h || {};
-      var l, f = this.sizeX || h.cornerSize || c.cornerSize, m = this.sizeY || h.cornerSize || c.cornerSize, v = h.transparentCorners !== void 0 ? h.transparentCorners : c.transparentCorners, x = v ? "stroke" : "fill", U = !v && (h.cornerStrokeColor || c.cornerStrokeColor), F = i, _ = n;
-      A.save(), A.fillStyle = h.cornerColor || c.cornerColor, A.strokeStyle = h.cornerStrokeColor || c.cornerStrokeColor, f > m ? (l = f, A.scale(1, m / f), _ = n * f / m) : m > f ? (l = m, A.scale(f / m, 1), F = i * m / f) : l = f, A.lineWidth = 1, A.beginPath(), A.arc(F, _, l / 2, 0, 2 * Math.PI, !1), A[x](), U && A.stroke(), A.restore();
+      var l, f = this.sizeX || h.cornerSize || c.cornerSize, m = this.sizeY || h.cornerSize || c.cornerSize, v = h.transparentCorners !== void 0 ? h.transparentCorners : c.transparentCorners, x = v ? "stroke" : "fill", U = !v && (h.cornerStrokeColor || c.cornerStrokeColor), F = i, k = n;
+      A.save(), A.fillStyle = h.cornerColor || c.cornerColor, A.strokeStyle = h.cornerStrokeColor || c.cornerStrokeColor, f > m ? (l = f, A.scale(1, m / f), k = n * f / m) : m > f ? (l = m, A.scale(f / m, 1), F = i * m / f) : l = f, A.lineWidth = 1, A.beginPath(), A.arc(F, k, l / 2, 0, 2 * Math.PI, !1), A[x](), U && A.stroke(), A.restore();
     }, d.renderSquareControl = function(A, i, n, h, c) {
       h = h || {};
       var l = this.sizeX || h.cornerSize || c.cornerSize, f = this.sizeY || h.cornerSize || c.cornerSize, m = h.transparentCorners !== void 0 ? h.transparentCorners : c.transparentCorners, v = m ? "stroke" : "fill", x = !m && (h.cornerStrokeColor || c.cornerStrokeColor), U = l / 2, F = f / 2;
@@ -7298,8 +7298,8 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     }, calcCornerCoords: function(o, d, A, i, n) {
       var h, c, l, f, m = n ? this.touchSizeX : this.sizeX, v = n ? this.touchSizeY : this.sizeY;
       if (m && v && m !== v) {
-        var x = Math.atan2(v, m), U = Math.sqrt(m * m + v * v) / 2, F = x - s.util.degreesToRadians(o), _ = Math.PI / 2 - x - s.util.degreesToRadians(o);
-        h = U * s.util.cos(F), c = U * s.util.sin(F), l = U * s.util.cos(_), f = U * s.util.sin(_);
+        var x = Math.atan2(v, m), U = Math.sqrt(m * m + v * v) / 2, F = x - s.util.degreesToRadians(o), k = Math.PI / 2 - x - s.util.degreesToRadians(o);
+        h = U * s.util.cos(F), c = U * s.util.sin(F), l = U * s.util.cos(k), f = U * s.util.sin(k);
       } else
         U = 0.7071067812 * (m && v ? m : d), F = s.util.degreesToRadians(45 - o), h = l = U * s.util.cos(F), c = f = U * s.util.sin(F);
       return { tl: { x: A - f, y: i - l }, tr: { x: A + h, y: i - c }, bl: { x: A - h, y: i + c }, br: { x: A + f, y: i + l } };
@@ -7344,9 +7344,9 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
         if (f)
           for ((l = l.concat()).reverse(), A = 0, i = l.length; A < i; A++)
             l[A].offset = 1 - l[A].offset;
-        var _ = Math.min(c.r1, c.r2);
-        if (_ > 0) {
-          var O = _ / Math.max(c.r1, c.r2);
+        var k = Math.min(c.r1, c.r2);
+        if (k > 0) {
+          var O = k / Math.max(c.r1, c.r2);
           for (A = 0, i = l.length; A < i; A++)
             l[A].offset += O * (1 - l[A].offset);
         }
@@ -7371,7 +7371,7 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     } }), B.util.object.extend(B.Gradient, { fromElement: function(o, d, A, i) {
       var n = parseFloat(A) / (/%$/.test(A) ? 100 : 1);
       n = n < 0 ? 0 : n > 1 ? 1 : n, isNaN(n) && (n = 1);
-      var h, c, l, f, m = o.getElementsByTagName("stop"), v = o.getAttribute("gradientUnits") === "userSpaceOnUse" ? "pixels" : "percentage", x = o.getAttribute("gradientTransform") || "", U = [], F = 0, _ = 0;
+      var h, c, l, f, m = o.getElementsByTagName("stop"), v = o.getAttribute("gradientUnits") === "userSpaceOnUse" ? "pixels" : "percentage", x = o.getAttribute("gradientTransform") || "", U = [], F = 0, k = 0;
       for (o.nodeName === "linearGradient" || o.nodeName === "LINEARGRADIENT" ? (h = "linear", c = function(O) {
         return { x1: O.getAttribute("x1") || 0, y1: O.getAttribute("y1") || 0, x2: O.getAttribute("x2") || "100%", y2: O.getAttribute("y2") || 0 };
       }(o)) : (h = "radial", c = function(O) {
@@ -7379,11 +7379,11 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       }(o)), l = m.length; l--; )
         U.push(u(m[l], n));
       return f = B.parseTransformAttribute(x), function(O, P, R, Y) {
-        var N, k;
+        var V, _;
         Object.keys(P).forEach(function(T) {
-          (N = P[T]) === "Infinity" ? k = 1 : N === "-Infinity" ? k = 0 : (k = parseFloat(P[T], 10), typeof N == "string" && /^(\d+\.\d+)%|(\d+)%$/.test(N) && (k *= 0.01, Y === "pixels" && (T !== "x1" && T !== "x2" && T !== "r2" || (k *= R.viewBoxWidth || R.width), T !== "y1" && T !== "y2" || (k *= R.viewBoxHeight || R.height)))), P[T] = k;
+          (V = P[T]) === "Infinity" ? _ = 1 : V === "-Infinity" ? _ = 0 : (_ = parseFloat(P[T], 10), typeof V == "string" && /^(\d+\.\d+)%|(\d+)%$/.test(V) && (_ *= 0.01, Y === "pixels" && (T !== "x1" && T !== "x2" && T !== "r2" || (_ *= R.viewBoxWidth || R.width), T !== "y1" && T !== "y2" || (_ *= R.viewBoxHeight || R.height)))), P[T] = _;
         });
-      }(0, c, i, v), v === "pixels" && (F = -d.left, _ = -d.top), new B.Gradient({ id: o.getAttribute("id"), type: h, coords: c, colorStops: U, gradientUnits: v, gradientTransform: f, offsetX: F, offsetY: _ });
+      }(0, c, i, v), v === "pixels" && (F = -d.left, k = -d.top), new B.Gradient({ id: o.getAttribute("id"), type: h, coords: c, colorStops: U, gradientUnits: v, gradientTransform: f, offsetX: F, offsetY: k });
     } });
   }(), Q = B.util.toFixed, B.Pattern = B.util.createClass({ repeat: "repeat", offsetX: 0, offsetY: 0, crossOrigin: "", patternTransform: null, initialize: function(u, s) {
     if (u || (u = {}), this.id = B.Object.__uid++, this.setOptions(u), !u.source || u.source && typeof u.source != "string")
@@ -7656,18 +7656,18 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
           }
         }).join("");
       }, createSVGFontFacesMarkup: function() {
-        var l, f, m, v, x, U, F, _, O = "", P = {}, R = B.fontPaths, Y = [];
-        for (this._objects.forEach(function k(T) {
-          Y.push(T), T._objects && T._objects.forEach(k);
-        }), F = 0, _ = Y.length; F < _; F++)
+        var l, f, m, v, x, U, F, k, O = "", P = {}, R = B.fontPaths, Y = [];
+        for (this._objects.forEach(function _(T) {
+          Y.push(T), T._objects && T._objects.forEach(_);
+        }), F = 0, k = Y.length; F < k; F++)
           if (f = (l = Y[F]).fontFamily, l.type.indexOf("text") !== -1 && !P[f] && R[f] && (P[f] = !0, l.styles))
             for (x in m = l.styles)
               for (U in v = m[x])
                 !P[f = v[U].fontFamily] && R[f] && (P[f] = !0);
-        for (var N in P)
+        for (var V in P)
           O += [`		@font-face {
-`, "			font-family: '", N, `';
-`, "			src: url('", R[N], `');
+`, "			font-family: '", V, `';
+`, "			src: url('", R[V], `');
 `, `		}
 `].join("");
         return O && (O = ['	<style type="text/css">', `<![CDATA[
@@ -7685,7 +7685,7 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
         var m = this[f + "Color"], v = this.viewportTransform, x = this.width, U = this.height;
         if (m)
           if (m.toLive) {
-            var F = m.repeat, _ = B.util.invertTransform(v), O = this[f + "Vpt"] ? B.util.matrixToSVG(_) : "";
+            var F = m.repeat, k = B.util.invertTransform(v), O = this[f + "Vpt"] ? B.util.matrixToSVG(k) : "";
             l.push('<rect transform="' + O + " translate(", x / 2, ",", U / 2, ')"', ' x="', m.offsetX - x / 2, '" y="', m.offsetY - U / 2, '" ', 'width="', F === "repeat-y" || F === "no-repeat" ? m.source.width : x, '" height="', F === "repeat-x" || F === "no-repeat" ? m.source.height : U, '" fill="url(#SVGID_' + m.id + ')"', `></rect>
 `);
           } else
@@ -7714,9 +7714,9 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       }, sendBackwards: function(l, f) {
         if (!l)
           return this;
-        var m, v, x, U, F, _ = this._activeObject, O = 0;
-        if (l === _ && l.type === "activeSelection")
-          for (F = _._objects, m = 0; m < F.length; m++)
+        var m, v, x, U, F, k = this._activeObject, O = 0;
+        if (l === k && l.type === "activeSelection")
+          for (F = k._objects, m = 0; m < F.length; m++)
             v = F[m], (x = this._objects.indexOf(v)) > 0 + O && (U = x - 1, o(this._objects, v), this._objects.splice(U, 0, v)), O++;
         else
           (x = this._objects.indexOf(l)) !== 0 && (U = this._findNewLowerIndex(l, x, f), o(this._objects, l), this._objects.splice(U, 0, l));
@@ -7735,9 +7735,9 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       }, bringForward: function(l, f) {
         if (!l)
           return this;
-        var m, v, x, U, F, _ = this._activeObject, O = 0;
-        if (l === _ && l.type === "activeSelection")
-          for (m = (F = _._objects).length; m--; )
+        var m, v, x, U, F, k = this._activeObject, O = 0;
+        if (l === k && l.type === "activeSelection")
+          for (m = (F = k._objects).length; m--; )
             v = F[m], (x = this._objects.indexOf(v)) < this._objects.length - 1 - O && (U = x + 1, o(this._objects, v), this._objects.splice(U, 0, v)), O++;
         else
           (x = this._objects.indexOf(l)) !== this._objects.length - 1 && (U = this._findNewUpperIndex(l, x, f), o(this._objects, l), this._objects.splice(U, 0, l));
@@ -8227,8 +8227,8 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
             i.isMoving = !1;
           }
           if (n && (n.target !== i || n.corner !== m)) {
-            var F = n.target && n.target.controls[n.corner], _ = F && F.getMouseUpHandler(A, i, x);
-            v = v || this.getPointer(A), _ && _(A, n, v.x, v.y);
+            var F = n.target && n.target.controls[n.corner], k = F && F.getMouseUpHandler(A, i, x);
+            v = v || this.getPointer(A), k && k(A, n, v.x, v.y);
           }
           this._setCursorFromEvent(A, i), this._handleEvent(A, "up", 1, l), this._groupSelector = null, this._currentTransform = null, i && (i.__corner = 0), c ? this.requestRenderAll() : l || this.renderTop();
         }
@@ -8439,7 +8439,7 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       var l = s.perfLimitSizeTotal, f = c.width, m = c.height, v = s.maxCacheSideLimit, x = s.minCacheSideLimit;
       if (f <= v && m <= v && f * m <= l)
         return f < x && (c.width = x), m < x && (c.height = x), c;
-      var U = f / m, F = s.util.limitDimsByArea(U, l), _ = s.util.capValue, O = _(x, F.x, v), P = _(x, F.y, v);
+      var U = f / m, F = s.util.limitDimsByArea(U, l), k = s.util.capValue, O = k(x, F.x, v), P = k(x, F.y, v);
       return f > O && (c.zoomX /= f / O, c.width = O, c.capped = !0), m > P && (c.zoomY /= m / P, c.height = P, c.capped = !0), c;
     }, _getCacheCanvasDimensions: function() {
       var c = this.getTotalObjectScaling(), l = this._getTransformedDimensions(0, 0), f = l.x * c.scaleX / this.scaleX, m = l.y * c.scaleY / this.scaleY;
@@ -8451,12 +8451,12 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
         if (this === l && f.slice && f.slice(0, 5) === "scale")
           return !1;
       }
-      var m, v, x = this._cacheCanvas, U = this._limitCacheSize(this._getCacheCanvasDimensions()), F = s.minCacheSideLimit, _ = U.width, O = U.height, P = U.zoomX, R = U.zoomY, Y = _ !== this.cacheWidth || O !== this.cacheHeight, N = this.zoomX !== P || this.zoomY !== R, k = Y || N, T = 0, M = 0, G = !1;
+      var m, v, x = this._cacheCanvas, U = this._limitCacheSize(this._getCacheCanvasDimensions()), F = s.minCacheSideLimit, k = U.width, O = U.height, P = U.zoomX, R = U.zoomY, Y = k !== this.cacheWidth || O !== this.cacheHeight, V = this.zoomX !== P || this.zoomY !== R, _ = Y || V, T = 0, M = 0, N = !1;
       if (Y) {
-        var X = this._cacheCanvas.width, D = this._cacheCanvas.height, I = _ > X || O > D;
-        G = I || (_ < 0.9 * X || O < 0.9 * D) && X > F && D > F, I && !U.capped && (_ > F || O > F) && (T = 0.1 * _, M = 0.1 * O);
+        var X = this._cacheCanvas.width, D = this._cacheCanvas.height, I = k > X || O > D;
+        N = I || (k < 0.9 * X || O < 0.9 * D) && X > F && D > F, I && !U.capped && (k > F || O > F) && (T = 0.1 * k, M = 0.1 * O);
       }
-      return this instanceof s.Text && this.path && (k = !0, G = !0, T += this.getHeightOfLine(0) * this.zoomX, M += this.getHeightOfLine(0) * this.zoomY), !!k && (G ? (x.width = Math.ceil(_ + T), x.height = Math.ceil(O + M)) : (this._cacheContext.setTransform(1, 0, 0, 1, 0, 0), this._cacheContext.clearRect(0, 0, x.width, x.height)), m = U.x / 2, v = U.y / 2, this.cacheTranslationX = Math.round(x.width / 2 - m) + m, this.cacheTranslationY = Math.round(x.height / 2 - v) + v, this.cacheWidth = _, this.cacheHeight = O, this._cacheContext.translate(this.cacheTranslationX, this.cacheTranslationY), this._cacheContext.scale(P, R), this.zoomX = P, this.zoomY = R, !0);
+      return this instanceof s.Text && this.path && (_ = !0, N = !0, T += this.getHeightOfLine(0) * this.zoomX, M += this.getHeightOfLine(0) * this.zoomY), !!_ && (N ? (x.width = Math.ceil(k + T), x.height = Math.ceil(O + M)) : (this._cacheContext.setTransform(1, 0, 0, 1, 0, 0), this._cacheContext.clearRect(0, 0, x.width, x.height)), m = U.x / 2, v = U.y / 2, this.cacheTranslationX = Math.round(x.width / 2 - m) + m, this.cacheTranslationY = Math.round(x.height / 2 - v) + v, this.cacheWidth = k, this.cacheHeight = O, this._cacheContext.translate(this.cacheTranslationX, this.cacheTranslationY), this._cacheContext.scale(P, R), this.zoomX = P, this.zoomY = R, !0);
     }, setOptions: function(c) {
       this._setOptions(c), this._initGradient(c.fill, "fill"), this._initGradient(c.stroke, "stroke"), this._initPattern(c.fill, "fill"), this._initPattern(c.stroke, "stroke");
     }, transform: function(c) {
@@ -8608,14 +8608,14 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       c || (c = {});
       var l = s.util, f = l.saveObjectTransform(this), m = this.group, v = this.shadow, x = Math.abs, U = (c.multiplier || 1) * (c.enableRetinaScaling ? s.devicePixelRatio : 1);
       delete this.group, c.withoutTransform && l.resetObjectTransform(this), c.withoutShadow && (this.shadow = null);
-      var F, _, O, P, R = s.util.createCanvasElement(), Y = this.getBoundingRect(!0, !0), N = this.shadow, k = { x: 0, y: 0 };
-      N && (_ = N.blur, F = N.nonScaling ? { scaleX: 1, scaleY: 1 } : this.getObjectScaling(), k.x = 2 * Math.round(x(N.offsetX) + _) * x(F.scaleX), k.y = 2 * Math.round(x(N.offsetY) + _) * x(F.scaleY)), O = Y.width + k.x, P = Y.height + k.y, R.width = Math.ceil(O), R.height = Math.ceil(P);
+      var F, k, O, P, R = s.util.createCanvasElement(), Y = this.getBoundingRect(!0, !0), V = this.shadow, _ = { x: 0, y: 0 };
+      V && (k = V.blur, F = V.nonScaling ? { scaleX: 1, scaleY: 1 } : this.getObjectScaling(), _.x = 2 * Math.round(x(V.offsetX) + k) * x(F.scaleX), _.y = 2 * Math.round(x(V.offsetY) + k) * x(F.scaleY)), O = Y.width + _.x, P = Y.height + _.y, R.width = Math.ceil(O), R.height = Math.ceil(P);
       var T = new s.StaticCanvas(R, { enableRetinaScaling: !1, renderOnAddRemove: !1, skipOffscreen: !1 });
       c.format === "jpeg" && (T.backgroundColor = "#fff"), this.setPositionByOrigin(new s.Point(T.width / 2, T.height / 2), "center", "center");
       var M = this.canvas;
       T.add(this);
-      var G = T.toCanvasElement(U || 1, c);
-      return this.shadow = v, this.set("canvas", M), m && (this.group = m), this.set(f).setCoords(), T._objects = [], T.dispose(), T = null, G;
+      var N = T.toCanvasElement(U || 1, c);
+      return this.shadow = v, this.set("canvas", M), m && (this.group = m), this.set(f).setCoords(), T._objects = [], T.dispose(), T = null, N;
     }, toDataURL: function(c) {
       return c || (c = {}), s.util.toDataURL(this.toCanvasElement(c), c.format || "png", c.quality || 1);
     }, isType: function(c) {
@@ -8855,14 +8855,14 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
       var A = (d = d || {}).reviver, i = d.additionalTransform || "", n = [this.getSvgTransform(!0, i), this.getSvgCommons()].join(""), h = o.indexOf("COMMON_PARTS");
       return o[h] = n, A ? A(o.join("")) : o.join("");
     }, _createBaseSVGMarkup: function(o, d) {
-      var A, i, n = (d = d || {}).noStyle, h = d.reviver, c = n ? "" : 'style="' + this.getSvgStyles() + '" ', l = d.withShadow ? 'style="' + this.getSvgFilter() + '" ' : "", f = this.clipPath, m = this.strokeUniform ? 'vector-effect="non-scaling-stroke" ' : "", v = f && f.absolutePositioned, x = this.stroke, U = this.fill, F = this.shadow, _ = [], O = o.indexOf("COMMON_PARTS"), P = d.additionalTransform;
+      var A, i, n = (d = d || {}).noStyle, h = d.reviver, c = n ? "" : 'style="' + this.getSvgStyles() + '" ', l = d.withShadow ? 'style="' + this.getSvgFilter() + '" ' : "", f = this.clipPath, m = this.strokeUniform ? 'vector-effect="non-scaling-stroke" ' : "", v = f && f.absolutePositioned, x = this.stroke, U = this.fill, F = this.shadow, k = [], O = o.indexOf("COMMON_PARTS"), P = d.additionalTransform;
       return f && (f.clipPathId = "CLIPPATH_" + B.Object.__uid++, i = '<clipPath id="' + f.clipPathId + `" >
 ` + f.toClipPathSVG(h) + `</clipPath>
-`), v && _.push("<g ", l, this.getSvgCommons(), ` >
-`), _.push("<g ", this.getSvgTransform(!1), v ? "" : l + this.getSvgCommons(), ` >
-`), A = [c, m, n ? "" : this.addPaintOrder(), " ", P ? 'transform="' + P + '" ' : ""].join(""), o[O] = A, U && U.toLive && _.push(U.toSVG(this)), x && x.toLive && _.push(x.toSVG(this)), F && _.push(F.toSVG(this)), f && _.push(i), _.push(o.join("")), _.push(`</g>
-`), v && _.push(`</g>
-`), h ? h(_.join("")) : _.join("");
+`), v && k.push("<g ", l, this.getSvgCommons(), ` >
+`), k.push("<g ", this.getSvgTransform(!1), v ? "" : l + this.getSvgCommons(), ` >
+`), A = [c, m, n ? "" : this.addPaintOrder(), " ", P ? 'transform="' + P + '" ' : ""].join(""), o[O] = A, U && U.toLive && k.push(U.toSVG(this)), x && x.toLive && k.push(x.toSVG(this)), F && k.push(F.toSVG(this)), f && k.push(i), k.push(o.join("")), k.push(`</g>
+`), v && k.push(`</g>
+`), h ? h(k.join("")) : k.join("");
     }, addPaintOrder: function() {
       return this.paintFirst !== "fill" ? ' paint-order="' + this.paintFirst + '" ' : "";
     } });
@@ -9212,21 +9212,21 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     }, _setPath: function(h, c) {
       this.path = s.util.makePathSimpler(Array.isArray(h) ? h : s.util.parsePath(h)), s.Polyline.prototype._setPositionDimensions.call(this, c || {});
     }, _renderPathCommands: function(h) {
-      var c, l = 0, f = 0, m = 0, v = 0, x = 0, U = 0, F = -this.pathOffset.x, _ = -this.pathOffset.y;
+      var c, l = 0, f = 0, m = 0, v = 0, x = 0, U = 0, F = -this.pathOffset.x, k = -this.pathOffset.y;
       h.beginPath();
       for (var O = 0, P = this.path.length; O < P; ++O)
         switch ((c = this.path[O])[0]) {
           case "L":
-            m = c[1], v = c[2], h.lineTo(m + F, v + _);
+            m = c[1], v = c[2], h.lineTo(m + F, v + k);
             break;
           case "M":
-            l = m = c[1], f = v = c[2], h.moveTo(m + F, v + _);
+            l = m = c[1], f = v = c[2], h.moveTo(m + F, v + k);
             break;
           case "C":
-            m = c[5], v = c[6], x = c[3], U = c[4], h.bezierCurveTo(c[1] + F, c[2] + _, x + F, U + _, m + F, v + _);
+            m = c[5], v = c[6], x = c[3], U = c[4], h.bezierCurveTo(c[1] + F, c[2] + k, x + F, U + k, m + F, v + k);
             break;
           case "Q":
-            h.quadraticCurveTo(c[1] + F, c[2] + _, c[3] + F, c[4] + _), m = c[3], v = c[4], x = c[1], U = c[2];
+            h.quadraticCurveTo(c[1] + F, c[2] + k, c[3] + F, c[4] + k), m = c[3], v = c[4], x = c[1], U = c[2];
             break;
           case "z":
           case "Z":
@@ -9258,7 +9258,7 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     }, complexity: function() {
       return this.path.length;
     }, _calcDimensions: function() {
-      for (var h, c, l = [], f = [], m = 0, v = 0, x = 0, U = 0, F = 0, _ = this.path.length; F < _; ++F) {
+      for (var h, c, l = [], f = [], m = 0, v = 0, x = 0, U = 0, F = 0, k = this.path.length; F < k; ++F) {
         switch ((h = this.path[F])[0]) {
           case "L":
             x = h[1], U = h[2], c = [];
@@ -9592,8 +9592,8 @@ const gr = Ya(Object.freeze(Object.defineProperty({ __proto__: null, default: {}
     }, _renderFill: function(o) {
       var d = this._element;
       if (d) {
-        var A = this._filterScalingX, i = this._filterScalingY, n = this.width, h = this.height, c = Math.min, l = Math.max, f = l(this.cropX, 0), m = l(this.cropY, 0), v = d.naturalWidth || d.width, x = d.naturalHeight || d.height, U = f * A, F = m * i, _ = c(n * A, v - U), O = c(h * i, x - F), P = -n / 2, R = -h / 2, Y = c(n, v / A - f), N = c(h, x / i - m);
-        d && o.drawImage(d, U, F, _, O, P, R, Y, N);
+        var A = this._filterScalingX, i = this._filterScalingY, n = this.width, h = this.height, c = Math.min, l = Math.max, f = l(this.cropX, 0), m = l(this.cropY, 0), v = d.naturalWidth || d.width, x = d.naturalHeight || d.height, U = f * A, F = m * i, k = c(n * A, v - U), O = c(h * i, x - F), P = -n / 2, R = -h / 2, Y = c(n, v / A - f), V = c(h, x / i - m);
+        d && o.drawImage(d, U, F, k, O, P, R, Y, V);
       }
     }, _needsResize: function() {
       var o = this.getTotalObjectScaling();
@@ -9704,8 +9704,8 @@ void main(){}`, i = o.createShader(o.FRAGMENT_SHADER);
       return l.bindFramebuffer(l.FRAMEBUFFER, m), o.forEach(function(v) {
         v && v.applyTo(f);
       }), function(v) {
-        var x = v.targetCanvas, U = x.width, F = x.height, _ = v.destinationWidth, O = v.destinationHeight;
-        U === _ && F === O || (x.width = _, x.height = O);
+        var x = v.targetCanvas, U = x.width, F = x.height, k = v.destinationWidth, O = v.destinationHeight;
+        U === k && F === O || (x.width = k, x.height = O);
       }(f), this.copyGLTo2D(l, f), l.bindTexture(l.TEXTURE_2D, null), l.deleteTexture(f.sourceTexture), l.deleteTexture(f.targetTexture), l.deleteFramebuffer(m), n.getContext("2d").setTransform(1, 0, 0, 1, 0, 0), f;
     }, dispose: function() {
       this.canvas && (this.canvas = null, this.gl = null), this.clearWebGLCaches();
@@ -10009,12 +10009,12 @@ gl_FragColor.a = alpha;
       var n = Math.sqrt(this.matrix.length), h = this.type + "_" + n + "_" + (this.opaque ? 1 : 0), c = this.fragmentSource[h];
       return i.programCache.hasOwnProperty(h) || (i.programCache[h] = this.createProgram(i.context, c)), i.programCache[h];
     }, applyTo2d: function(i) {
-      var n, h, c, l, f, m, v, x, U, F, _, O, P, R = i.imageData, Y = R.data, N = this.matrix, k = Math.round(Math.sqrt(N.length)), T = Math.floor(k / 2), M = R.width, G = R.height, X = i.ctx.createImageData(M, G), D = X.data, I = this.opaque ? 1 : 0;
-      for (_ = 0; _ < G; _++)
+      var n, h, c, l, f, m, v, x, U, F, k, O, P, R = i.imageData, Y = R.data, V = this.matrix, _ = Math.round(Math.sqrt(V.length)), T = Math.floor(_ / 2), M = R.width, N = R.height, X = i.ctx.createImageData(M, N), D = X.data, I = this.opaque ? 1 : 0;
+      for (k = 0; k < N; k++)
         for (F = 0; F < M; F++) {
-          for (f = 4 * (_ * M + F), n = 0, h = 0, c = 0, l = 0, P = 0; P < k; P++)
-            for (O = 0; O < k; O++)
-              m = F + O - T, (v = _ + P - T) < 0 || v >= G || m < 0 || m >= M || (x = 4 * (v * M + m), U = N[P * k + O], n += Y[x] * U, h += Y[x + 1] * U, c += Y[x + 2] * U, I || (l += Y[x + 3] * U));
+          for (f = 4 * (k * M + F), n = 0, h = 0, c = 0, l = 0, P = 0; P < _; P++)
+            for (O = 0; O < _; O++)
+              m = F + O - T, (v = k + P - T) < 0 || v >= N || m < 0 || m >= M || (x = 4 * (v * M + m), U = V[P * _ + O], n += Y[x] * U, h += Y[x + 1] * U, c += Y[x + 2] * U, I || (l += Y[x + 3] * U));
           D[f] = n, D[f + 1] = h, D[f + 2] = c, D[f + 3] = I ? Y[f + 3] : l;
         }
       i.imageData = X;
@@ -10139,7 +10139,7 @@ vec2 squareCoords = vec2(fposX * blockW, fposY * blockH);
 vec4 color = texture2D(uTexture, squareCoords);
 gl_FragColor = color;
 }`, applyTo2d: function(A) {
-      var i, n, h, c, l, f, m, v, x, U, F, _ = A.imageData, O = _.data, P = _.height, R = _.width;
+      var i, n, h, c, l, f, m, v, x, U, F, k = A.imageData, O = k.data, P = k.height, R = k.width;
       for (n = 0; n < P; n += this.blocksize)
         for (h = 0; h < R; h += this.blocksize)
           for (c = O[i = 4 * n * R + 4 * h], l = O[i + 1], f = O[i + 2], m = O[i + 3], U = Math.min(n + this.blocksize, P), F = Math.min(h + this.blocksize, R), v = n; v < U; v++)
@@ -10309,8 +10309,8 @@ gl_FragColor = color;
       var A = this.image, i = A._element.width, n = A._element.height;
       return [1 / A.scaleX, 0, 0, 0, 1 / A.scaleY, 0, -A.left / i, -A.top / n, 1];
     }, applyTo2d: function(A) {
-      var i, n, h, c, l, f, m, v, x, U, F, _ = A.imageData, O = A.filterBackend.resources, P = _.data, R = P.length, Y = _.width, N = _.height, k = this.image;
-      O.blendImage || (O.blendImage = s.util.createCanvasElement()), U = (x = O.blendImage).getContext("2d"), x.width !== Y || x.height !== N ? (x.width = Y, x.height = N) : U.clearRect(0, 0, Y, N), U.setTransform(k.scaleX, 0, 0, k.scaleY, k.left, k.top), U.drawImage(k._element, 0, 0, Y, N), F = U.getImageData(0, 0, Y, N).data;
+      var i, n, h, c, l, f, m, v, x, U, F, k = A.imageData, O = A.filterBackend.resources, P = k.data, R = P.length, Y = k.width, V = k.height, _ = this.image;
+      O.blendImage || (O.blendImage = s.util.createCanvasElement()), U = (x = O.blendImage).getContext("2d"), x.width !== Y || x.height !== V ? (x.width = Y, x.height = V) : U.clearRect(0, 0, Y, V), U.setTransform(_.scaleX, 0, 0, _.scaleY, _.left, _.top), U.drawImage(_._element, 0, 0, Y, V), F = U.getImageData(0, 0, Y, V).data;
       for (var T = 0; T < R; T += 4)
         switch (l = P[T], f = P[T + 1], m = P[T + 2], v = P[T + 3], i = F[T], n = F[T + 1], h = F[T + 2], c = F[T + 3], this.mode) {
           case "multiply":
@@ -10359,10 +10359,10 @@ gl_FragColor = color;
 `, x += `void main() {
 `, x += `  vec4 color = texture2D(uTexture, vTexCoord);
 `, x += `  float sum = 1.0;
-`, v.forEach(function(F, _) {
-        x += "  color += texture2D(uTexture, vTexCoord + " + F + ") * uTaps[" + _ + `];
-`, x += "  color += texture2D(uTexture, vTexCoord - " + F + ") * uTaps[" + _ + `];
-`, x += "  sum += 2.0 * uTaps[" + _ + `];
+`, v.forEach(function(F, k) {
+        x += "  color += texture2D(uTexture, vTexCoord + " + F + ") * uTaps[" + k + `];
+`, x += "  color += texture2D(uTexture, vTexCoord - " + F + ") * uTaps[" + k + `];
+`, x += "  sum += 2.0 * uTaps[" + k + `];
 `;
       }), x += `  gl_FragColor = color / sum;
 `, x += "}";
@@ -10386,46 +10386,46 @@ varying vec2 vTexCoord;
     }, applyTo2d: function(m) {
       var v = m.imageData, x = this.scaleX, U = this.scaleY;
       this.rcpScaleX = 1 / x, this.rcpScaleY = 1 / U;
-      var F, _ = v.width, O = v.height, P = n(_ * x), R = n(O * U);
-      this.resizeType === "sliceHack" ? F = this.sliceByTwo(m, _, O, P, R) : this.resizeType === "hermite" ? F = this.hermiteFastResize(m, _, O, P, R) : this.resizeType === "bilinear" ? F = this.bilinearFiltering(m, _, O, P, R) : this.resizeType === "lanczos" && (F = this.lanczosResize(m, _, O, P, R)), m.imageData = F;
+      var F, k = v.width, O = v.height, P = n(k * x), R = n(O * U);
+      this.resizeType === "sliceHack" ? F = this.sliceByTwo(m, k, O, P, R) : this.resizeType === "hermite" ? F = this.hermiteFastResize(m, k, O, P, R) : this.resizeType === "bilinear" ? F = this.bilinearFiltering(m, k, O, P, R) : this.resizeType === "lanczos" && (F = this.lanczosResize(m, k, O, P, R)), m.imageData = F;
     }, sliceByTwo: function(m, v, x, U, F) {
-      var _, O, P = m.imageData, R = 0.5, Y = !1, N = !1, k = v * R, T = x * R, M = s.filterBackend.resources, G = 0, X = 0, D = v, I = 0;
-      for (M.sliceByTwo || (M.sliceByTwo = document.createElement("canvas")), ((_ = M.sliceByTwo).width < 1.5 * v || _.height < x) && (_.width = 1.5 * v, _.height = x), (O = _.getContext("2d")).clearRect(0, 0, 1.5 * v, x), O.putImageData(P, 0, 0), U = d(U), F = d(F); !Y || !N; )
-        v = k, x = T, U < d(k * R) ? k = d(k * R) : (k = U, Y = !0), F < d(T * R) ? T = d(T * R) : (T = F, N = !0), O.drawImage(_, G, X, v, x, D, I, k, T), G = D, X = I, I += T;
-      return O.getImageData(G, X, U, F);
+      var k, O, P = m.imageData, R = 0.5, Y = !1, V = !1, _ = v * R, T = x * R, M = s.filterBackend.resources, N = 0, X = 0, D = v, I = 0;
+      for (M.sliceByTwo || (M.sliceByTwo = document.createElement("canvas")), ((k = M.sliceByTwo).width < 1.5 * v || k.height < x) && (k.width = 1.5 * v, k.height = x), (O = k.getContext("2d")).clearRect(0, 0, 1.5 * v, x), O.putImageData(P, 0, 0), U = d(U), F = d(F); !Y || !V; )
+        v = _, x = T, U < d(_ * R) ? _ = d(_ * R) : (_ = U, Y = !0), F < d(T * R) ? T = d(T * R) : (T = F, V = !0), O.drawImage(k, N, X, v, x, D, I, _, T), N = D, X = I, I += T;
+      return O.getImageData(N, X, U, F);
     }, lanczosResize: function(m, v, x, U, F) {
-      var _ = m.imageData.data, O = m.ctx.createImageData(U, F), P = O.data, R = this.lanczosCreate(this.lanczosLobes), Y = this.rcpScaleX, N = this.rcpScaleY, k = 2 / this.rcpScaleX, T = 2 / this.rcpScaleY, M = c(Y * this.lanczosLobes / 2), G = c(N * this.lanczosLobes / 2), X = {}, D = {}, I = {};
+      var k = m.imageData.data, O = m.ctx.createImageData(U, F), P = O.data, R = this.lanczosCreate(this.lanczosLobes), Y = this.rcpScaleX, V = this.rcpScaleY, _ = 2 / this.rcpScaleX, T = 2 / this.rcpScaleY, M = c(Y * this.lanczosLobes / 2), N = c(V * this.lanczosLobes / 2), X = {}, D = {}, I = {};
       return function K(W) {
-        var V, z, $, eA, rA, Z, nA, q, lA, sA, hA;
-        for (D.x = (W + 0.5) * Y, I.x = d(D.x), V = 0; V < F; V++) {
-          for (D.y = (V + 0.5) * N, I.y = d(D.y), rA = 0, Z = 0, nA = 0, q = 0, lA = 0, z = I.x - M; z <= I.x + M; z++)
+        var G, z, $, eA, rA, Z, nA, q, lA, sA, hA;
+        for (D.x = (W + 0.5) * Y, I.x = d(D.x), G = 0; G < F; G++) {
+          for (D.y = (G + 0.5) * V, I.y = d(D.y), rA = 0, Z = 0, nA = 0, q = 0, lA = 0, z = I.x - M; z <= I.x + M; z++)
             if (!(z < 0 || z >= v)) {
               sA = d(1e3 * i(z - D.x)), X[sA] || (X[sA] = {});
-              for (var BA = I.y - G; BA <= I.y + G; BA++)
-                BA < 0 || BA >= x || (hA = d(1e3 * i(BA - D.y)), X[sA][hA] || (X[sA][hA] = R(A(o(sA * k, 2) + o(hA * T, 2)) / 1e3)), ($ = X[sA][hA]) > 0 && (rA += $, Z += $ * _[eA = 4 * (BA * v + z)], nA += $ * _[eA + 1], q += $ * _[eA + 2], lA += $ * _[eA + 3]));
+              for (var BA = I.y - N; BA <= I.y + N; BA++)
+                BA < 0 || BA >= x || (hA = d(1e3 * i(BA - D.y)), X[sA][hA] || (X[sA][hA] = R(A(o(sA * _, 2) + o(hA * T, 2)) / 1e3)), ($ = X[sA][hA]) > 0 && (rA += $, Z += $ * k[eA = 4 * (BA * v + z)], nA += $ * k[eA + 1], q += $ * k[eA + 2], lA += $ * k[eA + 3]));
             }
-          P[eA = 4 * (V * U + W)] = Z / rA, P[eA + 1] = nA / rA, P[eA + 2] = q / rA, P[eA + 3] = lA / rA;
+          P[eA = 4 * (G * U + W)] = Z / rA, P[eA + 1] = nA / rA, P[eA + 2] = q / rA, P[eA + 3] = lA / rA;
         }
         return ++W < U ? K(W) : O;
       }(0);
     }, bilinearFiltering: function(m, v, x, U, F) {
-      var _, O, P, R, Y, N, k, T, M, G = 0, X = this.rcpScaleX, D = this.rcpScaleY, I = 4 * (v - 1), K = m.imageData.data, W = m.ctx.createImageData(U, F), V = W.data;
+      var k, O, P, R, Y, V, _, T, M, N = 0, X = this.rcpScaleX, D = this.rcpScaleY, I = 4 * (v - 1), K = m.imageData.data, W = m.ctx.createImageData(U, F), G = W.data;
       for (P = 0; P < F; P++)
         for (R = 0; R < U; R++)
-          for (Y = X * R - (_ = d(X * R)), N = D * P - (O = d(D * P)), M = 4 * (O * v + _), k = 0; k < 4; k++)
-            T = K[M + k] * (1 - Y) * (1 - N) + K[M + 4 + k] * Y * (1 - N) + K[M + I + k] * N * (1 - Y) + K[M + I + 4 + k] * Y * N, V[G++] = T;
+          for (Y = X * R - (k = d(X * R)), V = D * P - (O = d(D * P)), M = 4 * (O * v + k), _ = 0; _ < 4; _++)
+            T = K[M + _] * (1 - Y) * (1 - V) + K[M + 4 + _] * Y * (1 - V) + K[M + I + _] * V * (1 - Y) + K[M + I + 4 + _] * Y * V, G[N++] = T;
       return W;
     }, hermiteFastResize: function(m, v, x, U, F) {
-      for (var _ = this.rcpScaleX, O = this.rcpScaleY, P = c(_ / 2), R = c(O / 2), Y = m.imageData.data, N = m.ctx.createImageData(U, F), k = N.data, T = 0; T < F; T++)
+      for (var k = this.rcpScaleX, O = this.rcpScaleY, P = c(k / 2), R = c(O / 2), Y = m.imageData.data, V = m.ctx.createImageData(U, F), _ = V.data, T = 0; T < F; T++)
         for (var M = 0; M < U; M++) {
-          for (var G = 4 * (M + T * U), X = 0, D = 0, I = 0, K = 0, W = 0, V = 0, z = 0, $ = (T + 0.5) * O, eA = d(T * O); eA < (T + 1) * O; eA++)
-            for (var rA = i($ - (eA + 0.5)) / R, Z = (M + 0.5) * _, nA = rA * rA, q = d(M * _); q < (M + 1) * _; q++) {
+          for (var N = 4 * (M + T * U), X = 0, D = 0, I = 0, K = 0, W = 0, G = 0, z = 0, $ = (T + 0.5) * O, eA = d(T * O); eA < (T + 1) * O; eA++)
+            for (var rA = i($ - (eA + 0.5)) / R, Z = (M + 0.5) * k, nA = rA * rA, q = d(M * k); q < (M + 1) * k; q++) {
               var lA = i(Z - (q + 0.5)) / P, sA = A(nA + lA * lA);
-              sA > 1 && sA < -1 || (X = 2 * sA * sA * sA - 3 * sA * sA + 1) > 0 && (z += X * Y[(lA = 4 * (q + eA * v)) + 3], I += X, Y[lA + 3] < 255 && (X = X * Y[lA + 3] / 250), K += X * Y[lA], W += X * Y[lA + 1], V += X * Y[lA + 2], D += X);
+              sA > 1 && sA < -1 || (X = 2 * sA * sA * sA - 3 * sA * sA + 1) > 0 && (z += X * Y[(lA = 4 * (q + eA * v)) + 3], I += X, Y[lA + 3] < 255 && (X = X * Y[lA + 3] / 250), K += X * Y[lA], W += X * Y[lA + 1], G += X * Y[lA + 2], D += X);
             }
-          k[G] = K / D, k[G + 1] = W / D, k[G + 2] = V / D, k[G + 3] = z / I;
+          _[N] = K / D, _[N + 1] = W / D, _[N + 2] = G / D, _[N + 3] = z / I;
         }
-      return N;
+      return V;
     }, toObject: function() {
       return { type: this.type, scaleX: this.scaleX, scaleY: this.scaleY, resizeType: this.resizeType, lanczosLobes: this.lanczosLobes };
     } }), s.Image.filters.Resize.fromObject = s.Image.filters.BaseFilter.fromObject;
@@ -10531,11 +10531,11 @@ gl_FragColor = color / total;
     }, simpleBlur: function(A) {
       var i, n, h = A.filterBackend.resources, c = A.imageData.width, l = A.imageData.height;
       h.blurLayer1 || (h.blurLayer1 = s.util.createCanvasElement(), h.blurLayer2 = s.util.createCanvasElement()), i = h.blurLayer1, n = h.blurLayer2, i.width === c && i.height === l || (n.width = i.width = c, n.height = i.height = l);
-      var f, m, v, x, U = i.getContext("2d"), F = n.getContext("2d"), _ = 15, O = 0.06 * this.blur * 0.5;
-      for (U.putImageData(A.imageData, 0, 0), F.clearRect(0, 0, c, l), x = -15; x <= _; x++)
-        v = O * (m = x / _) * c + (f = (Math.random() - 0.5) / 4), F.globalAlpha = 1 - Math.abs(m), F.drawImage(i, v, f), U.drawImage(n, 0, 0), F.globalAlpha = 1, F.clearRect(0, 0, n.width, n.height);
-      for (x = -15; x <= _; x++)
-        v = O * (m = x / _) * l + (f = (Math.random() - 0.5) / 4), F.globalAlpha = 1 - Math.abs(m), F.drawImage(i, f, v), U.drawImage(n, 0, 0), F.globalAlpha = 1, F.clearRect(0, 0, n.width, n.height);
+      var f, m, v, x, U = i.getContext("2d"), F = n.getContext("2d"), k = 15, O = 0.06 * this.blur * 0.5;
+      for (U.putImageData(A.imageData, 0, 0), F.clearRect(0, 0, c, l), x = -15; x <= k; x++)
+        v = O * (m = x / k) * c + (f = (Math.random() - 0.5) / 4), F.globalAlpha = 1 - Math.abs(m), F.drawImage(i, v, f), U.drawImage(n, 0, 0), F.globalAlpha = 1, F.clearRect(0, 0, n.width, n.height);
+      for (x = -15; x <= k; x++)
+        v = O * (m = x / k) * l + (f = (Math.random() - 0.5) / 4), F.globalAlpha = 1 - Math.abs(m), F.drawImage(i, f, v), U.drawImage(n, 0, 0), F.globalAlpha = 1, F.clearRect(0, 0, n.width, n.height);
       A.ctx.drawImage(i, 0, 0);
       var P = A.ctx.getImageData(0, 0, i.width, i.height);
       return U.globalAlpha = 1, U.clearRect(0, 0, i.width, i.height), P;
@@ -10669,12 +10669,12 @@ gl_FragColor.rgb *= color.a;
         this._renderChars(A, i, n, h, c, l);
       }, _renderTextLinesBackground: function(A) {
         if (this.textBackgroundColor || this.styleHas("textBackgroundColor")) {
-          for (var i, n, h, c, l, f, m, v = A.fillStyle, x = this._getLeftOffset(), U = this._getTopOffset(), F = 0, _ = 0, O = this.path, P = 0, R = this._textLines.length; P < R; P++)
+          for (var i, n, h, c, l, f, m, v = A.fillStyle, x = this._getLeftOffset(), U = this._getTopOffset(), F = 0, k = 0, O = this.path, P = 0, R = this._textLines.length; P < R; P++)
             if (i = this.getHeightOfLine(P), this.textBackgroundColor || this.styleHas("textBackgroundColor", P)) {
-              h = this._textLines[P], n = this._getLineLeftOffset(P), _ = 0, F = 0, c = this.getValueOfPropertyAt(P, 0, "textBackgroundColor");
-              for (var Y = 0, N = h.length; Y < N; Y++)
-                l = this.__charBounds[P][Y], f = this.getValueOfPropertyAt(P, Y, "textBackgroundColor"), O ? (A.save(), A.translate(l.renderLeft, l.renderTop), A.rotate(l.angle), A.fillStyle = f, f && A.fillRect(-l.width / 2, -i / this.lineHeight * (1 - this._fontSizeFraction), l.width, i / this.lineHeight), A.restore()) : f !== c ? (m = x + n + F, this.direction === "rtl" && (m = this.width - m - _), A.fillStyle = c, c && A.fillRect(m, U, _, i / this.lineHeight), F = l.left, _ = l.width, c = f) : _ += l.kernedWidth;
-              f && !O && (m = x + n + F, this.direction === "rtl" && (m = this.width - m - _), A.fillStyle = f, A.fillRect(m, U, _, i / this.lineHeight)), U += i;
+              h = this._textLines[P], n = this._getLineLeftOffset(P), k = 0, F = 0, c = this.getValueOfPropertyAt(P, 0, "textBackgroundColor");
+              for (var Y = 0, V = h.length; Y < V; Y++)
+                l = this.__charBounds[P][Y], f = this.getValueOfPropertyAt(P, Y, "textBackgroundColor"), O ? (A.save(), A.translate(l.renderLeft, l.renderTop), A.rotate(l.angle), A.fillStyle = f, f && A.fillRect(-l.width / 2, -i / this.lineHeight * (1 - this._fontSizeFraction), l.width, i / this.lineHeight), A.restore()) : f !== c ? (m = x + n + F, this.direction === "rtl" && (m = this.width - m - k), A.fillStyle = c, c && A.fillRect(m, U, k, i / this.lineHeight), F = l.left, k = l.width, c = f) : k += l.kernedWidth;
+              f && !O && (m = x + n + F, this.direction === "rtl" && (m = this.width - m - k), A.fillStyle = f, A.fillRect(m, U, k, i / this.lineHeight)), U += i;
             } else
               U += i;
           A.fillStyle = v, this._removeShadow(A);
@@ -10687,31 +10687,31 @@ gl_FragColor.rgb *= color.a;
       }, _measureChar: function(A, i, n, h) {
         var c, l, f, m, v = this.getFontCache(i), x = n + A, U = this._getFontDeclaration(i) === this._getFontDeclaration(h), F = i.fontSize / this.CACHE_FONT_SIZE;
         if (n && v[n] !== void 0 && (f = v[n]), v[A] !== void 0 && (m = c = v[A]), U && v[x] !== void 0 && (m = (l = v[x]) - f), c === void 0 || f === void 0 || l === void 0) {
-          var _ = this.getMeasuringContext();
-          this._setTextStyles(_, i, !0);
+          var k = this.getMeasuringContext();
+          this._setTextStyles(k, i, !0);
         }
-        return c === void 0 && (m = c = _.measureText(A).width, v[A] = c), f === void 0 && U && n && (f = _.measureText(n).width, v[n] = f), U && l === void 0 && (l = _.measureText(x).width, v[x] = l, m = l - f), { width: c * F, kernedWidth: m * F };
+        return c === void 0 && (m = c = k.measureText(A).width, v[A] = c), f === void 0 && U && n && (f = k.measureText(n).width, v[n] = f), U && l === void 0 && (l = k.measureText(x).width, v[x] = l, m = l - f), { width: c * F, kernedWidth: m * F };
       }, getHeightOfChar: function(A, i) {
         return this.getValueOfPropertyAt(A, i, "fontSize");
       }, measureLine: function(A) {
         var i = this._measureLine(A);
         return this.charSpacing !== 0 && (i.width -= this._getWidthOfCharSpacing()), i.width < 0 && (i.width = 0), i;
       }, _measureLine: function(A) {
-        var i, n, h, c, l, f, m = 0, v = this._textLines[A], x = new Array(v.length), U = 0, F = this.path, _ = this.pathSide === "right";
+        var i, n, h, c, l, f, m = 0, v = this._textLines[A], x = new Array(v.length), U = 0, F = this.path, k = this.pathSide === "right";
         for (this.__charBounds[A] = x, i = 0; i < v.length; i++)
           n = v[i], c = this._getGraphemeBox(n, A, i, h), x[i] = c, m += c.kernedWidth, h = n;
         if (x[i] = { left: c ? c.left + c.width : 0, width: 0, kernedWidth: 0, height: this.fontSize }, F) {
           switch (f = F.segmentsInfo[F.segmentsInfo.length - 1].length, (l = s.util.getPointOnPath(F.path, 0, F.segmentsInfo)).x += F.pathOffset.x, l.y += F.pathOffset.y, this.textAlign) {
             case "left":
-              U = _ ? f - m : 0;
+              U = k ? f - m : 0;
               break;
             case "center":
               U = (f - m) / 2;
               break;
             case "right":
-              U = _ ? 0 : f - m;
+              U = k ? 0 : f - m;
           }
-          for (U += this.pathStartOffset * (_ ? -1 : 1), i = _ ? v.length - 1 : 0; _ ? i >= 0 : i < v.length; _ ? i-- : i++)
+          for (U += this.pathStartOffset * (k ? -1 : 1), i = k ? v.length - 1 : 0; k ? i >= 0 : i < v.length; k ? i-- : i++)
             c = x[i], U > f ? U %= f : U < 0 && (U += f), this._setGraphemeOnPath(U, c, l), U += c.kernedWidth;
         }
         return { width: m, numOfSpaces: 0 };
@@ -10723,8 +10723,8 @@ gl_FragColor.rgb *= color.a;
         this.charSpacing !== 0 && (U += l = this._getWidthOfCharSpacing(), x += l);
         var F = { width: U, left: 0, height: f.fontSize, kernedWidth: x, deltaY: f.deltaY };
         if (n > 0 && !c) {
-          var _ = this.__charBounds[i][n - 1];
-          F.left = _.left + _.width + v.kernedWidth - v.width;
+          var k = this.__charBounds[i][n - 1];
+          F.left = k.left + k.width + v.kernedWidth - v.width;
         }
         return F;
       }, getHeightOfLine: function(A) {
@@ -10753,11 +10753,11 @@ gl_FragColor.rgb *= color.a;
       }, _renderTextStroke: function(A) {
         (this.stroke && this.strokeWidth !== 0 || !this.isEmptyStyles()) && (this.shadow && !this.shadow.affectStroke && this._removeShadow(A), A.save(), this._setLineDash(A, this.strokeDashArray), A.beginPath(), this._renderTextCommon(A, "strokeText"), A.closePath(), A.restore());
       }, _renderChars: function(A, i, n, h, c, l) {
-        var f, m, v, x, U, F = this.getHeightOfLine(l), _ = this.textAlign.indexOf("justify") !== -1, O = "", P = 0, R = this.path, Y = !_ && this.charSpacing === 0 && this.isEmptyStyles(l) && !R, N = this.direction === "ltr", k = this.direction === "ltr" ? 1 : -1, T = i.canvas.getAttribute("dir");
-        if (i.save(), T !== this.direction && (i.canvas.setAttribute("dir", N ? "ltr" : "rtl"), i.direction = N ? "ltr" : "rtl", i.textAlign = N ? "left" : "right"), c -= F * this._fontSizeFraction / this.lineHeight, Y)
+        var f, m, v, x, U, F = this.getHeightOfLine(l), k = this.textAlign.indexOf("justify") !== -1, O = "", P = 0, R = this.path, Y = !k && this.charSpacing === 0 && this.isEmptyStyles(l) && !R, V = this.direction === "ltr", _ = this.direction === "ltr" ? 1 : -1, T = i.canvas.getAttribute("dir");
+        if (i.save(), T !== this.direction && (i.canvas.setAttribute("dir", V ? "ltr" : "rtl"), i.direction = V ? "ltr" : "rtl", i.textAlign = V ? "left" : "right"), c -= F * this._fontSizeFraction / this.lineHeight, Y)
           return this._renderChar(A, i, l, 0, n.join(""), h, c, F), void i.restore();
-        for (var M = 0, G = n.length - 1; M <= G; M++)
-          x = M === G || this.charSpacing || R, O += n[M], v = this.__charBounds[l][M], P === 0 ? (h += k * (v.kernedWidth - v.width), P += v.width) : P += v.kernedWidth, _ && !x && this._reSpaceAndTab.test(n[M]) && (x = !0), x || (f = f || this.getCompleteStyleDeclaration(l, M), m = this.getCompleteStyleDeclaration(l, M + 1), x = s.util.hasStyleChanged(f, m, !1)), x && (R ? (i.save(), i.translate(v.renderLeft, v.renderTop), i.rotate(v.angle), this._renderChar(A, i, l, M, O, -P / 2, 0, F), i.restore()) : (U = h, this._renderChar(A, i, l, M, O, U, c, F)), O = "", f = m, h += k * P, P = 0);
+        for (var M = 0, N = n.length - 1; M <= N; M++)
+          x = M === N || this.charSpacing || R, O += n[M], v = this.__charBounds[l][M], P === 0 ? (h += _ * (v.kernedWidth - v.width), P += v.width) : P += v.kernedWidth, k && !x && this._reSpaceAndTab.test(n[M]) && (x = !0), x || (f = f || this.getCompleteStyleDeclaration(l, M), m = this.getCompleteStyleDeclaration(l, M + 1), x = s.util.hasStyleChanged(f, m, !1)), x && (R ? (i.save(), i.translate(v.renderLeft, v.renderTop), i.rotate(v.angle), this._renderChar(A, i, l, M, O, -P / 2, 0, F), i.restore()) : (U = h, this._renderChar(A, i, l, M, O, U, c, F)), O = "", f = m, h += _ * P, P = 0);
         i.restore();
       }, _applyPatternGradientTransformText: function(A) {
         var i, n = s.util.createCanvasElement(), h = this.width + this.strokeWidth, c = this.height + this.strokeWidth;
@@ -10770,8 +10770,8 @@ gl_FragColor.rgb *= color.a;
       }, _setFillStyles: function(A, i) {
         return this.handleFiller(A, "fillStyle", i.fill);
       }, _renderChar: function(A, i, n, h, c, l, f) {
-        var m, v, x = this._getStyleDeclaration(n, h), U = this.getCompleteStyleDeclaration(n, h), F = A === "fillText" && U.fill, _ = A === "strokeText" && U.stroke && U.strokeWidth;
-        (_ || F) && (i.save(), F && (m = this._setFillStyles(i, U)), _ && (v = this._setStrokeStyles(i, U)), i.font = this._getFontDeclaration(U), x && x.textBackgroundColor && this._removeShadow(i), x && x.deltaY && (f += x.deltaY), F && i.fillText(c, l - m.offsetX, f - m.offsetY), _ && i.strokeText(c, l - v.offsetX, f - v.offsetY), i.restore());
+        var m, v, x = this._getStyleDeclaration(n, h), U = this.getCompleteStyleDeclaration(n, h), F = A === "fillText" && U.fill, k = A === "strokeText" && U.stroke && U.strokeWidth;
+        (k || F) && (i.save(), F && (m = this._setFillStyles(i, U)), k && (v = this._setStrokeStyles(i, U)), i.font = this._getFontDeclaration(U), x && x.textBackgroundColor && this._removeShadow(i), x && x.deltaY && (f += x.deltaY), F && i.fillText(c, l - m.offsetX, f - m.offsetY), k && i.strokeText(c, l - v.offsetX, f - v.offsetY), i.restore());
       }, setSuperscript: function(A, i) {
         return this._setScript(A, i, this.superscript);
       }, setSubscript: function(A, i) {
@@ -10799,18 +10799,18 @@ gl_FragColor.rgb *= color.a;
         return h && h[n] !== void 0 ? h[n] : this[n];
       }, _renderTextDecoration: function(A, i) {
         if (this[i] || this.styleHas(i)) {
-          for (var n, h, c, l, f, m, v, x, U, F, _, O, P, R, Y, N, k = this._getLeftOffset(), T = this._getTopOffset(), M = this.path, G = this._getWidthOfCharSpacing(), X = this.offsets[i], D = 0, I = this._textLines.length; D < I; D++)
+          for (var n, h, c, l, f, m, v, x, U, F, k, O, P, R, Y, V, _ = this._getLeftOffset(), T = this._getTopOffset(), M = this.path, N = this._getWidthOfCharSpacing(), X = this.offsets[i], D = 0, I = this._textLines.length; D < I; D++)
             if (n = this.getHeightOfLine(D), this[i] || this.styleHas(i, D)) {
-              v = this._textLines[D], R = n / this.lineHeight, l = this._getLineLeftOffset(D), F = 0, _ = 0, x = this.getValueOfPropertyAt(D, 0, i), N = this.getValueOfPropertyAt(D, 0, "fill"), U = T + R * (1 - this._fontSizeFraction), h = this.getHeightOfChar(D, 0), f = this.getValueOfPropertyAt(D, 0, "deltaY");
+              v = this._textLines[D], R = n / this.lineHeight, l = this._getLineLeftOffset(D), F = 0, k = 0, x = this.getValueOfPropertyAt(D, 0, i), V = this.getValueOfPropertyAt(D, 0, "fill"), U = T + R * (1 - this._fontSizeFraction), h = this.getHeightOfChar(D, 0), f = this.getValueOfPropertyAt(D, 0, "deltaY");
               for (var K = 0, W = v.length; K < W; K++)
                 if (O = this.__charBounds[D][K], P = this.getValueOfPropertyAt(D, K, i), Y = this.getValueOfPropertyAt(D, K, "fill"), c = this.getHeightOfChar(D, K), m = this.getValueOfPropertyAt(D, K, "deltaY"), M && P && Y)
-                  A.save(), A.fillStyle = N, A.translate(O.renderLeft, O.renderTop), A.rotate(O.angle), A.fillRect(-O.kernedWidth / 2, X * c + m, O.kernedWidth, this.fontSize / 15), A.restore();
-                else if ((P !== x || Y !== N || c !== h || m !== f) && _ > 0) {
-                  var V = k + l + F;
-                  this.direction === "rtl" && (V = this.width - V - _), x && N && (A.fillStyle = N, A.fillRect(V, U + X * h + f, _, this.fontSize / 15)), F = O.left, _ = O.width, x = P, N = Y, h = c, f = m;
+                  A.save(), A.fillStyle = V, A.translate(O.renderLeft, O.renderTop), A.rotate(O.angle), A.fillRect(-O.kernedWidth / 2, X * c + m, O.kernedWidth, this.fontSize / 15), A.restore();
+                else if ((P !== x || Y !== V || c !== h || m !== f) && k > 0) {
+                  var G = _ + l + F;
+                  this.direction === "rtl" && (G = this.width - G - k), x && V && (A.fillStyle = V, A.fillRect(G, U + X * h + f, k, this.fontSize / 15)), F = O.left, k = O.width, x = P, V = Y, h = c, f = m;
                 } else
-                  _ += O.kernedWidth;
-              V = k + l + F, this.direction === "rtl" && (V = this.width - V - _), A.fillStyle = Y, P && Y && A.fillRect(V, U + X * h + f, _ - G, this.fontSize / 15), T += n;
+                  k += O.kernedWidth;
+              G = _ + l + F, this.direction === "rtl" && (G = this.width - G - k), A.fillStyle = Y, P && Y && A.fillRect(G, U + X * h + f, k - N, this.fontSize / 15), T += n;
             } else
               T += n;
           this._removeShadow(A);
@@ -10852,8 +10852,8 @@ gl_FragColor.rgb *= color.a;
         "textContent" in A ? f = A.textContent : "firstChild" in A && A.firstChild !== null && "data" in A.firstChild && A.firstChild.data !== null && (f = A.firstChild.data), f = f.replace(/^\s+|\s+$|\n+/g, "").replace(/\s+/g, " ");
         var m = n.strokeWidth;
         n.strokeWidth = 0;
-        var v = new s.Text(f, n), x = v.getScaledHeight() / v.height, U = ((v.height + v.strokeWidth) * v.lineHeight - v.height) * x, F = v.getScaledHeight() + U, _ = 0;
-        c === "center" && (_ = v.getScaledWidth() / 2), c === "right" && (_ = v.getScaledWidth()), v.set({ left: v.left - _, top: v.top - (F - v.fontSize * (0.07 + v._fontSizeFraction)) / v.lineHeight, strokeWidth: m !== void 0 ? m : 1 }), i(v);
+        var v = new s.Text(f, n), x = v.getScaledHeight() / v.height, U = ((v.height + v.strokeWidth) * v.lineHeight - v.height) * x, F = v.getScaledHeight() + U, k = 0;
+        c === "center" && (k = v.getScaledWidth() / 2), c === "right" && (k = v.getScaledWidth()), v.set({ left: v.left - k, top: v.top - (F - v.fontSize * (0.07 + v._fontSizeFraction)) / v.lineHeight, strokeWidth: m !== void 0 ? m : 1 }), i(v);
       }, s.Text.fromObject = function(A, i) {
         var n = o(A), h = A.path;
         return delete n.path, s.Object._fromObject("Text", n, function(c) {
@@ -10997,8 +10997,8 @@ gl_FragColor.rgb *= color.a;
       l += (1 - this._fontSizeFraction) * this.getHeightOfLine(A) / this.lineHeight - n * (1 - this._fontSizeFraction), this.inCompositionMode && this.renderSelection(s, o), o.fillStyle = this.cursorColor || this.getValueOfPropertyAt(A, i, "fill"), o.globalAlpha = this.__isMousedown ? 1 : this._currentCursorOpacity, o.fillRect(s.left + s.leftOffset - c / 2, l + s.top + f, c, n);
     }, renderSelection: function(s, o) {
       for (var d = this.inCompositionMode ? this.hiddenTextarea.selectionStart : this.selectionStart, A = this.inCompositionMode ? this.hiddenTextarea.selectionEnd : this.selectionEnd, i = this.textAlign.indexOf("justify") !== -1, n = this.get2DCursorLocation(d), h = this.get2DCursorLocation(A), c = n.lineIndex, l = h.lineIndex, f = n.charIndex < 0 ? 0 : n.charIndex, m = h.charIndex < 0 ? 0 : h.charIndex, v = c; v <= l; v++) {
-        var x, U = this._getLineLeftOffset(v) || 0, F = this.getHeightOfLine(v), _ = 0, O = 0;
-        if (v === c && (_ = this.__charBounds[c][f].left), v >= c && v < l)
+        var x, U = this._getLineLeftOffset(v) || 0, F = this.getHeightOfLine(v), k = 0, O = 0;
+        if (v === c && (k = this.__charBounds[c][f].left), v >= c && v < l)
           O = i && !this.isEndOfWrapping(v) ? this.width : this.getLineWidth(v) || 5;
         else if (v === l)
           if (m === 0)
@@ -11008,8 +11008,8 @@ gl_FragColor.rgb *= color.a;
             O = this.__charBounds[l][m - 1].left + this.__charBounds[l][m - 1].width - P;
           }
         x = F, (this.lineHeight < 1 || v === l && this.lineHeight > 1) && (F /= this.lineHeight);
-        var R = s.left + U + _, Y = O - _, N = F, k = 0;
-        this.inCompositionMode ? (o.fillStyle = this.compositionColor || "black", N = 1, k = F) : o.fillStyle = this.selectionColor, this.direction === "rtl" && (R = this.width - R - Y), o.fillRect(R, s.top + s.topOffset + k, Y, N), s.topOffset += x;
+        var R = s.left + U + k, Y = O - k, V = F, _ = 0;
+        this.inCompositionMode ? (o.fillStyle = this.compositionColor || "black", V = 1, _ = F) : o.fillStyle = this.selectionColor, this.direction === "rtl" && (R = this.width - R - Y), o.fillRect(R, s.top + s.topOffset + _, Y, V), s.topOffset += x;
       }
     }, getCurrentCharFontSize: function() {
       var s = this._getCurrentCharIndex();
@@ -11166,8 +11166,8 @@ gl_FragColor.rgb *= color.a;
   }, _calcTextareaPosition: function() {
     if (!this.canvas)
       return { x: 1, y: 1 };
-    var u = this.inCompositionMode ? this.compositionStart : this.selectionStart, s = this._getCursorBoundaries(u), o = this.get2DCursorLocation(u), d = o.lineIndex, A = o.charIndex, i = this.getValueOfPropertyAt(d, A, "fontSize") * this.lineHeight, n = s.leftOffset, h = this.calcTransformMatrix(), c = { x: s.left + n, y: s.top + s.topOffset + i }, l = this.canvas.getRetinaScaling(), f = this.canvas.upperCanvasEl, m = f.width / l, v = f.height / l, x = m - i, U = v - i, F = f.clientWidth / m, _ = f.clientHeight / v;
-    return c = B.util.transformPoint(c, h), (c = B.util.transformPoint(c, this.canvas.viewportTransform)).x *= F, c.y *= _, c.x < 0 && (c.x = 0), c.x > x && (c.x = x), c.y < 0 && (c.y = 0), c.y > U && (c.y = U), c.x += this.canvas._offset.left, c.y += this.canvas._offset.top, { left: c.x + "px", top: c.y + "px", fontSize: i + "px", charHeight: i };
+    var u = this.inCompositionMode ? this.compositionStart : this.selectionStart, s = this._getCursorBoundaries(u), o = this.get2DCursorLocation(u), d = o.lineIndex, A = o.charIndex, i = this.getValueOfPropertyAt(d, A, "fontSize") * this.lineHeight, n = s.leftOffset, h = this.calcTransformMatrix(), c = { x: s.left + n, y: s.top + s.topOffset + i }, l = this.canvas.getRetinaScaling(), f = this.canvas.upperCanvasEl, m = f.width / l, v = f.height / l, x = m - i, U = v - i, F = f.clientWidth / m, k = f.clientHeight / v;
+    return c = B.util.transformPoint(c, h), (c = B.util.transformPoint(c, this.canvas.viewportTransform)).x *= F, c.y *= k, c.x < 0 && (c.x = 0), c.x > x && (c.x = x), c.y < 0 && (c.y = 0), c.y > U && (c.y = U), c.x += this.canvas._offset.left, c.y += this.canvas._offset.top, { left: c.x + "px", top: c.y + "px", fontSize: i + "px", charHeight: i };
   }, _saveEditingProps: function() {
     this._savedProps = { hasControls: this.hasControls, borderColor: this.borderColor, lockMovementX: this.lockMovementX, lockMovementY: this.lockMovementY, hoverCursor: this.hoverCursor, selectable: this.selectable, defaultCursor: this.canvas && this.canvas.defaultCursor, moveCursor: this.canvas && this.canvas.moveCursor };
   }, _restoreEditingProps: function() {
@@ -11435,8 +11435,8 @@ gl_FragColor.rgb *= color.a;
     }, _setSVGTextLineText: function(o, d, A, i) {
       var n, h, c, l, f, m = this.getHeightOfLine(d), v = this.textAlign.indexOf("justify") !== -1, x = "", U = 0, F = this._textLines[d];
       i += m * (1 - this._fontSizeFraction) / this.lineHeight;
-      for (var _ = 0, O = F.length - 1; _ <= O; _++)
-        f = _ === O || this.charSpacing, x += F[_], c = this.__charBounds[d][_], U === 0 ? (A += c.kernedWidth - c.width, U += c.width) : U += c.kernedWidth, v && !f && this._reSpaceAndTab.test(F[_]) && (f = !0), f || (n = n || this.getCompleteStyleDeclaration(d, _), h = this.getCompleteStyleDeclaration(d, _ + 1), f = B.util.hasStyleChanged(n, h, !0)), f && (l = this._getStyleDeclaration(d, _) || {}, o.push(this._createTextCharSpan(x, l, A, i)), x = "", n = h, A += U, U = 0);
+      for (var k = 0, O = F.length - 1; k <= O; k++)
+        f = k === O || this.charSpacing, x += F[k], c = this.__charBounds[d][k], U === 0 ? (A += c.kernedWidth - c.width, U += c.width) : U += c.kernedWidth, v && !f && this._reSpaceAndTab.test(F[k]) && (f = !0), f || (n = n || this.getCompleteStyleDeclaration(d, k), h = this.getCompleteStyleDeclaration(d, k + 1), f = B.util.hasStyleChanged(n, h, !0)), f && (l = this._getStyleDeclaration(d, k) || {}, o.push(this._createTextCharSpan(x, l, A, i)), x = "", n = h, A += U, U = 0);
     }, _pushTextBgRect: function(o, d, A, i, n, h) {
       var c = B.Object.NUM_FRACTION_DIGITS;
       o.push("		<rect ", this._getFillAttributes(d), ' x="', u(A, c), '" y="', u(i, c), '" width="', u(n, c), '" height="', u(h, c), `"></rect>
@@ -11512,11 +11512,11 @@ gl_FragColor.rgb *= color.a;
         n += this._getGraphemeBox(o[h], d, h + A, i, !0).kernedWidth, i = o[h];
       return n;
     }, _wrapLine: function(o, d, A, i) {
-      var n = 0, h = this.splitByGrapheme, c = [], l = [], f = h ? s.util.string.graphemeSplit(o) : o.split(this._wordJoiners), m = "", v = 0, x = h ? "" : " ", U = 0, F = 0, _ = 0, O = !0, P = this._getWidthOfCharSpacing();
+      var n = 0, h = this.splitByGrapheme, c = [], l = [], f = h ? s.util.string.graphemeSplit(o) : o.split(this._wordJoiners), m = "", v = 0, x = h ? "" : " ", U = 0, F = 0, k = 0, O = !0, P = this._getWidthOfCharSpacing();
       i = i || 0, f.length === 0 && f.push([]), A -= i;
       for (var R = 0; R < f.length; R++)
-        m = h ? f[R] : s.util.string.graphemeSplit(f[R]), U = this._measureWord(m, d, v), v += m.length, (n += F + U - P) > A && !O ? (c.push(l), l = [], n = U, O = !0) : n += P, O || h || l.push(x), l = l.concat(m), F = h ? 0 : this._measureWord([x], d, v), v++, O = !1, U > _ && (_ = U);
-      return R && c.push(l), _ + i > this.dynamicMinWidth && (this.dynamicMinWidth = _ - P + i), c;
+        m = h ? f[R] : s.util.string.graphemeSplit(f[R]), U = this._measureWord(m, d, v), v += m.length, (n += F + U - P) > A && !O ? (c.push(l), l = [], n = U, O = !0) : n += P, O || h || l.push(x), l = l.concat(m), F = h ? 0 : this._measureWord([x], d, v), v++, O = !1, U > k && (k = U);
+      return R && c.push(l), k + i > this.dynamicMinWidth && (this.dynamicMinWidth = k - P + i), c;
     }, isEndOfWrapping: function(o) {
       return !this._styleMap[o + 1] || this._styleMap[o + 1].line !== this._styleMap[o].line;
     }, missingNewlineOffset: function(o) {
@@ -11606,43 +11606,43 @@ const fr = (e) => {
     })(g, t));
   }), a;
 }, ya = (e) => {
-  const t = _A.localStorage, r = CA.attachmentsManager;
+  const t = kA.localStorage, r = CA.attachmentsManager;
   let a, g = t.getDrawingColor() ?? va[0], p = t.getDrawingOption() ?? FA.PENCIL;
   const w = () => {
     a == null || a.remove(), a = function(m, v, x, U) {
       const F = document.createElement("canvas");
       F.classList.add("shake-sdk-canvas");
-      const _ = F.getContext("2d");
+      const k = F.getContext("2d");
       F.width = m.clientWidth, F.height = m.clientHeight;
       const O = new be.fabric.Canvas(F);
-      let P = !1, R = 0, Y = 0, N = null, k = null;
+      let P = !1, R = 0, Y = 0, V = null, _ = null;
       const T = (K) => {
         P = !P;
         const W = F.getBoundingClientRect();
-        return R = D(K) - W.left, Y = I(K) - W.top, x === FA.RECT ? (N = new be.fabric.Rect({ left: R, top: Y, width: 0, height: 0, fill: "transparent", stroke: v, strokeWidth: 4, cornerColor: v, cornerSize: 6, transparentCorners: !0, selectable: !1 }), void O.add(N)) : x === FA.ELLIPSE ? (k = new be.fabric.Ellipse({ left: R, top: Y, rx: 0, ry: 0, fill: "transparent", stroke: v, strokeWidth: 4, selectable: !1 }), void O.add(k)) : void 0;
+        return R = D(K) - W.left, Y = I(K) - W.top, x === FA.RECT ? (V = new be.fabric.Rect({ left: R, top: Y, width: 0, height: 0, fill: "transparent", stroke: v, strokeWidth: 4, cornerColor: v, cornerSize: 6, transparentCorners: !0, selectable: !1 }), void O.add(V)) : x === FA.ELLIPSE ? (_ = new be.fabric.Ellipse({ left: R, top: Y, rx: 0, ry: 0, fill: "transparent", stroke: v, strokeWidth: 4, selectable: !1 }), void O.add(_)) : void 0;
       }, M = (K) => {
         if (!P)
           return;
-        const W = F.getBoundingClientRect(), V = D(K) - W.left, z = I(K) - W.top;
-        if (x === FA.RECT && N)
-          return N.set({ width: V - R, height: z - Y }), void O.renderAll();
-        if (x === FA.ELLIPSE && k) {
-          const rA = Math.abs(V - R) / 2, Z = Math.abs(z - Y) / 2;
-          return k.set({ rx: rA, ry: Z, left: V > R ? R : V, top: z > Y ? Y : z }).setCoords(), void O.renderAll();
+        const W = F.getBoundingClientRect(), G = D(K) - W.left, z = I(K) - W.top;
+        if (x === FA.RECT && V)
+          return V.set({ width: G - R, height: z - Y }), void O.renderAll();
+        if (x === FA.ELLIPSE && _) {
+          const rA = Math.abs(G - R) / 2, Z = Math.abs(z - Y) / 2;
+          return _.set({ rx: rA, ry: Z, left: G > R ? R : G, top: z > Y ? Y : z }).setCoords(), void O.renderAll();
         }
         const $ = x === FA.BLUR;
-        $ && _ && (_.filter = "blur(10px)");
-        const eA = new be.fabric.Line([R, Y, V, z], { stroke: $ ? "rgba(128, 128, 128, 0.8)" : v, strokeWidth: $ ? 20 : 4, fill: $ ? "rgba(128, 128, 128, 0.8)" : void 0, fillRule: $ ? "solid" : void 0, selectable: !0 });
-        O.add(eA), R = V, Y = z;
-      }, G = () => {
+        $ && k && (k.filter = "blur(10px)");
+        const eA = new be.fabric.Line([R, Y, G, z], { stroke: $ ? "rgba(128, 128, 128, 0.8)" : v, strokeWidth: $ ? 20 : 4, fill: $ ? "rgba(128, 128, 128, 0.8)" : void 0, fillRule: $ ? "solid" : void 0, selectable: !0 });
+        O.add(eA), R = G, Y = z;
+      }, N = () => {
         P && X(), P = !1;
       }, X = async () => {
         const K = document.createElement("canvas"), W = K.getContext("2d");
-        K.width = m.naturalWidth, K.height = m.naturalHeight, W == null || W.drawImage(m, 0, 0, K.width, K.height), W == null || W.drawImage(F, 0, 0, m.naturalWidth, m.naturalHeight), m.src = K.toDataURL(), K.toBlob((V) => {
-          U(V ?? new Blob());
+        K.width = m.naturalWidth, K.height = m.naturalHeight, W == null || W.drawImage(m, 0, 0, K.width, K.height), W == null || W.drawImage(F, 0, 0, m.naturalWidth, m.naturalHeight), m.src = K.toDataURL(), K.toBlob((G) => {
+          U(G ?? new Blob());
         });
       };
-      F.addEventListener("mousedown", T, { passive: !0 }), F.addEventListener("mousemove", M, { passive: !0 }), F.addEventListener("mouseup", G, { passive: !0 }), F.addEventListener("mouseleave", G, { passive: !0 }), F.addEventListener("touchstart", T, { passive: !0 }), F.addEventListener("touchmove", M, { passive: !0 }), F.addEventListener("touchend", G, { passive: !0 }), F.addEventListener("touchcancel", G, { passive: !0 });
+      F.addEventListener("mousedown", T, { passive: !0 }), F.addEventListener("mousemove", M, { passive: !0 }), F.addEventListener("mouseup", N, { passive: !0 }), F.addEventListener("mouseleave", N, { passive: !0 }), F.addEventListener("touchstart", T, { passive: !0 }), F.addEventListener("touchmove", M, { passive: !0 }), F.addEventListener("touchend", N, { passive: !0 }), F.addEventListener("touchcancel", N, { passive: !0 });
       const D = (K) => Hi() ? K.touches[0].clientX : K.clientX, I = (K) => Hi() ? K.touches[0].clientY : K.clientY;
       return window.onresize = () => {
         F.width = m.clientWidth, F.height = m.clientHeight, O.setWidth(m.clientWidth), O.setHeight(m.clientHeight), O.renderAll();
@@ -11699,7 +11699,7 @@ const fr = (e) => {
   const r = e.type == yA.IMAGE ? ya(e) : ((a) => {
     const g = uA();
     g.classList.add("shake-sdk-video-preview");
-    const p = URL.createObjectURL(a), w = Ni({ src: p + "#t=0.1", controls: !0 });
+    const p = URL.createObjectURL(a), w = Vi({ src: p + "#t=0.1", controls: !0 });
     return w.addEventListener("loadeddata", () => {
       g.appendChild(w);
     }, !1), g;
@@ -11736,7 +11736,7 @@ const fr = (e) => {
   });
   return g.appendChild(y), r.appendChild(g), r.appendChild(p), e.length > 0 ? w() : C(), t;
 }, ba = (e, t) => {
-  const r = Oe(Gr);
+  const r = Oe(Nr);
   r.classList.add("shake-sdk-close-button"), r.onclick = () => se(!0);
   const a = qu(t), g = uA();
   g.classList.add("shake-sdk-content-left"), g.appendChild(r), g.appendChild(a);
@@ -11755,10 +11755,10 @@ const fr = (e) => {
   const b = document.createElement("div");
   b.appendChild(Q), b.id = "shake-sdk-root";
   const E = b.attachShadow({ mode: "open" });
-  return E.appendChild(y), _t(E), b;
+  return E.appendChild(y), kt(E), b;
 }, Qa = async () => {
-  const e = _A.localStorage.getShakeState(), t = await Le(), r = ba(e, t);
-  document.body.appendChild(r), xa(), _A.localStorage.setShakeOpened(!0);
+  const e = kA.localStorage.getShakeState(), t = await Le(), r = ba(e, t);
+  document.body.appendChild(r), xa(), kA.localStorage.setShakeOpened(!0);
 }, wn = () => {
   se(!1);
   const e = da("data:image/svg+xml,%3c?xml%20version='1.0'%20encoding='UTF-8'%20standalone='no'?%3e%3csvg%20width='16px'%20height='16px'%20viewBox='0%200%2032%2032'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20transform='translate(-35.852326,-90.237974)'%3e%3cpath%20style='fill:%23ff0000'%20d='m%2067.852325,106.23797%20a%2016,16%200%200%201%20-16,16%2016,16%200%200%201%20-16,-16%2016,16%200%200%201%2016,-15.999997%2016,16%200%200%201%2016,15.999997%20z'/%3e%3c/g%3e%3c/svg%3e", "white", "#d3d3d3", () => {
@@ -11784,7 +11784,7 @@ const fr = (e) => {
     const p = uA();
     p.classList.add("shake-sdk-image-preview-root-fs"), p.appendChild(a), p.append(g);
     const w = document.createElement("div"), C = w.attachShadow({ mode: "open" });
-    return _t(C), C.appendChild(p), w;
+    return kt(C), C.appendChild(p), w;
   })(e));
 }, Ad = (e) => {
   mt("Opening video: " + e.name), document.body.appendChild(((t) => {
@@ -11792,12 +11792,12 @@ const fr = (e) => {
       C.remove();
     } }), a = uA();
     a.classList.add("shake-sdk-video-preview-toolbar-fs"), a.appendChild(r);
-    const g = URL.createObjectURL(t), p = Ni({ src: g, controls: !0, autoplay: !0 });
+    const g = URL.createObjectURL(t), p = Vi({ src: g, controls: !0, autoplay: !0 });
     p.classList.add("shake-sdk-video-preview-fs");
     const w = uA();
     w.classList.add("shake-sdk-video-preview-root-fs"), w.appendChild(a), w.appendChild(p);
     const C = document.createElement("div"), y = C.attachShadow({ mode: "open" });
-    return _t(y), y.appendChild(w), C;
+    return kt(y), y.appendChild(w), C;
   })(e.data));
 }, td = (e) => {
   const t = CA.attachmentsManager, r = /* @__PURE__ */ new Map(), a = async () => {
@@ -11820,7 +11820,7 @@ const fr = (e) => {
         iA.stopPropagation(), L(E);
       };
       const B = URL.createObjectURL(E.drawingData ?? E.data);
-      j = E.type == yA.IMAGE ? XA(B) : E.type == yA.VIDEO ? Ni({ src: B + "#t=0.1", autoplay: !0 }) : Zu(E.name), j.classList.add("shake-sdk-attachment-item-thumbnail-small"), j.onclick = () => S(E);
+      j = E.type == yA.IMAGE ? XA(B) : E.type == yA.VIDEO ? Vi({ src: B + "#t=0.1", autoplay: !0 }) : Zu(E.name), j.classList.add("shake-sdk-attachment-item-thumbnail-small"), j.onclick = () => S(E);
       const J = uA();
       return J.classList.add("shake-sdk-attachment-item-small"), J.appendChild(j), J.appendChild(H), J;
     })(y, g, p);
@@ -11855,7 +11855,7 @@ const rd = (e, t) => {
   C.classList.add("shake-sdk-new-ticket-form");
   const y = ((J = se, iA = !1, cA = () => {
   }) => {
-    const u = Ii({ image: Gr, onClick: () => cA() }), s = Ii({ image: Gr, onClick: J }), o = document.createElement("div");
+    const u = Ii({ image: Nr, onClick: () => cA() }), s = Ii({ image: Nr, onClick: J }), o = document.createElement("div");
     return o.classList.add("shake-sdk-toolbar"), iA && o.appendChild(u), o.appendChild(s), o;
   })(), Q = rn(dA().shake_sdk_ticket_form_title);
   Q.classList.add("shake-sdk-new-ticket-title"), w.appendChild(Q);
@@ -11871,10 +11871,10 @@ const rd = (e, t) => {
   };
   const S = Qo(dA().shake_sdk_ticket_form_submit_button_text);
   b.appendChild(S);
-  const L = Vu({ label: dA().shake_sdk_new_ticket_feedback_type_title, items: id, onSelectionChange: (J) => {
+  const L = Gu({ label: dA().shake_sdk_new_ticket_feedback_type_title, items: id, onSelectionChange: (J) => {
     r = J;
-    const iA = _A.localStorage.getShakeState();
-    iA && (iA.feedbackType = J, _A.localStorage.setShakeState(iA));
+    const iA = kA.localStorage.getShakeState();
+    iA && (iA.feedbackType = J, kA.localStorage.setShakeState(iA));
   }, selectedValue: r });
   C.appendChild(y), C.appendChild(Q), C.appendChild(L);
   const { textArea: H, textAreaInput: j } = (({ onChange: J, maxLength: iA, value: cA, label: u }) => {
@@ -11889,8 +11889,8 @@ const rd = (e, t) => {
     }), s.appendChild(o), s.appendChild(d), { textArea: s, textAreaInput: d };
   })({ onChange: (J) => {
     a = J;
-    const iA = _A.localStorage.getShakeState();
-    iA && (iA.description = J, _A.localStorage.setShakeState(iA), E());
+    const iA = kA.localStorage.getShakeState();
+    iA && (iA.description = J, kA.localStorage.setShakeState(iA), E());
   }, maxLength: 1e4, value: a, label: dA().shake_sdk_ticket_form_description_placeholder });
   at = j, H.classList.add("shake-sdk-styled-textarea"), C.appendChild(H);
   const B = td(t);
@@ -11902,39 +11902,39 @@ const rd = (e, t) => {
 };
 var pr, Br, Xr = { exports: {} };
 pr = Xr, Br = Xr.exports, function(e, t) {
-  var r = "function", a = "undefined", g = "object", p = "string", w = "major", C = "model", y = "name", Q = "type", b = "vendor", E = "version", S = "architecture", L = "console", H = "mobile", j = "tablet", B = "smarttv", J = "wearable", iA = "embedded", cA = "Amazon", u = "Apple", s = "ASUS", o = "BlackBerry", d = "Browser", A = "Chrome", i = "Firefox", n = "Google", h = "Huawei", c = "LG", l = "Microsoft", f = "Motorola", m = "Opera", v = "Samsung", x = "Sharp", U = "Sony", F = "Xiaomi", _ = "Zebra", O = "Facebook", P = "Chromium OS", R = "Mac OS", Y = function(V) {
-    for (var z = {}, $ = 0; $ < V.length; $++)
-      z[V[$].toUpperCase()] = V[$];
+  var r = "function", a = "undefined", g = "object", p = "string", w = "major", C = "model", y = "name", Q = "type", b = "vendor", E = "version", S = "architecture", L = "console", H = "mobile", j = "tablet", B = "smarttv", J = "wearable", iA = "embedded", cA = "Amazon", u = "Apple", s = "ASUS", o = "BlackBerry", d = "Browser", A = "Chrome", i = "Firefox", n = "Google", h = "Huawei", c = "LG", l = "Microsoft", f = "Motorola", m = "Opera", v = "Samsung", x = "Sharp", U = "Sony", F = "Xiaomi", k = "Zebra", O = "Facebook", P = "Chromium OS", R = "Mac OS", Y = function(G) {
+    for (var z = {}, $ = 0; $ < G.length; $++)
+      z[G[$].toUpperCase()] = G[$];
     return z;
-  }, N = function(V, z) {
-    return typeof V === p && k(z).indexOf(k(V)) !== -1;
-  }, k = function(V) {
-    return V.toLowerCase();
-  }, T = function(V, z) {
-    if (typeof V === p)
-      return V = V.replace(/^\s\s*/, ""), typeof z === a ? V : V.substring(0, 500);
-  }, M = function(V, z) {
+  }, V = function(G, z) {
+    return typeof G === p && _(z).indexOf(_(G)) !== -1;
+  }, _ = function(G) {
+    return G.toLowerCase();
+  }, T = function(G, z) {
+    if (typeof G === p)
+      return G = G.replace(/^\s\s*/, ""), typeof z === a ? G : G.substring(0, 500);
+  }, M = function(G, z) {
     for (var $, eA, rA, Z, nA, q, lA = 0; lA < z.length && !nA; ) {
       var sA = z[lA], hA = z[lA + 1];
       for ($ = eA = 0; $ < sA.length && !nA && sA[$]; )
-        if (nA = sA[$++].exec(V))
+        if (nA = sA[$++].exec(G))
           for (rA = 0; rA < hA.length; rA++)
             q = nA[++eA], typeof (Z = hA[rA]) === g && Z.length > 0 ? Z.length === 2 ? typeof Z[1] == r ? this[Z[0]] = Z[1].call(this, q) : this[Z[0]] = Z[1] : Z.length === 3 ? typeof Z[1] !== r || Z[1].exec && Z[1].test ? this[Z[0]] = q ? q.replace(Z[1], Z[2]) : t : this[Z[0]] = q ? Z[1].call(this, q, Z[2]) : t : Z.length === 4 && (this[Z[0]] = q ? Z[3].call(this, q.replace(Z[1], Z[2])) : t) : this[Z] = q || t;
       lA += 2;
     }
-  }, G = function(V, z) {
+  }, N = function(G, z) {
     for (var $ in z)
       if (typeof z[$] === g && z[$].length > 0) {
         for (var eA = 0; eA < z[$].length; eA++)
-          if (N(z[$][eA], V))
+          if (V(z[$][eA], G))
             return $ === "?" ? t : $;
-      } else if (N(z[$], V))
+      } else if (V(z[$], G))
         return $ === "?" ? t : $;
-    return V;
-  }, X = { ME: "4.90", "NT 3.11": "NT3.51", "NT 4.0": "NT4.0", 2e3: "NT 5.0", XP: ["NT 5.1", "NT 5.2"], Vista: "NT 6.0", 7: "NT 6.1", 8: "NT 6.2", 8.1: "NT 6.3", 10: ["NT 6.4", "NT 10.0"], RT: "ARM" }, D = { browser: [[/\b(?:crmo|crios)\/([\w\.]+)/i], [E, [y, "Chrome"]], [/edg(?:e|ios|a)?\/([\w\.]+)/i], [E, [y, "Edge"]], [/(opera mini)\/([-\w\.]+)/i, /(opera [mobiletab]{3,6})\b.+version\/([-\w\.]+)/i, /(opera)(?:.+version\/|[\/ ]+)([\w\.]+)/i], [y, E], [/opios[\/ ]+([\w\.]+)/i], [E, [y, m + " Mini"]], [/\bopr\/([\w\.]+)/i], [E, [y, m]], [/\bb[ai]*d(?:uhd|[ub]*[aekoprswx]{5,6})[\/ ]?([\w\.]+)/i], [E, [y, "Baidu"]], [/(kindle)\/([\w\.]+)/i, /(lunascape|maxthon|netfront|jasmine|blazer)[\/ ]?([\w\.]*)/i, /(avant|iemobile|slim)\s?(?:browser)?[\/ ]?([\w\.]*)/i, /(?:ms|\()(ie) ([\w\.]+)/i, /(flock|rockmelt|midori|epiphany|silk|skyfire|bolt|iron|vivaldi|iridium|phantomjs|bowser|quark|qupzilla|falkon|rekonq|puffin|brave|whale(?!.+naver)|qqbrowserlite|qq|duckduckgo)\/([-\w\.]+)/i, /(heytap|ovi)browser\/([\d\.]+)/i, /(weibo)__([\d\.]+)/i], [y, E], [/(?:\buc? ?browser|(?:juc.+)ucweb)[\/ ]?([\w\.]+)/i], [E, [y, "UC" + d]], [/microm.+\bqbcore\/([\w\.]+)/i, /\bqbcore\/([\w\.]+).+microm/i, /micromessenger\/([\w\.]+)/i], [E, [y, "WeChat"]], [/konqueror\/([\w\.]+)/i], [E, [y, "Konqueror"]], [/trident.+rv[: ]([\w\.]{1,9})\b.+like gecko/i], [E, [y, "IE"]], [/ya(?:search)?browser\/([\w\.]+)/i], [E, [y, "Yandex"]], [/slbrowser\/([\w\.]+)/i], [E, [y, "Smart Lenovo " + d]], [/(avast|avg)\/([\w\.]+)/i], [[y, /(.+)/, "$1 Secure " + d], E], [/\bfocus\/([\w\.]+)/i], [E, [y, i + " Focus"]], [/\bopt\/([\w\.]+)/i], [E, [y, m + " Touch"]], [/coc_coc\w+\/([\w\.]+)/i], [E, [y, "Coc Coc"]], [/dolfin\/([\w\.]+)/i], [E, [y, "Dolphin"]], [/coast\/([\w\.]+)/i], [E, [y, m + " Coast"]], [/miuibrowser\/([\w\.]+)/i], [E, [y, "MIUI " + d]], [/fxios\/([-\w\.]+)/i], [E, [y, i]], [/\bqihu|(qi?ho?o?|360)browser/i], [[y, "360 " + d]], [/(oculus|sailfish|huawei|vivo)browser\/([\w\.]+)/i], [[y, /(.+)/, "$1 " + d], E], [/samsungbrowser\/([\w\.]+)/i], [E, [y, v + " Internet"]], [/(comodo_dragon)\/([\w\.]+)/i], [[y, /_/g, " "], E], [/metasr[\/ ]?([\d\.]+)/i], [E, [y, "Sogou Explorer"]], [/(sogou)mo\w+\/([\d\.]+)/i], [[y, "Sogou Mobile"], E], [/(electron)\/([\w\.]+) safari/i, /(tesla)(?: qtcarbrowser|\/(20\d\d\.[-\w\.]+))/i, /m?(qqbrowser|2345Explorer)[\/ ]?([\w\.]+)/i], [y, E], [/(lbbrowser)/i, /\[(linkedin)app\]/i], [y], [/((?:fban\/fbios|fb_iab\/fb4a)(?!.+fbav)|;fbav\/([\w\.]+);)/i], [[y, O], E], [/(Klarna)\/([\w\.]+)/i, /(kakao(?:talk|story))[\/ ]([\w\.]+)/i, /(naver)\(.*?(\d+\.[\w\.]+).*\)/i, /safari (line)\/([\w\.]+)/i, /\b(line)\/([\w\.]+)\/iab/i, /(alipay)client\/([\w\.]+)/i, /(chromium|instagram|snapchat)[\/ ]([-\w\.]+)/i], [y, E], [/\bgsa\/([\w\.]+) .*safari\//i], [E, [y, "GSA"]], [/musical_ly(?:.+app_?version\/|_)([\w\.]+)/i], [E, [y, "TikTok"]], [/headlesschrome(?:\/([\w\.]+)| )/i], [E, [y, A + " Headless"]], [/ wv\).+(chrome)\/([\w\.]+)/i], [[y, A + " WebView"], E], [/droid.+ version\/([\w\.]+)\b.+(?:mobile safari|safari)/i], [E, [y, "Android " + d]], [/(chrome|omniweb|arora|[tizenoka]{5} ?browser)\/v?([\w\.]+)/i], [y, E], [/version\/([\w\.\,]+) .*mobile\/\w+ (safari)/i], [E, [y, "Mobile Safari"]], [/version\/([\w(\.|\,)]+) .*(mobile ?safari|safari)/i], [E, y], [/webkit.+?(mobile ?safari|safari)(\/[\w\.]+)/i], [y, [E, G, { "1.0": "/8", 1.2: "/1", 1.3: "/3", "2.0": "/412", "2.0.2": "/416", "2.0.3": "/417", "2.0.4": "/419", "?": "/" }]], [/(webkit|khtml)\/([\w\.]+)/i], [y, E], [/(navigator|netscape\d?)\/([-\w\.]+)/i], [[y, "Netscape"], E], [/mobile vr; rv:([\w\.]+)\).+firefox/i], [E, [y, i + " Reality"]], [/ekiohf.+(flow)\/([\w\.]+)/i, /(swiftfox)/i, /(icedragon|iceweasel|camino|chimera|fennec|maemo browser|minimo|conkeror|klar)[\/ ]?([\w\.\+]+)/i, /(seamonkey|k-meleon|icecat|iceape|firebird|phoenix|palemoon|basilisk|waterfox)\/([-\w\.]+)$/i, /(firefox)\/([\w\.]+)/i, /(mozilla)\/([\w\.]+) .+rv\:.+gecko\/\d+/i, /(polaris|lynx|dillo|icab|doris|amaya|w3m|netsurf|sleipnir|obigo|mosaic|(?:go|ice|up)[\. ]?browser)[-\/ ]?v?([\w\.]+)/i, /(links) \(([\w\.]+)/i, /panasonic;(viera)/i], [y, E], [/(cobalt)\/([\w\.]+)/i], [y, [E, /master.|lts./, ""]]], cpu: [[/(?:(amd|x(?:(?:86|64)[-_])?|wow|win)64)[;\)]/i], [[S, "amd64"]], [/(ia32(?=;))/i], [[S, k]], [/((?:i[346]|x)86)[;\)]/i], [[S, "ia32"]], [/\b(aarch64|arm(v?8e?l?|_?64))\b/i], [[S, "arm64"]], [/\b(arm(?:v[67])?ht?n?[fl]p?)\b/i], [[S, "armhf"]], [/windows (ce|mobile); ppc;/i], [[S, "arm"]], [/((?:ppc|powerpc)(?:64)?)(?: mac|;|\))/i], [[S, /ower/, "", k]], [/(sun4\w)[;\)]/i], [[S, "sparc"]], [/((?:avr32|ia64(?=;))|68k(?=\))|\barm(?=v(?:[1-7]|[5-7]1)l?|;|eabi)|(?=atmel )avr|(?:irix|mips|sparc)(?:64)?\b|pa-risc)/i], [[S, k]]], device: [[/\b(sch-i[89]0\d|shw-m380s|sm-[ptx]\w{2,4}|gt-[pn]\d{2,4}|sgh-t8[56]9|nexus 10)/i], [C, [b, v], [Q, j]], [/\b((?:s[cgp]h|gt|sm)-\w+|sc[g-]?[\d]+a?|galaxy nexus)/i, /samsung[- ]([-\w]+)/i, /sec-(sgh\w+)/i], [C, [b, v], [Q, H]], [/(?:\/|\()(ip(?:hone|od)[\w, ]*)(?:\/|;)/i], [C, [b, u], [Q, H]], [/\((ipad);[-\w\),; ]+apple/i, /applecoremedia\/[\w\.]+ \((ipad)/i, /\b(ipad)\d\d?,\d\d?[;\]].+ios/i], [C, [b, u], [Q, j]], [/(macintosh);/i], [C, [b, u]], [/\b(sh-?[altvz]?\d\d[a-ekm]?)/i], [C, [b, x], [Q, H]], [/\b((?:ag[rs][23]?|bah2?|sht?|btv)-a?[lw]\d{2})\b(?!.+d\/s)/i], [C, [b, h], [Q, j]], [/(?:huawei|honor)([-\w ]+)[;\)]/i, /\b(nexus 6p|\w{2,4}e?-[atu]?[ln][\dx][012359c][adn]?)\b(?!.+d\/s)/i], [C, [b, h], [Q, H]], [/\b(poco[\w ]+|m2\d{3}j\d\d[a-z]{2})(?: bui|\))/i, /\b; (\w+) build\/hm\1/i, /\b(hm[-_ ]?note?[_ ]?(?:\d\w)?) bui/i, /\b(redmi[\-_ ]?(?:note|k)?[\w_ ]+)(?: bui|\))/i, /oid[^\)]+; (m?[12][0-389][01]\w{3,6}[c-y])( bui|; wv|\))/i, /\b(mi[-_ ]?(?:a\d|one|one[_ ]plus|note lte|max|cc)?[_ ]?(?:\d?\w?)[_ ]?(?:plus|se|lite)?)(?: bui|\))/i], [[C, /_/g, " "], [b, F], [Q, H]], [/oid[^\)]+; (2\d{4}(283|rpbf)[cgl])( bui|\))/i, /\b(mi[-_ ]?(?:pad)(?:[\w_ ]+))(?: bui|\))/i], [[C, /_/g, " "], [b, F], [Q, j]], [/; (\w+) bui.+ oppo/i, /\b(cph[12]\d{3}|p(?:af|c[al]|d\w|e[ar])[mt]\d0|x9007|a101op)\b/i], [C, [b, "OPPO"], [Q, H]], [/vivo (\w+)(?: bui|\))/i, /\b(v[12]\d{3}\w?[at])(?: bui|;)/i], [C, [b, "Vivo"], [Q, H]], [/\b(rmx[1-3]\d{3})(?: bui|;|\))/i], [C, [b, "Realme"], [Q, H]], [/\b(milestone|droid(?:[2-4x]| (?:bionic|x2|pro|razr))?:?( 4g)?)\b[\w ]+build\//i, /\bmot(?:orola)?[- ](\w*)/i, /((?:moto[\w\(\) ]+|xt\d{3,4}|nexus 6)(?= bui|\)))/i], [C, [b, f], [Q, H]], [/\b(mz60\d|xoom[2 ]{0,2}) build\//i], [C, [b, f], [Q, j]], [/((?=lg)?[vl]k\-?\d{3}) bui| 3\.[-\w; ]{10}lg?-([06cv9]{3,4})/i], [C, [b, c], [Q, j]], [/(lm(?:-?f100[nv]?|-[\w\.]+)(?= bui|\))|nexus [45])/i, /\blg[-e;\/ ]+((?!browser|netcast|android tv)\w+)/i, /\blg-?([\d\w]+) bui/i], [C, [b, c], [Q, H]], [/(ideatab[-\w ]+)/i, /lenovo ?(s[56]000[-\w]+|tab(?:[\w ]+)|yt[-\d\w]{6}|tb[-\d\w]{6})/i], [C, [b, "Lenovo"], [Q, j]], [/(?:maemo|nokia).*(n900|lumia \d+)/i, /nokia[-_ ]?([-\w\.]*)/i], [[C, /_/g, " "], [b, "Nokia"], [Q, H]], [/(pixel c)\b/i], [C, [b, n], [Q, j]], [/droid.+; (pixel[\daxl ]{0,6})(?: bui|\))/i], [C, [b, n], [Q, H]], [/droid.+ (a?\d[0-2]{2}so|[c-g]\d{4}|so[-gl]\w+|xq-a\w[4-7][12])(?= bui|\).+chrome\/(?![1-6]{0,1}\d\.))/i], [C, [b, U], [Q, H]], [/sony tablet [ps]/i, /\b(?:sony)?sgp\w+(?: bui|\))/i], [[C, "Xperia Tablet"], [b, U], [Q, j]], [/ (kb2005|in20[12]5|be20[12][59])\b/i, /(?:one)?(?:plus)? (a\d0\d\d)(?: b|\))/i], [C, [b, "OnePlus"], [Q, H]], [/(alexa)webm/i, /(kf[a-z]{2}wi|aeo[c-r]{2})( bui|\))/i, /(kf[a-z]+)( bui|\)).+silk\//i], [C, [b, cA], [Q, j]], [/((?:sd|kf)[0349hijorstuw]+)( bui|\)).+silk\//i], [[C, /(.+)/g, "Fire Phone $1"], [b, cA], [Q, H]], [/(playbook);[-\w\),; ]+(rim)/i], [C, b, [Q, j]], [/\b((?:bb[a-f]|st[hv])100-\d)/i, /\(bb10; (\w+)/i], [C, [b, o], [Q, H]], [/(?:\b|asus_)(transfo[prime ]{4,10} \w+|eeepc|slider \w+|nexus 7|padfone|p00[cj])/i], [C, [b, s], [Q, j]], [/ (z[bes]6[027][012][km][ls]|zenfone \d\w?)\b/i], [C, [b, s], [Q, H]], [/(nexus 9)/i], [C, [b, "HTC"], [Q, j]], [/(htc)[-;_ ]{1,2}([\w ]+(?=\)| bui)|\w+)/i, /(zte)[- ]([\w ]+?)(?: bui|\/|\))/i, /(alcatel|geeksphone|nexian|panasonic(?!(?:;|\.))|sony(?!-bra))[-_ ]?([-\w]*)/i], [b, [C, /_/g, " "], [Q, H]], [/droid.+; ([ab][1-7]-?[0178a]\d\d?)/i], [C, [b, "Acer"], [Q, j]], [/droid.+; (m[1-5] note) bui/i, /\bmz-([-\w]{2,})/i], [C, [b, "Meizu"], [Q, H]], [/; ((?:power )?armor(?:[\w ]{0,8}))(?: bui|\))/i], [C, [b, "Ulefone"], [Q, H]], [/(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus|dell|meizu|motorola|polytron|infinix|tecno)[-_ ]?([-\w]*)/i, /(hp) ([\w ]+\w)/i, /(asus)-?(\w+)/i, /(microsoft); (lumia[\w ]+)/i, /(lenovo)[-_ ]?([-\w]+)/i, /(jolla)/i, /(oppo) ?([\w ]+) bui/i], [b, C, [Q, H]], [/(kobo)\s(ereader|touch)/i, /(archos) (gamepad2?)/i, /(hp).+(touchpad(?!.+tablet)|tablet)/i, /(kindle)\/([\w\.]+)/i, /(nook)[\w ]+build\/(\w+)/i, /(dell) (strea[kpr\d ]*[\dko])/i, /(le[- ]+pan)[- ]+(\w{1,9}) bui/i, /(trinity)[- ]*(t\d{3}) bui/i, /(gigaset)[- ]+(q\w{1,9}) bui/i, /(vodafone) ([\w ]+)(?:\)| bui)/i], [b, C, [Q, j]], [/(surface duo)/i], [C, [b, l], [Q, j]], [/droid [\d\.]+; (fp\du?)(?: b|\))/i], [C, [b, "Fairphone"], [Q, H]], [/(u304aa)/i], [C, [b, "AT&T"], [Q, H]], [/\bsie-(\w*)/i], [C, [b, "Siemens"], [Q, H]], [/\b(rct\w+) b/i], [C, [b, "RCA"], [Q, j]], [/\b(venue[\d ]{2,7}) b/i], [C, [b, "Dell"], [Q, j]], [/\b(q(?:mv|ta)\w+) b/i], [C, [b, "Verizon"], [Q, j]], [/\b(?:barnes[& ]+noble |bn[rt])([\w\+ ]*) b/i], [C, [b, "Barnes & Noble"], [Q, j]], [/\b(tm\d{3}\w+) b/i], [C, [b, "NuVision"], [Q, j]], [/\b(k88) b/i], [C, [b, "ZTE"], [Q, j]], [/\b(nx\d{3}j) b/i], [C, [b, "ZTE"], [Q, H]], [/\b(gen\d{3}) b.+49h/i], [C, [b, "Swiss"], [Q, H]], [/\b(zur\d{3}) b/i], [C, [b, "Swiss"], [Q, j]], [/\b((zeki)?tb.*\b) b/i], [C, [b, "Zeki"], [Q, j]], [/\b([yr]\d{2}) b/i, /\b(dragon[- ]+touch |dt)(\w{5}) b/i], [[b, "Dragon Touch"], C, [Q, j]], [/\b(ns-?\w{0,9}) b/i], [C, [b, "Insignia"], [Q, j]], [/\b((nxa|next)-?\w{0,9}) b/i], [C, [b, "NextBook"], [Q, j]], [/\b(xtreme\_)?(v(1[045]|2[015]|[3469]0|7[05])) b/i], [[b, "Voice"], C, [Q, H]], [/\b(lvtel\-)?(v1[12]) b/i], [[b, "LvTel"], C, [Q, H]], [/\b(ph-1) /i], [C, [b, "Essential"], [Q, H]], [/\b(v(100md|700na|7011|917g).*\b) b/i], [C, [b, "Envizen"], [Q, j]], [/\b(trio[-\w\. ]+) b/i], [C, [b, "MachSpeed"], [Q, j]], [/\btu_(1491) b/i], [C, [b, "Rotor"], [Q, j]], [/(shield[\w ]+) b/i], [C, [b, "Nvidia"], [Q, j]], [/(sprint) (\w+)/i], [b, C, [Q, H]], [/(kin\.[onetw]{3})/i], [[C, /\./g, " "], [b, l], [Q, H]], [/droid.+; (cc6666?|et5[16]|mc[239][23]x?|vc8[03]x?)\)/i], [C, [b, _], [Q, j]], [/droid.+; (ec30|ps20|tc[2-8]\d[kx])\)/i], [C, [b, _], [Q, H]], [/smart-tv.+(samsung)/i], [b, [Q, B]], [/hbbtv.+maple;(\d+)/i], [[C, /^/, "SmartTV"], [b, v], [Q, B]], [/(nux; netcast.+smarttv|lg (netcast\.tv-201\d|android tv))/i], [[b, c], [Q, B]], [/(apple) ?tv/i], [b, [C, u + " TV"], [Q, B]], [/crkey/i], [[C, A + "cast"], [b, n], [Q, B]], [/droid.+aft(\w+)( bui|\))/i], [C, [b, cA], [Q, B]], [/\(dtv[\);].+(aquos)/i, /(aquos-tv[\w ]+)\)/i], [C, [b, x], [Q, B]], [/(bravia[\w ]+)( bui|\))/i], [C, [b, U], [Q, B]], [/(mitv-\w{5}) bui/i], [C, [b, F], [Q, B]], [/Hbbtv.*(technisat) (.*);/i], [b, C, [Q, B]], [/\b(roku)[\dx]*[\)\/]((?:dvp-)?[\d\.]*)/i, /hbbtv\/\d+\.\d+\.\d+ +\([\w\+ ]*; *([\w\d][^;]*);([^;]*)/i], [[b, T], [C, T], [Q, B]], [/\b(android tv|smart[- ]?tv|opera tv|tv; rv:)\b/i], [[Q, B]], [/(ouya)/i, /(nintendo) ([wids3utch]+)/i], [b, C, [Q, L]], [/droid.+; (shield) bui/i], [C, [b, "Nvidia"], [Q, L]], [/(playstation [345portablevi]+)/i], [C, [b, U], [Q, L]], [/\b(xbox(?: one)?(?!; xbox))[\); ]/i], [C, [b, l], [Q, L]], [/((pebble))app/i], [b, C, [Q, J]], [/(watch)(?: ?os[,\/]|\d,\d\/)[\d\.]+/i], [C, [b, u], [Q, J]], [/droid.+; (glass) \d/i], [C, [b, n], [Q, J]], [/droid.+; (wt63?0{2,3})\)/i], [C, [b, _], [Q, J]], [/(quest( 2| pro)?)/i], [C, [b, O], [Q, J]], [/(tesla)(?: qtcarbrowser|\/[-\w\.]+)/i], [b, [Q, iA]], [/(aeobc)\b/i], [C, [b, cA], [Q, iA]], [/droid .+?; ([^;]+?)(?: bui|; wv\)|\) applew).+? mobile safari/i], [C, [Q, H]], [/droid .+?; ([^;]+?)(?: bui|\) applew).+?(?! mobile) safari/i], [C, [Q, j]], [/\b((tablet|tab)[;\/]|focus\/\d(?!.+mobile))/i], [[Q, j]], [/(phone|mobile(?:[;\/]| [ \w\/\.]*safari)|pda(?=.+windows ce))/i], [[Q, H]], [/(android[-\w\. ]{0,9});.+buil/i], [C, [b, "Generic"]]], engine: [[/windows.+ edge\/([\w\.]+)/i], [E, [y, "EdgeHTML"]], [/webkit\/537\.36.+chrome\/(?!27)([\w\.]+)/i], [E, [y, "Blink"]], [/(presto)\/([\w\.]+)/i, /(webkit|trident|netfront|netsurf|amaya|lynx|w3m|goanna)\/([\w\.]+)/i, /ekioh(flow)\/([\w\.]+)/i, /(khtml|tasman|links)[\/ ]\(?([\w\.]+)/i, /(icab)[\/ ]([23]\.[\d\.]+)/i, /\b(libweb)/i], [y, E], [/rv\:([\w\.]{1,9})\b.+(gecko)/i], [E, y]], os: [[/microsoft (windows) (vista|xp)/i], [y, E], [/(windows (?:phone(?: os)?|mobile))[\/ ]?([\d\.\w ]*)/i], [y, [E, G, X]], [/windows nt 6\.2; (arm)/i, /windows[\/ ]?([ntce\d\. ]+\w)(?!.+xbox)/i, /(?:win(?=3|9|n)|win 9x )([nt\d\.]+)/i], [[E, G, X], [y, "Windows"]], [/ip[honead]{2,4}\b(?:.*os ([\w]+) like mac|; opera)/i, /(?:ios;fbsv\/|iphone.+ios[\/ ])([\d\.]+)/i, /cfnetwork\/.+darwin/i], [[E, /_/g, "."], [y, "iOS"]], [/(mac os x) ?([\w\. ]*)/i, /(macintosh|mac_powerpc\b)(?!.+haiku)/i], [[y, R], [E, /_/g, "."]], [/droid ([\w\.]+)\b.+(android[- ]x86|harmonyos)/i], [E, y], [/(android|webos|qnx|bada|rim tablet os|maemo|meego|sailfish)[-\/ ]?([\w\.]*)/i, /(blackberry)\w*\/([\w\.]*)/i, /(tizen|kaios)[\/ ]([\w\.]+)/i, /\((series40);/i], [y, E], [/\(bb(10);/i], [E, [y, o]], [/(?:symbian ?os|symbos|s60(?=;)|series60)[-\/ ]?([\w\.]*)/i], [E, [y, "Symbian"]], [/mozilla\/[\d\.]+ \((?:mobile|tablet|tv|mobile; [\w ]+); rv:.+ gecko\/([\w\.]+)/i], [E, [y, i + " OS"]], [/web0s;.+rt(tv)/i, /\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i], [E, [y, "webOS"]], [/watch(?: ?os[,\/]|\d,\d\/)([\d\.]+)/i], [E, [y, "watchOS"]], [/crkey\/([\d\.]+)/i], [E, [y, A + "cast"]], [/(cros) [\w]+(?:\)| ([\w\.]+)\b)/i], [[y, P], E], [/panasonic;(viera)/i, /(netrange)mmh/i, /(nettv)\/(\d+\.[\w\.]+)/i, /(nintendo|playstation) ([wids345portablevuch]+)/i, /(xbox); +xbox ([^\);]+)/i, /\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i, /(mint)[\/\(\) ]?(\w*)/i, /(mageia|vectorlinux)[; ]/i, /([kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?= linux)|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire)(?: gnu\/linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i, /(hurd|linux) ?([\w\.]*)/i, /(gnu) ?([\w\.]*)/i, /\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i, /(haiku) (\w+)/i], [y, E], [/(sunos) ?([\w\.\d]*)/i], [[y, "Solaris"], E], [/((?:open)?solaris)[-\/ ]?([\w\.]*)/i, /(aix) ((\d)(?=\.|\)| )[\w\.])*/i, /\b(beos|os\/2|amigaos|morphos|openvms|fuchsia|hp-ux|serenityos)/i, /(unix) ?([\w\.]*)/i], [y, E]] }, I = function(V, z) {
-    if (typeof V === g && (z = V, V = t), !(this instanceof I))
-      return new I(V, z).getResult();
-    var $ = typeof e !== a && e.navigator ? e.navigator : t, eA = V || ($ && $.userAgent ? $.userAgent : ""), rA = $ && $.userAgentData ? $.userAgentData : t, Z = z ? function(q, lA) {
+    return G;
+  }, X = { ME: "4.90", "NT 3.11": "NT3.51", "NT 4.0": "NT4.0", 2e3: "NT 5.0", XP: ["NT 5.1", "NT 5.2"], Vista: "NT 6.0", 7: "NT 6.1", 8: "NT 6.2", 8.1: "NT 6.3", 10: ["NT 6.4", "NT 10.0"], RT: "ARM" }, D = { browser: [[/\b(?:crmo|crios)\/([\w\.]+)/i], [E, [y, "Chrome"]], [/edg(?:e|ios|a)?\/([\w\.]+)/i], [E, [y, "Edge"]], [/(opera mini)\/([-\w\.]+)/i, /(opera [mobiletab]{3,6})\b.+version\/([-\w\.]+)/i, /(opera)(?:.+version\/|[\/ ]+)([\w\.]+)/i], [y, E], [/opios[\/ ]+([\w\.]+)/i], [E, [y, m + " Mini"]], [/\bopr\/([\w\.]+)/i], [E, [y, m]], [/\bb[ai]*d(?:uhd|[ub]*[aekoprswx]{5,6})[\/ ]?([\w\.]+)/i], [E, [y, "Baidu"]], [/(kindle)\/([\w\.]+)/i, /(lunascape|maxthon|netfront|jasmine|blazer)[\/ ]?([\w\.]*)/i, /(avant|iemobile|slim)\s?(?:browser)?[\/ ]?([\w\.]*)/i, /(?:ms|\()(ie) ([\w\.]+)/i, /(flock|rockmelt|midori|epiphany|silk|skyfire|bolt|iron|vivaldi|iridium|phantomjs|bowser|quark|qupzilla|falkon|rekonq|puffin|brave|whale(?!.+naver)|qqbrowserlite|qq|duckduckgo)\/([-\w\.]+)/i, /(heytap|ovi)browser\/([\d\.]+)/i, /(weibo)__([\d\.]+)/i], [y, E], [/(?:\buc? ?browser|(?:juc.+)ucweb)[\/ ]?([\w\.]+)/i], [E, [y, "UC" + d]], [/microm.+\bqbcore\/([\w\.]+)/i, /\bqbcore\/([\w\.]+).+microm/i, /micromessenger\/([\w\.]+)/i], [E, [y, "WeChat"]], [/konqueror\/([\w\.]+)/i], [E, [y, "Konqueror"]], [/trident.+rv[: ]([\w\.]{1,9})\b.+like gecko/i], [E, [y, "IE"]], [/ya(?:search)?browser\/([\w\.]+)/i], [E, [y, "Yandex"]], [/slbrowser\/([\w\.]+)/i], [E, [y, "Smart Lenovo " + d]], [/(avast|avg)\/([\w\.]+)/i], [[y, /(.+)/, "$1 Secure " + d], E], [/\bfocus\/([\w\.]+)/i], [E, [y, i + " Focus"]], [/\bopt\/([\w\.]+)/i], [E, [y, m + " Touch"]], [/coc_coc\w+\/([\w\.]+)/i], [E, [y, "Coc Coc"]], [/dolfin\/([\w\.]+)/i], [E, [y, "Dolphin"]], [/coast\/([\w\.]+)/i], [E, [y, m + " Coast"]], [/miuibrowser\/([\w\.]+)/i], [E, [y, "MIUI " + d]], [/fxios\/([-\w\.]+)/i], [E, [y, i]], [/\bqihu|(qi?ho?o?|360)browser/i], [[y, "360 " + d]], [/(oculus|sailfish|huawei|vivo)browser\/([\w\.]+)/i], [[y, /(.+)/, "$1 " + d], E], [/samsungbrowser\/([\w\.]+)/i], [E, [y, v + " Internet"]], [/(comodo_dragon)\/([\w\.]+)/i], [[y, /_/g, " "], E], [/metasr[\/ ]?([\d\.]+)/i], [E, [y, "Sogou Explorer"]], [/(sogou)mo\w+\/([\d\.]+)/i], [[y, "Sogou Mobile"], E], [/(electron)\/([\w\.]+) safari/i, /(tesla)(?: qtcarbrowser|\/(20\d\d\.[-\w\.]+))/i, /m?(qqbrowser|2345Explorer)[\/ ]?([\w\.]+)/i], [y, E], [/(lbbrowser)/i, /\[(linkedin)app\]/i], [y], [/((?:fban\/fbios|fb_iab\/fb4a)(?!.+fbav)|;fbav\/([\w\.]+);)/i], [[y, O], E], [/(Klarna)\/([\w\.]+)/i, /(kakao(?:talk|story))[\/ ]([\w\.]+)/i, /(naver)\(.*?(\d+\.[\w\.]+).*\)/i, /safari (line)\/([\w\.]+)/i, /\b(line)\/([\w\.]+)\/iab/i, /(alipay)client\/([\w\.]+)/i, /(chromium|instagram|snapchat)[\/ ]([-\w\.]+)/i], [y, E], [/\bgsa\/([\w\.]+) .*safari\//i], [E, [y, "GSA"]], [/musical_ly(?:.+app_?version\/|_)([\w\.]+)/i], [E, [y, "TikTok"]], [/headlesschrome(?:\/([\w\.]+)| )/i], [E, [y, A + " Headless"]], [/ wv\).+(chrome)\/([\w\.]+)/i], [[y, A + " WebView"], E], [/droid.+ version\/([\w\.]+)\b.+(?:mobile safari|safari)/i], [E, [y, "Android " + d]], [/(chrome|omniweb|arora|[tizenoka]{5} ?browser)\/v?([\w\.]+)/i], [y, E], [/version\/([\w\.\,]+) .*mobile\/\w+ (safari)/i], [E, [y, "Mobile Safari"]], [/version\/([\w(\.|\,)]+) .*(mobile ?safari|safari)/i], [E, y], [/webkit.+?(mobile ?safari|safari)(\/[\w\.]+)/i], [y, [E, N, { "1.0": "/8", 1.2: "/1", 1.3: "/3", "2.0": "/412", "2.0.2": "/416", "2.0.3": "/417", "2.0.4": "/419", "?": "/" }]], [/(webkit|khtml)\/([\w\.]+)/i], [y, E], [/(navigator|netscape\d?)\/([-\w\.]+)/i], [[y, "Netscape"], E], [/mobile vr; rv:([\w\.]+)\).+firefox/i], [E, [y, i + " Reality"]], [/ekiohf.+(flow)\/([\w\.]+)/i, /(swiftfox)/i, /(icedragon|iceweasel|camino|chimera|fennec|maemo browser|minimo|conkeror|klar)[\/ ]?([\w\.\+]+)/i, /(seamonkey|k-meleon|icecat|iceape|firebird|phoenix|palemoon|basilisk|waterfox)\/([-\w\.]+)$/i, /(firefox)\/([\w\.]+)/i, /(mozilla)\/([\w\.]+) .+rv\:.+gecko\/\d+/i, /(polaris|lynx|dillo|icab|doris|amaya|w3m|netsurf|sleipnir|obigo|mosaic|(?:go|ice|up)[\. ]?browser)[-\/ ]?v?([\w\.]+)/i, /(links) \(([\w\.]+)/i, /panasonic;(viera)/i], [y, E], [/(cobalt)\/([\w\.]+)/i], [y, [E, /master.|lts./, ""]]], cpu: [[/(?:(amd|x(?:(?:86|64)[-_])?|wow|win)64)[;\)]/i], [[S, "amd64"]], [/(ia32(?=;))/i], [[S, _]], [/((?:i[346]|x)86)[;\)]/i], [[S, "ia32"]], [/\b(aarch64|arm(v?8e?l?|_?64))\b/i], [[S, "arm64"]], [/\b(arm(?:v[67])?ht?n?[fl]p?)\b/i], [[S, "armhf"]], [/windows (ce|mobile); ppc;/i], [[S, "arm"]], [/((?:ppc|powerpc)(?:64)?)(?: mac|;|\))/i], [[S, /ower/, "", _]], [/(sun4\w)[;\)]/i], [[S, "sparc"]], [/((?:avr32|ia64(?=;))|68k(?=\))|\barm(?=v(?:[1-7]|[5-7]1)l?|;|eabi)|(?=atmel )avr|(?:irix|mips|sparc)(?:64)?\b|pa-risc)/i], [[S, _]]], device: [[/\b(sch-i[89]0\d|shw-m380s|sm-[ptx]\w{2,4}|gt-[pn]\d{2,4}|sgh-t8[56]9|nexus 10)/i], [C, [b, v], [Q, j]], [/\b((?:s[cgp]h|gt|sm)-\w+|sc[g-]?[\d]+a?|galaxy nexus)/i, /samsung[- ]([-\w]+)/i, /sec-(sgh\w+)/i], [C, [b, v], [Q, H]], [/(?:\/|\()(ip(?:hone|od)[\w, ]*)(?:\/|;)/i], [C, [b, u], [Q, H]], [/\((ipad);[-\w\),; ]+apple/i, /applecoremedia\/[\w\.]+ \((ipad)/i, /\b(ipad)\d\d?,\d\d?[;\]].+ios/i], [C, [b, u], [Q, j]], [/(macintosh);/i], [C, [b, u]], [/\b(sh-?[altvz]?\d\d[a-ekm]?)/i], [C, [b, x], [Q, H]], [/\b((?:ag[rs][23]?|bah2?|sht?|btv)-a?[lw]\d{2})\b(?!.+d\/s)/i], [C, [b, h], [Q, j]], [/(?:huawei|honor)([-\w ]+)[;\)]/i, /\b(nexus 6p|\w{2,4}e?-[atu]?[ln][\dx][012359c][adn]?)\b(?!.+d\/s)/i], [C, [b, h], [Q, H]], [/\b(poco[\w ]+|m2\d{3}j\d\d[a-z]{2})(?: bui|\))/i, /\b; (\w+) build\/hm\1/i, /\b(hm[-_ ]?note?[_ ]?(?:\d\w)?) bui/i, /\b(redmi[\-_ ]?(?:note|k)?[\w_ ]+)(?: bui|\))/i, /oid[^\)]+; (m?[12][0-389][01]\w{3,6}[c-y])( bui|; wv|\))/i, /\b(mi[-_ ]?(?:a\d|one|one[_ ]plus|note lte|max|cc)?[_ ]?(?:\d?\w?)[_ ]?(?:plus|se|lite)?)(?: bui|\))/i], [[C, /_/g, " "], [b, F], [Q, H]], [/oid[^\)]+; (2\d{4}(283|rpbf)[cgl])( bui|\))/i, /\b(mi[-_ ]?(?:pad)(?:[\w_ ]+))(?: bui|\))/i], [[C, /_/g, " "], [b, F], [Q, j]], [/; (\w+) bui.+ oppo/i, /\b(cph[12]\d{3}|p(?:af|c[al]|d\w|e[ar])[mt]\d0|x9007|a101op)\b/i], [C, [b, "OPPO"], [Q, H]], [/vivo (\w+)(?: bui|\))/i, /\b(v[12]\d{3}\w?[at])(?: bui|;)/i], [C, [b, "Vivo"], [Q, H]], [/\b(rmx[1-3]\d{3})(?: bui|;|\))/i], [C, [b, "Realme"], [Q, H]], [/\b(milestone|droid(?:[2-4x]| (?:bionic|x2|pro|razr))?:?( 4g)?)\b[\w ]+build\//i, /\bmot(?:orola)?[- ](\w*)/i, /((?:moto[\w\(\) ]+|xt\d{3,4}|nexus 6)(?= bui|\)))/i], [C, [b, f], [Q, H]], [/\b(mz60\d|xoom[2 ]{0,2}) build\//i], [C, [b, f], [Q, j]], [/((?=lg)?[vl]k\-?\d{3}) bui| 3\.[-\w; ]{10}lg?-([06cv9]{3,4})/i], [C, [b, c], [Q, j]], [/(lm(?:-?f100[nv]?|-[\w\.]+)(?= bui|\))|nexus [45])/i, /\blg[-e;\/ ]+((?!browser|netcast|android tv)\w+)/i, /\blg-?([\d\w]+) bui/i], [C, [b, c], [Q, H]], [/(ideatab[-\w ]+)/i, /lenovo ?(s[56]000[-\w]+|tab(?:[\w ]+)|yt[-\d\w]{6}|tb[-\d\w]{6})/i], [C, [b, "Lenovo"], [Q, j]], [/(?:maemo|nokia).*(n900|lumia \d+)/i, /nokia[-_ ]?([-\w\.]*)/i], [[C, /_/g, " "], [b, "Nokia"], [Q, H]], [/(pixel c)\b/i], [C, [b, n], [Q, j]], [/droid.+; (pixel[\daxl ]{0,6})(?: bui|\))/i], [C, [b, n], [Q, H]], [/droid.+ (a?\d[0-2]{2}so|[c-g]\d{4}|so[-gl]\w+|xq-a\w[4-7][12])(?= bui|\).+chrome\/(?![1-6]{0,1}\d\.))/i], [C, [b, U], [Q, H]], [/sony tablet [ps]/i, /\b(?:sony)?sgp\w+(?: bui|\))/i], [[C, "Xperia Tablet"], [b, U], [Q, j]], [/ (kb2005|in20[12]5|be20[12][59])\b/i, /(?:one)?(?:plus)? (a\d0\d\d)(?: b|\))/i], [C, [b, "OnePlus"], [Q, H]], [/(alexa)webm/i, /(kf[a-z]{2}wi|aeo[c-r]{2})( bui|\))/i, /(kf[a-z]+)( bui|\)).+silk\//i], [C, [b, cA], [Q, j]], [/((?:sd|kf)[0349hijorstuw]+)( bui|\)).+silk\//i], [[C, /(.+)/g, "Fire Phone $1"], [b, cA], [Q, H]], [/(playbook);[-\w\),; ]+(rim)/i], [C, b, [Q, j]], [/\b((?:bb[a-f]|st[hv])100-\d)/i, /\(bb10; (\w+)/i], [C, [b, o], [Q, H]], [/(?:\b|asus_)(transfo[prime ]{4,10} \w+|eeepc|slider \w+|nexus 7|padfone|p00[cj])/i], [C, [b, s], [Q, j]], [/ (z[bes]6[027][012][km][ls]|zenfone \d\w?)\b/i], [C, [b, s], [Q, H]], [/(nexus 9)/i], [C, [b, "HTC"], [Q, j]], [/(htc)[-;_ ]{1,2}([\w ]+(?=\)| bui)|\w+)/i, /(zte)[- ]([\w ]+?)(?: bui|\/|\))/i, /(alcatel|geeksphone|nexian|panasonic(?!(?:;|\.))|sony(?!-bra))[-_ ]?([-\w]*)/i], [b, [C, /_/g, " "], [Q, H]], [/droid.+; ([ab][1-7]-?[0178a]\d\d?)/i], [C, [b, "Acer"], [Q, j]], [/droid.+; (m[1-5] note) bui/i, /\bmz-([-\w]{2,})/i], [C, [b, "Meizu"], [Q, H]], [/; ((?:power )?armor(?:[\w ]{0,8}))(?: bui|\))/i], [C, [b, "Ulefone"], [Q, H]], [/(blackberry|benq|palm(?=\-)|sonyericsson|acer|asus|dell|meizu|motorola|polytron|infinix|tecno)[-_ ]?([-\w]*)/i, /(hp) ([\w ]+\w)/i, /(asus)-?(\w+)/i, /(microsoft); (lumia[\w ]+)/i, /(lenovo)[-_ ]?([-\w]+)/i, /(jolla)/i, /(oppo) ?([\w ]+) bui/i], [b, C, [Q, H]], [/(kobo)\s(ereader|touch)/i, /(archos) (gamepad2?)/i, /(hp).+(touchpad(?!.+tablet)|tablet)/i, /(kindle)\/([\w\.]+)/i, /(nook)[\w ]+build\/(\w+)/i, /(dell) (strea[kpr\d ]*[\dko])/i, /(le[- ]+pan)[- ]+(\w{1,9}) bui/i, /(trinity)[- ]*(t\d{3}) bui/i, /(gigaset)[- ]+(q\w{1,9}) bui/i, /(vodafone) ([\w ]+)(?:\)| bui)/i], [b, C, [Q, j]], [/(surface duo)/i], [C, [b, l], [Q, j]], [/droid [\d\.]+; (fp\du?)(?: b|\))/i], [C, [b, "Fairphone"], [Q, H]], [/(u304aa)/i], [C, [b, "AT&T"], [Q, H]], [/\bsie-(\w*)/i], [C, [b, "Siemens"], [Q, H]], [/\b(rct\w+) b/i], [C, [b, "RCA"], [Q, j]], [/\b(venue[\d ]{2,7}) b/i], [C, [b, "Dell"], [Q, j]], [/\b(q(?:mv|ta)\w+) b/i], [C, [b, "Verizon"], [Q, j]], [/\b(?:barnes[& ]+noble |bn[rt])([\w\+ ]*) b/i], [C, [b, "Barnes & Noble"], [Q, j]], [/\b(tm\d{3}\w+) b/i], [C, [b, "NuVision"], [Q, j]], [/\b(k88) b/i], [C, [b, "ZTE"], [Q, j]], [/\b(nx\d{3}j) b/i], [C, [b, "ZTE"], [Q, H]], [/\b(gen\d{3}) b.+49h/i], [C, [b, "Swiss"], [Q, H]], [/\b(zur\d{3}) b/i], [C, [b, "Swiss"], [Q, j]], [/\b((zeki)?tb.*\b) b/i], [C, [b, "Zeki"], [Q, j]], [/\b([yr]\d{2}) b/i, /\b(dragon[- ]+touch |dt)(\w{5}) b/i], [[b, "Dragon Touch"], C, [Q, j]], [/\b(ns-?\w{0,9}) b/i], [C, [b, "Insignia"], [Q, j]], [/\b((nxa|next)-?\w{0,9}) b/i], [C, [b, "NextBook"], [Q, j]], [/\b(xtreme\_)?(v(1[045]|2[015]|[3469]0|7[05])) b/i], [[b, "Voice"], C, [Q, H]], [/\b(lvtel\-)?(v1[12]) b/i], [[b, "LvTel"], C, [Q, H]], [/\b(ph-1) /i], [C, [b, "Essential"], [Q, H]], [/\b(v(100md|700na|7011|917g).*\b) b/i], [C, [b, "Envizen"], [Q, j]], [/\b(trio[-\w\. ]+) b/i], [C, [b, "MachSpeed"], [Q, j]], [/\btu_(1491) b/i], [C, [b, "Rotor"], [Q, j]], [/(shield[\w ]+) b/i], [C, [b, "Nvidia"], [Q, j]], [/(sprint) (\w+)/i], [b, C, [Q, H]], [/(kin\.[onetw]{3})/i], [[C, /\./g, " "], [b, l], [Q, H]], [/droid.+; (cc6666?|et5[16]|mc[239][23]x?|vc8[03]x?)\)/i], [C, [b, k], [Q, j]], [/droid.+; (ec30|ps20|tc[2-8]\d[kx])\)/i], [C, [b, k], [Q, H]], [/smart-tv.+(samsung)/i], [b, [Q, B]], [/hbbtv.+maple;(\d+)/i], [[C, /^/, "SmartTV"], [b, v], [Q, B]], [/(nux; netcast.+smarttv|lg (netcast\.tv-201\d|android tv))/i], [[b, c], [Q, B]], [/(apple) ?tv/i], [b, [C, u + " TV"], [Q, B]], [/crkey/i], [[C, A + "cast"], [b, n], [Q, B]], [/droid.+aft(\w+)( bui|\))/i], [C, [b, cA], [Q, B]], [/\(dtv[\);].+(aquos)/i, /(aquos-tv[\w ]+)\)/i], [C, [b, x], [Q, B]], [/(bravia[\w ]+)( bui|\))/i], [C, [b, U], [Q, B]], [/(mitv-\w{5}) bui/i], [C, [b, F], [Q, B]], [/Hbbtv.*(technisat) (.*);/i], [b, C, [Q, B]], [/\b(roku)[\dx]*[\)\/]((?:dvp-)?[\d\.]*)/i, /hbbtv\/\d+\.\d+\.\d+ +\([\w\+ ]*; *([\w\d][^;]*);([^;]*)/i], [[b, T], [C, T], [Q, B]], [/\b(android tv|smart[- ]?tv|opera tv|tv; rv:)\b/i], [[Q, B]], [/(ouya)/i, /(nintendo) ([wids3utch]+)/i], [b, C, [Q, L]], [/droid.+; (shield) bui/i], [C, [b, "Nvidia"], [Q, L]], [/(playstation [345portablevi]+)/i], [C, [b, U], [Q, L]], [/\b(xbox(?: one)?(?!; xbox))[\); ]/i], [C, [b, l], [Q, L]], [/((pebble))app/i], [b, C, [Q, J]], [/(watch)(?: ?os[,\/]|\d,\d\/)[\d\.]+/i], [C, [b, u], [Q, J]], [/droid.+; (glass) \d/i], [C, [b, n], [Q, J]], [/droid.+; (wt63?0{2,3})\)/i], [C, [b, k], [Q, J]], [/(quest( 2| pro)?)/i], [C, [b, O], [Q, J]], [/(tesla)(?: qtcarbrowser|\/[-\w\.]+)/i], [b, [Q, iA]], [/(aeobc)\b/i], [C, [b, cA], [Q, iA]], [/droid .+?; ([^;]+?)(?: bui|; wv\)|\) applew).+? mobile safari/i], [C, [Q, H]], [/droid .+?; ([^;]+?)(?: bui|\) applew).+?(?! mobile) safari/i], [C, [Q, j]], [/\b((tablet|tab)[;\/]|focus\/\d(?!.+mobile))/i], [[Q, j]], [/(phone|mobile(?:[;\/]| [ \w\/\.]*safari)|pda(?=.+windows ce))/i], [[Q, H]], [/(android[-\w\. ]{0,9});.+buil/i], [C, [b, "Generic"]]], engine: [[/windows.+ edge\/([\w\.]+)/i], [E, [y, "EdgeHTML"]], [/webkit\/537\.36.+chrome\/(?!27)([\w\.]+)/i], [E, [y, "Blink"]], [/(presto)\/([\w\.]+)/i, /(webkit|trident|netfront|netsurf|amaya|lynx|w3m|goanna)\/([\w\.]+)/i, /ekioh(flow)\/([\w\.]+)/i, /(khtml|tasman|links)[\/ ]\(?([\w\.]+)/i, /(icab)[\/ ]([23]\.[\d\.]+)/i, /\b(libweb)/i], [y, E], [/rv\:([\w\.]{1,9})\b.+(gecko)/i], [E, y]], os: [[/microsoft (windows) (vista|xp)/i], [y, E], [/(windows (?:phone(?: os)?|mobile))[\/ ]?([\d\.\w ]*)/i], [y, [E, N, X]], [/windows nt 6\.2; (arm)/i, /windows[\/ ]?([ntce\d\. ]+\w)(?!.+xbox)/i, /(?:win(?=3|9|n)|win 9x )([nt\d\.]+)/i], [[E, N, X], [y, "Windows"]], [/ip[honead]{2,4}\b(?:.*os ([\w]+) like mac|; opera)/i, /(?:ios;fbsv\/|iphone.+ios[\/ ])([\d\.]+)/i, /cfnetwork\/.+darwin/i], [[E, /_/g, "."], [y, "iOS"]], [/(mac os x) ?([\w\. ]*)/i, /(macintosh|mac_powerpc\b)(?!.+haiku)/i], [[y, R], [E, /_/g, "."]], [/droid ([\w\.]+)\b.+(android[- ]x86|harmonyos)/i], [E, y], [/(android|webos|qnx|bada|rim tablet os|maemo|meego|sailfish)[-\/ ]?([\w\.]*)/i, /(blackberry)\w*\/([\w\.]*)/i, /(tizen|kaios)[\/ ]([\w\.]+)/i, /\((series40);/i], [y, E], [/\(bb(10);/i], [E, [y, o]], [/(?:symbian ?os|symbos|s60(?=;)|series60)[-\/ ]?([\w\.]*)/i], [E, [y, "Symbian"]], [/mozilla\/[\d\.]+ \((?:mobile|tablet|tv|mobile; [\w ]+); rv:.+ gecko\/([\w\.]+)/i], [E, [y, i + " OS"]], [/web0s;.+rt(tv)/i, /\b(?:hp)?wos(?:browser)?\/([\w\.]+)/i], [E, [y, "webOS"]], [/watch(?: ?os[,\/]|\d,\d\/)([\d\.]+)/i], [E, [y, "watchOS"]], [/crkey\/([\d\.]+)/i], [E, [y, A + "cast"]], [/(cros) [\w]+(?:\)| ([\w\.]+)\b)/i], [[y, P], E], [/panasonic;(viera)/i, /(netrange)mmh/i, /(nettv)\/(\d+\.[\w\.]+)/i, /(nintendo|playstation) ([wids345portablevuch]+)/i, /(xbox); +xbox ([^\);]+)/i, /\b(joli|palm)\b ?(?:os)?\/?([\w\.]*)/i, /(mint)[\/\(\) ]?(\w*)/i, /(mageia|vectorlinux)[; ]/i, /([kxln]?ubuntu|debian|suse|opensuse|gentoo|arch(?= linux)|slackware|fedora|mandriva|centos|pclinuxos|red ?hat|zenwalk|linpus|raspbian|plan 9|minix|risc os|contiki|deepin|manjaro|elementary os|sabayon|linspire)(?: gnu\/linux)?(?: enterprise)?(?:[- ]linux)?(?:-gnu)?[-\/ ]?(?!chrom|package)([-\w\.]*)/i, /(hurd|linux) ?([\w\.]*)/i, /(gnu) ?([\w\.]*)/i, /\b([-frentopcghs]{0,5}bsd|dragonfly)[\/ ]?(?!amd|[ix346]{1,2}86)([\w\.]*)/i, /(haiku) (\w+)/i], [y, E], [/(sunos) ?([\w\.\d]*)/i], [[y, "Solaris"], E], [/((?:open)?solaris)[-\/ ]?([\w\.]*)/i, /(aix) ((\d)(?=\.|\)| )[\w\.])*/i, /\b(beos|os\/2|amigaos|morphos|openvms|fuchsia|hp-ux|serenityos)/i, /(unix) ?([\w\.]*)/i], [y, E]] }, I = function(G, z) {
+    if (typeof G === g && (z = G, G = t), !(this instanceof I))
+      return new I(G, z).getResult();
+    var $ = typeof e !== a && e.navigator ? e.navigator : t, eA = G || ($ && $.userAgent ? $.userAgent : ""), rA = $ && $.userAgentData ? $.userAgentData : t, Z = z ? function(q, lA) {
       var sA = {};
       for (var hA in q)
         lA[hA] && lA[hA].length % 2 == 0 ? sA[hA] = lA[hA].concat(q[hA]) : sA[hA] = q[hA];
@@ -11971,8 +11971,8 @@ pr = Xr, Br = Xr.exports, function(e, t) {
     var W = new I();
     K.ua = W.getResult(), K.ua.get = function() {
       return W.getUA();
-    }, K.ua.set = function(V) {
-      W.setUA(V);
+    }, K.ua.set = function(G) {
+      W.setUA(G);
       var z = W.getResult();
       for (var $ in z)
         K.ua[$] = z[$];
@@ -11984,7 +11984,7 @@ const $s = 5242880;
 async function Ua() {
   var r, a, g, p, w;
   const e = new nd.UAParser(navigator.userAgent), t = await cd().then((C) => C);
-  return { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, issue_reported_time: pi((/* @__PURE__ */ new Date()).toString()), device: sd(), browser_name: ((r = e.getBrowser()) == null ? void 0 : r.name) ?? "", browser_version: ((a = e.getBrowser()) == null ? void 0 : a.version) ?? "", current_view: window.location.pathname, screen_height: Ao().height, screen_width: Ao().width, metadata_: Ht.metadata, sdk_version: xo, report_type: no.MANUAL, screen_density: window.devicePixelRatio || 1, locale: window.navigator.language || null, os_version: ((g = e.getOS()) == null ? void 0 : g.version) ?? "", os_name: ((p = e.getOS()) == null ? void 0 : p.name) ?? "", device_orientation: ad(), battery_level: t == null ? void 0 : t.level, battery_status: t != null && t.charging ? 1 : 0, font_scale: ld(), network_type: hd(), permissions: await fd().then((C) => C), browser_height: to().height, browser_width: to().width, cookies_enabled: ud(), is_mobile: dd(), cpu_arch: ((w = e.getCPU()) == null ? void 0 : w.architecture) ?? "", app_version: "1.0", log: await od(), tags: [] };
+  return { timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, issue_reported_time: pi((/* @__PURE__ */ new Date()).toString()), device: sd(), browser_name: ((r = e.getBrowser()) == null ? void 0 : r.name) ?? "", browser_version: ((a = e.getBrowser()) == null ? void 0 : a.version) ?? "", current_view: window.location.pathname, screen_height: Ao().height, screen_width: Ao().width, metadata_: Ht.metadata, sdk_version: xo, report_type: no.MANUAL, screen_density: window.devicePixelRatio || 1, locale: window.navigator.language || null, os_version: ((g = e.getOS()) == null ? void 0 : g.version) ?? "", os_name: ((p = e.getOS()) == null ? void 0 : p.name) ?? "", device_orientation: ad(), battery_level: t == null ? void 0 : t.level, battery_status: t != null && t.charging ? 1 : 0, font_scale: ld(), network_type: hd(), permissions: await fd().then((C) => C), browser_height: to().height, browser_width: to().width, cookies_enabled: ud(), is_mobile: dd(), cpu_arch: ((w = e.getCPU()) == null ? void 0 : w.architecture) ?? "", app_version: "1.0", log: await od(), tags: [], fullstory_session: pd() };
 }
 function sd() {
   const e = navigator.userAgent;
@@ -12110,12 +12110,23 @@ async function fd() {
     }
   return e;
 }
-const pd = new ln(), Ea = async () => {
-  const e = _A.localStorage;
-  CA.shakeApiService.registerApp(), md();
+function pd() {
+  const e = localStorage.getItem("_fs_uid");
+  if (e)
+    return e;
+  {
+    const t = document.cookie.split("; ").find((r) => r.startsWith("fs_uid="));
+    if (t)
+      return t.split("=")[1];
+  }
+  return null;
+}
+const Bd = new ln(), Ea = async () => {
+  const e = kA.localStorage;
+  CA.shakeApiService.registerApp(), Cd();
   let t = await Uo();
   if (!t) {
-    const w = await pd.captureScreenshot(document.body);
+    const w = await Bd.captureScreenshot(document.body);
     w && await gn(w), t = await Ua(), await (r = t, new Promise((C, y) => {
       const Q = indexedDB.open(tt, 3);
       Q.onerror = function() {
@@ -12131,11 +12142,11 @@ const pd = new ln(), Ea = async () => {
     }));
   }
   var r;
-  const a = _A.localStorage.getShakeState(), g = await Le(), p = ba(a, g);
+  const a = kA.localStorage.getShakeState(), g = await Le(), p = ba(a, g);
   document.body.appendChild(p), xa(), e.setShakeOpened(!0);
-}, ka = "shake-sdk-main-button-root";
+}, _a = "shake-sdk-main-button-root";
 let $A;
-const Bd = () => {
+const wd = () => {
   $A = Pt(), $A.classList.add("shake-sdk-main-button");
   const e = XA("data:image/svg+xml,%3csvg%20width='21'%20height='21'%20viewBox='0%200%2021%2021'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20clip-path='url(%23clip0_14931_603)'%3e%3cpath%20d='M8.19434%2012.6212C10.9278%2015.3547%2014.6693%2016.0477%2016.5462%2014.1682C18.1282%2012.5862%2017.8823%209.68817%2016.1367%207.18042'%20stroke='%23B77DFF'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M13.8599%204.82319C10.5725%202.29444%206.46177%201.97857%204.1719%204.26844C1.60902%206.83132%202.30202%2011.6788%205.7189%2015.0957C7.21501%2016.6164%209.06436%2017.7431%2011.1019%2018.3752'%20stroke='%23B77DFF'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3cpath%20d='M10.8666%2010.8501L12.5002%2010.5228C12.7364%2010.4764%2012.9537%2010.3613%2013.1249%2010.1921L17.8954%205.42507C18.535%204.78514%2018.535%203.74801%2017.8954%203.10807C17.2555%202.46853%2016.2184%202.46853%2015.5784%203.10807L10.8079%207.87507C10.6374%208.04585%2010.5211%208.2632%2010.4737%208.49982L10.1499%2010.1334C10.0864%2010.4657%2010.3043%2010.7865%2010.6365%2010.8501C10.7125%2010.8646%2010.7906%2010.8646%2010.8666%2010.8501Z'%20stroke='%23880FFF'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_14931_603'%3e%3crect%20width='21'%20height='21'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e");
   e.alt = "Send feedback icon", e.classList.add("shake-sdk-main-button-icon");
@@ -12144,15 +12155,15 @@ const Bd = () => {
     g.stopPropagation(), g.preventDefault(), Ea();
   });
   const r = document.createElement("div");
-  r.id = ka;
+  r.id = _a;
   const a = r.attachShadow({ mode: "open" });
-  return _t(a), a.appendChild($A), r;
-}, wd = () => {
-  $A && ($A.style.transition = "transform 0.5s ease", $A.style.transform = "translateX(0) rotate(-90deg)");
+  return kt(a), a.appendChild($A), r;
 }, md = () => {
+  $A && ($A.style.transition = "transform 0.5s ease", $A.style.transform = "translateX(0) rotate(-90deg)");
+}, Cd = () => {
   $A && ($A.style.transition = "transform 0.5s ease", $A.style.transform = "translateX(100px) rotate(-90deg)");
 };
-class Cd {
+class vd {
   constructor() {
     AA(this, "_language", Bi.EN);
     AA(this, "_floatingButtonEnabled", !0);
@@ -12171,17 +12182,17 @@ class Cd {
   }
 }
 const Wr = () => {
-  if (_A.localStorage.isSDKEnabled())
+  if (kA.localStorage.isSDKEnabled())
     if (LA.config.floatingButtonEnabled) {
-      const e = Bd();
+      const e = wd();
       document.body.appendChild(e);
     } else {
-      const e = document.getElementById(ka);
+      const e = document.getElementById(_a);
       e == null || e.remove();
     }
 }, eo = () => {
   LA.report.isConsoleLogsEnabled && CA.consoleLogsTracker.start(), LA.report.isNetworkRequestsEnabled && CA.networkRequestsTracker.start(), LA.report.isScreenChangesEnabled && CA.screenChangeTracker.start(), LA.report.isSystemEventsEnabled && CA.systemEventTracker.start(), LA.report.isUserActionsEnabled && CA.userActionTracker.start();
-}, io = 5120, vd = { takeScreenshot: !0, showSuccessMessage: !1 }, yd = (e) => {
+}, io = 5120, yd = { takeScreenshot: !0, showSuccessMessage: !1 }, bd = (e) => {
   const t = [];
   return e && t.push({ type: wi.TITLE, value: e, label: "Title" }), t;
 }, ro = () => {
@@ -12196,31 +12207,31 @@ const Wr = () => {
         if (ie.apiKey = t, ie.appDomain = r, CA.shakeApiService.init(), this.localStorage.isSDKEnabled())
           return eo(), Wr(), ro(), this.isStarted = !0, void ls("Shake started.");
         await (async () => {
-          _A.localStorage.isAppRegistered() || await CA.shakeApiService.registerApp();
+          kA.localStorage.isAppRegistered() || await CA.shakeApiService.registerApp();
         })(), this.localStorage.isSDKEnabled() && (eo(), Wr(), ro(), this.isStarted = !0, ls("Shake started.")), this.isLoading = !1;
       } else
-        Ge("Cannot start Shake. Api key is empty.");
+        Ne("Cannot start Shake. Api key is empty.");
   }
 };
-AA(OA, "config", new Cd()), AA(OA, "report", new Ht()), AA(OA, "localStorage", _A.localStorage), AA(OA, "isLoading", !1), AA(OA, "isStarted", !1), AA(OA, "show", async () => await OA.ifSDKEnabled(async () => {
+AA(OA, "config", new vd()), AA(OA, "report", new Ht()), AA(OA, "localStorage", kA.localStorage), AA(OA, "isLoading", !1), AA(OA, "isStarted", !1), AA(OA, "show", async () => await OA.ifSDKEnabled(async () => {
   await Ea();
 })), AA(OA, "silentReport", async (t, r) => await OA.ifSDKEnabled(async () => {
-  await (async (a, g = vd) => {
+  await (async (a, g = yd) => {
     const p = CA.shakeApiService, w = [];
     if (g.takeScreenshot) {
       const y = await new ln().captureScreenshot(document.body);
       y && w.push({ data: y, type: yA.IMAGE, name: dn(yA.IMAGE, "jpg"), timestamp: (/* @__PURE__ */ new Date()).getTime() });
     }
     const C = await Ua();
-    C.tags.push("silent"), C.custom_fields = yd(a), await p.sendUserFeedback(C, w), g.showSuccessMessage && br(!0);
+    C.tags.push("silent"), C.custom_fields = bd(a), await p.sendUserFeedback(C, w), g.showSuccessMessage && br(!0);
   })(t, r);
 })), AA(OA, "log", async (t, r) => await OA.ifSDKEnabled(async () => {
   await CA.customLogTracker.captureEvent(t, r);
 })), AA(OA, "setMetadata", (t, r) => {
   ((a, g) => {
     if (Object.keys(Ht.metadata).length >= 100)
-      return void Ge("Cannot set metadata. Limit of 100 items reached.");
-    g.length > io && (Ge("Truncating metadata value. Value exceeded 5120 chars."), g = g.substring(0, io)), Ht.metadata[a] = g;
+      return void Ne("Cannot set metadata. Limit of 100 items reached.");
+    g.length > io && (Ne("Truncating metadata value. Value exceeded 5120 chars."), g = g.substring(0, io)), Ht.metadata[a] = g;
   })(t, r);
 }), AA(OA, "removeMetadata", (t) => {
   ((r) => {
@@ -12228,7 +12239,7 @@ AA(OA, "config", new Cd()), AA(OA, "report", new Ht()), AA(OA, "localStorage", _
   })(t);
 }), AA(OA, "clearMetadata", () => {
   Ht.metadata = {};
-}), AA(OA, "ifSDKEnabled", async (t) => OA.localStorage.isSDKEnabled() ? (await t(), !0) : (Ge("Please call Shake.start(apiKey) before using Shake."), !1));
+}), AA(OA, "ifSDKEnabled", async (t) => OA.localStorage.isSDKEnabled() ? (await t(), !0) : (Ne("Please call Shake.start(apiKey) before using Shake."), !1));
 let Yr = OA;
 const LA = Yr;
 export {
