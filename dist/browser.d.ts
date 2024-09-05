@@ -62,11 +62,34 @@ declare class Shake {
      * @param appDomain app domain - check app settings on dashboard
      */
     static start(apiKey: string, appDomain: string): Promise<void>;
+    private static setupShake;
     /**
      * Shows shake screen from code.
      * Shake.start must be called before this method can be used.
      */
-    static show: () => Promise<boolean>;
+    static show: (shakeScreen?: ShakeScreen) => Promise<boolean>;
+    /**
+     * Registers new app user.
+     * If app user is already registered with the same id, request will be ignored.
+     * If app user is already registred with the other id, old user will be unregistered.
+     * @param userId user id
+     */
+    static registerUser: (userId: string) => Promise<boolean>;
+    /**
+     * Updates registered app user id.
+     * If id is already registered, the request will be rejected.
+     * @param userId new user id
+     */
+    static updateUserId: (userId: string) => Promise<boolean>;
+    /**
+     * Updates registered app user metadata.
+     * @param metadata new user metadata
+     */
+    static updateUserMetadata: (metadata: UserMetadata) => Promise<boolean>;
+    /**
+     * Unregisters app user.
+     */
+    static unregisterUser: () => Promise<boolean>;
     /**
      * Sends tickets silently from the code.
      *
@@ -108,12 +131,21 @@ export default Shake;
  * Keeps Shake SDK related configuration.
  */
 declare class ShakeConfig {
+    static isShakeOpened: boolean;
     private _language;
+    private _defaultScreen;
     private _floatingButtonEnabled;
     get language(): Language;
     set language(value: Language);
+    get defaultScreen(): ShakeScreen;
+    set defaultScreen(value: ShakeScreen);
     get floatingButtonEnabled(): boolean;
     set floatingButtonEnabled(value: boolean);
+}
+
+export declare enum ShakeScreen {
+    HOME_SCREEN = 0,
+    NEW_TICKET = 1
 }
 
 /**
@@ -123,5 +155,9 @@ export declare interface SilentReportConfig {
     takeScreenshot?: boolean;
     showSuccessMessage?: boolean;
 }
+
+declare type UserMetadata = {
+    [key: string]: string;
+};
 
 export { }
