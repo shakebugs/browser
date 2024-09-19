@@ -1,3 +1,15 @@
+export declare const DefaultFormKeys: {
+    feedbackType: string;
+    feedbackTypeBug: string;
+    feedbackTypeQuestion: string;
+    feedbackTypeSuggestion: string;
+    description: string;
+    email: string;
+    attachments: string;
+};
+
+export declare const defaultShakeForm: () => ShakeForm;
+
 /**
  * Represents SDK interface language.
  */
@@ -25,6 +37,7 @@ declare type Metadata = {
  */
 declare class ReportConfig {
     static metadata: Metadata;
+    static shakeForm: ShakeForm | null;
     private _isConsoleLogsEnabled;
     private _isCustomLogsEnabled;
     private _isNetworkRequestsEnabled;
@@ -127,6 +140,10 @@ declare class Shake {
 }
 export default Shake;
 
+export declare class ShakeAttachments extends ShakeFormComponent {
+    constructor();
+}
+
 /**
  * Keeps Shake SDK related configuration.
  */
@@ -135,17 +152,69 @@ declare class ShakeConfig {
     private _language;
     private _defaultScreen;
     private _floatingButtonEnabled;
+    private _shakeForm;
     get language(): Language;
     set language(value: Language);
     get defaultScreen(): ShakeScreen;
     set defaultScreen(value: ShakeScreen);
     get floatingButtonEnabled(): boolean;
     set floatingButtonEnabled(value: boolean);
+    get shakeForm(): ShakeForm;
+    set shakeForm(value: ShakeForm);
+}
+
+export declare class ShakeEmail extends ShakeFormComponent {
+    label: string;
+    value?: string;
+    required?: boolean;
+    constructor(key: string, label: string, value?: string, required?: boolean);
+}
+
+export declare class ShakeForm {
+    items: ShakeFormComponent[];
+    constructor(items: ShakeFormComponent[]);
+    clone: () => ShakeForm;
+}
+
+export declare class ShakeFormComponent {
+    key: string;
+    constructor(key: string);
+}
+
+export declare class ShakePicker extends ShakeFormComponent {
+    label: string;
+    items: ShakePickerItem[];
+    value?: number;
+    constructor(key: string, label: string, items: ShakePickerItem[], value?: number);
+}
+
+export declare class ShakePickerItem {
+    key: string;
+    label: string;
+    icon?: string;
+    tag?: string;
+    constructor(key: string, label: string, icon?: string, tag?: string);
 }
 
 export declare enum ShakeScreen {
     HOME_SCREEN = 0,
     NEW_TICKET = 1
+}
+
+export declare class ShakeTextInput extends ShakeFormComponent {
+    label: string;
+    value?: string;
+    required?: boolean;
+    lines?: number;
+    constructor(key: string, label: string, value?: string, required?: boolean, lines?: number);
+}
+
+export declare class ShakeTitle extends ShakeFormComponent {
+    label: string;
+    value?: string;
+    required?: boolean;
+    lines?: number;
+    constructor(key: string, label: string, value?: string, required?: boolean, lines?: number);
 }
 
 /**
