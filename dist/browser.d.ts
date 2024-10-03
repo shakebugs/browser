@@ -1,3 +1,18 @@
+declare interface ActivityHistoryEvent {
+    timestamp: string;
+    event_type: ActivityHistoryEventType;
+}
+
+declare enum ActivityHistoryEventType {
+    CONSOLE_LOG = 0,
+    CUSTOM_LOG = 1,
+    NETWORK_REQUEST = 2,
+    NOTIFICATION_EVENT = 3,
+    VIEW_CONTROLLER = 4,
+    SYSTEM_EVENT = 5,
+    USER_ACTION = 6
+}
+
 export declare const DefaultFormKeys: {
     feedbackType: string;
     feedbackTypeBug: string;
@@ -32,18 +47,38 @@ declare type Metadata = {
     [key: string]: string;
 };
 
+export declare type NetworkReqeustFilter = ((networkRequest: NetworkRequest) => NetworkRequest | null) | null;
+
+export declare interface NetworkRequest extends ActivityHistoryEvent {
+    method: string;
+    status_code: string;
+    url: string;
+    request_body: string;
+    request_headers: {
+        [key: string]: string;
+    };
+    response_body: string;
+    response_headers: {
+        [key: string]: string;
+    };
+    duration: number;
+    start: number;
+}
+
 /**
  * Keeps Shake ticket related configuration.
  */
 declare class ReportConfig {
     static metadata: Metadata;
-    static shakeForm: ShakeForm | null;
+    private _tags;
     private _isConsoleLogsEnabled;
     private _isCustomLogsEnabled;
     private _isNetworkRequestsEnabled;
     private _isScreenChangesEnabled;
     private _isSystemEventsEnabled;
     private _isUserActionsEnabled;
+    get tags(): string[];
+    set tags(value: string[]);
     get isConsoleLogsEnabled(): boolean;
     set isConsoleLogsEnabled(enabled: boolean);
     get isCustomLogsEnabled(): boolean;
@@ -124,7 +159,7 @@ declare class Shake {
      * @param key data key
      * @param value data value
      */
-    static setMetadata: (key: string, value: string) => void;
+    static setMetadata: (key: string, value: string | null | undefined) => void;
     /**
      * Removes custom data from the ticket.
      * This data is sent with the report.
@@ -153,6 +188,8 @@ declare class ShakeConfig {
     private _defaultScreen;
     private _floatingButtonEnabled;
     private _shakeForm;
+    private _networkRequestsFilter;
+    private _sensitiveDataRedaction;
     get language(): Language;
     set language(value: Language);
     get defaultScreen(): ShakeScreen;
@@ -161,6 +198,10 @@ declare class ShakeConfig {
     set floatingButtonEnabled(value: boolean);
     get shakeForm(): ShakeForm;
     set shakeForm(value: ShakeForm);
+    get networkRequestsFilter(): NetworkReqeustFilter;
+    set networkRequestsFilter(value: NetworkReqeustFilter);
+    get sensitiveDataRedaction(): boolean;
+    set sensitiveDataRedaction(value: boolean);
 }
 
 export declare class ShakeEmail extends ShakeFormComponent {
