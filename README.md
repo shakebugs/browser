@@ -10,7 +10,7 @@ Browser plugin for [bug reporting](https://www.shakebugs.com).
 | :-------------: | :-------: |
 |  Bug reporting  |    ✅     |
 | Crash reporting |    ❌     |
-|      Users      |    ❌     |
+|      Users      |    ✅     |
 
 ## How to use
 
