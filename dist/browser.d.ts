@@ -77,6 +77,7 @@ declare class ReportConfig {
     private _isScreenChangesEnabled;
     private _isSystemEventsEnabled;
     private _isUserActionsEnabled;
+    private _screenshotIncluded;
     get tags(): string[];
     set tags(value: string[]);
     get isConsoleLogsEnabled(): boolean;
@@ -91,6 +92,8 @@ declare class ReportConfig {
     set isSystemEventsEnabled(enabled: boolean);
     get isUserActionsEnabled(): boolean;
     set isUserActionsEnabled(enabled: boolean);
+    get screenshotIncluded(): boolean;
+    set screenshotIncluded(value: boolean);
     enableActivityHistory: (enabled: boolean) => void;
 }
 
@@ -180,6 +183,17 @@ export declare class ShakeAttachments extends ShakeFormComponent {
 }
 
 /**
+ * Represents Shake button style.
+ */
+export declare enum ShakeButtonStyle {
+    MERCURY = "mercury",
+    VENUS = "venus",
+    EARTH = "earth",
+    MARS = "mars",
+    JUPITER = "jupiter"
+}
+
+/**
  * Keeps Shake SDK related configuration.
  */
 declare class ShakeConfig {
@@ -187,6 +201,7 @@ declare class ShakeConfig {
     private _language;
     private _defaultScreen;
     private _floatingButtonEnabled;
+    private _floatingButtonStyle;
     private _shakeForm;
     private _networkRequestsFilter;
     private _sensitiveDataRedaction;
@@ -196,6 +211,8 @@ declare class ShakeConfig {
     set defaultScreen(value: ShakeScreen);
     get floatingButtonEnabled(): boolean;
     set floatingButtonEnabled(value: boolean);
+    get floatingButtonStyle(): ShakeButtonStyle;
+    set floatingButtonStyle(value: ShakeButtonStyle);
     get shakeForm(): ShakeForm;
     set shakeForm(value: ShakeForm);
     get networkRequestsFilter(): NetworkReqeustFilter;
