@@ -32,10 +32,10 @@ Once installed, you can start using the library by calling `Shake.start()` at th
 // Import the library if using ES6 modules
 import Shake from '@shakebugs/browser';
 
-Shake.start('app-api-key', 'website-domain');
+Shake.start('app-api-key');
 ```
 
-Replace `app-api-key` and `website-domain` with the actual value you have in your app settings on dashboard.
+Replace `app-api-key` with the actual value you have in your app settings on dashboard.
 
 ### CDN
 
@@ -59,12 +59,12 @@ Once installed, you can start using the library by calling `Shake.start()` at th
 ```html
 <body>
 	<script>
-        window.Shake.start('app-api-key', 'website-domain');
+        window.Shake.start('app-api-key');
 	</script>
 </body>
 ```
 
-Replace `app-api-key` and `website-domain` with the actual value you have in your app settings on dashboard.
+Replace `app-api-key` with the actual value you have in your app settings on dashboard.
 
 ## Resources
 
