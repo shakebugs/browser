@@ -110,9 +110,8 @@ declare class Shake {
      * Starts Shake SDK. Must be called before using Shake.
      *
      * @param apiKey app api key - check app settings on dashboard
-     * @param appDomain app domain - check app settings on dashboard
      */
-    static start(apiKey: string, appDomain: string): Promise<void>;
+    static start(apiKey: string): Promise<void>;
     private static setupShake;
     /**
      * Shows shake screen from code.
