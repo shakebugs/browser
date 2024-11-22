@@ -214,6 +214,7 @@ declare class ShakeConfig {
     set floatingButtonStyle(value: ShakeButtonStyle);
     get shakeForm(): ShakeForm;
     set shakeForm(value: ShakeForm);
+    isAttachmentsEnabled: () => boolean;
     get networkRequestsFilter(): NetworkReqeustFilter;
     set networkRequestsFilter(value: NetworkReqeustFilter);
     get sensitiveDataRedaction(): boolean;
