@@ -78,6 +78,7 @@ declare class ReportConfig {
     private _isSystemEventsEnabled;
     private _isUserActionsEnabled;
     private _screenshotIncluded;
+    private _sessionReplayEnabled;
     get tags(): string[];
     set tags(value: string[]);
     get isConsoleLogsEnabled(): boolean;
@@ -95,6 +96,8 @@ declare class ReportConfig {
     get screenshotIncluded(): boolean;
     set screenshotIncluded(value: boolean);
     enableActivityHistory: (enabled: boolean) => void;
+    get isSessionReplayEnabled(): boolean;
+    set isSessionReplayEnabled(enabled: boolean);
 }
 
 /**
@@ -281,6 +284,7 @@ export declare class ShakeTitle extends ShakeFormComponent {
 export declare interface SilentReportConfig {
     takeScreenshot?: boolean;
     showSuccessMessage?: boolean;
+    includeSessionReplay?: boolean;
 }
 
 declare type UserMetadata = {
