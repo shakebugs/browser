@@ -13,6 +13,24 @@ declare enum ActivityHistoryEventType {
     USER_ACTION = 6
 }
 
+export declare interface ConsoleLog extends ActivityHistoryEvent {
+    message: string;
+    type: ConsoleLogType;
+}
+
+declare interface ConsoleLogEvent {
+    data: any[];
+    type: string;
+}
+
+export declare enum ConsoleLogType {
+    VERBOSE = "verbose",
+    DEBUG = "debug",
+    INFO = "info",
+    WARNING = "warning",
+    ERROR = "error"
+}
+
 export declare const DefaultFormKeys: {
     feedbackType: string;
     feedbackTypeBug: string;
@@ -65,6 +83,23 @@ export declare interface NetworkRequest extends ActivityHistoryEvent {
     start: number;
 }
 
+declare interface NetworkRequestEvent {
+    method: string;
+    status_code: string;
+    url: string;
+    request_body: string;
+    request_headers: {
+        [key: string]: string;
+    };
+    response_body: string;
+    response_headers: {
+        [key: string]: string;
+    };
+    duration: number;
+    start: number;
+    timestamp: string;
+}
+
 /**
  * Keeps Shake ticket related configuration.
  */
@@ -104,11 +139,12 @@ declare class ReportConfig {
  * Shake SDK interface.
  */
 declare class Shake {
+    static isStarted: boolean;
+    static isExtension: boolean;
     static config: ShakeConfig;
     static report: ReportConfig;
     private static localStorage;
     private static isLoading;
-    private static isStarted;
     /**
      * Starts Shake SDK. Must be called before using Shake.
      *
@@ -177,6 +213,46 @@ declare class Shake {
      */
     static clearMetadata: () => void;
     private static ifSDKEnabled;
+    /**
+     * Starts Shake SDK. Must be called before using Shake.
+     * Used only from browser extension.
+     */
+    static startFromExtension(): void;
+    /**
+     * Shows shake screen from code.
+     * Used only from browser extension.
+     */
+    static showFromExtension: (base64Image: string) => Promise<boolean>;
+    /**
+     * Sets screenshot bubble click listener.
+     * Used only from browser extension.
+     */
+    static setOnScreenshotBubbleClick: (fun: () => void) => void;
+    /**
+     * Adds new screenshot and shows Shake.
+     * Used only from browser extension.
+     */
+    static grabScreenshotFromExtension: (base64Image: string) => Promise<boolean>;
+    /**
+     * Sets dashboard user auth token.
+     * Used only from browser extension.
+     */
+    static setAuthToken: (authToken: string) => Promise<void>;
+    /**
+     * Sets ticket sent listener.
+     * Used only from browser extension.
+     */
+    static setOnTicketSentListener: (fun: (url: string) => void) => void;
+    /**
+     * Inserts network log object in Shake.
+     * Used only from browser extension.
+     */
+    static insertNetworkRequest: (networkRequestEvent: NetworkRequestEvent) => Promise<void>;
+    /**
+     * Inserts console log object in Shake.
+     * Used only from browser extension.
+     */
+    static insertConsoleLog: (consoleLogEvent: ConsoleLogEvent) => Promise<void>;
 }
 export default Shake;
 
@@ -200,6 +276,8 @@ export declare enum ShakeButtonStyle {
  */
 declare class ShakeConfig {
     static isShakeOpened: boolean;
+    static isScreensotCaptureMode: boolean;
+    static isVideoRecordingMode: boolean;
     private _language;
     private _defaultScreen;
     private _floatingButtonEnabled;
@@ -292,3 +370,11 @@ declare type UserMetadata = {
 };
 
 export { }
+
+
+declare global {
+    interface Window {
+        XMLHttpRequest: any;
+    }
+}
+
