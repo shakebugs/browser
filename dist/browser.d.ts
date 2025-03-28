@@ -47,7 +47,26 @@ export declare const defaultShakeForm: () => ShakeForm;
  * Represents SDK interface language.
  */
 export declare enum Language {
-    EN = 0
+    CZECH = "cs",
+    DANISH = "da",
+    GERMAN = "de",
+    ENGLISH = "en",
+    SPANISH = "es",
+    ESTONIAN = "et",
+    FRENCH = "fr",
+    HUNGARIAN = "hu",
+    ITALIAN = "it",
+    JAPANESE = "ja",
+    KOREAN = "ko",
+    LATVIAN = "lv",
+    DUTCH = "nl",
+    POLISH = "pl",
+    PORTUGUESE = "pt",
+    RUSSIAN = "ru",
+    THAI = "th",
+    TURKISH = "tr",
+    CHINESE_SIMPLIFIED = "zh-CN",
+    CHINESE_TRADITIONAL = "zh-TW"
 }
 
 /**
@@ -244,6 +263,11 @@ declare class Shake {
      */
     static setOnTicketSentListener: (fun: (url: string) => void) => void;
     /**
+     * Sets settings click listener.
+     * Used only from browser extension.
+     */
+    static setOnSettingsClickListener: (fun: () => void) => void;
+    /**
      * Inserts network log object in Shake.
      * Used only from browser extension.
      */
@@ -285,8 +309,8 @@ declare class ShakeConfig {
     private _shakeForm;
     private _networkRequestsFilter;
     private _sensitiveDataRedaction;
-    get language(): Language;
-    set language(value: Language);
+    get language(): Language | null;
+    set language(value: Language | null);
     get defaultScreen(): ShakeScreen;
     set defaultScreen(value: ShakeScreen);
     get floatingButtonEnabled(): boolean;
