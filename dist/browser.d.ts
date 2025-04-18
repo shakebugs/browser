@@ -277,6 +277,16 @@ declare class Shake {
      * Used only from browser extension.
      */
     static insertConsoleLog: (consoleLogEvent: ConsoleLogEvent) => Promise<void>;
+    /**
+     * Sets full story session link.
+     * Used only from browser extension.
+     */
+    static setFullStorySession: (sessionLink: string) => Promise<void>;
+    /**
+     * Resets Shake storage.
+     * Used only from browser extension.
+     */
+    static resetShake: () => Promise<void>;
 }
 export default Shake;
 
