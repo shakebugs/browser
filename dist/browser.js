@@ -11905,7 +11905,7 @@ const mS = new TextEncoder(), EA = (A) => {
   return mS.encode(t).length;
 };
 var Ee = ((A) => (A[A.CONSOLE_LOG = 0] = "CONSOLE_LOG", A[A.CUSTOM_LOG = 1] = "CUSTOM_LOG", A[A.NETWORK_REQUEST = 2] = "NETWORK_REQUEST", A[A.NOTIFICATION_EVENT = 3] = "NOTIFICATION_EVENT", A[A.VIEW_CONTROLLER = 4] = "VIEW_CONTROLLER", A[A.SYSTEM_EVENT = 5] = "SYSTEM_EVENT", A[A.USER_ACTION = 6] = "USER_ACTION", A))(Ee || {});
-const bn = (A, t) => A.substring(0, t), B0 = (A) => A === null ? !1 : new RegExp("^[\\w.+-]+@([\\w\\-]+\\.)+[A-Z]+$", "i").test(A), Zc = (A) => /\ufffd/.test(A), c_ = "2.12.0";
+const bn = (A, t) => A.substring(0, t), B0 = (A) => A === null ? !1 : new RegExp("^[\\w.+-]+@([\\w\\-]+\\.)+[A-Z]+$", "i").test(A), Zc = (A) => /\ufffd/.test(A), c_ = "2.12.1";
 async function ud() {
   var r, i, n, o, a;
   const A = new fS.UAParser(navigator.userAgent), t = await BS(), e = At.report.tags, s = await N.shakeService.getUser();
@@ -12976,8 +12976,8 @@ let eh, VA = !1, gi = { url: "", method: "", request_body: "", response_body: ""
 const sh = { setOnCaptureEvent(A) {
   eh = A;
 }, enableInterceptor() {
-  Xs.prototype.open = function(A, t) {
-    gi = { url: "", method: "", request_body: "", response_body: "", request_headers: {}, response_headers: {}, status_code: "", timestamp: "", start: 0, duration: 0 }, gi.url = t.toString(), gi.method = A, F0.call(this, A, t);
+  Xs.prototype.open = function(A, t, e, s, r) {
+    gi = { url: "", method: "", request_body: "", response_body: "", request_headers: {}, response_headers: {}, status_code: "", timestamp: "", start: 0, duration: 0 }, gi.url = t.toString(), gi.method = A, F0.call(this, A, t, e, s, r);
   }, Xs.prototype.setRequestHeader = function(A, t) {
     gi.request_headers[A] = String(t), U0.call(this, A, t);
   }, Xs.prototype.send = function(A) {
