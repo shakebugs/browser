@@ -11905,7 +11905,7 @@ const mS = new TextEncoder(), EA = (A) => {
   return mS.encode(t).length;
 };
 var Ee = ((A) => (A[A.CONSOLE_LOG = 0] = "CONSOLE_LOG", A[A.CUSTOM_LOG = 1] = "CUSTOM_LOG", A[A.NETWORK_REQUEST = 2] = "NETWORK_REQUEST", A[A.NOTIFICATION_EVENT = 3] = "NOTIFICATION_EVENT", A[A.VIEW_CONTROLLER = 4] = "VIEW_CONTROLLER", A[A.SYSTEM_EVENT = 5] = "SYSTEM_EVENT", A[A.USER_ACTION = 6] = "USER_ACTION", A))(Ee || {});
-const bn = (A, t) => A.substring(0, t), B0 = (A) => A === null ? !1 : new RegExp("^[\\w.+-]+@([\\w\\-]+\\.)+[A-Z]+$", "i").test(A), Zc = (A) => /\ufffd/.test(A), c_ = "2.12.1";
+const bn = (A, t) => A.substring(0, t), B0 = (A) => A === null ? !1 : new RegExp("^[\\w.+-]+@([\\w\\-]+\\.)+[A-Z]+$", "i").test(A), Zc = (A) => /\ufffd/.test(A), c_ = "2.12.2";
 async function ud() {
   var r, i, n, o, a;
   const A = new fS.UAParser(navigator.userAgent), t = await BS(), e = At.report.tags, s = await N.shakeService.getUser();
@@ -12976,8 +12976,8 @@ let eh, VA = !1, gi = { url: "", method: "", request_body: "", response_body: ""
 const sh = { setOnCaptureEvent(A) {
   eh = A;
 }, enableInterceptor() {
-  Xs.prototype.open = function(A, t, e, s, r) {
-    gi = { url: "", method: "", request_body: "", response_body: "", request_headers: {}, response_headers: {}, status_code: "", timestamp: "", start: 0, duration: 0 }, gi.url = t.toString(), gi.method = A, F0.call(this, A, t, e, s, r);
+  Xs.prototype.open = function(A, t, ...e) {
+    gi = { url: "", method: "", request_body: "", response_body: "", request_headers: {}, response_headers: {}, status_code: "", timestamp: "", start: 0, duration: 0 }, gi.url = t.toString(), gi.method = A, F0.call(this, A, t, ...e);
   }, Xs.prototype.setRequestHeader = function(A, t) {
     gi.request_headers[A] = String(t), U0.call(this, A, t);
   }, Xs.prototype.send = function(A) {
@@ -13033,7 +13033,7 @@ const sh = { setOnCaptureEvent(A) {
   }
   return t;
 }, Us = /* @__PURE__ */ new Map();
-Us.set("Email address regex", /[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]{2,}/), Us.set("IPv4 Address regex", /\d{1,3}[.]\d{1,3}[.]\d{1,3}[.]\d{1,3}/), Us.set("Mastercard number regex", /(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}/), Us.set("Visa numbers regex", /\b([4]\d{3}[\s]\d{4}[\s]\d{4}[\s]\d{4}|[4]\d{3}[-]\d{4}[-]\d{4}[-]\d{4}|[4]\d{3}[.]\d{4}[.]\d{4}[.]\d{4}|[4]\d{3}\d{4}\d{4}\d{4})\b/), Us.set("American express number regex", /3[47][0-9]{13}/), Us.set("Credit card number regex", /\b(3[47]\d{2}([ -]?)(?!(\d)\3{5}|123456|234567|345678)\d{6}\2(?!(\d)\4{4})\d{5}|((4\d|5[1-5]|65)\d{2}|6011)([ -]?)(?!(\d)\8{3}|1234|3456|5678)\d{4}\7(?!(\d)\9{3})\d{4}\7\d{4})\b/), Us.set("Bearer token regex", /Bearer\s[A-Za-z0-9-.]*/);
+Us.set("Email address regex", /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/gi), Us.set("IPv4 Address regex", /\d{1,3}[.]\d{1,3}[.]\d{1,3}[.]\d{1,3}/), Us.set("Mastercard number regex", /(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}/), Us.set("Visa numbers regex", /\b([4]\d{3}[\s]\d{4}[\s]\d{4}[\s]\d{4}|[4]\d{3}[-]\d{4}[-]\d{4}[-]\d{4}|[4]\d{3}[.]\d{4}[.]\d{4}[.]\d{4}|[4]\d{3}\d{4}\d{4}\d{4})\b/), Us.set("American express number regex", /3[47][0-9]{13}/), Us.set("Credit card number regex", /\b(3[47]\d{2}([ -]?)(?!(\d)\3{5}|123456|234567|345678)\d{6}\2(?!(\d)\4{4})\d{5}|((4\d|5[1-5]|65)\d{2}|6011)([ -]?)(?!(\d)\8{3}|1234|3456|5678)\d{4}\7(?!(\d)\9{3})\d{4}\7\d{4})\b/), Us.set("Bearer token regex", /Bearer\s[A-Za-z0-9-.]*/);
 const I0 = ["password", "secret", "passwd", "api_key", "apikey", "access_token", "auth_token", "credentials", "mysql_pwd", "stripetoken", "Authorization", "Proxy-Authorization", "card[number]", "token"], Ws = "data_redacted";
 class BE {
   constructor() {
