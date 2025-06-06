@@ -84,8 +84,6 @@ declare type Metadata = {
     [key: string]: string;
 };
 
-export declare type NetworkReqeustFilter = ((networkRequest: NetworkRequest) => NetworkRequest | null) | null;
-
 export declare interface NetworkRequest extends ActivityHistoryEvent {
     method: string;
     status_code: string;
@@ -118,6 +116,8 @@ declare interface NetworkRequestEvent {
     start: number;
     timestamp: string;
 }
+
+export declare type NetworkRequestFilter = ((networkRequest: NetworkRequest) => NetworkRequest | null) | null;
 
 /**
  * Keeps Shake ticket related configuration.
@@ -170,7 +170,6 @@ declare class Shake {
      * @param apiKey app api key - check app settings on dashboard
      */
     static start(apiKey: string): Promise<void>;
-    private static setupShake;
     /**
      * Shows shake screen from code.
      * Shake.start must be called before this method can be used.
@@ -330,8 +329,8 @@ declare class ShakeConfig {
     get shakeForm(): ShakeForm;
     set shakeForm(value: ShakeForm);
     isAttachmentsEnabled: () => boolean;
-    get networkRequestsFilter(): NetworkReqeustFilter;
-    set networkRequestsFilter(value: NetworkReqeustFilter);
+    get networkRequestsFilter(): NetworkRequestFilter;
+    set networkRequestsFilter(value: NetworkRequestFilter);
     get sensitiveDataRedaction(): boolean;
     set sensitiveDataRedaction(value: boolean);
 }
