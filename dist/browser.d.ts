@@ -150,6 +150,7 @@ declare class ReportConfig {
     get screenshotIncluded(): boolean;
     set screenshotIncluded(value: boolean);
     enableActivityHistory: (enabled: boolean) => void;
+    isActivityHistoryEnabled: () => boolean;
     get isSessionReplayEnabled(): boolean;
     set isSessionReplayEnabled(enabled: boolean);
 }
@@ -276,6 +277,11 @@ declare class Shake {
      * Used only from browser extension.
      */
     static insertConsoleLog: (consoleLogEvent: ConsoleLogEvent) => Promise<void>;
+    /**
+     * Updates body of similar network request.
+     * Used only from browser extension.
+     */
+    static updateSimilarNetworkRequestBody: (networkRequestEvent: NetworkRequestEvent) => Promise<void>;
     /**
      * Sets full story session link.
      * Used only from browser extension.
