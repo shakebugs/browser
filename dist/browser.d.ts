@@ -238,20 +238,57 @@ declare class Shake {
      */
     static startFromExtension(): void;
     /**
-     * Shows shake screen from code.
+     * Shows shake screen with screenshot.
      * Used only from browser extension.
+     * @param image base64 string
      */
-    static showFromExtension: (base64Image: string) => Promise<boolean>;
+    static showExtensionWithScreenshot: (image: string) => Promise<boolean>;
     /**
-     * Sets screenshot bubble click listener.
+     * Shows shake screen with video.
      * Used only from browser extension.
+     * @param video base64 string
      */
-    static setOnScreenshotBubbleClick: (fun: () => void) => void;
+    static showExtensionWithVideo: (video: string) => Promise<boolean>;
     /**
-     * Adds new screenshot and shows Shake.
+     * Starts screen recording mode.
      * Used only from browser extension.
      */
-    static grabScreenshotFromExtension: (base64Image: string) => Promise<boolean>;
+    static startScreenRecordingMode: () => Promise<boolean>;
+    /**
+     * Starts screenshot capture mode.
+     * Used only from browser extension.
+     */
+    static startScreenshotCaptureMode: () => Promise<boolean>;
+    /**
+     * Adds screen recording bubble to the screen.
+     * Used only from browser extension.
+     */
+    static showScreenRecordingBubble: () => Promise<boolean>;
+    /**
+     * Removes screen recording bubble from the screen.
+     * Used only from browser extension.
+     */
+    static removeScreenRecordingBubble: () => Promise<boolean>;
+    /**
+     * Sets grab screenshot click listener.
+     * Used only from browser extension.
+     */
+    static setOnGrabScreenshotClick: (fun: () => void) => void;
+    /**
+     * Sets record just tab click listener.
+     * Used only from browser extension.
+     */
+    static setOnRecrodJustTabClickListener: (fun: () => void) => void;
+    /**
+     * Sets record entire screen click listener.
+     * Used only from browser extension.
+     */
+    static setOnRecordEntireScreenClickListener: (fun: () => void) => void;
+    /**
+     * Sets recording stop click listener.
+     * Used only from browser extension.
+     */
+    static setOnStopRecordingClickListener: (fun: () => void) => void;
     /**
      * Sets dashboard user auth token.
      * Used only from browser extension.
@@ -263,10 +300,10 @@ declare class Shake {
      */
     static setOnTicketSentListener: (fun: (url: string) => void) => void;
     /**
-     * Sets settings click listener.
+     * Sets Shake closed event listener.
      * Used only from browser extension.
      */
-    static setOnSettingsClickListener: (fun: () => void) => void;
+    static setOnShakeCloseListener: (fun: () => void) => void;
     /**
      * Inserts network log object in Shake.
      * Used only from browser extension.
@@ -316,7 +353,7 @@ export declare enum ShakeButtonStyle {
 declare class ShakeConfig {
     static isShakeOpened: boolean;
     static isScreensotCaptureMode: boolean;
-    static isVideoRecordingMode: boolean;
+    static isScreenRecordingMode: boolean;
     private _language;
     private _defaultScreen;
     private _floatingButtonEnabled;
@@ -324,6 +361,7 @@ declare class ShakeConfig {
     private _shakeForm;
     private _networkRequestsFilter;
     private _sensitiveDataRedaction;
+    private _soundEffects;
     get language(): Language | null;
     set language(value: Language | null);
     get defaultScreen(): ShakeScreen;
@@ -339,6 +377,8 @@ declare class ShakeConfig {
     set networkRequestsFilter(value: NetworkRequestFilter);
     get sensitiveDataRedaction(): boolean;
     set sensitiveDataRedaction(value: boolean);
+    get soundEffects(): boolean;
+    set soundEffects(value: boolean);
 }
 
 export declare class ShakeEmail extends ShakeFormComponent {
