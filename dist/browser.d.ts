@@ -255,11 +255,6 @@ declare class Shake {
      */
     static startScreenRecordingMode: () => Promise<boolean>;
     /**
-     * Starts screenshot capture mode.
-     * Used only from browser extension.
-     */
-    static startScreenshotCaptureMode: () => Promise<boolean>;
-    /**
      * Adds screen recording bubble to the screen.
      * Used only from browser extension.
      */
