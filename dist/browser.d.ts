@@ -320,6 +320,11 @@ declare class Shake {
      */
     static setFullStorySession: (sessionLink: string) => Promise<void>;
     /**
+     * Sets Shake SDK version.
+     * Used only from browser extension.
+     */
+    static setChromeExtensionVersion: (sdkVersion: string) => Promise<void>;
+    /**
      * Resets Shake storage.
      * Used only from browser extension.
      */
