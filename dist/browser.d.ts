@@ -240,9 +240,9 @@ declare class Shake {
     /**
      * Shows shake screen with screenshot.
      * Used only from browser extension.
-     * @param image base64 string
+     * @param delay adds delay to screenshot capture if provided
      */
-    static showExtensionWithScreenshot: (image: string) => Promise<boolean>;
+    static showExtensionWithScreenshot: (delay?: number) => Promise<boolean>;
     /**
      * Shows shake screen with video.
      * Used only from browser extension.
@@ -268,12 +268,18 @@ declare class Shake {
      * Sets grab screenshot click listener.
      * Used only from browser extension.
      */
-    static setOnGrabScreenshotClick: (fun: () => void) => void;
+    static setGrabScreenshot: (fun: () => void) => void;
+    /**
+     * Finished grabbing screenshot process.
+     * Used only from browser extension.
+     * @param image base64 string
+     */
+    static finishGrabScreenshot: (image: string) => void;
     /**
      * Sets record just tab click listener.
      * Used only from browser extension.
      */
-    static setOnRecrodJustTabClickListener: (fun: () => void) => void;
+    static setOnRecordJustTabClickListener: (fun: () => void) => void;
     /**
      * Sets record entire screen click listener.
      * Used only from browser extension.
