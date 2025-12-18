@@ -1,7 +1,7 @@
 {
 	"name": "@shakebugs/browser",
 	"type": "module",
-	"version": "3.3.0",
+	"version": "3.3.1",
 	"description": "Browser SDK for Shake",
 	"main": "./dist/browser.js",
 	"style": "./dist/main.css",
