@@ -3747,7 +3747,7 @@ class C0 {
       try {
         const t = window.scrollX, r = window.scrollY, n = window.innerWidth, i = window.innerHeight;
         let o, a, c, l;
-        e ? (o = e.width, a = e.height, c = e.x, l = e.y) : (o = n, a = i, c = t, l = r);
+        e ? (o = e.width, a = e.height, c = e.x + t, l = e.y + r) : (o = n, a = i, c = t, l = r);
         const h = await function(g, d) {
           return d === void 0 && (d = {}), RP(g, d);
         }(A, { x: c, y: l, width: o, height: a, scrollX: 0, scrollY: 0, allowTaint: !0, useCORS: !0, backgroundColor: "white", logging: !1 });
@@ -13419,7 +13419,7 @@ const P9 = new TextEncoder(), Ys = (s) => {
 }, lw = (s) => {
   const A = JSON.stringify(s);
   return P9.encode(A).length;
-}, ak = "3.3.2";
+}, ak = "3.3.3";
 async function ji() {
   var n, i, o;
   const s = new as(navigator.userAgent), A = await I9(), e = iA.report.tags, t = await N.shakeService.getUser(), r = await s.getOS().withClientHints();
