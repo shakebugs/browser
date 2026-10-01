@@ -169,8 +169,15 @@ declare class Shake {
      * Starts Shake SDK. Must be called before using Shake.
      *
      * @param apiKey app api key - check app settings on dashboard
+     * @param appVersion version of app running
      */
-    static start(apiKey: string): Promise<void>;
+    static start(apiKey: string, appVersion?: string): Promise<void>;
+    /**
+     * Checks if api key has changed since last Shake start. Reset Shake if changed.
+     * @param apiKey api key string
+     * @private
+     */
+    private static checkIfApiKeyChanged;
     /**
      * Shows shake screen from code.
      * Shake.start must be called before this method can be used.
@@ -290,6 +297,11 @@ declare class Shake {
      * Used only from browser extension.
      */
     static setOnStopRecordingClickListener: (fun: () => void) => void;
+    /**
+     * Sets send analytics event click listener.
+     * Used only from browser extension.
+     */
+    static setSendAnalyticsEventClickListener: (fun: (name: string) => void) => void;
     /**
      * Sets dashboard user auth token.
      * Used only from browser extension.
